@@ -1,0 +1,37 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_esend')
+BEGIN
+
+CREATE TABLE [dbo].[pos_esend](
+	[brno] [varchar](2) NOT NULL,
+	[slno] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[contr] [int] NOT NULL,
+	[type] [int] NOT NULL,
+	[uuid] [uniqueidentifier] NOT NULL,
+	[hash] [nvarchar](max) NULL,
+	[qr_code] [nvarchar](max) NULL,
+	[file_name] [nvarchar](max) NULL,
+	[encoded_xml] [nvarchar](max) NULL,
+	[xml_err_msg] [nvarchar](max) NULL,
+	[status_code] [int] NULL,
+	[wrning_msg] [nvarchar](max) NULL,
+	[zatka_err_msg] [nvarchar](max) NULL,
+	[zatka_status] [bit] NULL,
+	[rport_status] [nvarchar](max) NULL,
+	[cleard_inv] [nvarchar](max) NULL,
+	[clrnce_status] [nvarchar](max) NULL,
+	[z_ref] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+
+SET ANSI_PADDING OFF
+
+
+ALTER TABLE [dbo].[pos_esend] ADD  CONSTRAINT [DF_pos_esend_uuid]  DEFAULT (newid()) FOR [uuid]
+
+
+ALTER TABLE [dbo].[pos_esend] ADD  CONSTRAINT [DF_pos_esend_zatka_status]  DEFAULT ((0)) FOR [zatka_status]
+
+
+END

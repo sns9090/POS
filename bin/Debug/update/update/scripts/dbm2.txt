@@ -1,0 +1,23 @@
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per13')
+		begin 
+        exec sp_rename 'years.per13','per12', 'COLUMN'
+        ALTER TABLE years ALTER COLUMN per12 char(8);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='startdate')
+		begin 
+        exec sp_rename 'companys.startdate','color', 'COLUMN'
+        ALTER TABLE companys ALTER COLUMN color varchar(8);
+		end
+
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='enddate')
+		begin 
+        exec sp_rename 'companys.enddate','cotype', 'COLUMN'
+        ALTER TABLE companys ALTER COLUMN cotype varchar(8);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='comp_name')
+		begin      
+        ALTER TABLE companys ALTER COLUMN comp_name nvarchar(200);
+		end

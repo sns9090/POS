@@ -1,0 +1,21 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_adds')
+BEGIN
+
+CREATE TABLE [dbo].[pos_adds](
+	[add_no] [int] NOT NULL,
+	[add_desc] [nvarchar](50) NOT NULL,
+	[add_edesc] [nvarchar](50) NULL,
+	[inactive] [bit] NULL,
+ CONSTRAINT [PK_pos_adds] PRIMARY KEY CLUSTERED 
+(
+	[add_no] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[pos_adds] ADD  CONSTRAINT [DF_pos_adds_add_edesc]  DEFAULT (N'') FOR [add_edesc]
+
+
+ALTER TABLE [dbo].[pos_adds] ADD  CONSTRAINT [DF_pos_adds_inactive]  DEFAULT ((0)) FOR [inactive]
+
+END

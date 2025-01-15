@@ -1,0 +1,39 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_hash')
+BEGIN
+
+CREATE TABLE [dbo].[pos_hash](
+	[brno] [varchar](2) NOT NULL,
+	[slno] [varchar](2) NULL,
+	[ref] [int] NULL,
+	[contr] [int] NOT NULL,
+	[type] [int] NULL,
+	[zref] [int] NOT NULL,
+	[zuuid] [uniqueidentifier] NULL,
+	[inv_hash] [nvarchar](max) NULL,
+ CONSTRAINT [PK_pos_hash] PRIMARY KEY CLUSTERED 
+(
+	[brno] ASC,
+	[contr] ASC,
+	[zref] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+
+SET ANSI_PADDING OFF
+
+
+ALTER TABLE [dbo].[pos_hash] ADD  CONSTRAINT [DF_pos_hash_type]  DEFAULT ((1)) FOR [type]
+
+
+ALTER TABLE [dbo].[pos_hash] ADD  CONSTRAINT [DF_pos_hash_inv_zid]  DEFAULT ((1)) FOR [zref]
+
+
+ALTER TABLE [dbo].[pos_hash] ADD  CONSTRAINT [DF_pos_hash_zuuid]  DEFAULT (newid()) FOR [zuuid]
+
+
+ALTER TABLE [dbo].[pos_hash] ADD  CONSTRAINT [DF_pos_hash_inv_hash]  DEFAULT (N'NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==') FOR [inv_hash]
+
+INSERT [dbo].[pos_hash] ([brno], [slno], [ref], [contr], [type], [zref], [zuuid], [inv_hash]) VALUES (N'01', N'01', 0, 1, 1, 0, N'1e5eccf1-1731-4c46-9dc9-8d5980c03436', N'NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==')
+
+END

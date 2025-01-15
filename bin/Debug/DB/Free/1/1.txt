@@ -1,0 +1,50 @@
+CREATE PROCEDURE [dbo].[RestoreBackupToNewDB]    
+         @pathToBackup  varchar(500),--where to take backup from
+         @pathToRestoreFolder  varchar(500), -- where to put the restored db files 
+         @newDBName varchar(100)
+    AS
+    BEGIN
+
+            SET NOCOUNT ON
+            DECLARE @fileListTable TABLE (
+            [LogicalName]           NVARCHAR(128),
+            [PhysicalName]          NVARCHAR(260),
+            [Type]                  CHAR(1),
+            [FileGroupName]         NVARCHAR(128),
+            [Size]                  NUMERIC(20,0),
+            [MaxSize]               NUMERIC(20,0),
+            [FileID]                BIGINT,
+            [CreateLSN]             NUMERIC(25,0),
+            [DropLSN]               NUMERIC(25,0),
+            [UniqueID]              UNIQUEIDENTIFIER,
+            [ReadOnlyLSN]           NUMERIC(25,0),
+            [ReadWriteLSN]          NUMERIC(25,0),
+            [BackupSizeInBytes]     BIGINT,
+            [SourceBlockSize]       INT,
+            [FileGroupID]           INT,
+            [LogGroupGUID]          UNIQUEIDENTIFIER,
+            [DifferentialBaseLSN]   NUMERIC(25,0),
+            [DifferentialBaseGUID]  UNIQUEIDENTIFIER,
+            [IsReadOnly]            BIT,
+            [IsPresent]             BIT,
+            [TDEThumbprint]         VARBINARY(32) -- remove this column if using SQL 2005
+            )
+            INSERT INTO @fileListTable EXEC('RESTORE FILELISTONLY FROM DISK ='''+ @pathToBackup+'''')
+            DECLARE @restoreDatabaseFilePath NVARCHAR(500)
+            DECLARE @restoreLogFilePath NVARCHAR(500)
+            DECLARE @databaseLogicName NVARCHAR(500)
+            DECLARE @logLogicName NVARCHAR(500)
+            DECLARE @pathSalt uniqueidentifier = NEWID()
+
+            SET @databaseLogicName = (SELECT LogicalName FROM @fileListTable WHERE [Type]='D') 
+            SET @logLogicName = (SELECT LogicalName FROM @fileListTable WHERE [Type]='L')           
+            SET @restoreDatabaseFilePath= @pathToRestoreFolder + @newDBName + '.mdf'
+            SET @restoreLogFilePath= @pathToRestoreFolder + @newDBName + '.ldf'
+
+            RESTORE DATABASE @newDBName FROM DISK=@pathToBackup     
+            WITH 
+               MOVE @databaseLogicName TO @restoreDatabaseFilePath,
+               MOVE @logLogicName TO @restoreLogFilePath
+
+            SET NOCOUNT OFF
+    END

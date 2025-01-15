@@ -1,0 +1,79 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'r_pos_hdr')
+BEGIN
+CREATE TABLE [dbo].[r_pos_hdr](
+	[brno] [varchar](2) NOT NULL,
+	[slno] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[contr] [int] NOT NULL,
+	[type] [int] NOT NULL,
+	[date] [datetime] NOT NULL,
+	[total] [float] NOT NULL,
+	[count] [float] NOT NULL,
+	[payed] [float] NOT NULL,
+	[total_cost] [float] NULL,
+	[saleman] [nvarchar](50) NULL,
+	[req_no] [int] NULL,
+	[cust_no] [int] NULL,
+	[discount] [float] NULL,
+	[net_total] [float] NULL,
+	[sysdate] [datetime] NULL,
+	[gen_ref] [int] NULL,
+	[tax_amt] [float] NULL,
+	[dscper] [float] NULL,
+	[card_type] [int] NULL,
+	[card_amt] [float] NULL,
+	[rref] [int] NULL,
+	[rcontr] [int] NULL,
+	[taxfree_amt] [float] NULL,
+	[note] [nvarchar](100) NULL,
+	[mobile] [nvarchar](20) NULL,
+ CONSTRAINT [PK_r_pos_hdr] PRIMARY KEY CLUSTERED 
+(
+	[brno] ASC,
+	[ref] ASC,
+	[contr] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_req_no]  DEFAULT ((0)) FOR [req_no]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_discount]  DEFAULT ((0)) FOR [discount]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_sysdate]  DEFAULT (getdate()) FOR [sysdate]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_gen_ref]  DEFAULT ((0)) FOR [gen_ref]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_tax_amt]  DEFAULT ((0)) FOR [tax_amt]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_dscper]  DEFAULT ((0)) FOR [dscper]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_cardtype]  DEFAULT ((0)) FOR [card_type]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_cardamt]  DEFAULT ((0)) FOR [card_amt]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_rref]  DEFAULT ((0)) FOR [rref]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_rcontr]  DEFAULT ((0)) FOR [rcontr]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_taxfree_amt]  DEFAULT ((0)) FOR [taxfree_amt]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_note]  DEFAULT (N'') FOR [note]
+
+
+ALTER TABLE [dbo].[r_pos_hdr] ADD  CONSTRAINT [DF_r_pos_hdr_mobile]  DEFAULT (N'') FOR [mobile]
+
+
+END

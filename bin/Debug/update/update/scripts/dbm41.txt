@@ -1,0 +1,34 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'comp_chang_fild')
+BEGIN
+
+CREATE TABLE [dbo].[comp_chang_fild](
+	[comp_id] [varchar](2) NOT NULL,
+	[fld_tag] [int] NOT NULL,
+	[fld_name] [nvarchar](20) NOT NULL,
+	[fld_desc] [nvarchar](20) NULL,
+	[fld_edesc] [nvarchar](20) NULL,
+	[fld_note] [nvarchar](50) NULL,
+ CONSTRAINT [PK_comp_chang_fild_1] PRIMARY KEY CLUSTERED 
+(
+	[fld_tag] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+SET ANSI_PADDING OFF
+
+INSERT [dbo].[comp_chang_fild] ([comp_id], [fld_tag], [fld_name], [fld_desc], [fld_edesc], [fld_note]) VALUES (N'01', 1, N'ملاحظات', N'ملاحظات', N'Note', N'مبيعات')
+
+INSERT [dbo].[comp_chang_fild] ([comp_id], [fld_tag], [fld_name], [fld_desc], [fld_edesc], [fld_note]) VALUES (N'01', 2, N'ملاحظة2', N'ملاحظة2', N'Note2', N'مبيعات')
+
+INSERT [dbo].[comp_chang_fild] ([comp_id], [fld_tag], [fld_name], [fld_desc], [fld_edesc], [fld_note]) VALUES (N'01', 3, N'ملاحظة3', N'ملاحظة3', N'Note3', N'مبيعات')
+
+INSERT [dbo].[comp_chang_fild] ([comp_id], [fld_tag], [fld_name], [fld_desc], [fld_edesc], [fld_note]) VALUES (N'01', 4, N'العقد', N'العقد', N'Aqd No', N'مبيعات')
+
+INSERT [dbo].[comp_chang_fild] ([comp_id], [fld_tag], [fld_name], [fld_desc], [fld_edesc], [fld_note]) VALUES (N'01', 5, N'يستحق', N'يستحق', N'Pay in', N'مبيعات')
+
+ALTER TABLE [dbo].[comp_chang_fild] ADD  CONSTRAINT [DF_comp_chang_fild_comp_id]  DEFAULT (N'01') FOR [comp_id]
+
+
+
+END

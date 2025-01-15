@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/21/2020 00:40:43" ReportInfo.Modified="07/11/2024 20:04:50" ReportInfo.CreatorVersion="2013.2.5.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZj+wf5gXF74cTEZipNpR2ngZd1ypfWBlxh5lDYG7eiMwzmb2yADDa4ldtliALt8bIiwZMa7Gntpi+ADkrxBeIgQcXWV1wHGBXIXxZeBowACFmdZR7xZMKEiksedbeHRKD7c36A3nG4S1O0UvioT+dYg==">
+      <TableDataSource Name="items" DataType="System.Int32" Enabled="true" TableName="items">
+        <Column Name="item_no" DataType="System.String"/>
+        <Column Name="item_name" DataType="System.String"/>
+        <Column Name="item_cost" DataType="System.Double"/>
+        <Column Name="item_price" DataType="System.Decimal"/>
+        <Column Name="item_barcode" DataType="System.String"/>
+        <Column Name="item_unit" DataType="System.Int32"/>
+        <Column Name="item_obalance" DataType="System.Decimal"/>
+        <Column Name="item_cbalance" DataType="System.Decimal"/>
+        <Column Name="item_group" DataType="System.String"/>
+        <Column Name="item_image" DataType="System.String"/>
+        <Column Name="item_req" DataType="System.Int32"/>
+        <Column Name="item_tax" DataType="System.Int32"/>
+        <Column Name="unit2" DataType="System.Int32"/>
+        <Column Name="uq2" DataType="System.Decimal"/>
+        <Column Name="unit2p" DataType="System.Decimal"/>
+        <Column Name="unit3" DataType="System.Int32"/>
+        <Column Name="uq3" DataType="System.Decimal"/>
+        <Column Name="unit3p" DataType="System.Decimal"/>
+        <Column Name="unit4" DataType="System.Int32"/>
+        <Column Name="uq4" DataType="System.Decimal"/>
+        <Column Name="unit4p" DataType="System.Decimal"/>
+        <Column Name="item_ename" DataType="System.String"/>
+        <Column Name="item_opencost" DataType="System.Double"/>
+        <Column Name="item_curcost" DataType="System.Double"/>
+        <Column Name="supno" DataType="System.String"/>
+        <Column Name="note" DataType="System.String"/>
+        <Column Name="last_updt" DataType="System.String"/>
+        <Column Name="sgroup" DataType="System.String"/>
+        <Column Name="price2" DataType="System.Decimal"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="br_name" DataType="System.String"/>
+    <Parameter Name="tax_type" DataType="System.String"/>
+    <Parameter Name="price1" DataType="System.String" Expression="IIf([tax_type]==&quot;3&quot;,([items.item_price] + ([items.item_price]* ToDecimal([taxper])/100)),[items.item_price])"/>
+    <Parameter Name="taxper" DataType="System.String"/>
+    <Parameter Name="sdate" DataType="System.String"/>
+    <Parameter Name="edate" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="38" PaperHeight="28" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <DataBand Name="Data1" Width="143.64" Height="94.5" DataSource="items">
+      <TextObject Name="Text1" Top="16.9" Width="141.75" Height="18.9" Text="[items.item_no]" HorzAlign="Center"/>
+      <TextObject Name="Text2" Top="27.8" Width="141.75" Height="15.12" Text="[items.item_name]" HorzAlign="Center"/>
+      <TextObject Name="Text4" Left="80.05" Top="67.7" Width="37.8" Height="18.9" Text="السعر" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="1" Top="68.15" Width="75.6" Height="18.9" Text="[bc_price]" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <BarcodeObject Name="Barcode1" Left="4" Top="43.25" Width="136.55" Height="26.35" AutoSize="false" DataColumn="items.item_barcode" ShowText="false" Barcode="Code128" Barcode.AutoEncode="true"/>
+      <TextObject Name="Text6" Width="141.75" Height="18.9" Text="ــــــــــــــــــــ" HorzAlign="Center"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,68 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_hdr_r')
+BEGIN
+
+CREATE TABLE [dbo].[pos_hdr_r](
+	[dbrno] [varchar](2) NOT NULL,
+	[dslno] [varchar](2) NOT NULL,
+	[dref] [int] NOT NULL,
+	[dcontr] [int] NOT NULL,
+	[dtype] [int] NOT NULL,
+	[driver_id] [nvarchar](50) NULL,
+	[driver_nam] [nvarchar](100) NULL,
+	[dtawla] [int] NULL,
+	[dpayed] [bit] NULL,
+	[dnote] [nvarchar](max) NULL,
+	[dmobile] [nvarchar](20) NULL,
+	[dtameen] [float] NULL,
+	[rtameen] [float] NULL,
+	[tameen_note] [nvarchar](max) NULL,
+ CONSTRAINT [PK_pos_hdr_r] PRIMARY KEY CLUSTERED 
+(
+	[dbrno] ASC,
+	[dref] ASC,
+	[dcontr] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+
+SET ANSI_PADDING OFF
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_driver_id]  DEFAULT (N'') FOR [driver_id]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_driver_nam]  DEFAULT (N'') FOR [driver_nam]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_tawla]  DEFAULT ((0)) FOR [dtawla]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_payed]  DEFAULT ((0)) FOR [dpayed]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_note]  DEFAULT (N'') FOR [dnote]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_mobile]  DEFAULT (N'') FOR [dmobile]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_dtameen]  DEFAULT ((0)) FOR [dtameen]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_rtameen]  DEFAULT ((0)) FOR [rtameen]
+
+
+ALTER TABLE [dbo].[pos_hdr_r] ADD  CONSTRAINT [DF_pos_hdr_r_tameen_not]  DEFAULT (N'') FOR [tameen_note]
+
+
+ALTER TABLE [dbo].[pos_hdr_r]  WITH CHECK ADD  CONSTRAINT [FK_pos_hdr_r_pos_hdr] FOREIGN KEY([dbrno], [dref], [dcontr])
+REFERENCES [dbo].[pos_hdr] ([brno], [ref], [contr])
+ON DELETE CASCADE
+
+
+ALTER TABLE [dbo].[pos_hdr_r] CHECK CONSTRAINT [FK_pos_hdr_r_pos_hdr]
+
+
+
+END

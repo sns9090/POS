@@ -1,0 +1,54 @@
+CREATE FUNCTION [dbo].[get_lastprice_for_item]
+(@comp char(2), @lbarcode varchar(20),@Glact bit)
+-- @mode 
+RETURNS float
+AS
+BEGIN
+    declare @dbc varchar(40),
+    @c_l_price float=0,
+	@lpkqty numeric(8,3),
+	@mdate varchar(10),
+	@sql varchar(400)='',
+	@paralist varchar(400)
+	set @dbc=DB_NAME()	
+
+	if @glact=0
+	begin
+		select top 1 @c_l_price=price ,@lpkqty=pkqty,@mdate=CONVERT(VARCHAR(10), CAST(a.invmdate as date), 105) from pu_dtl a join pu_hdr b on a.branch=b.branch and a.invtype=b.invtype and a.pucenter=b.pucenter and a.ref=b.ref  where a.branch=@comp and 
+		ltrim(rtrim(a.itemno))=@lbarcode and a.invtype in ('06','07') order by b.released desc
+
+		--if isnull(@c_l_price,0)=0
+		--begin
+		--  declare @yrcode char(4)
+		--  set @yrcode=substring(@dbc,6,4)
+		--  set @dbc=substring(@dbc,1,5)+str(cast(@yrcode as int)-1,2)
+		--  if exists(SELECT name FROM sys.databases where name=@dbc)
+		--  begin
+		--	 set @paralist='@c_l_price float output,@lpkqty numeric(8,3) output'
+		--	 set @sql='select top 1 @c_l_price=price,@lpkqty=pkqty from '+@dbc+'.dbo.pu_dtl where 
+		--			   branch='''+@comp+''' and 
+		--			   ltrim(rtrim(barcode))='''+@lbarcode+''' and invtype in (''06'',''07'') order by invmdate desc'
+
+		--	 EXECUTE sp_executesql @sql ,@paralist,@c_l_price=@c_l_price output,@lpkqty=@lpkqty output
+		--  end
+		--end
+	end
+	else
+	begin
+	select top 1 @c_l_price=price ,@lpkqty=pkqty,@mdate=CONVERT(VARCHAR(10), CAST(a.invmdate as date), 105) from pu_dtl a join pu_hdr b on a.branch=b.branch and a.invtype=b.invtype and a.pucenter=b.pucenter and a.ref=b.ref  where a.branch=@comp and 
+		ltrim(rtrim(a.barcode))=@lbarcode and a.invtype in ('06','07') order by b.released desc
+
+	end
+
+	set @c_l_price=isnull(@c_l_price,0)
+	set @lpkqty=isnull(@lpkqty,0)
+	--set @mdate=isnull(@mdate,'')
+	if @c_l_price>0 and @lpkqty>1 set @c_l_price=@c_l_price/@lpkqty
+
+	--insert into @t values(@c_l_price,@mdate)
+	return round(@c_l_price,4) --(@c_l_price,@mdate)
+
+
+	--select [dbo].[get_lastprice_for_item] ('01','555',0)
+
+end

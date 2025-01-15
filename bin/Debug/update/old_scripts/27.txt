@@ -1,0 +1,24 @@
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_whbins]'))
+  BEGIN
+
+CREATE TYPE [dbo].[tb_whbins] AS TABLE(
+	[br_no] [varchar](2) NOT NULL,
+	[item_no] [nvarchar](16) NOT NULL,
+	[unicode] [varchar](6) NOT NULL,
+	[wh_no] [varchar](2) NOT NULL,
+	[bin_no] [nvarchar](16) NOT NULL,
+	[qty] [numeric](10, 2) NOT NULL,
+	[rsvqty] [numeric](10, 2) NOT NULL,
+	[openbal] [numeric](10, 2) NOT NULL,
+	[lcost] [float] NOT NULL,
+	[fcost] [float] NOT NULL,
+	[openlcost] [float] NOT NULL,
+	[openfcost] [float] NOT NULL,
+	[expdate] [char](8) NOT NULL
+)
+
+
+
+  END

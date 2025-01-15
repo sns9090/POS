@@ -1,0 +1,175 @@
+IF OBJECT_ID('dbo.Save_Hdr_Dtl_Data') IS NOT NULL
+DROP PROCEDURE dbo.Save_Hdr_Dtl_Data
+
+      
+CREATE PROCEDURE [dbo].[Save_Hdr_Dtl_Data]
+
+	@ok_sl_dtl bit,
+	@ok_pu_dtl bit,
+	@ok_sto_dtl bit,
+
+	@br_no nvarchar(2),	
+	@sl_no nvarchar(2),	
+	@trtype nvarchar(2),
+	@trref int,
+
+	@sales_hdr_tb tb_sal_hdr  READONLY,
+	@pu_hdr_tb tb_pu_hdr  READONLY,
+	@sto_hdr_tb tb_sto_hdr  READONLY,
+
+	@sales_dtl_tb tb_sales_dtl  READONLY,
+	@pu_dtl_tb tb_pu_dtl  READONLY,
+	@sto_dtl_tb tb_sto_dtl  READONLY,
+
+
+	@errstatus int=0 output
+ 
+AS
+BEGIN
+
+	if @ok_sl_dtl=1
+	   BEGIN 
+	   BEGIN TRANSACTION;  
+  
+       BEGIN TRY 
+
+	    merge sales_hdr as t 
+	    using (select * from @sales_hdr_tb where branch=@br_no and slcenter=@sl_no and invtype=@trtype and ref=@trref) as s
+		ON t.[branch] = s.[branch] AND t.[invtype] = s.[invtype] AND t.[ref] = s.[ref] AND t.[slcenter] = s.[slcenter]
+	    when not matched then
+		INSERT(branch,slcenter,invtype,ref,invmdate, invhdate,[text],remarks,casher,entries,invttl,invdsvl,nettotal,invdspc,tax_amt_rcvd,with_tax,usrid,custno,invcst,[suspend],glser,slcode,stkjvno,taxid,tax_percent,taxfree_amt,carrier,invpaid,chkno,reref,sanedcrd_amt,rtncash_dfrpl,fcy2)
+        VALUES(s.branch,s.slcenter,s.invtype,s.ref,s.invmdate, s.invhdate,s.[text],s.remarks,s.casher,s.entries,round(s.invttl,2),round(s.invdsvl,2),round(s.nettotal,2),s.invdspc,round(s.tax_amt_rcvd,2),s.with_tax,s.usrid,s.custno,s.invcst,s.[suspend],s.glser,s.slcode,s.stkjvno,s.taxid,s.tax_percent,round(s.taxfree_amt,2),s.carrier,s.invpaid,s.chkno,s.reref,s.sanedcrd_amt,s.rtncash_dfrpl,s.fcy2);		
+
+	   -- delete from  sales_dtl where branch=@br_no and slcenter=@sl_no and invtype=@trtype and ref=@trref;
+
+		merge sales_dtl as t 
+		using (select * from @sales_dtl_tb where branch=@br_no and slcenter=@sl_no and invtype=@trtype and ref=@trref) as s
+	    ON t.[branch] = s.[branch] AND t.[folio] = s.[folio] AND t.[invtype] = s.[invtype] AND t.[ref] = s.[ref] AND t.[slcenter] = s.[slcenter]
+	    when not matched then
+		INSERT([branch],[slcenter],[invtype],[ref],[invmdate],[invhdate],[itemno],[unicode],[qty],[fqty],[price],[discpc],[cost],[ds_acfm],[sl_acfm],[gclass],[custno],[fcy],[barcode],[imfcval],[pack],[pkqty],[shadd],[shdpk],[shdqty],[frtqty],[rtnqty],[whno],[cmbkey],[folio],[rplct_post],[sold_item_status],[tax_amt],[tax_id],[stk_or_ser],[tax_prcent],[offer_amt])
+        VALUES(s.[branch],s.[slcenter],s.[invtype],s.[ref],s.[invmdate],s.[invhdate],s.[itemno],s.[unicode],s.[qty],s.[fqty],s.[price],s.[discpc],s.[cost],s.[ds_acfm],s.[sl_acfm],s.[gclass],s.[custno],s.[fcy],s.[barcode],s.[imfcval],s.[pack],s.[pkqty],s.[shadd],s.[shdpk],s.[shdqty],s.[frtqty],s.[rtnqty],s.[whno],s.[cmbkey],s.[folio],s.[rplct_post],s.[sold_item_status],s.[tax_amt],s.[tax_id],s.[stk_or_ser],s.[tax_prcent],s.[offer_amt]);
+		
+        set @errstatus=1
+	    COMMIT;  	  
+	   END TRY
+
+       BEGIN CATCH
+	     set @errstatus=0 --ERROR_MESSAGE()
+         ROLLBACK; 
+       END CATCH
+	   END
+------  Process pu_hdr & pu_dtl Table  
+-- 	if @ok_pu_dtl=1 
+--	begin
+------------ sdaad_hd Table
+------		set @sqlmsg='merge pu_hdr as t 
+------		using (select * from '+@dbc+'pu_hdr with (NOLOCK) where 1=1 ' + iif(@ok_pstd=1,' and posted=1 ','')
+------		+' and invmdate between '+@fmdate+' and '+@todate+') as s
+------		 ON t.[branch] = s.[branch] AND t.[invtype] = s.[invtype] AND t.[ref] = s.[ref] AND t.[pucenter] = s.[pucenter]
+------		 when not matched then
+------		INSERT([branch],[pucenter],[invtype],[ref],[invmdate],[invhdate],[supno],[text],[glser],[dsctype],[pstmode],[cur],[currate],[invttl],[invcst],[invdspc],[invdsvl],[nettotal],[invpaid],[casher],[entries],[released],[posted],[fixrate],[extamt],[extser],[pricetp],[ischeque],[chkno],[chkdate],[lastupdt],[jvgenrt],[cccommsn],[belowbal],[invsupno],[ccpayment],[rplsamt],[pdother],[slcode],[prpaidamt],[instldays],[instflag],[slcmnd],[inv_printed],[bendit],[modified],[rqstorder],[rqststld],[carrier],[rcvdtrn],[usrid],[address],[wst_key],[wst_amt],[gmark],[tameen],[shahan],[msfr],[mother],[etax],[remarks],[tax_amt_paid],[with_tax],[taxid],[tax_percent],[taxfree_amt],[reref],[sabr])
+------        VALUES(s.[branch],s.[pucenter],s.[invtype],s.[ref],s.[invmdate],s.[invhdate],s.[supno],s.[text],s.[glser],s.[dsctype],s.[pstmode],s.[cur],s.[currate],s.[invttl],s.[invcst],s.[invdspc],s.[invdsvl],s.[nettotal],s.[invpaid],s.[casher],s.[entries],s.[released],s.[posted],s.[fixrate],s.[extamt],s.[extser],s.[pricetp],s.[ischeque],s.[chkno],s.[chkdate],s.[lastupdt],s.[jvgenrt],s.[cccommsn],s.[belowbal],s.[invsupno],s.[ccpayment],s.[rplsamt],s.[pdother],s.[slcode],s.[prpaidamt],s.[instldays],s.[instflag],s.[slcmnd],s.[inv_printed],s.[bendit],s.[modified],s.[rqstorder],s.[rqststld],s.[carrier],s.[rcvdtrn],s.[usrid],s.[address],s.[wst_key],s.[wst_amt],s.[gmark],s.[tameen],s.[shahan],s.[msfr],s.[mother],s.[etax],s.[remarks],s.[tax_amt_paid],s.[with_tax],s.[taxid],s.[tax_percent],s.[taxfree_amt],s.[reref],s.[sabr]);'
+		
+------		begin transaction
+------		exec sp_executesql @sqlmsg
+------		if @@error<>0
+------		begin
+------			rollback transaction
+------			set @errstatus=6	
+------			return	--@errstatus		 				
+------		end
+------		else commit transaction
+
+     if @ok_pu_dtl=1
+	    BEGIN
+	   BEGIN TRANSACTION;  
+  
+       BEGIN TRY 
+
+	    merge pu_hdr as t 
+		using (select * from @pu_hdr_tb where branch=@br_no and pucenter=@sl_no and invtype=@trtype and ref=@trref) as s
+	    ON t.[branch] = s.[branch] AND t.[invtype] = s.[invtype] AND t.[ref] = s.[ref] AND t.[pucenter] = s.[pucenter]
+	    when not matched then
+		INSERT([branch],[pucenter],[invtype],[ref],[invmdate],[invhdate],[supno],[text],[glser],[dsctype],[pstmode],[cur],[currate],[invttl],[invcst],[invdspc],[invdsvl],[nettotal],[invpaid],[casher],[entries],[released],[posted],[fixrate],[extamt],[extser],[pricetp],[ischeque],[chkno],[chkdate],[lastupdt],[jvgenrt],[cccommsn],[belowbal],[invsupno],[ccpayment],[rplsamt],[pdother],[slcode],[prpaidamt],[instldays],[instflag],[slcmnd],[inv_printed],[bendit],[modified],[rqstorder],[rqststld],[carrier],[rcvdtrn],[usrid],[address],[wst_key],[wst_amt],[gmark],[tameen],[shahan],[msfr],[mother],[etax],[remarks],[tax_amt_paid],[with_tax],[taxid],[tax_percent],[taxfree_amt],[reref],[sabr])
+        VALUES(s.[branch],s.[pucenter],s.[invtype],s.[ref],s.[invmdate],s.[invhdate],s.[supno],s.[text],s.[glser],s.[dsctype],s.[pstmode],s.[cur],s.[currate],s.[invttl],s.[invcst],s.[invdspc],s.[invdsvl],s.[nettotal],s.[invpaid],s.[casher],s.[entries],s.[released],s.[posted],s.[fixrate],s.[extamt],s.[extser],s.[pricetp],s.[ischeque],s.[chkno],s.[chkdate],s.[lastupdt],s.[jvgenrt],s.[cccommsn],s.[belowbal],s.[invsupno],s.[ccpayment],s.[rplsamt],s.[pdother],s.[slcode],s.[prpaidamt],s.[instldays],s.[instflag],s.[slcmnd],s.[inv_printed],s.[bendit],s.[modified],s.[rqstorder],s.[rqststld],s.[carrier],s.[rcvdtrn],s.[usrid],s.[address],s.[wst_key],s.[wst_amt],s.[gmark],s.[tameen],s.[shahan],s.[msfr],s.[mother],s.[etax],s.[remarks],s.[tax_amt_paid],s.[with_tax],s.[taxid],s.[tax_percent],s.[taxfree_amt],s.[reref],s.[sabr]);
+		
+
+	   -- delete from  pu_dtl where branch=@br_no and pucenter=@sl_no and invtype=@trtype and ref=@trref;
+
+		merge pu_dtl as t 
+		using (select * from @pu_dtl_tb where branch=@br_no and pucenter=@sl_no and invtype=@trtype and ref=@trref) as s
+		ON t.[branch] = s.[branch] AND t.[folio] = s.[folio] AND t.[invtype] = s.[invtype] AND t.[ref] = s.[ref] AND t.[pucenter] = s.[pucenter]
+		when not matched then
+		INSERT([branch],[pucenter],[invtype],[ref],[invmdate],[invhdate],[itemno],[unicode],[qty],[fqty],[price],[discpc],[cost],[ds_acfm],[sl_acfm],[gclass],[fullcost],[cur],[barcode],[imfcval],[pack],[pkqty],[shadd],[shdpk],[shdqty],[frtqty],[rtnqty],[whno],[cmbkey],[folio],[rplct_post],[sold_item_status],[tax_amt],[tax_id],[stk_or_ser],[tax_prcent],[expdate])
+        VALUES(s.[branch],s.[pucenter],s.[invtype],s.[ref],s.[invmdate],s.[invhdate],s.[itemno],s.[unicode],s.[qty],s.[fqty],s.[price],s.[discpc],s.[cost],s.[ds_acfm],s.[sl_acfm],s.[gclass],s.[fullcost],s.[cur],s.[barcode],s.[imfcval],s.[pack],s.[pkqty],s.[shadd],s.[shdpk],s.[shdqty],s.[frtqty],s.[rtnqty],s.[whno],s.[cmbkey],s.[folio],s.[rplct_post],s.[sold_item_status],s.[tax_amt],s.[tax_id],s.[stk_or_ser],s.[tax_prcent],s.[expdate]);
+		
+        set @errstatus=1
+	    COMMIT;  	  
+	   END TRY
+
+       BEGIN CATCH
+	     set @errstatus=0 --ERROR_MESSAGE()
+         ROLLBACK; 
+       END CATCH
+	   END
+--	end
+------  Process Sto_hdr & Sto_dtl Table   
+--	if @ok_st=1 
+--	begin
+	  
+--	 ---- 	set @sqlmsg='merge sto_hdr as t 
+--		----using (select * from '+@dbc+'sto_hdr with (NOLOCK) where 1=1 ' + iif(@ok_pstd=1,' and posted=1 ','')
+--		----+' and trmdate between '+@fmdate+' and '+@todate+') as s
+--		---- ON t.[branch] = s.[branch] AND t.[ref] = s.[ref] AND t.[trtype] = s.[trtype]
+--		---- when not matched then
+--		----INSERT([branch],[trtype],[ref],[trmdate],[trhdate],[text],[amnttl],[costttl],[sysdate],[src],[released],[posted],[fcy],[fcyrate],[whno],[entries],[lastupdt],[towhno],[modified],[rcvdtrn],[supno],[usrid],[brsupp],[tobrno],[brxref],[glref],[isbrtrx],[asmtype],[repost],[remarks],[stkjvno])
+--  ----      VALUES(s.[branch],s.[trtype],s.[ref],s.[trmdate],s.[trhdate],s.[text],s.[amnttl],s.[costttl],s.[sysdate],s.[src],s.[released],s.[posted],s.[fcy],s.[fcyrate],s.[whno],s.[entries],s.[lastupdt],s.[towhno],s.[modified],s.[rcvdtrn],s.[supno],s.[usrid],s.[brsupp],s.[tobrno],s.[brxref],s.[glref],s.[isbrtrx],s.[asmtype],s.[repost],s.[remarks],s.[stkjvno]);'
+		
+--		----begin transaction
+--		----exec sp_executesql @sqlmsg
+--		----if @@error<>0
+--		----begin
+--		----	rollback transaction
+--		----	set @errstatus=8	
+--		----	return	--@errstatus		 				
+--		----end
+--		----else commit transaction
+
+      if @ok_sto_dtl=1
+	    BEGIN
+
+	   BEGIN TRANSACTION;  
+  
+       BEGIN TRY 
+
+	    merge sto_hdr as t 
+		using ( select * from @sto_hdr_tb where branch=@br_no  and trtype=@trtype and ref=@trref) as s
+		 ON t.[branch] = s.[branch] AND t.[ref] = s.[ref] AND t.[trtype] = s.[trtype]
+		 when not matched then
+		INSERT([branch],[trtype],[ref],[trmdate],[trhdate],[text],[amnttl],[costttl],[sysdate],[src],[released],[posted],[fcy],[fcyrate],[whno],[entries],[lastupdt],[towhno],[modified],[rcvdtrn],[supno],[usrid],[brsupp],[tobrno],[brxref],[glref],[isbrtrx],[asmtype],[repost],[remarks],[stkjvno])
+        VALUES(s.[branch],s.[trtype],s.[ref],s.[trmdate],s.[trhdate],s.[text],s.[amnttl],s.[costttl],s.[sysdate],s.[src],s.[released],s.[posted],s.[fcy],s.[fcyrate],s.[whno],s.[entries],s.[lastupdt],s.[towhno],s.[modified],s.[rcvdtrn],s.[supno],s.[usrid],s.[brsupp],s.[tobrno],s.[brxref],s.[glref],s.[isbrtrx],s.[asmtype],s.[repost],s.[remarks],s.[stkjvno]);
+		
+	   -- delete from  sto_dtl where branch=@br_no  and trtype=@trtype and ref=@trref;
+
+        merge sto_dtl as t 
+ 		using ( select * from @sto_dtl_tb where branch=@br_no  and trtype=@trtype and ref=@trref) as s
+ 		ON t.[branch] = s.[branch] AND t.[folio] = s.[folio] AND t.[ref] = s.[ref] AND t.[trtype] = s.[trtype]
+ 		when not matched then
+ 		INSERT([branch],[trtype],[ref],[trmdate],[trhdate],[itemno],[unicode],[qty],[fqty],[whno],[binno],[lcost],[sysdate],[src],[lprice],[fcost],[fprice],[expdate],[towhno],[tobinno],[barcode],[cmbkey],[discpc],[pack],[pkqty],[shdpk],[shdqty],[folio],[rplct_post])
+        VALUES(s.[branch],s.[trtype],s.[ref],s.[trmdate],s.[trhdate],s.[itemno],s.[unicode],s.[qty],s.[fqty],s.[whno],s.[binno],s.[lcost],s.[sysdate],s.[src],s.[lprice],s.[fcost],s.[fprice],s.[expdate],s.[towhno],s.[tobinno],s.[barcode],s.[cmbkey],s.[discpc],s.[pack],s.[pkqty],s.[shdpk],s.[shdqty],s.[folio],s.[rplct_post]);
+		
+        set @errstatus=1
+	    COMMIT;  	  
+	   END TRY
+
+       BEGIN CATCH
+	     set @errstatus=0 --ERROR_MESSAGE()
+         ROLLBACK; 
+       END CATCH
+	   END
+--	end
+
+
+--	return	@errstatus
+END
+

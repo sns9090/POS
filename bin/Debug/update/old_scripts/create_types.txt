@@ -1,0 +1,166 @@
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_sales_dtl]'))
+  BEGIN
+     CREATE TYPE [dbo].[tb_sales_dtl] AS TABLE(
+	[branch] [varchar](2) NOT NULL,
+	[slcenter] [varchar](2) NOT NULL,
+	[invtype] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[invmdate] [char](8) NULL,
+	[invhdate] [char](8) NULL,
+	[itemno] [char](16) NULL,
+	[unicode] [char](6) NULL,
+	[qty] [numeric](10, 2) NULL,
+	[fqty] [numeric](10, 2) NULL,
+	[price] [numeric](10, 2) NULL,
+	[discpc] [float] NULL,
+	[cost] [float] NULL,
+	[ds_acfm] [numeric](1, 0) NULL,
+	[sl_acfm] [numeric](1, 0) NULL,
+	[gclass] [char](12) NULL,
+	[custno] [char](6) NULL,
+	[fcy] [char](3) NULL,
+	[barcode] [nvarchar](20) NULL,
+	[imfcval] [float] NULL,
+	[pack] [varchar](2) NULL,
+	[pkqty] [numeric](10, 2) NULL,
+	[shadd] [char](1) NULL,
+	[shdpk] [numeric](8, 3) NULL,
+	[shdqty] [numeric](11, 3) NULL,
+	[frtqty] [numeric](9, 3) NULL,
+	[rtnqty] [numeric](12, 3) NULL,
+	[whno] [varchar](2) NULL,
+	[cmbkey] [nvarchar](max) NULL,
+	[folio] [numeric](7, 0) NULL,
+	[rplct_post] [bit] NULL,
+	[sold_item_status] [numeric](1, 0) NULL,
+	[tax_amt] [float] NULL,
+	[tax_id] [int] NULL,
+	[stk_or_ser] [float] NULL,
+	[tax_prcent] [float] NULL,
+	[offer_amt] [float] NULL
+)
+  END 
+
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_pu_dtl]'))
+  BEGIN
+CREATE TYPE [dbo].[tb_pu_dtl] AS TABLE(
+	[branch] [varchar](2) NOT NULL,
+	[pucenter] [varchar](2) NOT NULL,
+	[invtype] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[invmdate] [char](8) NULL,
+	[invhdate] [char](8) NULL,
+	[itemno] [char](16) NULL,
+	[unicode] [char](6) NULL,
+	[qty] [numeric](10, 2) NULL,
+	[fqty] [numeric](10, 2) NULL,
+	[price] [numeric](10, 4) NULL,
+	[discpc] [float] NULL,
+	[cost] [float] NULL,
+	[ds_acfm] [numeric](1, 0) NULL,
+	[sl_acfm] [numeric](1, 0) NULL,
+	[gclass] [char](12) NULL,
+	[fullcost] [float] NULL,
+	[cur] [varchar](2) NULL,
+	[barcode] [nvarchar](20) NULL,
+	[imfcval] [float] NULL,
+	[pack] [varchar](2) NULL,
+	[pkqty] [numeric](8, 2) NULL,
+	[shadd] [char](1) NULL,
+	[shdpk] [numeric](8, 3) NULL,
+	[shdqty] [numeric](11, 3) NULL,
+	[frtqty] [numeric](9, 3) NULL,
+	[rtnqty] [numeric](12, 3) NULL,
+	[whno] [varchar](2) NULL,
+	[cmbkey] [char](24) NULL,
+	[folio] [numeric](7, 0) NULL,
+	[rplct_post] [bit] NULL,
+	[sold_item_status] [numeric](1, 0) NULL,
+	[tax_amt] [float] NULL,
+	[tax_id] [int] NULL,
+	[stk_or_ser] [float] NULL,
+	[tax_prcent] [float] NULL,
+	[expdate] [char](8) NULL
+)
+  END 
+
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_sto_dtl]'))
+  BEGIN
+CREATE TYPE [dbo].[tb_sto_dtl] AS TABLE(
+	[branch] [varchar](2) NOT NULL,
+	[trtype] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[trmdate] [char](8) NOT NULL,
+	[trhdate] [char](8) NOT NULL,
+	[itemno] [nvarchar](50) NOT NULL,
+	[unicode] [char](6) NULL,
+	[qty] [numeric](10, 2) NULL,
+	[fqty] [numeric](10, 2) NULL,
+	[whno] [varchar](2) NOT NULL,
+	[binno] [char](6) NULL,
+	[lcost] [float] NOT NULL,
+	[sysdate] [char](8) NULL,
+	[src] [char](2) NULL,
+	[lprice] [float] NULL,
+	[fcost] [float] NULL,
+	[fprice] [numeric](11, 2) NULL,
+	[expdate] [char](8) NULL,
+	[towhno] [varchar](2) NULL,
+	[tobinno] [char](6) NULL,
+	[barcode] [nvarchar](20) NULL,
+	[cmbkey] [char](24) NULL,
+	[discpc] [numeric](6, 2) NULL,
+	[pack] [varchar](2) NULL,
+	[pkqty] [numeric](10, 2) NULL,
+	[shdpk] [numeric](8, 3) NULL,
+	[shdqty] [numeric](14, 3) NULL,
+	[folio] [numeric](7, 0) NOT NULL,
+	[rplct_post] [bit] NULL
+)
+  END 
+
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_sal_hdr]'))
+  BEGIN
+CREATE TYPE [dbo].[tb_sal_hdr] AS TABLE(
+	[branch] [varchar](2) NOT NULL,
+	[slcenter] [varchar](2) NOT NULL,
+	[invtype] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[invmdate] [char](8) NULL,
+	[invhdate] [char](8) NULL,
+	[text] [varchar](100) NULL,
+	[remarks] [nvarchar](200) NULL,
+	[casher] [nvarchar](16) NULL,
+	[entries] [numeric](5, 0) NULL,
+	[invttl] [float] NULL,
+	[invdsvl] [float] NULL,
+	[nettotal] [float] NULL,
+	[invdspc] [float] NULL,
+	[tax_amt_rcvd] [float] NULL,
+	[with_tax] [bit] NULL,
+	[usrid] [varchar](50) NULL,
+	[custno] [nvarchar](10) NULL,
+	[invcst] [float] NULL,
+	[suspend] [bit] NULL,
+	[glser] [varchar](5) NULL,
+	[slcode] [varchar](2) NULL,
+	[stkjvno] [numeric](6, 0) NULL,
+	[taxid] [varchar](50) NULL,
+	[tax_percent] [float] NULL,
+	[taxfree_amt] [float] NULL,
+	[carrier] [varchar](3) NULL,
+	[invpaid] [numeric](14, 2) NULL,
+	[chkno] [varchar](10) NULL,
+	[reref] [nvarchar](50) NULL,
+	[sanedcrd_amt] [numeric](12, 2) NULL,
+	[rtncash_dfrpl] [numeric](12, 2) NULL
+)
+  END 

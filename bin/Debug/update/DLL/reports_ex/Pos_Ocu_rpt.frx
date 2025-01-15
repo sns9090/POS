@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/22/2020 09:02:58" ReportInfo.Modified="12/06/2020 01:06:13" ReportInfo.CreatorVersion="2013.3.5.0" PrintSettings.PaperSource="15">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+   // Text38.Text= (ToDouble([pos_dtl.price]) * ToDouble([pos_dtl.qty])).ToString();
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZj+wf5gXF74cTEZipNpR2ngZd1ypfWBlxh5lDYG7eiMwzmb2yADDa4ldtliALt8bIiwZMa7Gntpi+ADkrxBeIgQcXWV1wHGBXIXxZeBowACFmdZR7xZMKEiksedbeHRKDmtgF9jvoqvbetQyhcPB7CQ==">
+      <TableDataSource Name="pos_dtl" DataType="System.Int32" Enabled="true" TableName="pos_dtl">
+        <Column Name="brno" DataType="System.String"/>
+        <Column Name="slno" DataType="System.String"/>
+        <Column Name="ref" DataType="System.Int32"/>
+        <Column Name="contr" DataType="System.Int32"/>
+        <Column Name="type" DataType="System.Int32"/>
+        <Column Name="barcode" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="unit" DataType="System.String"/>
+        <Column Name="price" DataType="System.Double"/>
+        <Column Name="qty" DataType="System.Double"/>
+        <Column Name="cost" DataType="System.Double"/>
+        <Column Name="is_req" DataType="System.Int32"/>
+        <Column Name="itemno" DataType="System.String"/>
+        <Column Name="srno" DataType="System.Int32"/>
+        <Column Name="pkqty" DataType="System.Double"/>
+        <Column Name="discpc" DataType="System.Double"/>
+        <Column Name="tax_id" DataType="System.Int32"/>
+        <Column Name="tax_amt" DataType="System.Double"/>
+        <Column Name="rqty" DataType="System.Double"/>
+        <Column Name="offr_amt" DataType="System.Double"/>
+      </TableDataSource>
+      <TableDataSource Name="pos_hdr" DataType="System.Int32" Enabled="true" TableName="pos_hdr">
+        <Column Name="brno" DataType="System.String"/>
+        <Column Name="slno" DataType="System.String"/>
+        <Column Name="ref" DataType="System.Int32"/>
+        <Column Name="contr" DataType="System.Int32"/>
+        <Column Name="type" DataType="System.Int32"/>
+        <Column Name="date" DataType="System.DateTime"/>
+        <Column Name="total" DataType="System.Double"/>
+        <Column Name="count" DataType="System.Double"/>
+        <Column Name="payed" DataType="System.Double"/>
+        <Column Name="total_cost" DataType="System.Double"/>
+        <Column Name="saleman" DataType="System.String"/>
+        <Column Name="req_no" DataType="System.Int32"/>
+        <Column Name="cust_no" DataType="System.Int32"/>
+        <Column Name="discount" DataType="System.Double"/>
+        <Column Name="net_total" DataType="System.Double"/>
+        <Column Name="sysdate" DataType="System.DateTime"/>
+        <Column Name="gen_ref" DataType="System.Int32"/>
+        <Column Name="tax_amt" DataType="System.Double"/>
+        <Column Name="dscper" DataType="System.Double"/>
+        <Column Name="card_type" DataType="System.Int32"/>
+        <Column Name="card_amt" DataType="System.Double"/>
+        <Column Name="rref" DataType="System.Int32"/>
+        <Column Name="rcontr" DataType="System.Int32"/>
+        <Column Name="taxfree_amt" DataType="System.Double"/>
+        <Column Name="note" DataType="System.String"/>
+        <Column Name="mobile" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="Comp_Name" DataType="System.String"/>
+    <Parameter Name="Br_Name" DataType="System.String"/>
+    <Parameter Name="Msg1" DataType="System.String"/>
+    <Parameter Name="Msg2" DataType="System.String"/>
+    <Parameter Name="total" DataType="System.String" Expression="IIf([tax_type]==&quot;3&quot;,((([pos_dtl.qty]*[pos_dtl.price])- [pos_dtl.offr_amt]) + ((([pos_dtl.qty]*[pos_dtl.price])- [pos_dtl.offr_amt])* ToDouble([taxper])/100)),(([pos_dtl.qty]*[pos_dtl.price])-[pos_dtl.offr_amt]))"/>
+    <Parameter Name="Remain" DataType="System.String" Expression="(([pos_hdr.total]-[pos_hdr.discount])-([pos_hdr.card_amt]+[pos_hdr.payed]))*-1"/>
+    <Parameter Name="inv_bar" DataType="System.String"/>
+    <Parameter Name="taxper" DataType="System.String"/>
+    <Parameter Name="tax_type" DataType="System.String"/>
+    <Parameter Name="total0" DataType="System.String" Expression="IIf([tax_type]==&quot;3&quot;,([pos_dtl.price] + ([pos_dtl.price]* ToDouble([taxper])/100)),[pos_dtl.price])"/>
+    <Parameter Name="offeramt" DataType="System.String" Expression="IIf(ToDouble([pos_dtl.offr_amt])==0 ,&quot;&quot;,&quot;عرض&quot;)"/>
+    <Total Name="Total1" Expression="[total]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="3276.1" RawPaperSize="140" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <ReportTitleBand Name="ReportTitle1" Width="302.4" Height="77.6" PrintOn="FirstPage">
+      <TextObject Name="Text7" Left="11.45" Top="2.45" Width="264.6" Height="18.9" Text="[Comp_Name]" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text9" Left="11.45" Top="26.35" Width="264.6" Height="18.9" Text="[Br_Name]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="11.45" Top="51.25" Width="264.6" Height="18.9" Text="[Msg1]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <LineObject Name="Line5" Left="11.45" Top="75.15" Width="264.6"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="81.6" Width="302.4" Height="60.7" PrintOn="FirstPage" KeepChild="true">
+      <TextObject Name="Text1" Left="11.45" Top="20.9" Width="189" Height="18.9" Text="[FormatDateTime([pos_hdr.date],&quot;dd-MM-yyyy hh:mm:ss tt&quot;)]" Format="Custom" Format.Format="dd-MM-yyyy  hh:mm:ss tt" HorzAlign="Right"/>
+      <TextObject Name="Text8" Left="11.45" Top="2" Width="94.5" Height="18.9" Text="فاتورة محجوزة" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text33" Left="200.45" Top="21.8" Width="75.6" Height="18.9" Text="التاريخ والوقت" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text34" Left="199.9" Top="40.7" Width="75.6" Height="18.9" Text="رقم الكاشير" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text32" Left="200.45" Top="2.45" Width="75.6" Height="18.9" Text="رقم الفاتورة" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="105.95" Top="2" Width="94.5" Height="18.9" Text="[pos_hdr.ref]" HorzAlign="Right"/>
+      <TextObject Name="Text35" Left="143.75" Top="39.8" Width="56.7" Height="18.9" Text="[pos_hdr.contr]" HorzAlign="Right"/>
+      <TextObject Name="Text36" Left="77.6" Top="39.8" Width="37.8" Height="18.9" Text="البائع" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text37" Left="11.45" Top="39.8" Width="65.5" Height="18.9" Text="[pos_hdr.saleman]" HorzAlign="Right"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="146.3" Width="302.4" DataSource="pos_dtl"/>
+    <ReportSummaryBand Name="ReportSummary1" Top="150.3" Width="302.4" Height="236.25">
+      <TextObject Name="Text12" Left="12.45" Top="34.8" Width="94.5" Height="18.9" Text="[pos_hdr.discount]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text13" Left="12.45" Top="53.8" Width="94.5" Height="18.9" Text="[pos_hdr.tax_amt]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text14" Left="12.45" Top="72.15" Width="94.5" Height="18.9" Text="[pos_hdr.net_total]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text17" Left="12.45" Width="264.6" Height="18.9" Text="*************************************************" HorzAlign="Center"/>
+      <TextObject Name="Text18" Left="13.45" Top="91.4" Width="264.6" Height="18.9" Text="*************************************************" HorzAlign="Center"/>
+      <TextObject Name="Text19" Left="13.45" Top="105.85" Width="264.6" Height="37.8" Text="[Msg2]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="12.45" Top="15.45" Width="94.5" Height="18.9" Text="[Total1]" Format="Number" Format.UseLocale="true" HorzAlign="Center"/>
+      <TextObject Name="Text11" Left="109.95" Top="16.45" Width="94.5" Height="18.9" Text="المجموع" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Left="110.4" Top="35.8" Width="93.5" Height="18.9" Text="الخصم" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="110.4" Top="73.6" Width="93.5" Height="18.9" Text="الصافي" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text26" Left="145.2" Top="54.7" Width="112.4" Height="18.9" Text="ضريبة القيمة المضافة " Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text27" Left="110.4" Top="53.7" Width="37.8" Height="18.9" Text="[taxper]%" Font="Arial, 10pt, style=Bold"/>
+      <BarcodeObject Name="Barcode1" Left="56.7" Top="141.75" Width="186.95" Height="37.8" AutoSize="false" Expression="[inv_bar]" ShowText="false" Barcode="Code128" Barcode.AutoEncode="true"/>
+      <TextObject Name="Text2" Left="14.9" Top="189" Width="264.6" Height="37.8" Text="[pos_hdr.note]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>

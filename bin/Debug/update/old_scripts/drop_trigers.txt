@@ -1,0 +1,29 @@
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_acc_hdr' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_acc_hdr];
+END;
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_acc_dtl' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_acc_dtl];
+END;
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_pu_hdr' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_pu_hdr];
+END;
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_pu_dtl' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_pu_dtl];
+END;
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_sales_hdr' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_sales_hdr];
+END;
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = N'save_deleted_sales_dtl' AND [type] = 'TR')
+BEGIN
+      DROP TRIGGER [dbo].[save_deleted_sales_dtl];
+END;

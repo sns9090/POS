@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/22/2020 09:02:58" ReportInfo.Modified="11/26/2021 14:56:03" ReportInfo.CreatorVersion="2013.3.5.0" PrintSettings.PaperSource="15">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+   // Text38.Text= (ToDouble([pos_dtl.price]) * ToDouble([pos_dtl.qty])).ToString();
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZydjSRcjxnQ2eXsoKnFButLifsF4AH6W7nSYVH8mqOWKt7ebcetXSuKnIS5bOKAkTBJ3No6nladmW9Qaho2cFiEti44k0i2heVpgOb+yImG4IpdLeHY6/IhRr0hOhb6GqCnZEZDc4vnjEHTju8O/1dw==">
+      <TableDataSource Name="tbl_rpt" DataType="System.Int32" Enabled="true" TableName="tbl_rpt">
+        <Column Name="c1" DataType="System.String"/>
+        <Column Name="c2" DataType="System.String"/>
+        <Column Name="c3" DataType="System.String"/>
+        <Column Name="c4" DataType="System.String"/>
+        <Column Name="c5" DataType="System.String"/>
+        <Column Name="c6" DataType="System.String"/>
+        <Column Name="c7" DataType="System.String"/>
+        <Column Name="c8" DataType="System.String"/>
+        <Column Name="c9" DataType="System.String"/>
+        <Column Name="c10" DataType="System.String"/>
+        <Column Name="c11" DataType="System.String"/>
+        <Column Name="c12" DataType="System.String"/>
+        <Column Name="c13" DataType="System.String"/>
+        <Column Name="c14" DataType="System.String"/>
+        <Column Name="c15" DataType="System.String"/>
+        <Column Name="c16" DataType="System.String"/>
+        <Column Name="c17" DataType="System.String"/>
+        <Column Name="c18" DataType="System.String"/>
+        <Column Name="c19" DataType="System.String"/>
+        <Column Name="c20" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="date" DataType="System.String"/>
+    <Parameter Name="ref" DataType="System.String"/>
+    <Parameter Name="type" DataType="System.String"/>
+    <Parameter Name="br_name" DataType="System.String"/>
+    <Parameter Name="tax_id" DataType="System.String"/>
+    <Parameter Name="total" DataType="System.String"/>
+    <Parameter Name="descount" DataType="System.String"/>
+    <Parameter Name="tax" DataType="System.String"/>
+    <Parameter Name="nettotal" DataType="System.String"/>
+    <Parameter Name="a_toword" DataType="System.String"/>
+    <Parameter Name="custno" DataType="System.String"/>
+    <Parameter Name="note" DataType="System.String"/>
+    <Parameter Name="clnt_taxid" DataType="System.String"/>
+    <Parameter Name="count" DataType="System.String"/>
+    <Parameter Name="salman" DataType="System.String"/>
+    <Parameter Name="trans" DataType="System.String"/>
+    <Parameter Name="desc" DataType="System.String"/>
+    <Parameter Name="cust" DataType="System.String"/>
+    <Parameter Name="descs" DataType="System.String" Expression="IIf([custno]==&quot;&quot;,IIf([note]==&quot;&quot;,[desc],[note]),[cust])"/>
+    <Parameter Name="Qr_Code" DataType="System.String" Expression="[comp_name]+&quot;\n&quot;+[br_name]+&quot;\n&quot;+&quot;الرقم الضريبي : &quot;+[tax_id]+&quot;\n&quot;+&quot;رقم الفاتورة : &quot;+ToString([ref])+&quot;\n&quot;+&quot;تاريخ الفاتورة : &quot;+[date]+&quot;\n&quot;+&quot;ضريبة القيمة المظافة &quot; +[taxper]+&quot;% : &quot;+ToString(Round(ToDouble([tax]),2))+&quot;\n&quot;+&quot;صافي الفاتورة شامل الضريبة : &quot;+ToString([nettotal])"/>
+    <Parameter Name="comp_name" DataType="System.String"/>
+    <Parameter Name="taxper" DataType="System.String"/>
+    <Parameter Name="qr" DataType="System.String"/>
+    <Total Name="Total1" Expression="[total]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="215.9" PaperHeight="139.7" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="4" OtherPagesSource="4">
+    <PageHeaderBand Name="PageHeader1" Width="816.1" Height="264.6">
+      <TextObject Name="Text1" Left="56.7" Top="193.45" Width="94.5" Height="18.9" Text="[date]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text4" Left="538.65" Top="174.55" Width="94.5" Height="18.9" Text="[ref]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text7" Left="170.1" Top="193.45" Width="463.05" Height="18.9" Text="[descs]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text17" Left="103.95" Top="174.55" Width="9.45" Height="18.9" Text="/" Font="Arial, 12pt"/>
+      <TextObject Name="Text16" Left="113.4" Top="174.55" Width="94.5" Height="18.9" Text="[TotalPages#]" Font="Arial, 12pt"/>
+      <TextObject Name="Text15" Left="47.25" Top="174.55" Width="56.7" Height="18.9" Text="[Page]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <BarcodeObject Name="Barcode2" Left="274.05" Top="56.7" Width="151.2" Height="151.2" AutoSize="false" Expression="[qr]" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+      <TextObject Name="Text18" Left="453.6" Top="122.85" Width="94.5" Height="18.9" Text="[taxper]"/>
+      <TextObject Name="Text19" Left="321.3" Top="18.9" Width="141.75" Height="18.9" Text="فاتورة ضريبية" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="268.6" Width="816.1" Height="19.45" DataSource="tbl_rpt">
+      <TextObject Name="Text2" Left="94.5" Width="94.5" Height="18.9" Text="[tbl_rpt.c1]" Font="Arial, 12pt"/>
+      <TextObject Name="Text5" Left="236.25" Width="255.15" Height="18.9" Text="[tbl_rpt.c3]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text9" Left="491.4" Width="94.5" Height="18.9" Text="[tbl_rpt.c6]" HorzAlign="Center" Font="Arial, 12pt"/>
+      <TextObject Name="Text14" Left="595.35" Width="94.5" Height="18.9" Text="[tbl_rpt.c7]" Font="Arial, 12pt"/>
+      <TextObject Name="Text12" Left="18.9" Width="94.5" Height="18.9" Text="[Row#]" Font="Arial, 12pt"/>
+      <TextObject Name="Text13" Left="680.4" Width="94.5" Height="18.9" Text="[tbl_rpt.c10]" Font="Arial, 12pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="292.05" Width="816.1" Height="141.75">
+      <TextObject Name="Text8" Left="680.4" Top="45.25" Width="94.5" Height="18.9" Text="[descount]" Font="Arial, 12pt"/>
+      <TextObject Name="Text6" Left="680.4" Top="20.9" Width="94.5" Height="18.9" Text="[tax]" Font="Arial, 12pt"/>
+      <TextObject Name="Text10" Left="56.7" Top="69.6" Width="529.2" Height="18.9" Text="[a_toword]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text11" Left="680.4" Top="68.6" Width="94.5" Height="18.9" Text="[nettotal]" Font="Arial, 12pt"/>
+      <TextObject Name="Text3" Left="680.4" Top="-4" Width="94.5" Height="18.9" Text="[total]" Font="Arial, 12pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

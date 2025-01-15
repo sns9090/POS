@@ -1,0 +1,53 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_drivers')
+BEGIN
+
+CREATE TABLE [dbo].[pos_drivers](
+	[sp_brno] [varchar](2) NOT NULL,
+	[sp_id] [varchar](2) NOT NULL,
+	[sp_name] [varchar](50) NOT NULL,
+	[sp_short] [varchar](15) NOT NULL,
+	[sp_percent] [numeric](4, 2) NOT NULL,
+	[sp_target] [numeric](4, 2) NOT NULL,
+	[salesman] [bit] NOT NULL,
+	[collecman] [bit] NOT NULL,
+	[purshman] [bit] NOT NULL,
+	[cashcrdit] [bit] NOT NULL,
+	[modified] [bit] NULL,
+	[lastupdt] [char](8) NULL,
+	[usrid] [char](10) NULL,
+ CONSTRAINT [PK_pos_men] PRIMARY KEY CLUSTERED 
+(
+	[sp_brno] ASC,
+	[sp_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_sp_percent]  DEFAULT ((0)) FOR [sp_percent]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_sp_target]  DEFAULT ((0)) FOR [sp_target]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_salesman]  DEFAULT ((1)) FOR [salesman]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_collecman]  DEFAULT ((0)) FOR [collecman]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_purshman]  DEFAULT ((0)) FOR [purshman]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_cashcrdit]  DEFAULT ((0)) FOR [cashcrdit]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_modified]  DEFAULT ((0)) FOR [modified]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_lastupdt]  DEFAULT (N'') FOR [lastupdt]
+
+
+ALTER TABLE [dbo].[pos_drivers] ADD  CONSTRAINT [DF_pos_drivers_usrid]  DEFAULT (N'') FOR [usrid]
+
+END

@@ -1,0 +1,25 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'tbl_rpt')
+BEGIN
+CREATE TABLE [dbo].[tbl_rpt](
+	[c1] [nvarchar](100) NULL,
+	[c2] [nvarchar](100) NULL,
+	[c3] [nvarchar](100) NULL,
+	[c4] [nvarchar](100) NULL,
+	[c5] [nvarchar](100) NULL,
+	[c6] [nvarchar](100) NULL,
+	[c7] [nvarchar](100) NULL,
+	[c8] [nvarchar](100) NULL,
+	[c9] [nvarchar](100) NULL,
+	[c10] [nvarchar](100) NULL,
+	[c11] [nvarchar](100) NULL,
+	[c12] [nvarchar](100) NULL,
+	[c13] [nvarchar](100) NULL,
+	[c14] [nvarchar](100) NULL,
+	[c15] [nvarchar](100) NULL,
+	[c16] [nvarchar](100) NULL,
+	[c17] [nvarchar](100) NULL,
+	[c18] [nvarchar](100) NULL,
+	[c19] [nvarchar](100) NULL,
+	[c20] [nvarchar](100) NULL
+) ON [PRIMARY]
+END

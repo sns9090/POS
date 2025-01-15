@@ -1,0 +1,55 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'pos_tamin_sdad')
+BEGIN
+
+CREATE TABLE [dbo].[pos_tamin_sdad](
+	[sbrno] [varchar](2) NOT NULL,
+	[sslno] [varchar](2) NOT NULL,
+	[sref] [int] NOT NULL,
+	[scontr] [int] NOT NULL,
+	[stype] [int] NOT NULL,
+	[sdate] [datetime] NOT NULL,
+	[spayed] [bit] NOT NULL,
+	[snote] [nvarchar](max) NULL,
+	[smobile] [nvarchar](20) NULL,
+	[stameen] [float] NULL,
+ CONSTRAINT [PK_pos_tamin_sdad] PRIMARY KEY CLUSTERED 
+(
+	[sbrno] ASC,
+	[sref] ASC,
+	[scontr] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+
+SET ANSI_PADDING OFF
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] ADD  CONSTRAINT [DF_pos_tamin_sdad_driver_id]  DEFAULT (getdate()) FOR [sdate]
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] ADD  CONSTRAINT [DF_pos_tamin_sdad_payed]  DEFAULT ((0)) FOR [spayed]
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] ADD  CONSTRAINT [DF_pos_tamin_sdad_note]  DEFAULT (N'') FOR [snote]
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] ADD  CONSTRAINT [DF_pos_tamin_sdad_mobile]  DEFAULT (N'') FOR [smobile]
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] ADD  CONSTRAINT [DF_pos_tamin_sdad_dtameen]  DEFAULT ((0)) FOR [stameen]
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad]  WITH CHECK ADD  CONSTRAINT [FK_pos_tamin_sdad_pos_hdr_r] FOREIGN KEY([sbrno], [sref], [scontr])
+REFERENCES [dbo].[pos_hdr_r] ([dbrno], [dref], [dcontr])
+ON DELETE CASCADE
+
+
+ALTER TABLE [dbo].[pos_tamin_sdad] CHECK CONSTRAINT [FK_pos_tamin_sdad_pos_hdr_r]
+
+
+
+
+
+
+END

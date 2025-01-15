@@ -1,0 +1,77 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'server_links')
+BEGIN
+
+CREATE TABLE [dbo].[server_links](
+	[server_id] [nvarchar](2) NOT NULL,
+	[server_name] [nvarchar](50) NOT NULL,
+	[server_ename] [nvarchar](50) NULL,
+	[db] [nvarchar](50) NOT NULL,
+	[login] [nvarchar](50) NULL,
+	[pass] [nvarchar](50) NULL,
+	[tim_out] [nvarchar](50) NULL,
+	[acc] [bit] NULL,
+	[cus] [bit] NULL,
+	[sup] [bit] NULL,
+	[its] [bit] NULL,
+	[ac] [bit] NULL,
+	[pu] [bit] NULL,
+	[sl] [bit] NULL,
+	[st] [bit] NULL,
+	[posted] [bit] NULL,
+	[dtl] [bit] NULL,
+ CONSTRAINT [PK_server_links] PRIMARY KEY CLUSTERED 
+(
+	[server_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_server_links]  DEFAULT (N'server_links\SQLEXPRESS') FOR [server_name]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_server_ename]  DEFAULT (N'') FOR [server_ename]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_db]  DEFAULT (N'DBASE') FOR [db]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_login]  DEFAULT (N'sa') FOR [login]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_pass]  DEFAULT (N'sa123456') FOR [pass]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_tim_out]  DEFAULT ((60)) FOR [tim_out]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_acc]  DEFAULT ((0)) FOR [acc]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_cus]  DEFAULT ((0)) FOR [cus]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_sup]  DEFAULT ((0)) FOR [sup]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_its]  DEFAULT ((0)) FOR [its]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_ac]  DEFAULT ((0)) FOR [ac]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_pu]  DEFAULT ((0)) FOR [pu]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_sl]  DEFAULT ((0)) FOR [sl]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_st]  DEFAULT ((0)) FOR [st]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_posted]  DEFAULT ((0)) FOR [posted]
+
+
+ALTER TABLE [dbo].[server_links] ADD  CONSTRAINT [DF_server_links_dtl]  DEFAULT ((0)) FOR [dtl]
+
+END

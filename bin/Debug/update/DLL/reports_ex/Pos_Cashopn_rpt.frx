@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/22/2020 09:02:58" ReportInfo.Modified="11/30/2020 00:36:40" ReportInfo.CreatorVersion="2013.3.5.0" PrintSettings.PaperSource="15">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+   // Text38.Text= (ToDouble([pos_dtl.price]) * ToDouble([pos_dtl.qty])).ToString();
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZj+wf5gXF74cTEZipNpR2ngZd1ypfWBlxh5lDYG7eiMwzmb2yADDa4ldtliALt8bIiwZMa7Gntpi+ADkrxBeIgQcXWV1wHGBXIXxZeBowACFmdZR7xZMKEiksedbeHRKD0k1ZMd00U/Q/TvY7CUrpOg=="/>
+    <Parameter Name="Datetim" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="3276.1" RawPaperSize="140" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <PageHeaderBand Name="PageHeader1" Width="302.4" Height="60.7" PrintOn="FirstPage" KeepChild="true">
+      <TextObject Name="Text1" Left="217.35" Top="18.9" Width="66.15" Height="18.9" Text="فتح الدرج" HorzAlign="Right" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text2" Left="9.45" Top="18.9" Width="207.9" Height="18.9" Text="[Datetim]" Font="Arial, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="64.7" Width="302.4" DataSource="pos_dtl"/>
+  </ReportPage>
+</Report>

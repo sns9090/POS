@@ -1,0 +1,65 @@
+IF OBJECT_ID('dbo.Save_Pos_Hdr_Dtl') IS NOT NULL
+DROP PROCEDURE dbo.Save_Pos_Hdr_Dtl
+GO
+      
+CREATE PROCEDURE [dbo].[Save_Pos_Hdr_Dtl]
+
+	--@ok_sl_dtl bit,
+	--@ok_pu_dtl bit,
+	--@ok_sto_dtl bit,
+
+	@br_no nvarchar(2),	
+	@sl_no nvarchar(2),	
+	@contr int,
+	@ref int,
+
+	@pos_hdr_tb tblpos_hdr  READONLY,
+	
+	@pos_dtl_tb tblpos_dtl  READONLY,
+
+
+
+	@errstatus int=0 output
+ 
+AS
+BEGIN
+
+	if 1=1
+	   BEGIN 
+	   BEGIN TRANSACTION;  
+  
+       BEGIN TRY 
+
+	     MERGE pos_hdr as t
+         USING @pos_hdr_tb as s
+         ON t.brno=s.brno and T.slno=S.slno and T.ref=S.ref and T.contr=S.contr
+         WHEN MATCHED THEN
+         UPDATE SET T.total = S.total,T.discount = S.discount,T.net_total = S.net_total,t.tax_amt=s.tax_amt
+         WHEN NOT MATCHED THEN
+         INSERT VALUES(s.brno,s.slno, s.ref, s.contr,s.type,s.date,s.total,s.count,s.payed,s.total_cost,s.saleman,s.req_no,s.cust_no,s.discount,s.net_total,s.sysdate,s.gen_ref,s.tax_amt,s.dscper,s.card_type,s.card_amt,s.rref,s.rcontr,s.taxfree_amt,s.note,s.mobile);
+
+	   ----------------------------------------------------------------------------------------
+
+		 MERGE pos_dtl as t
+         USING @pos_dtl_tb as s
+         ON t.brno=s.brno and T.slno=S.slno and T.ref=S.ref and T.contr=S.contr and T.srno=S.srno
+         WHEN MATCHED THEN
+         UPDATE SET T.price = S.price,T.qty=S.qty,t.itemno=s.itemno,t.srno=s.srno
+         WHEN NOT MATCHED THEN
+         INSERT VALUES(s.brno,s.slno, s.ref, s.contr,s.type,s.barcode,s.name,s.unit,s.price,s.qty,s.cost,s.is_req,s.itemno,s.srno,s.pkqty,s.discpc,s.tax_id,s.tax_amt,s.rqty,s.offr_amt);
+                
+        set @errstatus=1
+	    COMMIT;  	  
+	   END TRY
+
+       BEGIN CATCH
+	     set @errstatus=0 --ERROR_MESSAGE()
+         ROLLBACK; 
+       END CATCH
+	   END
+
+
+END
+
+GO
+

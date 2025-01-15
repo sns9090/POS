@@ -1,0 +1,93 @@
+IF OBJECT_ID('dbo.Save_Hdr_Dtl_Data') IS NOT NULL
+DROP PROCEDURE dbo.Save_Hdr_Dtl_Data
+GO
+IF OBJECT_ID('dbo.update_acc_inv') IS NOT NULL
+DROP PROCEDURE dbo.update_acc_inv
+GO
+IF OBJECT_ID('dbo.Save_Detail_Data') IS NOT NULL
+DROP PROCEDURE dbo.Save_Detail_Data
+GO
+
+IF type_id('[dbo].[tb_pu_hdr]') IS NOT NULL
+        DROP TYPE [dbo].[tb_pu_hdr];
+GO
+
+IF not EXISTS (SELECT *
+           FROM   [sys].[table_types]
+           WHERE  user_type_id = Type_id(N'[dbo].[tb_pu_hdr]'))
+  BEGIN
+
+CREATE TYPE [dbo].[tb_pu_hdr] AS TABLE(
+	[branch] [varchar](2) NOT NULL,
+	[pucenter] [varchar](2) NOT NULL,
+	[invtype] [varchar](2) NOT NULL,
+	[ref] [int] NOT NULL,
+	[invmdate] [char](8) NULL,
+	[invhdate] [char](8) NULL,
+	[supno] [nvarchar](10) NULL,
+	[text] [varchar](100) NULL,
+	[glser] [varchar](5) NULL,
+	[dsctype] [char](1) NULL,
+	[pstmode] [numeric](1, 0) NULL,
+	[cur] [varchar](2) NULL,
+	[currate] [numeric](10, 5) NULL,
+	[invttl] [float] NULL,
+	[invcst] [float] NULL,
+	[invdspc] [float] NULL,
+	[invdsvl] [float] NULL,
+	[nettotal] [float] NULL,
+	[invpaid] [numeric](14, 2) NULL,
+	[casher] [nvarchar](16) NULL,
+	[entries] [numeric](5, 0) NULL,
+	[released] [datetime] NULL,
+	[posted] [bit] NULL,
+	[fixrate] [numeric](6, 3) NULL,
+	[extamt] [numeric](14, 2) NULL,
+	[extser] [char](19) NULL,
+	[pricetp] [char](1) NULL,
+	[ischeque] [bit] NULL,
+	[chkno] [char](8) NULL,
+	[chkdate] [char](8) NULL,
+	[lastupdt] [datetime] NULL,
+	[jvgenrt] [bit] NULL,
+	[cccommsn] [float] NULL,
+	[belowbal] [bit] NULL,
+	[invsupno] [nvarchar](50) NULL,
+	[ccpayment] [numeric](13, 2) NULL,
+	[rplsamt] [nvarchar](50) NULL,
+	[pdother] [bit] NULL,
+	[slcode] [char](2) NULL,
+	[prpaidamt] [numeric](9, 2) NULL,
+	[instldays] [numeric](2, 0) NULL,
+	[instflag] [bit] NULL,
+	[slcmnd] [bit] NULL,
+	[inv_printed] [numeric](2, 0) NULL,
+	[bendit] [bit] NULL,
+	[modified] [bit] NULL,
+	[rqstorder] [numeric](6, 0) NULL,
+	[rqststld] [bit] NULL,
+	[carrier] [char](3) NULL,
+	[rcvdtrn] [bit] NULL,
+	[usrid] [varchar](50) NULL,
+	[address] [varchar](50) NULL,
+	[wst_key] [nvarchar](20) NULL,
+	[wst_amt] [float] NULL,
+	[gmark] [float] NULL,
+	[tameen] [float] NULL,
+	[shahan] [float] NULL,
+	[msfr] [float] NULL,
+	[mother] [float] NULL,
+	[etax] [float] NULL,
+	[remarks] [nvarchar](200) NULL,
+	[tax_amt_paid] [float] NULL,
+	[with_tax] [bit] NULL,
+	[taxid] [varchar](50) NULL,
+	[tax_percent] [float] NULL,
+	[taxfree_amt] [float] NULL,
+	[reref] [nvarchar](50) NULL,
+	[sabr] [float] NULL
+)
+
+
+
+  END

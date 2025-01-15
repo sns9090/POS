@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/22/2020 09:02:58" ReportInfo.Modified="01/14/2021 14:24:05" ReportInfo.CreatorVersion="2013.2.5.0" PrintSettings.PaperSource="15">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+   // Text38.Text= (ToDouble([pos_dtl.price]) * ToDouble([pos_dtl.qty])).ToString();
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZydjSRcjxnQ2eXsoKnFButLifsF4AH6W7nSYVH8mqOWKt7ebcetXSuKnIS5bOKAkTBJ3No6nladmW9Qaho2cFiEti44k0i2heVpgOb+yImG4IpdLeHY6/IhRr0hOhb6Gqob7pZZeieDqMVV8gHZG8Gw==">
+      <TableDataSource Name="tbl_rpt" DataType="System.Int32" Enabled="true" TableName="tbl_rpt">
+        <Column Name="c1" DataType="System.String"/>
+        <Column Name="c2" DataType="System.String"/>
+        <Column Name="c3" DataType="System.String"/>
+        <Column Name="c4" DataType="System.String"/>
+        <Column Name="c5" DataType="System.String"/>
+        <Column Name="c6" DataType="System.String"/>
+        <Column Name="c7" DataType="System.String"/>
+        <Column Name="c8" DataType="System.String"/>
+        <Column Name="c9" DataType="System.String"/>
+        <Column Name="c10" DataType="System.String"/>
+        <Column Name="c11" DataType="System.String"/>
+        <Column Name="c12" DataType="System.String"/>
+        <Column Name="c13" DataType="System.String"/>
+        <Column Name="c14" DataType="System.String"/>
+        <Column Name="c15" DataType="System.String"/>
+        <Column Name="c16" DataType="System.String"/>
+        <Column Name="c17" DataType="System.String"/>
+        <Column Name="c18" DataType="System.String"/>
+        <Column Name="c19" DataType="System.String"/>
+        <Column Name="c20" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="date" DataType="System.String"/>
+    <Parameter Name="ref" DataType="System.String"/>
+    <Parameter Name="type" DataType="System.String"/>
+    <Parameter Name="br_name" DataType="System.String"/>
+    <Parameter Name="tax_id" DataType="System.String"/>
+    <Parameter Name="total" DataType="System.String"/>
+    <Parameter Name="descount" DataType="System.String"/>
+    <Parameter Name="tax" DataType="System.String"/>
+    <Parameter Name="nettotal" DataType="System.String"/>
+    <Parameter Name="a_toword" DataType="System.String"/>
+    <Parameter Name="custno" DataType="System.String"/>
+    <Parameter Name="note" DataType="System.String"/>
+    <Parameter Name="clnt_taxid" DataType="System.String"/>
+    <Parameter Name="count" DataType="System.String"/>
+    <Parameter Name="salman" DataType="System.String"/>
+    <Parameter Name="trans" DataType="System.String"/>
+    <Parameter Name="desc" DataType="System.String"/>
+    <Parameter Name="cust" DataType="System.String"/>
+    <Parameter Name="descs" DataType="System.String" Expression="IIf([custno]==&quot;&quot;,IIf([note]==&quot;&quot;,[desc],[note]),[cust])"/>
+    <Total Name="Total1" Expression="[total]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="215.9" PaperHeight="139.7" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="4" OtherPagesSource="4">
+    <PageHeaderBand Name="PageHeader1" Width="816.1" Height="173.2">
+      <TextObject Name="Text1" Left="56.7" Top="108.4" Width="94.5" Height="18.9" Text="[date]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text4" Left="538.65" Top="70.6" Width="94.5" Height="18.9" Text="[ref]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text7" Left="217.35" Top="108.4" Width="415.8" Height="18.9" Text="[descs]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text17" Left="103.95" Top="70.6" Width="9.45" Height="18.9" Text="/" Font="Arial, 12pt"/>
+      <TextObject Name="Text16" Left="113.4" Top="70.6" Width="94.5" Height="18.9" Text="[TotalPages#]" Font="Arial, 12pt"/>
+      <TextObject Name="Text15" Left="47.25" Top="70.6" Width="56.7" Height="18.9" Text="[Page]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <ShapeObject Name="Shape1" Left="18.9" Top="28.35" Width="756" Height="113.4" Shape="RoundRectangle"/>
+      <ShapeObject Name="Shape4" Left="18.9" Top="147.3" Width="756" Height="25.9" Fill.Color="Gainsboro"/>
+      <LineObject Name="Line2" Left="85.05" Top="148.2" Height="23.9" Diagonal="true"/>
+      <LineObject Name="Line3" Left="226.8" Top="148.2" Height="23.9" Diagonal="true"/>
+      <LineObject Name="Line4" Left="491.4" Top="148.2" Height="23.9" Diagonal="true"/>
+      <LineObject Name="Line5" Left="585.9" Top="148.2" Height="23.9" Diagonal="true"/>
+      <LineObject Name="Line6" Left="670.95" Top="148.2" Height="22.9" Diagonal="true"/>
+      <TextObject Name="Text18" Left="47.25" Top="151.2" Width="18.9" Height="18.9" Text="م" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text19" Left="113.4" Top="151.2" Width="94.5" Height="18.9" Text="رقم الصنف" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text20" Left="349.65" Top="151.2" Width="94.5" Height="18.9" Text="اسم الصنف" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text21" Left="510.3" Top="151.2" Width="56.7" Height="18.9" Text="الكمية" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text22" Left="604.8" Top="151.2" Width="56.7" Height="18.9" Text="السعر" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text23" Left="689.85" Top="151.2" Width="56.7" Height="18.9" Text="الاجمالي" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text28" Left="652.5" Top="71.15" Width="56.7" Height="18.9" Text="الرقم" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text29" Left="652.5" Top="107.4" Width="56.7" Height="18.9" Text="العميل" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text30" Left="151.2" Top="108.95" Width="56.7" Height="18.9" Text="التاريخ" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text31" Left="274.05" Top="71.6" Width="170.1" Height="18.9" Text="[type]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text32" Left="457.6" Top="71.15" Width="56.7" Height="18.9" Text="النوع" Font="Arial, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="177.2" Width="816.1" Height="23.9" DataSource="tbl_rpt">
+      <TextObject Name="Text2" Left="94.5" Width="94.5" Height="18.9" Text="[tbl_rpt.c1]" Font="Arial, 12pt"/>
+      <TextObject Name="Text5" Left="236.25" Width="255.15" Height="18.9" Text="[tbl_rpt.c3]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text9" Left="491.4" Width="94.5" Height="18.9" Text="[tbl_rpt.c6]" HorzAlign="Center" Font="Arial, 12pt"/>
+      <TextObject Name="Text14" Left="595.35" Width="94.5" Height="18.9" Text="[tbl_rpt.c7]" Font="Arial, 12pt"/>
+      <TextObject Name="Text12" Left="18.9" Width="94.5" Height="18.9" Text="[Row#]" Font="Arial, 12pt"/>
+      <TextObject Name="Text13" Left="680.4" Width="94.5" Height="18.9" Text="[tbl_rpt.c10]" Font="Arial, 12pt"/>
+      <ShapeObject Name="Shape2" Left="18.9" Top="-1" Width="756" Height="25.9" Border.Width="0.25"/>
+      <LineObject Name="Line7" Left="85.05" Top="-2" Height="24.9" Diagonal="true"/>
+      <LineObject Name="Line8" Left="226.8" Top="-2" Height="24.9" Diagonal="true"/>
+      <LineObject Name="Line9" Left="491.4" Top="-2.55" Height="24.9" Diagonal="true"/>
+      <LineObject Name="Line10" Left="585.9" Top="-2" Height="24.9" Diagonal="true"/>
+      <LineObject Name="Line11" Left="670.95" Top="-2" Height="24.9" Diagonal="true"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="205.1" Width="816.1" Height="141.75">
+      <TextObject Name="Text8" Left="680.4" Top="54.7" Width="94.5" Height="18.9" Text="[descount]" Font="Arial, 12pt"/>
+      <TextObject Name="Text6" Left="680.4" Top="30.35" Width="94.5" Height="18.9" Text="[tax]" Font="Arial, 12pt"/>
+      <TextObject Name="Text10" Left="18.9" Top="79.05" Width="519.75" Height="18.9" Text="[a_toword]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text11" Left="680.4" Top="78.05" Width="94.5" Height="18.9" Text="[nettotal]" Font="Arial, 12pt"/>
+      <TextObject Name="Text3" Left="680.4" Top="5.45" Width="94.5" Height="18.9" Text="[total]" Font="Arial, 12pt"/>
+      <ShapeObject Name="Shape3" Left="18.9" Top="-1" Width="756" Height="122.85" Shape="RoundRectangle"/>
+      <TextObject Name="Text24" Left="614.25" Top="7.45" Width="56.7" Height="18.9" Text="الاجمالي" HorzAlign="Right" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text25" Left="538.65" Top="31.35" Width="132.3" Height="18.9" Text="ضريبة القيمة المضافة" HorzAlign="Right" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text26" Left="614.25" Top="54.7" Width="56.7" Height="18.9" Text="الخصم" HorzAlign="Right" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text27" Left="614.25" Top="79.05" Width="56.7" Height="18.9" Text="الصافي" HorzAlign="Right" Font="Arial, 12pt, style=Bold"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

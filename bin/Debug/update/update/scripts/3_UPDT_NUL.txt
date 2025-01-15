@@ -1,0 +1,111 @@
+ALTER TABLE sales_hdr ALTER COLUMN released datetime;
+ALTER TABLE sales_hdr ALTER COLUMN lastupdt datetime;
+
+ALTER TABLE pu_hdr ALTER COLUMN released datetime;
+ALTER TABLE pu_hdr ALTER COLUMN lastupdt datetime;
+
+ALTER TABLE sto_hdr ALTER COLUMN released datetime;
+ALTER TABLE sto_hdr ALTER COLUMN lastupdt datetime;
+
+ALTER TABLE salofr_hdr ALTER COLUMN released datetime;
+ALTER TABLE salofr_hdr ALTER COLUMN lastupdt datetime;
+ALTER TABLE acc_hdr ALTER COLUMN serial_no nvarchar(20);
+ALTER TABLE pu_dtl ALTER COLUMN price numeric(10,4);
+ALTER TABLE sales_hdr ALTER COLUMN chkno varchar(10);
+
+ALTER TABLE taxs ALTER COLUMN tax_percent float;
+
+update users set show_win = 0 where show_win is null;
+update users set suspend_inv = 0 where suspend_inv is null;
+update users set belw_bal = 1 where belw_bal is null;
+
+update units set unit_qty = 0 where unit_qty is null;
+update contrs set print_type = 0 where print_type is null;
+update contrs set print_rtn = 1 where print_rtn is null;
+update taxperiods set tax_percent = 5 where tax_percent is null;
+update suppliers set is_shamel_tax = 0 where is_shamel_tax is null;
+update slcenters set is_shamel_tax = 0 where is_shamel_tax is null;
+update contrs set is_tuch = 0 where is_tuch is null;
+update sales_dtl set offer_amt = 0 where offer_amt is null;
+update d_sales_dtl set offer_amt = 0 where offer_amt is null;
+update contrs set impitm = 1 where impitm is null;
+
+update items set price3 = 0 where price3 is null;
+update items set min_price = 0 where min_price is null;
+update items set static_cost = 0 where static_cost is null;
+update items set inactive = 0 where inactive is null;
+
+update items_bc set price2 = 0 where price2 is null;
+update items_bc set price3 = 0 where price3 is null;
+update items_bc set min_price = 0 where min_price is null;
+
+update pos_salmen set frcrplinv = 0 where frcrplinv is null;
+update pos_salmen set catch_thief = 0 where catch_thief is null;
+update pos_salmen set sold_once = 0 where sold_once is null;
+update groups set inactive = 0 where inactive is null;
+
+update contrs set is_cofi = 0 where is_cofi is null;
+update contrs set is_small = 0 where is_small is null;
+update groups set printer = '' where printer is null;
+update whouses set frq_sar_acc = '' where frq_sar_acc is null;
+
+update acc_hdr set cc_no = '' where cc_no is null;
+update acc_hdr set invsupno = '' where invsupno is null;
+update acc_hdr set taxid = '' where taxid is null;
+
+update items_bc set br_no= '01' where br_no is null;
+update items_bc set sl_no = '01' where sl_no is null;
+update users set sl_no = '01' where sl_no is null;
+
+update sales_hdr set reref = '' where reref is null;
+update d_sales_hdr set reref = '' where reref is null;
+update pu_hdr set reref = '' where reref is null;
+update d_pu_hdr set reref = '' where reref is null;
+update salofr_hdr set reref = '' where reref is null;
+
+update users set prislwcst = 0 where prislwcst is null;
+update pu_hdr set sabr = 0 where sabr is null;
+update customers set cu_alwcr = 0 where cu_alwcr is null;
+
+if((SELECT object_definition(default_object_id) FROM sys.columns WHERE name ='cu_alwcr' AND object_id = object_id('dbo.customers')) is null)
+begin 
+ALTER TABLE customers ADD DEFAULT 0 FOR cu_alwcr;
+end
+
+update users set cstkey = '' where cstkey is null;
+update contrs set portno = 99;
+update customers set cu_salman = '' where cu_salman is null;
+update users set up_stopsrch = 0 where up_stopsrch is null;
+update server set updt_itm = 1 where updt_itm is null;
+update server set send_inv = 1 where send_inv is null;
+update server set updt_cust = 0 where updt_cust is null;
+update customers set cu_disc = 0 where cu_disc is null;
+
+update sales_hdr set sanedcrd_amt = 0 where sanedcrd_amt is null;
+update sales_hdr set rtncash_dfrpl = 0 where rtncash_dfrpl is null;
+update salofr_hdr set sanedcrd_amt = 0 where sanedcrd_amt is null;
+update salofr_hdr set rtncash_dfrpl = 0 where rtncash_dfrpl is null;
+update d_pos_hdr set card_type = 0 where card_type is null;
+
+update pos_esend set crt_date = getdate() where crt_date is null;
+
+update branchs set taxin_acc = (select dp_taxacc from slcenters where sl_brno='01' and sl_no='01') where taxin_acc is null;
+update branchs set taxout_acc = (select dp_taxacc from pucenters where pu_brno='01' and pu_no='01') where taxout_acc is null;
+update server set updt_stk = 0 where updt_stk is null;
+
+UPDATE
+    t1
+SET
+    t1.min_price = t2.price2
+FROM
+    items_bc t1
+INNER JOIN
+    items t2
+ON 
+    t1.item_no = t2.item_no and t1.barcode=t2.item_barcode and t1.min_price<>t2.price2;
+
+update customers set lastupdt= CONVERT([varchar],getdate(),(112)) where lastupdt is null;
+update pos_cards set inactive = 0 where inactive is null;
+update sales_hdr set inv_mpay=invmdate where inv_mpay is null;
+update salofr_hdr set inv_mpay=invmdate where inv_mpay is null;
+update branchs set jv_37=0 where jv_37 is null;

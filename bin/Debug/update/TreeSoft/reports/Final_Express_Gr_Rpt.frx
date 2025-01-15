@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/22/2020 09:02:58" ReportInfo.Modified="10/06/2024 17:26:06" ReportInfo.CreatorVersion="2013.3.5.0" PrintSettings.PaperSource="15">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+   // Text38.Text= (ToDouble([pos_dtl.price]) * ToDouble([pos_dtl.qty])).ToString();
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZydjSRcjxnQ2eXsoKnFButLifsF4AH6W7nSYVH8mqOWKt7ebcetXSuKnIS5bOKAkTBJ3No6nladmW9Qaho2cFiKtlApUv6i4KHRZK7ypRgVDSvb8yTzRntJ5nSvHYOu+yGTdWGHbPJ2PPSBREjmTy7Q==">
+      <TableDataSource Name="groups" DataType="System.Int32" Enabled="true" TableName="groups">
+        <Column Name="group_id" DataType="System.String"/>
+        <Column Name="group_name" DataType="System.String"/>
+        <Column Name="group_desc" DataType="System.String"/>
+        <Column Name="group_order" DataType="System.Int32"/>
+        <Column Name="group_img" Enabled="false" DataType="System.Byte[]" BindableControl="Picture"/>
+        <Column Name="group_pid" DataType="System.String"/>
+        <Column Name="inactive" Enabled="false" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="printer" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="Comp_Name" DataType="System.String"/>
+    <Parameter Name="date" DataType="System.String"/>
+    <Parameter Name="salman" DataType="System.String"/>
+    <Parameter Name="total" DataType="System.String"/>
+    <Parameter Name="disc" DataType="System.String"/>
+    <Parameter Name="net" DataType="System.String"/>
+    <Parameter Name="net_cash" DataType="System.String"/>
+    <Parameter Name="net_card" DataType="System.String"/>
+    <Parameter Name="cashir" DataType="System.String"/>
+    <Parameter Name="other_amt" DataType="System.String"/>
+    <Parameter Name="tax_amt" DataType="System.String"/>
+    <Parameter Name="agl" DataType="System.String"/>
+    <Parameter Name="tameen" DataType="System.String"/>
+    <Total Name="Total1" Expression="[total]" PrintOn="ReportSummary1"/>
+    <Total Name="Total2" Expression="[groups.group_desc]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="3276.1" RawPaperSize="140" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <ReportTitleBand Name="ReportTitle1" Width="302.4" Height="58.7" PrintOn="FirstPage">
+      <TextObject Name="Text7" Left="11.45" Top="21.35" Width="264.6" Height="18.9" Text="[Comp_Name]" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <LineObject Name="Line5" Left="11.45" Top="56.25" Width="264.6"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="62.7" Width="302.4" Height="68.15" PrintOn="FirstPage" KeepChild="true">
+      <TextObject Name="Text33" Left="209.9" Top="2.9" Width="66.15" Height="18.9" Text="التاريخ" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text34" Left="209.35" Top="21.8" Width="66.15" Height="18.9" Text="رقم الكاشير" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text1" Left="103.95" Top="22.45" Width="103.95" Height="18.9" Text="[cashir]" HorzAlign="Right"/>
+      <TextObject Name="Text2" Left="9.45" Top="1" Width="198.45" Height="18.9" Text="[date]" HorzAlign="Right"/>
+      <TextObject Name="Text44" Left="56.7" Top="23.35" Width="75.6" Height="18.9" Text="البائع" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text3" Left="9.45" Top="23.9" Width="85.05" Height="18.9" Text="[salman]" HorzAlign="Right"/>
+      <ShapeObject Name="Shape1" Left="9.45" Top="47.25" Width="274.05" Height="20.9" Fill.Color="Gainsboro"/>
+      <LineObject Name="Line3" Left="109.95" Top="47.25" Height="18.9" Diagonal="true"/>
+      <TextObject Name="Text20" Left="9.45" Top="49.25" Width="94.5" Height="18.9" Text="اجمالي المبيعات" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text23" Left="113.4" Top="49.25" Width="160.65" Height="18.9" Text="المجموعة" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="134.85" Width="302.4" Height="50.7" DataSource="groups">
+      <LineObject Name="Line7" Left="110.4" Top="-1" Height="20.35" Diagonal="true"/>
+      <TextObject Name="Text4" Left="113.4" Width="160.65" Height="18.9" Text="[groups.group_name]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="9.45" Width="94.5" Height="18.9" Text="[groups.printer]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <LineObject Name="Line1" Left="9.45" Top="50.25" Width="274.05" Diagonal="true"/>
+      <LineObject Name="Line8" Left="283.5" Top="-2" Height="52.7" Diagonal="true"/>
+      <LineObject Name="Line9" Left="9.45" Top="-3" Height="52.7" Diagonal="true"/>
+      <TextObject Name="Text5" Left="15.9" Top="18.9" Width="94.5" Height="18.9" Border.Lines="Left, Top, Bottom" Text="[groups.group_desc]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text56" Left="110.4" Top="18.9" Width="103.95" Height="18.9" Border.Lines="Right, Top, Bottom" Text="الربح" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="189.55" Width="302.4" Height="387.45">
+      <TextObject Name="Text12" Left="10.45" Top="36.8" Width="94.5" Height="18.9" Text="[disc]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text13" Left="10.45" Top="78.7" Width="94.5" Height="18.9" Text="[tax_amt]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text14" Left="12.45" Top="99.05" Width="94.5" Height="18.9" Text="[net_cash]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text15" Left="12.45" Top="119.95" Width="94.5" Height="18.9" Text="[net_card]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text16" Left="12.45" Top="140.85" Width="94.5" Height="18.9" Text="[other_amt]&#13;&#10;&#13;&#10;" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text17" Left="12.45" Width="264.6" Height="18.9" Text="***********************************************" HorzAlign="Center"/>
+      <TextObject Name="Text18" Left="13.45" Top="204.8" Width="264.6" Height="18.9" Text="***********************************************" HorzAlign="Center"/>
+      <TextObject Name="Text6" Left="12.45" Top="15.45" Width="94.5" Height="18.9" Text="[total]" Format="Number" Format.UseLocale="true" HorzAlign="Center"/>
+      <TextObject Name="Text11" Left="109.95" Top="16.45" Width="94.5" Height="18.9" Text="اجمالي المبيعات" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Left="110.4" Top="37.8" Width="93.5" Height="18.9" Text="الخصم" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="110.4" Top="100.5" Width="93.5" Height="18.9" Text="الصافي النقدي" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text26" Left="112.4" Top="79.6" Width="112.4" Height="18.9" Text="الضريبة المحصلة" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text28" Left="110.4" Top="121.4" Width="93.5" Height="18.9" Text="صافي البطائق" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text29" Left="110.4" Top="142.3" Width="150.2" Height="18.9" Text="مبالغ اخرى" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text42" Left="111.4" Top="58.7" Width="112.4" Height="18.9" Text="صافي المبيعات" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text43" Left="12.45" Top="57.7" Width="94.5" Height="18.9" Border.Lines="All" Text="[net]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text45" Left="179.55" Top="330.75" Width="75.6" Height="18.9" Text="النوقيع" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text46" Left="75.6" Top="330.75" Width="103.95" Height="18.9" Text="......................" HorzAlign="Right" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text47" Left="11.9" Top="164.1" Width="94.5" Height="18.9" Border.Lines="All" Text="[agl]&#13;&#10;&#13;&#10;" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text48" Left="109.85" Top="165.55" Width="150.2" Height="18.9" Text="مبيعات اجلة" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text49" Left="113.4" Top="226.8" Width="150.2" Height="18.9" Text="اجمالي المبيعات الاجلة والنقدية" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text50" Left="12.45" Top="226.8" Width="94.5" Height="18.9" Border.Lines="All" Text="[Round(ToDouble([agl]),2)+Round(ToDouble([net]),2)]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text51" Left="14.45" Top="368.55" Width="264.6" Height="18.9" Text="***********************************************" HorzAlign="Center"/>
+      <TextObject Name="Text52" Left="113.4" Top="255.15" Width="150.2" Height="18.9" Text="مبالغ التامين" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text53" Left="13.45" Top="255.15" Width="94.5" Height="18.9" Border.Lines="All" Text="[tameen]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text54" Left="113.4" Top="292.95" Width="150.2" Height="18.9" Border.Lines="All" Text="صافي مبالغ البيع والتامين" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text55" Left="13.45" Top="292.95" Width="94.5" Height="18.9" Border.Lines="All" Text="[Round(ToDouble([agl]),2)+Round(ToDouble([net]),2)+Round(ToDouble([tameen]),2)]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <LineObject Name="Line6" Left="9.45" Top="283.5" Width="264.6"/>
+      <TextObject Name="Text57" Left="12.9" Top="186.55" Width="94.5" Height="18.9" Border.Lines="All" Text="[Total2]" Format="Number" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text58" Left="109.95" Top="186" Width="150.2" Height="18.9" Text="اجمالي الربح" Font="Arial, 10pt, style=Bold"/>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>

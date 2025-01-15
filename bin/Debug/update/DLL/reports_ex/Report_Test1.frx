@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/17/2020 12:47:49" ReportInfo.Modified="02/17/2020 17:16:00" ReportInfo.CreatorVersion="2018.4.7.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqr2sEgbyd/XFgYBeuRgqcA+s6qcp+RVb4f2rSQO15d4dtoOfYObg2/a14KWeWM7qZydjSRcjxnQ2eXsoKnFButLifsF4AH6W7nSYVH8mqOWKt7ebcetXSuKnIS5bOKAkTBJ3No6nladmW9Qaho2cFiEti44k0i2heVpgOb+yImG6SAgQPgcFGs9ad/vVBu4Y0Gj3aQV0QMQqW/2yFGfcteA==">
+      <TableDataSource Name="items" DataType="System.Int32" Enabled="true" TableName="items">
+        <Column Name="item_no" DataType="System.String"/>
+        <Column Name="item_name" DataType="System.String"/>
+        <Column Name="item_cost" DataType="System.Double"/>
+        <Column Name="item_price" DataType="System.Decimal"/>
+        <Column Name="item_barcode" DataType="System.String"/>
+        <Column Name="item_unit" DataType="System.Int32"/>
+        <Column Name="item_obalance" DataType="System.Decimal"/>
+        <Column Name="item_cbalance" DataType="System.Decimal"/>
+        <Column Name="item_group" DataType="System.String"/>
+        <Column Name="item_image" DataType="System.String"/>
+        <Column Name="item_req" DataType="System.Int32"/>
+        <Column Name="item_tax" DataType="System.Int32"/>
+        <Column Name="unit2" DataType="System.Int32"/>
+        <Column Name="uq2" DataType="System.Decimal"/>
+        <Column Name="unit2p" DataType="System.Decimal"/>
+        <Column Name="unit3" DataType="System.Int32"/>
+        <Column Name="uq3" DataType="System.Decimal"/>
+        <Column Name="unit3p" DataType="System.Decimal"/>
+        <Column Name="unit4" DataType="System.Int32"/>
+        <Column Name="uq4" DataType="System.Decimal"/>
+        <Column Name="unit4p" DataType="System.Decimal"/>
+        <Column Name="item_ename" DataType="System.String"/>
+        <Column Name="item_opencost" DataType="System.Double"/>
+        <Column Name="item_curcost" DataType="System.Double"/>
+        <Column Name="supno" DataType="System.String"/>
+        <Column Name="note" DataType="System.String"/>
+        <Column Name="last_updt" DataType="System.String"/>
+        <Column Name="sgroup" DataType="System.String"/>
+        <Column Name="price2" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="units" DataType="System.Int32" Enabled="true" TableName="units">
+        <Column Name="unit_id" DataType="System.Int32"/>
+        <Column Name="unit_name" DataType="System.String"/>
+        <Column Name="unit_desc" DataType="System.String"/>
+        <Column Name="unit_order" DataType="System.Int32"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="Parameter1" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="66.15">
+      <TextObject Name="Text7" Left="274.05" Top="18.9" Width="94.5" Height="18.9" Text="[Parameter1]"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="70.15" Width="718.2" Height="47.25">
+      <TextObject Name="Text4" Left="37.8" Width="94.5" Height="18.9" Text="item_no"/>
+      <TextObject Name="Text3" Left="151.2" Width="94.5" Height="18.9" Text="item_name"/>
+      <TextObject Name="Text6" Left="283.5" Width="94.5" Height="18.9" Text="السعر"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="121.4" Width="718.2" Height="75.6">
+      <TextObject Name="Text1" Left="37.8" Top="9.45" Width="94.5" Height="18.9" Text="[items.item_no]"/>
+      <TextObject Name="Text2" Left="151.2" Top="9.45" Width="94.5" Height="18.9" Text="[items.item_name]"/>
+      <TextObject Name="Text5" Left="283.5" Top="9.45" Width="94.5" Height="18.9" Text="[items.item_price]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="201" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

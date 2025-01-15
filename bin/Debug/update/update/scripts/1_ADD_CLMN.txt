@@ -1,0 +1,620 @@
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='price2')
+		begin 
+		    ALTER TABLE dbo.items ADD  price2  numeric(10, 2) NULL default 0
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='show_win')
+		begin 
+		    ALTER TABLE dbo.users ADD  show_win  bit NULL default 0
+		 
+		end
+
+
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='suspend_inv')
+		begin 
+		    ALTER TABLE dbo.users ADD  suspend_inv  bit NULL default 0
+		  
+		end
+
+
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='belw_bal')
+		begin 
+		    ALTER TABLE dbo.users ADD  belw_bal  bit NULL default 0
+		 
+		end
+
+
+
+
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_dtl' and COLUMN_NAME='expdate')
+		begin 
+		    ALTER TABLE dbo.pu_dtl ADD  expdate  char(8) NULL
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'units' and COLUMN_NAME='unit_qty')
+		begin 
+		    ALTER TABLE dbo.units ADD  unit_qty  int NULL
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='print_type')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  print_type  int NULL
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='tax_percent')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  tax_percent  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_hdr' and COLUMN_NAME='tax_percent')
+		begin 
+		    ALTER TABLE dbo.pu_hdr ADD  tax_percent  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='tax_percent')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  tax_percent  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='taxfree_amt')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  taxfree_amt  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_hdr' and COLUMN_NAME='taxfree_amt')
+		begin 
+		    ALTER TABLE dbo.pu_hdr ADD  taxfree_amt  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='taxfree_amt')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  taxfree_amt  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr' and COLUMN_NAME='taxfree_amt')
+		begin 
+		    ALTER TABLE dbo.pos_hdr ADD  taxfree_amt  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr' and COLUMN_NAME='note')
+		begin 
+		    ALTER TABLE dbo.pos_hdr ADD  note  nvarchar(100) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr' and COLUMN_NAME='mobile')
+		begin 
+		    ALTER TABLE dbo.pos_hdr ADD  mobile  nvarchar(20) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='print_rtn')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  print_rtn  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'taxperiods' and COLUMN_NAME='tax_percent')
+		begin 
+		    ALTER TABLE dbo.taxperiods ADD  tax_percent  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='is_shamel_tax')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  is_shamel_tax  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'slcenters' and COLUMN_NAME='is_shamel_tax')
+		begin 
+		    ALTER TABLE dbo.slcenters ADD  is_shamel_tax  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'whouses' and COLUMN_NAME='sc_code')
+		begin 
+		    ALTER TABLE dbo.whouses ADD  sc_code  varchar(2) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='is_tuch')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  is_tuch  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_dtl' and COLUMN_NAME='offer_amt')
+		begin 
+		    ALTER TABLE dbo.sales_dtl ADD  offer_amt  float NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'd_sales_dtl' and COLUMN_NAME='offer_amt')
+		begin 
+		    ALTER TABLE dbo.d_sales_dtl ADD  offer_amt  float NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='impitm')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  impitm  bit NULL default 1
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='price3')
+		begin 
+		    ALTER TABLE dbo.items ADD  price3  numeric(10, 2) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='min_price')
+		begin 
+		    ALTER TABLE dbo.items ADD  min_price  numeric(10, 2) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='static_cost')
+		begin 
+		    ALTER TABLE dbo.items ADD  static_cost  numeric(10, 4) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='inactive')
+		begin 
+		    ALTER TABLE dbo.items ADD  inactive  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items_bc' and COLUMN_NAME='price2')
+		begin 
+		    ALTER TABLE dbo.items_bc ADD  price2  numeric(10, 2) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items_bc' and COLUMN_NAME='price3')
+		begin 
+		    ALTER TABLE dbo.items_bc ADD  price3  numeric(10, 2) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items_bc' and COLUMN_NAME='min_price')
+		begin 
+		    ALTER TABLE dbo.items_bc ADD  min_price  numeric(10, 2) NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_hdr' and COLUMN_NAME='aqd_no')
+		begin 
+		    ALTER TABLE dbo.acc_hdr ADD  aqd_no  nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'groups' and COLUMN_NAME='inactive')
+		begin 
+		    ALTER TABLE dbo.groups ADD  inactive  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='is_cofi')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  is_cofi  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'contrs' and COLUMN_NAME='is_small')
+		begin 
+		    ALTER TABLE dbo.contrs ADD  is_small  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr_r' and COLUMN_NAME='dtameen')
+		begin 
+		    ALTER TABLE dbo.pos_hdr_r ADD  dtameen  float NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr_r' and COLUMN_NAME='rtameen')
+		begin 
+		    ALTER TABLE dbo.pos_hdr_r ADD  rtameen  float NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_hdr_r' and COLUMN_NAME='tameen_note')
+		begin 
+		    ALTER TABLE dbo.pos_hdr_r ADD  tameen_note  nvarchar(MAX) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'groups' and COLUMN_NAME='printer')
+		begin 
+		    ALTER TABLE dbo.groups ADD  printer  nvarchar(100) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'whouses' and COLUMN_NAME='frq_sar_acc')
+		begin 
+		    ALTER TABLE dbo.whouses ADD  frq_sar_acc  varchar(19) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_hdr' and COLUMN_NAME='cc_no')
+		begin 
+		    ALTER TABLE dbo.acc_hdr ADD  cc_no  varchar(2) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_hdr' and COLUMN_NAME='invsupno')
+		begin 
+		    ALTER TABLE dbo.acc_hdr ADD  invsupno  nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_hdr' and COLUMN_NAME='taxid')
+		begin 
+		    ALTER TABLE dbo.acc_hdr ADD  taxid  varchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items_bc' and COLUMN_NAME='br_no')
+		begin 
+		    ALTER TABLE dbo.items_bc ADD  br_no  nchar(2) NULL default N'01'
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items_bc' and COLUMN_NAME='sl_no')
+		begin 
+		    ALTER TABLE dbo.items_bc ADD  sl_no  nchar(2) NULL default N'01'
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='sl_no')
+		begin 
+		    ALTER TABLE dbo.users ADD  sl_no  nchar(2) NULL default N'01'
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='reref')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  reref nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'd_sales_hdr' and COLUMN_NAME='reref')
+		begin 
+		    ALTER TABLE dbo.d_sales_hdr ADD  reref nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_hdr' and COLUMN_NAME='reref')
+		begin 
+		    ALTER TABLE dbo.pu_hdr ADD  reref nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'd_pu_hdr' and COLUMN_NAME='reref')
+		begin 
+		    ALTER TABLE dbo.d_pu_hdr ADD  reref nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='reref')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  reref nvarchar(50) NULL default N''
+		
+		end
+
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='prislwcst')
+		begin 
+		    ALTER TABLE dbo.users ADD  prislwcst  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_hdr' and COLUMN_NAME='sabr')
+		begin 
+		    ALTER TABLE dbo.pu_hdr ADD  sabr  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pucenters' and COLUMN_NAME='dp_sabr_acc')
+		begin 
+		    ALTER TABLE dbo.pucenters ADD  dp_sabr_acc  varchar(20) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_bulding_no')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_bulding_no nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_street')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_street nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_site_name')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_site_name nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_city')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_city nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_cuntry')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_cuntry nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_postal_code')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_postal_code nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_ex_postalcode')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_ex_postalcode nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='c_other_id')
+		begin 
+		    ALTER TABLE dbo.customers ADD  c_other_id nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_bulding_no')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_bulding_no nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_street')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_street nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_site_name')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_site_name nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_city')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_city nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_cuntry')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_cuntry nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_postal_code')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_postal_code nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_ex_postalcode')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_ex_postalcode nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='s_other_id')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  s_other_id nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='cstkey')
+		begin 
+		    ALTER TABLE dbo.users ADD  cstkey nvarchar(MAX) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='cu_salman')
+		begin 
+		    ALTER TABLE dbo.customers ADD  cu_salman varchar(2) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='up_stopsrch')
+		begin 
+		    ALTER TABLE dbo.users ADD  up_stopsrch  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'ttk_dtl' and COLUMN_NAME='note')
+		begin 
+		    ALTER TABLE dbo.ttk_dtl ADD  note nvarchar(1000) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'server' and COLUMN_NAME='updt_itm')
+		begin 
+		    ALTER TABLE dbo.server ADD  updt_itm  bit NULL default 1
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'server' and COLUMN_NAME='send_inv')
+		begin 
+		    ALTER TABLE dbo.server ADD  send_inv  bit NULL default 1
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='cu_disc')
+		begin 
+		    ALTER TABLE dbo.customers ADD  cu_disc  float NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'd_pos_hdr' and COLUMN_NAME='card_type')
+		begin 
+		    ALTER TABLE dbo.d_pos_hdr ADD  card_type  int NULL default 0
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_dtl' and COLUMN_NAME='qst_ref')
+		begin 
+		    ALTER TABLE dbo.acc_dtl ADD  qst_ref  int NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acc_dtl' and COLUMN_NAME='qst_sl')
+		begin 
+		    ALTER TABLE dbo.acc_dtl ADD  qst_sl  varchar(2) NULL default N''
+		 
+		end
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'accounts' and COLUMN_NAME='a_note')
+		begin 
+		    ALTER TABLE dbo.accounts ADD  a_note  nvarchar(MAX) NULL default N''
+		 
+		end
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'customers' and COLUMN_NAME='cu_note')
+		begin 
+		    ALTER TABLE dbo.customers ADD  cu_note  nvarchar(MAX) NULL default N''
+		 
+		end
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'suppliers' and COLUMN_NAME='su_note')
+		begin 
+		    ALTER TABLE dbo.suppliers ADD  su_note  nvarchar(MAX) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'taxs' and COLUMN_NAME='zatka_code')
+		begin 
+		    ALTER TABLE dbo.taxs ADD  zatka_code  nvarchar(100) NULL default N''
+		 
+		end
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'taxs' and COLUMN_NAME='zatka_reason')
+		begin 
+		    ALTER TABLE dbo.taxs ADD  zatka_reason  nvarchar(200) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_esend' and COLUMN_NAME='z_ref')
+		begin 
+		    ALTER TABLE dbo.pos_esend ADD  z_ref  int NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_esend' and COLUMN_NAME='crt_date')
+		begin 
+		    ALTER TABLE dbo.pos_esend ADD  crt_date  datetime NULL default (getdate())
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_esend' and COLUMN_NAME='snd_date')
+		begin 
+		    ALTER TABLE dbo.pos_esend ADD  snd_date  datetime NULL default (getdate())
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'server' and COLUMN_NAME='updt_cust')
+		begin 
+		    ALTER TABLE dbo.server ADD  updt_cust  bit NULL default 0
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='taxin_acc')
+		begin 
+		    ALTER TABLE dbo.branchs ADD  taxin_acc  varchar(20) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='taxout_acc')
+		begin 
+		    ALTER TABLE dbo.branchs ADD  taxout_acc  varchar(20) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'server' and COLUMN_NAME='updt_stk')
+		begin 
+		    ALTER TABLE dbo.server ADD  updt_stk  bit NULL default 0
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pos_cards' and COLUMN_NAME='inactive')
+		begin 
+		    ALTER TABLE dbo.pos_cards ADD  inactive  bit NULL default 0
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='note2')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  note2  nvarchar(200) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='note3')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  note3  nvarchar(200) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='inv_mpay')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  inv_mpay  char(8) NULL default CONVERT([varchar],getdate(),(112)) 
+		 
+		end
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'sales_hdr' and COLUMN_NAME='cust_mobil')
+		begin 
+		    ALTER TABLE dbo.sales_hdr ADD  cust_mobil  nvarchar(50) NULL default N''
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='note2')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  note2  nvarchar(200) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='note3')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  note3  nvarchar(200) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='inv_mpay')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  inv_mpay  char(8) NULL default CONVERT([varchar],getdate(),(112)) 
+		 
+		end
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'salofr_hdr' and COLUMN_NAME='cust_mobil')
+		begin 
+		    ALTER TABLE dbo.salofr_hdr ADD  cust_mobil  nvarchar(50) NULL default N''
+		 
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='jv_37')
+		begin 
+		    ALTER TABLE dbo.branchs ADD  jv_37  numeric(10, 0) NULL default 0
+		 
+		end

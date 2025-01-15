@@ -1,0 +1,30 @@
+IF OBJECT_ID('dbo.login_sec') IS NOT NULL
+DROP PROCEDURE dbo.login_sec
+GO
+      
+CREATE PROCEDURE login_sec
+	
+AS
+BEGIN
+
+declare @sqlmsg nvarchar(max)
+set @sqlmsg='alter login ' + (SELECT  QUOTENAME(NAME) 
+FROM sys.server_principals
+WHERE type = 'U' and QUOTENAME(NAME) like '%' + host_name() + '%') + ' disable '
+	begin transaction
+	exec sp_executesql @sqlmsg
+	
+	if @@error<>0
+	begin
+		rollback transaction
+
+		return 
+	end
+	commit transaction
+
+END
+
+
+
+GO
+

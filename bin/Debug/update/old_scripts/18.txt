@@ -1,0 +1,29 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ts_msg')
+BEGIN
+
+CREATE TABLE [dbo].[ts_msg](
+	[id] [int] NOT NULL,
+	[ar_text] [text] NULL,
+	[en_text] [text] NULL,
+	[date] [date] NULL,
+	[inactive] [bit] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[ts_msg] ADD  CONSTRAINT [DF_ts_msg_ar_text]  DEFAULT ('') FOR [ar_text]
+
+
+ALTER TABLE [dbo].[ts_msg] ADD  CONSTRAINT [DF_ts_msg_en_text]  DEFAULT ('') FOR [en_text]
+
+
+ALTER TABLE [dbo].[ts_msg] ADD  CONSTRAINT [DF_ts_msg_date]  DEFAULT (getdate()) FOR [date]
+
+
+ALTER TABLE [dbo].[ts_msg] ADD  CONSTRAINT [DF_ts_msg_inactive]  DEFAULT ((0)) FOR [inactive]
+
+
+
+
+
+
+END

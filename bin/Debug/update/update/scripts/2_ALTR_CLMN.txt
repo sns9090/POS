@@ -1,0 +1,87 @@
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'slcenter' and COLUMN_NAME='dp_custser')
+		begin 
+        exec sp_rename 'slcenter.dp_custser','dp_salcust_acc', 'COLUMN'
+        ALTER TABLE slcenter ALTER COLUMN dp_salcust_acc varchar(20);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'slcenter' and COLUMN_NAME='dp_expser')
+		begin 
+        exec sp_rename 'slcenter.dp_expser','dp_mkhzon_acc', 'COLUMN'
+        ALTER TABLE slcenter ALTER COLUMN dp_mkhzon_acc varchar(20);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='stkxtoser')
+		begin 
+        exec sp_rename 'branchs.stkxtoser','stkinacc', 'COLUMN'
+        ALTER TABLE branchs ALTER COLUMN stkinacc varchar(20);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='stkxfmser')
+		begin 
+        exec sp_rename 'branchs.stkxfmser','stkoutacc', 'COLUMN'
+        ALTER TABLE branchs ALTER COLUMN stkoutacc varchar(20);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='calgl')
+		begin 
+        exec sp_rename 'branchs.calgl','jv_36', 'COLUMN'
+        ALTER TABLE branchs ALTER COLUMN jv_36 numeric(6, 0);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'pu_hdr' and COLUMN_NAME='fcy2')
+		begin 
+        exec sp_rename 'pu_hdr.fcy2','invsupno', 'COLUMN'
+        ALTER TABLE pu_hdr ALTER COLUMN invsupno nvarchar(50);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='dscernser')
+		begin        
+        ALTER TABLE branchs ALTER COLUMN dscernser varchar(20);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='dscalwser')
+		begin      
+        ALTER TABLE branchs ALTER COLUMN dscalwser varchar(20);
+		end
+
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'brprices' and COLUMN_NAME='modelno')
+		begin 
+        exec sp_rename 'brprices.modelno','barcode', 'COLUMN'
+        ALTER TABLE brprices ALTER COLUMN barcode nvarchar(20);
+		end
+
+ if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'ttk_dtl' and COLUMN_NAME='name')
+		begin  
+        ALTER TABLE ttk_dtl ALTER COLUMN name varchar(100);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'slcenters' and COLUMN_NAME='dp_crdcardac')
+		begin        
+        ALTER TABLE slcenters ALTER COLUMN dp_crdcardac varchar(20);
+		end
+
+if exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'slcenters' and COLUMN_NAME='dp_cardcomm')
+		begin        
+        ALTER TABLE slcenters ALTER COLUMN dp_cardcomm varchar(20);
+		end
+
+if((SELECT object_definition(default_object_id) AS definition FROM   sys.columns WHERE  name='sanedcrd_amt' AND object_id = object_id('dbo.sales_hdr')) is null)
+		begin        
+        ALTER TABLE sales_hdr ADD DEFAULT ((0)) FOR sanedcrd_amt;
+		end
+
+if((SELECT object_definition(default_object_id) AS definition FROM   sys.columns WHERE  name='rtncash_dfrpl' AND object_id = object_id('dbo.sales_hdr')) is null)
+		begin        
+        ALTER TABLE sales_hdr ADD DEFAULT ((0)) FOR rtncash_dfrpl;
+		end
+
+if((SELECT object_definition(default_object_id) AS definition FROM   sys.columns WHERE  name='sanedcrd_amt' AND object_id = object_id('dbo.salofr_hdr')) is null)
+		begin        
+        ALTER TABLE salofr_hdr ADD DEFAULT ((0)) FOR sanedcrd_amt;
+		end
+
+if((SELECT object_definition(default_object_id) AS definition FROM   sys.columns WHERE  name='rtncash_dfrpl' AND object_id = object_id('dbo.salofr_hdr')) is null)
+		begin        
+        ALTER TABLE salofr_hdr ADD DEFAULT ((0)) FOR rtncash_dfrpl;
+		end

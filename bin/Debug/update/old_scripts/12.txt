@@ -1,0 +1,61 @@
+IF OBJECT_ID('dbo.get_balanace_for_item') IS NOT NULL
+DROP FUNCTION dbo.get_balanace_for_item
+GO
+      
+CREATE FUNCTION [dbo].[get_balanace_for_item]
+(@brno char(2),@whno char(2),@itemid varchar(20),@Glact bit)
+-- @mode 
+RETURNS numeric(8,2)
+AS
+BEGIN
+    declare @dbc varchar(40),
+    @c_l_cost float=0,
+	@lpkqty numeric(8,2),
+	@sql varchar(400)='',
+	@paralist varchar(400)
+	set @dbc=DB_NAME()	
+
+	--if @glact=0
+	--begin
+   select @lpkqty =(coalesce(stp.openbal,0) + coalesce(pur.puqty,0) -coalesce(sal.salqty,0) + coalesce(sto.stoqty,0) - coalesce(sto.stoqty1,0) - coalesce(sto2.stoqty2,0)) from items a
+	 left join
+	 (select t.itemno,sum(case when t.invtype in ('06','07') and t.whno=@whno and t.branch=@brno then t.qty*t.pkqty else -t.qty*t.pkqty end) as puqty 
+      from pu_dtl t where t.whno=@whno
+      group by t.itemno
+     ) pur   on a.item_no = pur.itemno  left join
+     (select t.itemno,  sum(case when t.invtype in ('04','05') and t.whno=@whno and t.branch=@brno then t.qty*t.pkqty else -t.qty*t.pkqty end) as salqty  
+      from sales_dtl t where t.whno=@whno
+      group by t.itemno
+     ) sal
+     on a.item_no = sal.itemno left join
+     (select t.itemno, sum(case when t.trtype in ('31','33','45','46','35') and t.towhno=@whno and t.branch=@brno then t.qty*t.pkqty else 0 end) as stoqty 
+	  ,sum(case when t.trtype in ('32') and t.whno=@whno and t.branch=@brno then t.qty*t.pkqty else 0 end) as stoqty1 
+	 -- ,sum(case when t.trtype in ('31','33','45','46') and t.whno=@whno and t.branch=@brno then t.qty*t.pkqty else 0 end) as stoqty2
+	 --,sum(case when t.trtype in ('33') and t.towhno=@whno and t.branch=@brno then t.qty*t.pkqty  when t.trtype in ('33') and t.whno=@whno and t.branch=@brno then -(t.qty*t.pkqty) else 0 end) as stoqty2
+	  from sto_dtl t where t.towhno=@whno
+      group by t.itemno
+     ) sto
+	  on a.item_no = sto.itemno  left join
+     (select t.itemno,sum(case when t.trtype in ('33') and t.whno=@whno and t.branch=@brno then t.qty*t.pkqty else 0 end) as stoqty2
+	  from sto_dtl t where t.whno=@whno
+      group by t.itemno
+    ) sto2
+	  on a.item_no = sto2.itemno left join
+     (select t.item_no,t.wh_no,sum(t.openbal) openbal from whbins t where t.wh_no=@whno and t.br_no=@brno
+      group by t.item_no,t.wh_no
+     ) stp
+	  on a.item_no = stp.item_no and stp.wh_no=@whno
+	  where a.item_no = @itemid;
+		
+	--end
+	set @c_l_cost=isnull(@c_l_cost,0)
+	set @lpkqty=isnull(@lpkqty,0)
+	if @c_l_cost>0 and @lpkqty>1 set @c_l_cost=@c_l_cost/@lpkqty
+	--return @c_l_cost
+	return @lpkqty
+
+	--select [dbo].[get_balanace_for_item] ('01','01','114B',0)
+end
+
+
+GO

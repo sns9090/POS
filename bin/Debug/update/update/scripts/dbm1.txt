@@ -1,0 +1,436 @@
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per01')
+		begin 
+		    ALTER TABLE dbo.years ADD  per01  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per02')
+		begin 
+		    ALTER TABLE dbo.years ADD  per02  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per03')
+		begin 
+		    ALTER TABLE dbo.years ADD  per03  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per04')
+		begin 
+		    ALTER TABLE dbo.years ADD  per04  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per05')
+		begin 
+		    ALTER TABLE dbo.years ADD  per05  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per06')
+		begin 
+		    ALTER TABLE dbo.years ADD  per06  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per07')
+		begin 
+		    ALTER TABLE dbo.years ADD  per07  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per08')
+		begin 
+		    ALTER TABLE dbo.years ADD  per08  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per09')
+		begin 
+		    ALTER TABLE dbo.years ADD  per09  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per10')
+		begin 
+		    ALTER TABLE dbo.years ADD  per10  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per11')
+		begin 
+		    ALTER TABLE dbo.years ADD  per11  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='per12')
+		begin 
+		    ALTER TABLE dbo.years ADD  per12  char(8) NULL default N''
+		
+		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='br_or_sl_price')
+		begin 
+		    ALTER TABLE dbo.companys ADD  br_or_sl_price  int NULL default 1
+		
+		end
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='auto_itmno')
+		begin 
+		    ALTER TABLE dbo.companys ADD  auto_itmno  bit NULL default 0
+		
+		end
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='item_start_with')
+		begin 
+		    ALTER TABLE dbo.companys ADD  item_start_with  nvarchar(10) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='tax_percent')
+		begin 
+		    ALTER TABLE dbo.companys ADD  tax_percent  float NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'years' and COLUMN_NAME='update_date')
+		begin 
+		    ALTER TABLE dbo.years ADD  update_date  char(8) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='auto_backup')
+		begin 
+		    ALTER TABLE dbo.companys ADD  auto_backup  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='auto_bak_time')
+		begin 
+		    ALTER TABLE dbo.companys ADD  auto_bak_time  int NULL default 0
+		
+		end	
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='auto_tax')
+		begin 
+		    ALTER TABLE dbo.companys ADD  auto_tax  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='auto_pos_update')
+		begin 
+		    ALTER TABLE dbo.companys ADD  auto_pos_update  bit NULL default 0
+		
+		end
+	
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_sections')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_sections  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mizan_sart')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mizan_sart  nchar(2) NULL default N'21'
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mizan_itemlen')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mizan_itemlen  int NULL default 4
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mizan_pricelen')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mizan_pricelen  int NULL default 6
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='multibc')
+		begin 
+		    ALTER TABLE dbo.companys ADD  multibc  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mada_type')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mada_type  int NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mada_porttyp')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mada_porttyp  int NULL default 1
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='mada_portno')
+		begin 
+		    ALTER TABLE dbo.companys ADD  mada_portno  int NULL default 1
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='sar_wzn')
+		begin 
+		    ALTER TABLE dbo.companys ADD  sar_wzn  int NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='down')
+		begin 
+		    ALTER TABLE dbo.companys ADD  down  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='must_cost')
+		begin 
+		    ALTER TABLE dbo.companys ADD  must_cost  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_main')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_main  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='ts_custno')
+		begin 
+		    ALTER TABLE dbo.companys ADD  ts_custno  nvarchar(10) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_taqseet')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_taqseet  bit NULL default 0
+		
+		end
+
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='comp_ename')
+		begin 
+		    ALTER TABLE dbo.companys ADD  comp_ename  nvarchar(200) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_einvoice')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_einvoice  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='notaxchang')
+		begin 
+		    ALTER TABLE dbo.companys ADD  notaxchang  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='must_equal')
+		begin 
+		    ALTER TABLE dbo.companys ADD  must_equal  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='pos_start_day')
+		begin 
+		    ALTER TABLE dbo.companys ADD  pos_start_day  int NULL default 5
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='msrof_qid')
+		begin 
+		    ALTER TABLE dbo.companys ADD  msrof_qid  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='one_sal_srial')
+		begin 
+		    ALTER TABLE dbo.companys ADD  one_sal_srial  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='show_qty_srch')
+		begin 
+		    ALTER TABLE dbo.companys ADD  show_qty_srch  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='bulding_no')
+		begin 
+		    ALTER TABLE dbo.companys ADD  bulding_no nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='street')
+		begin 
+		    ALTER TABLE dbo.companys ADD  street nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='site_name')
+		begin 
+		    ALTER TABLE dbo.companys ADD  site_name nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='city')
+		begin 
+		    ALTER TABLE dbo.companys ADD  city nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='cuntry')
+		begin 
+		    ALTER TABLE dbo.companys ADD  cuntry nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='postal_code')
+		begin 
+		    ALTER TABLE dbo.companys ADD  postal_code nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='ex_postalcode')
+		begin 
+		    ALTER TABLE dbo.companys ADD  ex_postalcode nvarchar(20) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='other_id')
+		begin 
+		    ALTER TABLE dbo.companys ADD  other_id nvarchar(50) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='edit_itm')
+		begin 
+		    ALTER TABLE dbo.companys ADD  edit_itm  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='row_hight')
+		begin 
+		    ALTER TABLE dbo.companys ADD  row_hight  int NULL default 75
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='allw_zerop')
+		begin 
+		    ALTER TABLE dbo.companys ADD  allw_zerop  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='guid_day')
+		begin 
+		    ALTER TABLE dbo.companys ADD  guid_day  nvarchar(50) NULL default 't+y8F24OhIs='
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='guid_dt')
+		begin 
+		    ALTER TABLE dbo.companys ADD  guid_dt  nvarchar(100) NULL default 'bweLrQi4sWAGTuCM4mc15A=='
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_einv_p2')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_einv_p2  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='einv_p2_date')
+		begin 
+		    ALTER TABLE dbo.companys ADD  einv_p2_date  char(8) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='is_production')
+		begin 
+		    ALTER TABLE dbo.companys ADD  is_production  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='whatsapp_actv')
+		begin 
+		    ALTER TABLE dbo.companys ADD  whatsapp_actv  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='whatsapp_tokn')
+		begin 
+		    ALTER TABLE dbo.companys ADD  whatsapp_tokn  nvarchar(1000) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='cmp_schem')
+		begin 
+		    ALTER TABLE dbo.companys ADD  cmp_schem  nvarchar(100) NULL default N'CRN'
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='whats_msg')
+		begin 
+		    ALTER TABLE dbo.companys ADD  whats_msg  nvarchar(1000) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='einv_p2_sync_actv')
+		begin 
+		    ALTER TABLE dbo.companys ADD  einv_p2_sync_actv  bit NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='einv_p2_sync_tim')
+		begin 
+		    ALTER TABLE dbo.companys ADD  einv_p2_sync_tim  int NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='min_start')
+		begin 
+		    ALTER TABLE dbo.companys ADD  min_start  nvarchar(500) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='min_lastlgin')
+		begin 
+		    ALTER TABLE dbo.companys ADD  min_lastlgin  nvarchar(500) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='min_givdays')
+		begin 
+		    ALTER TABLE dbo.companys ADD  min_givdays  int NULL default 0
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='min_mref')
+		begin 
+		    ALTER TABLE dbo.companys ADD  min_mref  nvarchar(10) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='z_cert_pem')
+		begin 
+		    ALTER TABLE dbo.companys ADD  z_cert_pem  nvarchar(MAX) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='z_key_pem')
+		begin 
+		    ALTER TABLE dbo.companys ADD  z_key_pem  nvarchar(MAX) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='z_secret_txt')
+		begin 
+		    ALTER TABLE dbo.companys ADD  z_secret_txt  nvarchar(MAX) NULL default N''
+		
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'companys' and COLUMN_NAME='z_csr_csr')
+		begin 
+		    ALTER TABLE dbo.companys ADD  z_csr_csr  nvarchar(MAX) NULL default N''
+		
+		end

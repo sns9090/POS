@@ -1,0 +1,37 @@
+IF OBJECT_ID('dbo.get_item_bal') IS NOT NULL
+DROP FUNCTION dbo.get_item_bal
+GO
+
+CREATE FUNCTION [dbo].[get_item_bal]
+(@itemno varchar(20)) 
+RETURNS numeric(8,2)
+AS
+BEGIN 
+
+    declare @dbc varchar(40),
+    @c1 float,@c2 float,@c3 float, @c4 float,@c5 float,@c6 float
+	set @dbc=DB_NAME()	
+
+     set @c1 = (select sum(case when t.invtype in ('06','07')  then t.qty*t.pkqty else -t.qty*t.pkqty end)  from pu_dtl t where t.itemno = @itemno)
+
+     set @c2 = (select sum(case when t.invtype in ('04','05') then t.qty*t.pkqty else -t.qty*t.pkqty end) from sales_dtl t where t.itemno = @itemno)
+
+
+     set @c3 = (select sum(case when t.trtype in ('31','45','46','35',case when trtype='45' and whno='' and towhno<>'' then '45' else '' end)  then t.qty*t.pkqty else 0 end) from sto_dtl t where t.itemno = @itemno)
+
+	 set @c4 = (select sum(case when t.trtype in ('32',case when trtype='45' and towhno='' and whno<>'' then '45' else '' end) then t.qty*t.pkqty else 0 end) from sto_dtl t where t.itemno = @itemno)
+
+    -- set @c5 = (select sum(case when t.trtype in ('31','33','45','46') then t.qty*t.pkqty else 0 end) from sto_dtl t  where t.itemno = @itemno)
+	-- set @c5 = (select sum(case when t.trtype in ('33')  then t.qty*t.pkqty else 0 end) from sto_dtl t where t.itemno = @itemno)
+     
+     set @c6 =(select sum(t.openbal) openbal from whbins t where t.item_no = @itemno)
+
+	  
+	
+	 return coalesce(@c6,0)+ coalesce(@c1,0)- coalesce(@c2,0)+ coalesce(@c3,0)- coalesce(@c4,0)
+
+	--select [dbo].[get_item_bal] ('114b')
+
+end
+
+GO

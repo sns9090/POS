@@ -1,0 +1,24 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'items_altr')
+BEGIN
+    
+
+CREATE TABLE [dbo].[items_altr](
+	[itemno] [nvarchar](16) NOT NULL,
+	[rplitemno] [nvarchar](16) NOT NULL,
+	[cmbkey] [char](24) NULL,
+	[iorder] [numeric](3, 0) NULL,
+	[lastupdt] [date] NULL
+) ON [PRIMARY]
+
+
+
+ALTER TABLE [dbo].[items_altr]  WITH CHECK ADD  CONSTRAINT [FK_items_altr_items] FOREIGN KEY([itemno])
+REFERENCES [dbo].[items] ([item_no])
+ON DELETE CASCADE
+
+ALTER TABLE [dbo].[items_altr] CHECK CONSTRAINT [FK_items_altr_items]
+
+
+END
+
+
