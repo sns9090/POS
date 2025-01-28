@@ -93,6 +93,7 @@ namespace POS.Sal
                 }
                 */
                 string usrname = cmb_user.SelectedIndex != -1 ? " and usrid = '" + cmb_user.SelectedValue.ToString() + "' " : " ";
+                string usrid = BL.CLS_Session.up_edit_othr ? " " : " and usrid = '" + BL.CLS_Session.UserName + "' ";
                 string custno = string.IsNullOrEmpty(txt_code.Text) ? " "  : " and custno='"+txt_code.Text+"' ";
                 string cond = checkBox1.Checked? "invhdate" : "invmdate" ;
                 string condp = rad_posted.Checked ? " and posted=1 " :(rad_notpostd.Checked? " and posted=0 " :" ");
@@ -104,7 +105,7 @@ namespace POS.Sal
                 string conslctr = cmb_salctr.SelectedIndex != -1 ? " and slcenter = '" + cmb_salctr.SelectedValue.ToString() + "' " : " ";
                 string condtp = cmb_type.SelectedIndex != -1 ? " and invtype='" + cmb_type.SelectedValue + "' " : " ";
                // string qstr = "select slcenter sl_no,invtype a_type,ref a_ref,CONVERT(VARCHAR(10), CAST(invmdate as date), 105) a_mdate,CONVERT(VARCHAR(10), CAST(invhdate as date), 105) a_hdate,text a_text,invttl invttl,invdsvl invdsvl,tax_amt_rcvd tax,nettotal nettotal,posted a_p,invtype a_t from sales_hdr where branch='" + BL.CLS_Session.brno + "' " + condp + usrname + condft + conslctr + " and " + cond + " between '" + txt_fdate.Text.Replace("-", "") + "' and '" + txt_tdate.Text.Replace("-", "") + "'";
-                string qstr = "select slcenter sl_no,invtype a_type,ref a_ref,CONVERT(VARCHAR(10), CAST(invmdate as date), 105) a_mdate,(substring(invhdate,7,2) + '-' + substring(invhdate,5,2)+'-'+substring(invhdate,1,4)) a_hdate,text a_text,invttl invttl,invdsvl invdsvl,tax_amt_rcvd tax,nettotal nettotal,posted a_p,invtype a_t from salofr_hdr where invtype in ('24','37') " + condtp + " and branch='" + BL.CLS_Session.brno + "' " + condp + usrname + custno + condft + conslctr + " and " + cond + " between '" + datval.convert_to_yyyyDDdd(txt_fdate.Text) + "' and '" + datval.convert_to_yyyyDDdd(txt_tdate.Text) + "'";
+                string qstr = "select slcenter sl_no,invtype a_type,ref a_ref,CONVERT(VARCHAR(10), CAST(invmdate as date), 105) a_mdate,(substring(invhdate,7,2) + '-' + substring(invhdate,5,2)+'-'+substring(invhdate,1,4)) a_hdate,text a_text,invttl invttl,invdsvl invdsvl,tax_amt_rcvd tax,nettotal nettotal,posted a_p,invtype a_t from salofr_hdr where invtype in ('24','37') " + condtp + " and branch='" + BL.CLS_Session.brno + "' " + condp + usrname + usrid + custno + condft + conslctr + " and " + cond + " between '" + datval.convert_to_yyyyDDdd(txt_fdate.Text) + "' and '" + datval.convert_to_yyyyDDdd(txt_tdate.Text) + "'";
                 
                 if (!string.IsNullOrEmpty(txt_desc.Text))
                 {
@@ -529,7 +530,7 @@ namespace POS.Sal
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (BL.CLS_Session.sysno == "0")
+            if (!BL.CLS_Session.sysno.Equals("1"))
             {
 
 

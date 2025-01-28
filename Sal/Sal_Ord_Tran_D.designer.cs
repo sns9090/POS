@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sal_Ord_Tran_D));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.نسخToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.حذفالصفToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +51,8 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Exit = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txt_mobile = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.txt_validdate = new System.Windows.Forms.MaskedTextBox();
@@ -182,29 +184,30 @@
             // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.نسخToolStripMenuItem,
             this.حذفالصفToolStripMenuItem,
             this.كشفحسابToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            this.toolTip1.SetToolTip(this.contextMenuStrip1, resources.GetString("contextMenuStrip1.ToolTip"));
             // 
             // نسخToolStripMenuItem
             // 
-            this.نسخToolStripMenuItem.Name = "نسخToolStripMenuItem";
             resources.ApplyResources(this.نسخToolStripMenuItem, "نسخToolStripMenuItem");
+            this.نسخToolStripMenuItem.Name = "نسخToolStripMenuItem";
             this.نسخToolStripMenuItem.Click += new System.EventHandler(this.نسخToolStripMenuItem_Click);
             // 
             // حذفالصفToolStripMenuItem
             // 
-            this.حذفالصفToolStripMenuItem.Name = "حذفالصفToolStripMenuItem";
             resources.ApplyResources(this.حذفالصفToolStripMenuItem, "حذفالصفToolStripMenuItem");
+            this.حذفالصفToolStripMenuItem.Name = "حذفالصفToolStripMenuItem";
             this.حذفالصفToolStripMenuItem.Click += new System.EventHandler(this.حذفالصفToolStripMenuItem_Click);
             // 
             // كشفحسابToolStripMenuItem
             // 
-            this.كشفحسابToolStripMenuItem.Name = "كشفحسابToolStripMenuItem";
             resources.ApplyResources(this.كشفحسابToolStripMenuItem, "كشفحسابToolStripMenuItem");
+            this.كشفحسابToolStripMenuItem.Name = "كشفحسابToolStripMenuItem";
             this.كشفحسابToolStripMenuItem.Click += new System.EventHandler(this.كشفحسابToolStripMenuItem_Click);
             // 
             // backgroundWorker1
@@ -245,16 +248,17 @@
             // 
             // contextMenuStrip2
             // 
+            resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.designToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
+            this.toolTip1.SetToolTip(this.contextMenuStrip2, resources.GetString("contextMenuStrip2.ToolTip"));
             // 
             // designToolStripMenuItem
             // 
+            resources.ApplyResources(this.designToolStripMenuItem, "designToolStripMenuItem");
             this.designToolStripMenuItem.Image = global::POS.Properties.Resources.Edit_16x16;
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
-            resources.ApplyResources(this.designToolStripMenuItem, "designToolStripMenuItem");
             this.designToolStripMenuItem.Click += new System.EventHandler(this.designToolStripMenuItem_Click);
             // 
             // btn_Exit
@@ -263,18 +267,34 @@
             this.btn_Exit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Exit.Image = global::POS.Properties.Resources.Log_Out_32x32;
             this.btn_Exit.Name = "btn_Exit";
+            this.toolTip1.SetToolTip(this.btn_Exit, resources.GetString("btn_Exit.ToolTip"));
             this.btn_Exit.UseVisualStyleBackColor = true;
             this.btn_Exit.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label33
+            // 
+            resources.ApplyResources(this.label33, "label33");
+            this.label33.Name = "label33";
+            this.toolTip1.SetToolTip(this.label33, resources.GetString("label33.ToolTip"));
+            // 
+            // txt_mobile
+            // 
+            resources.ApplyResources(this.txt_mobile, "txt_mobile");
+            this.txt_mobile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_mobile.Name = "txt_mobile";
+            this.toolTip1.SetToolTip(this.txt_mobile, resources.GetString("txt_mobile.ToolTip"));
             // 
             // label31
             // 
             resources.ApplyResources(this.label31, "label31");
             this.label31.Name = "label31";
+            this.toolTip1.SetToolTip(this.label31, resources.GetString("label31.ToolTip"));
             // 
             // label32
             // 
             resources.ApplyResources(this.label32, "label32");
             this.label32.Name = "label32";
+            this.toolTip1.SetToolTip(this.label32, resources.GetString("label32.ToolTip"));
             // 
             // txt_validdate
             // 
@@ -282,12 +302,14 @@
             this.txt_validdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_validdate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txt_validdate.Name = "txt_validdate";
+            this.toolTip1.SetToolTip(this.txt_validdate, resources.GetString("txt_validdate.ToolTip"));
             this.txt_validdate.Leave += new System.EventHandler(this.txt_validdate_Leave);
             // 
             // btn_payment
             // 
             resources.ApplyResources(this.btn_payment, "btn_payment");
             this.btn_payment.Name = "btn_payment";
+            this.toolTip1.SetToolTip(this.btn_payment, resources.GetString("btn_payment.ToolTip"));
             this.btn_payment.UseVisualStyleBackColor = true;
             this.btn_payment.Click += new System.EventHandler(this.btn_payment_Click);
             // 
@@ -295,6 +317,7 @@
             // 
             resources.ApplyResources(this.btn_tali, "btn_tali");
             this.btn_tali.Name = "btn_tali";
+            this.toolTip1.SetToolTip(this.btn_tali, resources.GetString("btn_tali.ToolTip"));
             this.btn_tali.UseVisualStyleBackColor = true;
             this.btn_tali.Click += new System.EventHandler(this.btn_tali_Click);
             // 
@@ -302,6 +325,7 @@
             // 
             resources.ApplyResources(this.btn_qbl, "btn_qbl");
             this.btn_qbl.Name = "btn_qbl";
+            this.toolTip1.SetToolTip(this.btn_qbl, resources.GetString("btn_qbl.ToolTip"));
             this.btn_qbl.UseVisualStyleBackColor = true;
             this.btn_qbl.Click += new System.EventHandler(this.btn_qbl_Click);
             // 
@@ -310,18 +334,21 @@
             resources.ApplyResources(this.txt_s, "txt_s");
             this.txt_s.Name = "txt_s";
             this.txt_s.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_s, resources.GetString("txt_s.ToolTip"));
             // 
             // txt_t
             // 
             resources.ApplyResources(this.txt_t, "txt_t");
             this.txt_t.Name = "txt_t";
             this.txt_t.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_t, resources.GetString("txt_t.ToolTip"));
             // 
             // txt_r
             // 
             resources.ApplyResources(this.txt_r, "txt_r");
             this.txt_r.Name = "txt_r";
             this.txt_r.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_r, resources.GetString("txt_r.ToolTip"));
             this.txt_r.TextChanged += new System.EventHandler(this.txt_r_TextChanged);
             // 
             // txt_reref
@@ -329,6 +356,7 @@
             resources.ApplyResources(this.txt_reref, "txt_reref");
             this.txt_reref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_reref.Name = "txt_reref";
+            this.toolTip1.SetToolTip(this.txt_reref, resources.GetString("txt_reref.ToolTip"));
             // 
             // txt_curbal
             // 
@@ -336,6 +364,7 @@
             this.txt_curbal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_curbal.Name = "txt_curbal";
             this.txt_curbal.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_curbal, resources.GetString("txt_curbal.ToolTip"));
             // 
             // txt_whbal
             // 
@@ -343,27 +372,32 @@
             this.txt_whbal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_whbal.Name = "txt_whbal";
             this.txt_whbal.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_whbal, resources.GetString("txt_whbal.ToolTip"));
             // 
             // label30
             // 
             resources.ApplyResources(this.label30, "label30");
             this.label30.Name = "label30";
+            this.toolTip1.SetToolTip(this.label30, resources.GetString("label30.ToolTip"));
             // 
             // label19
             // 
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
+            this.toolTip1.SetToolTip(this.label19, resources.GetString("label19.ToolTip"));
             // 
             // label29
             // 
             resources.ApplyResources(this.label29, "label29");
             this.label29.Name = "label29";
+            this.toolTip1.SetToolTip(this.label29, resources.GetString("label29.ToolTip"));
             // 
             // txt_aqd
             // 
             resources.ApplyResources(this.txt_aqd, "txt_aqd");
             this.txt_aqd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_aqd.Name = "txt_aqd";
+            this.toolTip1.SetToolTip(this.txt_aqd, resources.GetString("txt_aqd.ToolTip"));
             this.txt_aqd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_aqd_KeyDown);
             this.txt_aqd.Leave += new System.EventHandler(this.txt_aqd_Leave);
             // 
@@ -371,11 +405,13 @@
             // 
             resources.ApplyResources(this.label28, "label28");
             this.label28.Name = "label28";
+            this.toolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
             // 
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
             this.label27.Name = "label27";
+            this.toolTip1.SetToolTip(this.label27, resources.GetString("label27.ToolTip"));
             // 
             // txt_rim
             // 
@@ -383,17 +419,20 @@
             this.txt_rim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_rim.Name = "txt_rim";
             this.txt_rim.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_rim, resources.GetString("txt_rim.ToolTip"));
             // 
             // label26
             // 
             resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
+            this.toolTip1.SetToolTip(this.label26, resources.GetString("label26.ToolTip"));
             // 
             // txt_paid
             // 
             resources.ApplyResources(this.txt_paid, "txt_paid");
             this.txt_paid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_paid.Name = "txt_paid";
+            this.toolTip1.SetToolTip(this.txt_paid, resources.GetString("txt_paid.ToolTip"));
             this.txt_paid.TextChanged += new System.EventHandler(this.txt_paid_TextChanged);
             this.txt_paid.Leave += new System.EventHandler(this.txt_paid_Leave);
             // 
@@ -401,11 +440,13 @@
             // 
             resources.ApplyResources(this.label25, "label25");
             this.label25.Name = "label25";
+            this.toolTip1.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
             // 
             // label24
             // 
             resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
+            this.toolTip1.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
             // 
             // cmb_exits
             // 
@@ -413,12 +454,14 @@
             this.cmb_exits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_exits.FormattingEnabled = true;
             this.cmb_exits.Name = "cmb_exits";
+            this.toolTip1.SetToolTip(this.cmb_exits, resources.GetString("cmb_exits.ToolTip"));
             this.cmb_exits.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_exits_KeyDown);
             // 
             // label23
             // 
             resources.ApplyResources(this.label23, "label23");
             this.label23.Name = "label23";
+            this.toolTip1.SetToolTip(this.label23, resources.GetString("label23.ToolTip"));
             // 
             // txt_taxfree
             // 
@@ -426,28 +469,32 @@
             this.txt_taxfree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_taxfree.Name = "txt_taxfree";
             this.txt_taxfree.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_taxfree, resources.GetString("txt_taxfree.ToolTip"));
             // 
             // txt_taxid
             // 
             resources.ApplyResources(this.txt_taxid, "txt_taxid");
             this.txt_taxid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_taxid.Name = "txt_taxid";
+            this.toolTip1.SetToolTip(this.txt_taxid, resources.GetString("txt_taxid.ToolTip"));
             this.txt_taxid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_taxid_KeyDown);
             // 
             // label22
             // 
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
+            this.toolTip1.SetToolTip(this.label22, resources.GetString("label22.ToolTip"));
             // 
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            this.toolTip1.SetToolTip(this.panel2, resources.GetString("panel2.ToolTip"));
             // 
             // bindingNavigator1
             // 
-            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
             resources.ApplyResources(this.bindingNavigator1, "bindingNavigator1");
+            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -468,40 +515,41 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.toolTip1.SetToolTip(this.bindingNavigator1, resources.GetString("bindingNavigator1.ToolTip"));
             // 
             // bindingNavigatorAddNewItem
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorAddNewItem, "bindingNavigatorAddNewItem");
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             // 
             // bindingNavigatorCountItem
             // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             resources.ApplyResources(this.bindingNavigatorCountItem, "bindingNavigatorCountItem");
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             // 
             // bindingNavigatorDeleteItem
             // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorDeleteItem, "bindingNavigatorDeleteItem");
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             // 
             // bindingNavigatorMoveFirstItem
             // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorMoveFirstItem, "bindingNavigatorMoveFirstItem");
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             // 
             // bindingNavigatorMovePreviousItem
             // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorMovePreviousItem, "bindingNavigatorMovePreviousItem");
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             // 
             // bindingNavigatorSeparator
             // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
             resources.ApplyResources(this.bindingNavigatorSeparator, "bindingNavigatorSeparator");
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
             // 
             // bindingNavigatorPositionItem
             // 
@@ -510,36 +558,38 @@
             // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             resources.ApplyResources(this.bindingNavigatorSeparator1, "bindingNavigatorSeparator1");
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             // 
             // bindingNavigatorMoveNextItem
             // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorMoveNextItem, "bindingNavigatorMoveNextItem");
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             // 
             // bindingNavigatorMoveLastItem
             // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.bindingNavigatorMoveLastItem, "bindingNavigatorMoveLastItem");
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             resources.ApplyResources(this.bindingNavigatorSeparator2, "bindingNavigatorSeparator2");
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             // 
             // txt_jrdacc
             // 
             resources.ApplyResources(this.txt_jrdacc, "txt_jrdacc");
             this.txt_jrdacc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_jrdacc.Name = "txt_jrdacc";
+            this.toolTip1.SetToolTip(this.txt_jrdacc, resources.GetString("txt_jrdacc.ToolTip"));
             // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
+            this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
             // 
             // cmb_salman
             // 
@@ -547,12 +597,14 @@
             this.cmb_salman.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_salman.FormattingEnabled = true;
             this.cmb_salman.Name = "cmb_salman";
+            this.toolTip1.SetToolTip(this.cmb_salman, resources.GetString("cmb_salman.ToolTip"));
             this.cmb_salman.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_salman_KeyDown);
             // 
             // label20
             // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
+            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // numericUpDown1
             // 
@@ -569,6 +621,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
+            this.toolTip1.SetToolTip(this.numericUpDown1, resources.GetString("numericUpDown1.ToolTip"));
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
             0,
@@ -579,6 +632,7 @@
             // 
             resources.ApplyResources(this.chk_usebarcode, "chk_usebarcode");
             this.chk_usebarcode.Name = "chk_usebarcode";
+            this.toolTip1.SetToolTip(this.chk_usebarcode, resources.GetString("chk_usebarcode.ToolTip"));
             this.chk_usebarcode.UseVisualStyleBackColor = true;
             this.chk_usebarcode.CheckedChanged += new System.EventHandler(this.chk_usebarcode_CheckedChanged);
             // 
@@ -586,12 +640,14 @@
             // 
             resources.ApplyResources(this.chk_suspend, "chk_suspend");
             this.chk_suspend.Name = "chk_suspend";
+            this.toolTip1.SetToolTip(this.chk_suspend, resources.GetString("chk_suspend.ToolTip"));
             this.chk_suspend.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
+            this.toolTip1.SetToolTip(this.label18, resources.GetString("label18.ToolTip"));
             // 
             // txt_icost
             // 
@@ -599,29 +655,34 @@
             this.txt_icost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_icost.Name = "txt_icost";
             this.txt_icost.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_icost, resources.GetString("txt_icost.ToolTip"));
             // 
             // txt_cost
             // 
             resources.ApplyResources(this.txt_cost, "txt_cost");
             this.txt_cost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_cost.Name = "txt_cost";
+            this.toolTip1.SetToolTip(this.txt_cost, resources.GetString("txt_cost.ToolTip"));
             // 
             // txt_crlmt
             // 
             resources.ApplyResources(this.txt_crlmt, "txt_crlmt");
             this.txt_crlmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_crlmt.Name = "txt_crlmt";
+            this.toolTip1.SetToolTip(this.txt_crlmt, resources.GetString("txt_crlmt.ToolTip"));
             // 
             // txt_temp
             // 
             resources.ApplyResources(this.txt_temp, "txt_temp");
             this.txt_temp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_temp.Name = "txt_temp";
+            this.toolTip1.SetToolTip(this.txt_temp, resources.GetString("txt_temp.ToolTip"));
             // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
+            this.toolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
             // 
             // txt_custnam
             // 
@@ -629,12 +690,14 @@
             this.txt_custnam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_custnam.Name = "txt_custnam";
             this.txt_custnam.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_custnam, resources.GetString("txt_custnam.ToolTip"));
             // 
             // txt_custno
             // 
             resources.ApplyResources(this.txt_custno, "txt_custno");
             this.txt_custno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_custno.Name = "txt_custno";
+            this.toolTip1.SetToolTip(this.txt_custno, resources.GetString("txt_custno.ToolTip"));
             this.txt_custno.TextChanged += new System.EventHandler(this.txt_custno_TextChanged);
             this.txt_custno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_custno_KeyDown);
             this.txt_custno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_custno_KeyPress);
@@ -645,17 +708,20 @@
             // 
             resources.ApplyResources(this.chk_nodup, "chk_nodup");
             this.chk_nodup.Name = "chk_nodup";
+            this.toolTip1.SetToolTip(this.chk_nodup, resources.GetString("chk_nodup.ToolTip"));
             this.chk_nodup.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
+            this.toolTip1.SetToolTip(this.label16, resources.GetString("label16.ToolTip"));
             // 
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
+            this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
             // 
             // txt_user
             // 
@@ -663,17 +729,20 @@
             this.txt_user.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_user.Name = "txt_user";
             this.txt_user.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_user, resources.GetString("txt_user.ToolTip"));
             // 
             // label14
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
+            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
             // 
             // txt_desper
             // 
             resources.ApplyResources(this.txt_desper, "txt_desper");
             this.txt_desper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_desper.Name = "txt_desper";
+            this.toolTip1.SetToolTip(this.txt_desper, resources.GetString("txt_desper.ToolTip"));
             this.txt_desper.TextChanged += new System.EventHandler(this.txt_desper_TextChanged);
             this.txt_desper.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_desper_KeyDown);
             this.txt_desper.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_desper_KeyPress);
@@ -683,6 +752,7 @@
             // 
             resources.ApplyResources(this.chk_shaml_tax, "chk_shaml_tax");
             this.chk_shaml_tax.Name = "chk_shaml_tax";
+            this.toolTip1.SetToolTip(this.chk_shaml_tax, resources.GetString("chk_shaml_tax.ToolTip"));
             this.chk_shaml_tax.UseVisualStyleBackColor = true;
             this.chk_shaml_tax.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -692,6 +762,7 @@
             this.txt_tax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_tax.Name = "txt_tax";
             this.txt_tax.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_tax, resources.GetString("txt_tax.ToolTip"));
             this.txt_tax.TextChanged += new System.EventHandler(this.txt_tax_TextChanged);
             // 
             // txt_net
@@ -700,21 +771,25 @@
             this.txt_net.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_net.Name = "txt_net";
             this.txt_net.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_net, resources.GetString("txt_net.ToolTip"));
             // 
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
+            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
             // 
             // label12
             // 
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
+            this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
+            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // txt_name
             // 
@@ -722,12 +797,14 @@
             this.txt_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_name.Name = "txt_name";
             this.txt_name.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_name, resources.GetString("txt_name.ToolTip"));
             // 
             // txt_key
             // 
             resources.ApplyResources(this.txt_key, "txt_key");
             this.txt_key.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_key.Name = "txt_key";
+            this.toolTip1.SetToolTip(this.txt_key, resources.GetString("txt_key.ToolTip"));
             this.txt_key.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_key_KeyDown);
             this.txt_key.Layout += new System.Windows.Forms.LayoutEventHandler(this.txt_key_Layout);
             this.txt_key.Leave += new System.EventHandler(this.txt_key_Leave);
@@ -736,18 +813,21 @@
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
+            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
             // txt_remark
             // 
             resources.ApplyResources(this.txt_remark, "txt_remark");
             this.txt_remark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_remark.Name = "txt_remark";
+            this.toolTip1.SetToolTip(this.txt_remark, resources.GetString("txt_remark.ToolTip"));
             this.txt_remark.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_remark_KeyDown);
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
+            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // cmb_salctr
             // 
@@ -755,6 +835,7 @@
             this.cmb_salctr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_salctr.FormattingEnabled = true;
             this.cmb_salctr.Name = "cmb_salctr";
+            this.toolTip1.SetToolTip(this.cmb_salctr, resources.GetString("cmb_salctr.ToolTip"));
             this.cmb_salctr.SelectedIndexChanged += new System.EventHandler(this.cmb_salctr_SelectedIndexChanged);
             this.cmb_salctr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_salctr_KeyDown);
             this.cmb_salctr.Leave += new System.EventHandler(this.cmb_salctr_Leave);
@@ -765,6 +846,7 @@
             this.txt_total.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_total.Name = "txt_total";
             this.txt_total.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_total, resources.GetString("txt_total.ToolTip"));
             this.txt_total.TextChanged += new System.EventHandler(this.txt_damt_TextChanged);
             // 
             // txt_des
@@ -772,6 +854,7 @@
             resources.ApplyResources(this.txt_des, "txt_des");
             this.txt_des.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_des.Name = "txt_des";
+            this.toolTip1.SetToolTip(this.txt_des, resources.GetString("txt_des.ToolTip"));
             this.txt_des.TextChanged += new System.EventHandler(this.txt_camt_TextChanged);
             this.txt_des.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_des_KeyDown);
             this.txt_des.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_camt_KeyPress);
@@ -793,12 +876,14 @@
             this.panel1.Controls.Add(this.btn_Undo);
             this.panel1.Controls.Add(this.btn_Exit);
             this.panel1.Name = "panel1";
+            this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
             // 
             // btn_prtdirct
             // 
             resources.ApplyResources(this.btn_prtdirct, "btn_prtdirct");
             this.btn_prtdirct.Image = global::POS.Properties.Resources.Print_32x32;
             this.btn_prtdirct.Name = "btn_prtdirct";
+            this.toolTip1.SetToolTip(this.btn_prtdirct, resources.GetString("btn_prtdirct.ToolTip"));
             this.btn_prtdirct.UseVisualStyleBackColor = true;
             this.btn_prtdirct.Click += new System.EventHandler(this.btn_prtdirct_Click);
             // 
@@ -807,6 +892,7 @@
             resources.ApplyResources(this.button2, "button2");
             this.button2.Image = global::POS.Properties.Resources.Print_32x32;
             this.button2.Name = "button2";
+            this.toolTip1.SetToolTip(this.button2, resources.GetString("button2.ToolTip"));
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -815,6 +901,7 @@
             resources.ApplyResources(this.btn_Post, "btn_Post");
             this.btn_Post.Image = global::POS.Properties.Resources.Upload_32x32;
             this.btn_Post.Name = "btn_Post";
+            this.toolTip1.SetToolTip(this.btn_Post, resources.GetString("btn_Post.ToolTip"));
             this.btn_Post.UseVisualStyleBackColor = true;
             this.btn_Post.Click += new System.EventHandler(this.btn_Post_Click);
             // 
@@ -823,6 +910,7 @@
             resources.ApplyResources(this.btn_Edit, "btn_Edit");
             this.btn_Edit.Image = global::POS.Properties.Resources.Edit_32x32;
             this.btn_Edit.Name = "btn_Edit";
+            this.toolTip1.SetToolTip(this.btn_Edit, resources.GetString("btn_Edit.ToolTip"));
             this.btn_Edit.UseVisualStyleBackColor = true;
             this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
@@ -831,6 +919,7 @@
             resources.ApplyResources(this.btn_Del, "btn_Del");
             this.btn_Del.Image = global::POS.Properties.Resources.Delete_32x32;
             this.btn_Del.Name = "btn_Del";
+            this.toolTip1.SetToolTip(this.btn_Del, resources.GetString("btn_Del.ToolTip"));
             this.btn_Del.UseVisualStyleBackColor = true;
             this.btn_Del.Click += new System.EventHandler(this.btn_Del_Click);
             // 
@@ -839,6 +928,7 @@
             resources.ApplyResources(this.btn_Find, "btn_Find");
             this.btn_Find.Image = global::POS.Properties.Resources.Find_32x32;
             this.btn_Find.Name = "btn_Find";
+            this.toolTip1.SetToolTip(this.btn_Find, resources.GetString("btn_Find.ToolTip"));
             this.btn_Find.UseVisualStyleBackColor = true;
             this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
             // 
@@ -847,6 +937,7 @@
             resources.ApplyResources(this.btn_Add, "btn_Add");
             this.btn_Add.Image = global::POS.Properties.Resources.Add_32x32;
             this.btn_Add.Name = "btn_Add";
+            this.toolTip1.SetToolTip(this.btn_Add, resources.GetString("btn_Add.ToolTip"));
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.Add_btn_Click_1);
             // 
@@ -855,6 +946,7 @@
             resources.ApplyResources(this.btn_Save, "btn_Save");
             this.btn_Save.Image = global::POS.Properties.Resources.Save_32x32;
             this.btn_Save.Name = "btn_Save";
+            this.toolTip1.SetToolTip(this.btn_Save, resources.GetString("btn_Save.ToolTip"));
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             this.btn_Save.Enter += new System.EventHandler(this.btn_Save_Enter);
@@ -864,6 +956,7 @@
             resources.ApplyResources(this.btn_Print, "btn_Print");
             this.btn_Print.Image = global::POS.Properties.Resources.Print_32x32;
             this.btn_Print.Name = "btn_Print";
+            this.toolTip1.SetToolTip(this.btn_Print, resources.GetString("btn_Print.ToolTip"));
             this.btn_Print.UseVisualStyleBackColor = true;
             this.btn_Print.Click += new System.EventHandler(this.btn_Print_Click);
             // 
@@ -872,6 +965,7 @@
             resources.ApplyResources(this.btn_Undo, "btn_Undo");
             this.btn_Undo.Image = global::POS.Properties.Resources.Undo_32x32;
             this.btn_Undo.Name = "btn_Undo";
+            this.toolTip1.SetToolTip(this.btn_Undo, resources.GetString("btn_Undo.ToolTip"));
             this.btn_Undo.UseVisualStyleBackColor = true;
             this.btn_Undo.Click += new System.EventHandler(this.btn_Undo_Click);
             // 
@@ -880,6 +974,7 @@
             resources.ApplyResources(this.btn_Rfrsh, "btn_Rfrsh");
             this.btn_Rfrsh.Image = global::POS.Properties.Resources.Refresh_32x32;
             this.btn_Rfrsh.Name = "btn_Rfrsh";
+            this.toolTip1.SetToolTip(this.btn_Rfrsh, resources.GetString("btn_Rfrsh.ToolTip"));
             this.btn_Rfrsh.UseVisualStyleBackColor = true;
             this.btn_Rfrsh.Click += new System.EventHandler(this.btn_Rfrsh_Click);
             // 
@@ -888,6 +983,7 @@
             resources.ApplyResources(this.button1, "button1");
             this.button1.Image = global::POS.Properties.Resources.Search_32x321;
             this.button1.Name = "button1";
+            this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -896,16 +992,19 @@
             resources.ApplyResources(this.txt_ref, "txt_ref");
             this.txt_ref.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_ref.Name = "txt_ref";
+            this.toolTip1.SetToolTip(this.txt_ref, resources.GetString("txt_ref.ToolTip"));
             // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
+            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // cmb_type
             // 
@@ -913,6 +1012,7 @@
             this.cmb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_type.FormattingEnabled = true;
             this.cmb_type.Name = "cmb_type";
+            this.toolTip1.SetToolTip(this.cmb_type, resources.GetString("cmb_type.ToolTip"));
             this.cmb_type.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.cmb_type.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             this.cmb_type.Leave += new System.EventHandler(this.comboBox1_Leave);
@@ -921,31 +1021,37 @@
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
+            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
+            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // txt_hdate
             // 
@@ -953,6 +1059,7 @@
             this.txt_hdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_hdate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txt_hdate.Name = "txt_hdate";
+            this.toolTip1.SetToolTip(this.txt_hdate, resources.GetString("txt_hdate.ToolTip"));
             this.txt_hdate.Enter += new System.EventHandler(this.txt_hdate_Enter);
             this.txt_hdate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_hdate_KeyDown);
             this.txt_hdate.Leave += new System.EventHandler(this.txt_hdate_Leave);
@@ -962,6 +1069,7 @@
             // 
             resources.ApplyResources(this.txt_amt, "txt_amt");
             this.txt_amt.Name = "txt_amt";
+            this.toolTip1.SetToolTip(this.txt_amt, resources.GetString("txt_amt.ToolTip"));
             this.txt_amt.TextChanged += new System.EventHandler(this.txt_amt_TextChanged);
             this.txt_amt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_amt_KeyDown);
             this.txt_amt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_amt_KeyPress);
@@ -973,6 +1081,7 @@
             this.txt_mdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_mdate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txt_mdate.Name = "txt_mdate";
+            this.toolTip1.SetToolTip(this.txt_mdate, resources.GetString("txt_mdate.ToolTip"));
             this.txt_mdate.Enter += new System.EventHandler(this.txt_mdate_Enter);
             this.txt_mdate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_mdate_KeyDown);
             this.txt_mdate.Leave += new System.EventHandler(this.txt_mdate_Leave);
@@ -983,26 +1092,27 @@
             resources.ApplyResources(this.txt_desc, "txt_desc");
             this.txt_desc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_desc.Name = "txt_desc";
+            this.toolTip1.SetToolTip(this.txt_desc, resources.GetString("txt_desc.ToolTip"));
             this.txt_desc.Enter += new System.EventHandler(this.txt_desc_Enter);
             this.txt_desc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_desc_KeyDown);
             // 
             // dataGridView1
             // 
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column12,
@@ -1021,15 +1131,16 @@
             this.Column14,
             this.Column15});
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridView1.RowTemplate.Height = 25;
+            this.toolTip1.SetToolTip(this.dataGridView1, resources.GetString("dataGridView1.ToolTip"));
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -1097,10 +1208,10 @@
             // Column3
             // 
             this.Column3.DataPropertyName = "qty";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = "0.00";
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = "0.00";
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle10;
             this.Column3.FillWeight = 10F;
             resources.ApplyResources(this.Column3, "Column3");
             this.Column3.Name = "Column3";
@@ -1108,10 +1219,10 @@
             // Column4
             // 
             this.Column4.DataPropertyName = "price";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = "0.00";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = "0.00";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column4.FillWeight = 10F;
             resources.ApplyResources(this.Column4, "Column4");
             this.Column4.Name = "Column4";
@@ -1119,10 +1230,10 @@
             // Column10
             // 
             this.Column10.DataPropertyName = "discpc";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = "0";
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = "0";
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle12;
             this.Column10.FillWeight = 10F;
             resources.ApplyResources(this.Column10, "Column10");
             this.Column10.Name = "Column10";
@@ -1138,10 +1249,10 @@
             // Column6
             // 
             this.Column6.DataPropertyName = "total";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = "0.00";
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = "0.00";
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle13;
             this.Column6.FillWeight = 20F;
             resources.ApplyResources(this.Column6, "Column6");
             this.Column6.Name = "Column6";
@@ -1190,6 +1301,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.CancelButton = this.btn_Exit;
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.txt_mobile);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.txt_validdate);
@@ -1280,6 +1393,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Name = "Sal_Ord_Tran_D";
             this.Tag = "B124";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.Acc_Tran_Load);
             this.Shown += new System.EventHandler(this.Sal_Tran_D_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Sal_Tran_D_KeyDown);
@@ -1432,5 +1546,7 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.MaskedTextBox txt_validdate;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox txt_mobile;
     }
 }

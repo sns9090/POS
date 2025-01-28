@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TreeSoft.exe.manifest" size="27561">
+    <dependentAssembly dependencyType="install" codebase="TreeSoft.exe.manifest" size="31743">
       <assemblyIdentity name="TreeSoft.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>13AKMsb1oN+m8frXszv8sxmsQ8LCI4ZI2QUqWn6TSPw=</dsig:DigestValue>
+        <dsig:DigestValue>vQevSb7/6Tqmhbd7HHJtot19AOElhqk6zGp6D4iqDUM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

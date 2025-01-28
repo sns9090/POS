@@ -117,6 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtMessage.Text" xml:space="preserve">
+    <value>رابط حضور الدورة الساعة 1ظهرا على Microsoft Teams
+
+https://teams.live.com/meet/9376855699544?p=r2A8GdCsP9P5K8s0IK
+
+قد يتطلب تحميل تطبيق Microsoft Teams للاندرويد من جوجل بلاي
+
+https://play.google.com/store/apps/details?id=com.microsoft.teams
+
+لتحميل Microsoft Teams لجوالات ايفون من بلاي ستور
+
+https://apps.apple.com/us/app/microsoft-teams/id1113153706</value>
+  </data>
   <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

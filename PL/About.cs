@@ -45,5 +45,12 @@ namespace POS
         {
             System.Diagnostics.Process.Start("http://tree-soft.com/");
         }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            WhatsAppFrm sd = new WhatsAppFrm();
+            sd.MdiParent = MdiParent;
+            sd.Show();
+        }
     }
 }

@@ -762,7 +762,7 @@
             this.اعدادطابعةالباركودToolStripMenuItem,
             this.toolStripSeparator2,
             this.خروجToolStripMenuItem});
-            this.ملفToolStripMenuItem.Image = global::POS.Properties.Resources.Text_Document_16x16;
+            this.ملفToolStripMenuItem.Image = global::POS.Properties.Resources.Settings_16x16;
             this.ملفToolStripMenuItem.Name = "ملفToolStripMenuItem";
             resources.ApplyResources(this.ملفToolStripMenuItem, "ملفToolStripMenuItem");
             this.ملفToolStripMenuItem.Tag = "F100";
@@ -965,7 +965,7 @@
             this.ارسالالحركاتToolStripMenuItem.Image = global::POS.Properties.Resources.Settings_16x16;
             this.ارسالالحركاتToolStripMenuItem.Name = "ارسالالحركاتToolStripMenuItem";
             resources.ApplyResources(this.ارسالالحركاتToolStripMenuItem, "ارسالالحركاتToolStripMenuItem");
-            this.ارسالالحركاتToolStripMenuItem.Tag = "T100";
+            this.ارسالالحركاتToolStripMenuItem.Tag = "A126";
             this.ارسالالحركاتToolStripMenuItem.Click += new System.EventHandler(this.ارسالالحركاتToolStripMenuItem_Click);
             // 
             // جلبالبياناتمنالفروعToolStripMenuItem
@@ -973,7 +973,7 @@
             this.جلبالبياناتمنالفروعToolStripMenuItem.Image = global::POS.Properties.Resources.Settings_16x16;
             this.جلبالبياناتمنالفروعToolStripMenuItem.Name = "جلبالبياناتمنالفروعToolStripMenuItem";
             resources.ApplyResources(this.جلبالبياناتمنالفروعToolStripMenuItem, "جلبالبياناتمنالفروعToolStripMenuItem");
-            this.جلبالبياناتمنالفروعToolStripMenuItem.Tag = "T100";
+            this.جلبالبياناتمنالفروعToolStripMenuItem.Tag = "A127";
             this.جلبالبياناتمنالفروعToolStripMenuItem.Click += new System.EventHandler(this.جلبالبياناتمنالفروعToolStripMenuItem_Click);
             // 
             // التقاريرToolStripMenuItem4
@@ -3037,7 +3037,7 @@
             this.تحديثToolStripMenuItem.Image = global::POS.Properties.Resources.Download_16x16;
             this.تحديثToolStripMenuItem.Name = "تحديثToolStripMenuItem";
             resources.ApplyResources(this.تحديثToolStripMenuItem, "تحديثToolStripMenuItem");
-            this.تحديثToolStripMenuItem.Tag = "M101";
+            this.تحديثToolStripMenuItem.Tag = "M100";
             this.تحديثToolStripMenuItem.Click += new System.EventHandler(this.تحديثToolStripMenuItem_Click);
             // 
             // حولToolStripMenuItem

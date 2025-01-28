@@ -85,7 +85,7 @@ namespace POS.PL
                     return;
                 }
 
-                cmb_type_Leave(sender, e);
+              //  cmb_type_Leave(sender, e);
 
                 if (string.IsNullOrEmpty(txt_oldcode.Text.Trim()) || string.IsNullOrEmpty(txt_newcode.Text.Trim()))
                 {
@@ -324,7 +324,7 @@ namespace POS.PL
                     return;
                 }
 
-                cmb_type_Leave( sender,  e);
+               //// cmb_type_Leave( sender,  e);
                // MessageBox.Show(allmsg);
                // MessageBox.Show(txt_newno.Text);
               //  MessageBox.Show(txt_oldno.Text);

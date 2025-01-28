@@ -1312,8 +1312,8 @@ namespace POS.Sal
             this.Icon = Properties.Resources.TsIcon;
             //if (dataGridView1.RowCount < 1000 && BL.CLS_Session.sysno.Equals("10"))
             //    dataGridView1.Rows.Add(1000);
-            if (BL.CLS_Session.is_einv_p2)
-                btn_zatkasnd.Enabled = true;
+           // if (BL.CLS_Session.is_einv_p2)
+           
 
             if (BL.CLS_Session.is_taqsit || BL.CLS_Session.multi_bc)
             {
@@ -1412,6 +1412,9 @@ namespace POS.Sal
 
                     txt_mdate.Text = DateTime.Now.AddSeconds((BL.CLS_Session.posatrtday) * -3600).ToString("dd-MM-yyyy", new CultureInfo("en-US", false));
                     txt_hdate.Text = DateTime.Now.AddSeconds((BL.CLS_Session.posatrtday) * -3600).ToString("dd-MM-yyyy", new CultureInfo("ar-SA", false));
+
+                    if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+                        btn_zatkasnd.Enabled = true;
 
                     dataGridView1.TopLeftHeaderCell.Value = "م";
 
@@ -3009,7 +3012,9 @@ namespace POS.Sal
         {
             cmb_salctr_Leave(sender, e);
 
-            if (BL.CLS_Session.is_einv_p2)
+           // if (BL.CLS_Session.is_einv_p2 
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+              //       {
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
                 if (dtzs.Rows.Count > 0)
@@ -3302,7 +3307,7 @@ namespace POS.Sal
             {
                 isfeched = false;
                 var sr = new Search_All("6", "Sal");
-                sr.checkBox1.Visible = true;
+               // sr.checkBox1.Visible = true;
                 sr.ShowDialog();
 
                 Fill_Data(sr.dataGridView1.CurrentRow.Cells[0].Value.ToString(), sr.dataGridView1.CurrentRow.Cells["a_t"].Value.ToString(), sr.dataGridView1.CurrentRow.Cells[2].Value.ToString());
@@ -3320,6 +3325,9 @@ namespace POS.Sal
               //  hdate = txt_hdate.Text.Replace("-", "").Substring(4, 4) + txt_hdate.Text.Replace("-", "").Substring(2, 2) + txt_hdate.Text.Replace("-", "").Substring(0, 2);
                 string strtblh = atype.Equals("24") || atype.Equals("37") ? "salofr_hdr" : "sales_hdr";
                 string strtbld = atype.Equals("24") || atype.Equals("37") ? "salofr_dtl" : "sales_dtl";
+
+                string usrid = BL.CLS_Session.up_edit_othr ? " " : " and usrid = '" + BL.CLS_Session.UserName + "' ";
+
                 if (isfeched)
                 {
 
@@ -3327,7 +3335,7 @@ namespace POS.Sal
                 else
                 {
                     //dthdr = daml.SELECT_QUIRY_only_retrn_dt("select * from " + strtblh + " where invtype='" + atype + "' and ref=" + aref + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "'");
-                    dthdr = daml.SELECT_QUIRY_only_retrn_dt("select *,isnull(inv_printed,0) einv from " + strtblh + " where " + (aqd_temp ? " chkno='" + aref + "'" : "invtype='" + atype + "' and ref=" + aref + "") + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "'");
+                    dthdr = daml.SELECT_QUIRY_only_retrn_dt("select *,isnull(inv_printed,0) einv from " + strtblh + " where " + (aqd_temp ? " chkno='" + aref + "'" : "invtype='" + atype + "' and ref=" + aref + "") + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "' "+usrid+" ");
                     
                     // string strvt = Convert.ToBoolean(dthdr.Rows[0]["with_tax"]) ? "((aa.qty*aa.price)-((aa.qty*aa.price)*aa.discpc/100))" : "((aa.qty*aa.price)+aa.tax_amt)-(((aa.qty*aa.price)+aa.tax_amt)*aa.discpc/100)";
                     // string strvt = Convert.ToBoolean(dthdr.Rows[0]["with_tax"]) ? "((aa.qty*aa.price)-((aa.qty*aa.price)*aa.discpc/100))" : "((aa.qty*aa.price)+aa.tax_amt)-(((aa.qty*aa.price)+aa.tax_amt)*aa.discpc/100)";
@@ -3853,7 +3861,8 @@ namespace POS.Sal
                 return;
             DataTable dtdate = daml.SELECT_QUIRY_only_retrn_dt("select released from sales_hdr where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
 
-            if (BL.CLS_Session.is_einv_p2)
+            //if (BL.CLS_Session.is_einv_p2)
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
                 if (dtzs.Rows.Count == 0)
@@ -4076,7 +4085,8 @@ namespace POS.Sal
                              txt_net.Text,
                             Math.Round(Convert.ToDouble(txt_tax.Text), 2).ToString());
                     // GenerateQrCodeTLV1 ddd=new GenerateQrCodeTLV1();
-                     if (BL.CLS_Session.is_einv_p2)
+                    // if (BL.CLS_Session.is_einv_p2)
+                  if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
                      {
                          DataTable dtqrc = daml.SELECT_QUIRY_only_retrn_dt("select qr_code from pos_esend where ref=" + txt_ref.Text + " and type='" + cmb_type.SelectedValue + "'");
                          rpt.SetParameterValue("qr", dtqrc.Rows[0][0].ToString());
@@ -5698,7 +5708,7 @@ namespace POS.Sal
             daml.Exec_Query_only("update sales_hdr set inv_printed=isnull(inv_printed,0)+1 where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
             is_printd = true;
 
-            if (BL.CLS_Session.is_einv_p2)
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
                 if (dtzs.Rows.Count == 0)
@@ -5877,7 +5887,8 @@ namespace POS.Sal
                             txt_net.Text,
                            Math.Round(Convert.ToDouble(txt_tax.Text), 2).ToString());
 
-                if (BL.CLS_Session.is_einv_p2)
+                //if (BL.CLS_Session.is_einv_p2)
+                if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
                 {
                     DataTable dtqrc = daml.SELECT_QUIRY_only_retrn_dt("select qr_code from pos_esend where ref=" + txt_ref.Text + " and type='"+cmb_type.SelectedValue +"'");
                     rpt.SetParameterValue("qr", dtqrc.Rows[0][0].ToString());
@@ -6257,368 +6268,406 @@ namespace POS.Sal
         }
         private void create_einv_p2(string nref, string ttype)
         {
-            DataTable dth = daml.SELECT_QUIRY_only_retrn_dt("select * from sales_hdr s where ref=" + nref + " and invtype='" + ttype + "' and branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and not exists(select * from pos_esend p where p.[brno]=s.branch and p.[slno]=s.slcenter and p.[ref]=s.ref and p.[type]=s.invtype )");
-            //DataTable dthash = daml.SELECT_QUIRY_only_retrn_dt("select [inv_hash],[zref] from pos_hash where ref=" + (Convert.ToInt32(nref) - 1) + "");
-            if (dth.Rows.Count == 0)
-            { MessageBox.Show(" تمت مشاركة الفاتورة من سابق ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
-
-            DataTable dthash = daml.SELECT_QUIRY_only_retrn_dt("select [inv_hash],[zref]+1 from pos_hash");
-
-           // if(File.Exists(Environment.CurrentDirectory BL.CLS_Session.tax_no + "_" + Convert.ToDateTime(dth.Rows[0][21]).ToString("yyyyMMdd", new CultureInfo("en-US", false)) + "T" + Convert.ToDateTime(dth.Rows[0][21]).ToString("HHmmss", new CultureInfo("en-US", false)) + "_" + dth.Rows[0][3].ToString()
-           // MessageBox.Show();
-
-            foreach (DataRow dtrh in dth.Rows)
+            try
             {
-                UBLXML ubl = new UBLXML();
-                Invoice inv = new Invoice();
-                Result res = new Result();
+                DataTable dth = daml.SELECT_QUIRY_only_retrn_dt("select * from sales_hdr s where ref=" + nref + " and invtype='" + ttype + "' and branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and not exists(select * from pos_esend p where p.[brno]=s.branch and p.[slno]=s.slcenter and p.[ref]=s.ref and p.[type]=s.invtype )");
+                //DataTable dthash = daml.SELECT_QUIRY_only_retrn_dt("select [inv_hash],[zref] from pos_hash where ref=" + (Convert.ToInt32(nref) - 1) + "");
+                if (dth.Rows.Count == 0)
+                { MessageBox.Show(" تمت مشاركة الفاتورة من سابق ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-                inv.ID = dtrh[3].ToString(); //"1230"; // مثال SME00010
-                inv.UUID = Guid.NewGuid().ToString();
-                inv.IssueDate = Convert.ToDateTime(dtrh[21]).ToString("yyyy-MM-dd", new CultureInfo("en-US", false));
-                inv.IssueTime = Convert.ToDateTime(dtrh[21]).ToString("HH:mm:ss", new CultureInfo("en-US", false));
-                //388 فاتورة  
-                //383 اشعار مدين
-                //381 اشعار دائن
-                if (string.IsNullOrEmpty(txt_reref.Text) && (cmb_type.SelectedValue.Equals("04") || cmb_type.SelectedValue.Equals("05")))
-                    inv.invoiceTypeCode.id = 388;
-                else if (!string.IsNullOrEmpty(txt_reref.Text) && (cmb_type.SelectedValue.Equals("04") || cmb_type.SelectedValue.Equals("05")))
-                    inv.invoiceTypeCode.id = 383;
-                else
-                    inv.invoiceTypeCode.id = 381;
-                //inv.invoiceTypeCode.Name based on format NNPNESB
-                //NN 01 فاتورة عادية
-                //NN 02 فاتورة مبسطة
-                //P فى حالة فاتورة لطرف ثالث نكتب 1 فى الحالة الاخرى نكتب 0
-                //N فى حالة فاتورة اسمية نكتب 1 وفى الحالة الاخرى نكتب 0
-                // E فى حالة فاتورة للصادرات نكتب 1 وفى الحالة الاخرى نكتب 0
-                //S فى حالة فاتورة ملخصة نكتب 1 وفى الحالة الاخرى نكتب 0
-                //B فى حالة فاتورة ذاتية نكتب 1
-                //B فى حالة ان الفاتورة صادرات=1 لايمكن ان تكون الفاتورة ذاتية =1
-                //
-                inv.invoiceTypeCode.Name = string.IsNullOrEmpty(txt_custno.Text) ? "0200000" : "0100000";
-                inv.DocumentCurrencyCode = "SAR";//العملة
-                inv.TaxCurrencyCode = "SAR"; ////فى حالة الدولار لابد ان تكون عملة الضريبة بالريال السعودى
+                DataTable dthash = daml.SELECT_QUIRY_only_retrn_dt("select [inv_hash],[zref]+1 from pos_hash");
 
-                if (inv.invoiceTypeCode.id == 383 || inv.invoiceTypeCode.id == 381)
+                // if(File.Exists(Environment.CurrentDirectory BL.CLS_Session.tax_no + "_" + Convert.ToDateTime(dth.Rows[0][21]).ToString("yyyyMMdd", new CultureInfo("en-US", false)) + "T" + Convert.ToDateTime(dth.Rows[0][21]).ToString("HHmmss", new CultureInfo("en-US", false)) + "_" + dth.Rows[0][3].ToString()
+                // MessageBox.Show();
+
+                foreach (DataRow dtrh in dth.Rows)
                 {
-                    // فى حالة ان اشعار دائن او مدين فقط هانكتب رقم الفاتورة اللى اصدرنا الاشعار ليها
-                    // in case of return sales invoice or debit notes we must mention the original sales invoice number
-                    InvoiceDocumentReference invoiceDocumentReference = new InvoiceDocumentReference();
-                    invoiceDocumentReference.ID = "Invoice Number: " + dtrh["reref"].ToString() + " "; // mandatory in case of return sales invoice or debit notes
-                    inv.billingReference.invoiceDocumentReferences.Add(invoiceDocumentReference);
-                }
-                // inv.CurrencyRate = decimal.Parse("3.75"); // قيمة الدولار مقابل الريال
-                // فى حالة ان اشعار دائن او مدين فقط هانكتب رقم الفاتورة اللى اصدرنا الاشعار ليها
-                //inv.billingReference.InvoiceDocumentReferenceID = "123654"; رقم فاتورة البيع في حال ارجاع الفاتورة 
-                // هنا ممكن اضيف ال pih من قاعدة البيانات  
-                if (dthash.Rows.Count > 0)
-                    inv.AdditionalDocumentReferencePIH.EmbeddedDocumentBinaryObject = string.IsNullOrEmpty(dthash.Rows[0][0].ToString()) ? "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==" : dthash.Rows[0][0].ToString();
-                else
-                {
-                    inv.AdditionalDocumentReferencePIH.EmbeddedDocumentBinaryObject = "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==";
-                   // daml.Insert_Update_Delete_Only("INSERT [dbo].[pos_hash] ([brno], [slno], [ref], [contr], [type], [zref], [zuuid], [inv_hash]) VALUES (N'01', N'01', 0, 1, N'1', 1, NEWID(), N'NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==');",false);
-                }
-                // قيمة عداد الفاتورة
-                // inv.AdditionalDocumentReferenceICV.ID = string.IsNullOrEmpty(dthash.Rows[0][1].ToString()) ? "1" : dthash.Rows[0][1].ToString(); // لابد ان يكون ارقام فقط
-                inv.AdditionalDocumentReferenceICV.UUID = string.IsNullOrEmpty(dthash.Rows[0][1].ToString()) ? 1 : Convert.ToInt32(dthash.Rows[0][1].ToString()); //Convert.ToInt32(dtrh[2].ToString()); // لابد ان يكون ارقام فقط
-                //فى حالة فاتورة مبسطة وفاتورة ملخصة هانكتب تاريخ التسليم واخر تاريخ التسليم
-                // inv.delivery.ActualDeliveryDate = "2022-10-22"; للضريبية فقط اجباري
-                // inv.delivery.LatestDeliveryDate = "2022-10-23"; للضريبية فقط اختياري
-                //
-                //بيانات الدفع 
-                string paymentcode = cmb_type.SelectedValue.Equals("05") || cmb_type.SelectedValue.Equals("15") ? "30" : "10";
-                if (!string.IsNullOrEmpty(paymentcode))
-                {
-                    PaymentMeans paymentMeans = new PaymentMeans();
-                    paymentMeans.PaymentMeansCode = paymentcode; // optional for invoices - mandatory for return invoice - debit notes
+                    UBLXML ubl = new UBLXML();
+                    Invoice inv = new Invoice();
+                    Result res = new Result();
+
+                    inv.ID = dtrh[3].ToString(); //"1230"; // مثال SME00010
+                    inv.UUID = Guid.NewGuid().ToString();
+                    inv.IssueDate = Convert.ToDateTime(dtrh[21]).ToString("yyyy-MM-dd", new CultureInfo("en-US", false));
+                    inv.IssueTime = Convert.ToDateTime(dtrh[21]).ToString("HH:mm:ss", new CultureInfo("en-US", false));
+                    //388 فاتورة  
+                    //383 اشعار مدين
+                    //381 اشعار دائن
+                    if (string.IsNullOrEmpty(txt_reref.Text) && (cmb_type.SelectedValue.Equals("04") || cmb_type.SelectedValue.Equals("05")))
+                        inv.invoiceTypeCode.id = 388;
+                    else if (!string.IsNullOrEmpty(txt_reref.Text) && (cmb_type.SelectedValue.Equals("04") || cmb_type.SelectedValue.Equals("05")))
+                        inv.invoiceTypeCode.id = 383;
+                    else
+                        inv.invoiceTypeCode.id = 381;
+                    //inv.invoiceTypeCode.Name based on format NNPNESB
+                    //NN 01 فاتورة عادية
+                    //NN 02 فاتورة مبسطة
+                    //P فى حالة فاتورة لطرف ثالث نكتب 1 فى الحالة الاخرى نكتب 0
+                    //N فى حالة فاتورة اسمية نكتب 1 وفى الحالة الاخرى نكتب 0
+                    // E فى حالة فاتورة للصادرات نكتب 1 وفى الحالة الاخرى نكتب 0
+                    //S فى حالة فاتورة ملخصة نكتب 1 وفى الحالة الاخرى نكتب 0
+                    //B فى حالة فاتورة ذاتية نكتب 1
+                    //B فى حالة ان الفاتورة صادرات=1 لايمكن ان تكون الفاتورة ذاتية =1
+                    //
+                    inv.invoiceTypeCode.Name = string.IsNullOrEmpty(txt_custno.Text) || string.IsNullOrEmpty(txt_taxid.Text) ? "0200000" : "0100000";
+                    inv.DocumentCurrencyCode = "SAR";//العملة
+                    inv.TaxCurrencyCode = "SAR"; ////فى حالة الدولار لابد ان تكون عملة الضريبة بالريال السعودى
+
                     if (inv.invoiceTypeCode.id == 383 || inv.invoiceTypeCode.id == 381)
                     {
-                        paymentMeans.InstructionNote =inv.invoiceTypeCode.id == 381? "return items" : "add items"; //the reason of return invoice - debit notes // manatory only for return invoice - debit notes 
+                        // فى حالة ان اشعار دائن او مدين فقط هانكتب رقم الفاتورة اللى اصدرنا الاشعار ليها
+                        // in case of return sales invoice or debit notes we must mention the original sales invoice number
+                        InvoiceDocumentReference invoiceDocumentReference = new InvoiceDocumentReference();
+                        invoiceDocumentReference.ID = "Invoice Number: " + dtrh["reref"].ToString() + " "; // mandatory in case of return sales invoice or debit notes
+                        inv.billingReference.invoiceDocumentReferences.Add(invoiceDocumentReference);
                     }
-                    inv.paymentmeans.Add(paymentMeans);
-                }
-                // اكواد معين
-                // اختيارى كود الدفع
-                //inv.paymentmeans.PaymentMeansCode = "42";//اختيارى
-                //inv.paymentmeans.InstructionNote = "Payment Notes"; //اجبارى فى الاشعارات
-                //inv.paymentmeans.payeefinancialaccount.ID = "";//اختيارى
-                //inv.paymentmeans.payeefinancialaccount.paymentnote = "Payment by credit";//اختيارى
-
-                //بيانات البائع 
-                inv.SupplierParty.partyIdentification.ID = BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString();// "123456"; // رقم السجل التجارى الخاض بالبائع
-                inv.SupplierParty.partyIdentification.schemeID = BL.CLS_Session.cmpschem;// "CRN"; //رقم السجل التجارى
-                inv.SupplierParty.postalAddress.StreetName = BL.CLS_Session.dtcomp.Rows[0]["street"].ToString();// "streetnumber";// اجبارى
-                inv.SupplierParty.postalAddress.AdditionalStreetName = "";// "ststtstst"; //اختيارى
-                inv.SupplierParty.postalAddress.BuildingNumber = BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString();// "3724"; // اجبارى رقم المبنى
-                //inv.SupplierParty.postalAddress.PlotIdentification = "9833";//اختيارى رقم القطعة
-                inv.SupplierParty.postalAddress.CityName = BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "gaddah"; //اسم المدينة
-                inv.SupplierParty.postalAddress.PostalZone = BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString();// "15385";//الرقم البريدي
-                inv.SupplierParty.postalAddress.CountrySubentity = "";// BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "makka";//اسم المحافظة او المدينة مثال (مكة) اختيارى
-                inv.SupplierParty.postalAddress.CitySubdivisionName = BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString();// "flassk";// اسم المنطقة او الحى 
-                inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
-                inv.SupplierParty.partyLegalEntity.RegistrationName = BL.CLS_Session.cmp_name;// "على ابراهيم"; // اسم الشركة المسجل فى الهيئة
-                inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
-
-                //rpt.SetParameterValue("c_bulding_no", dtcust == null ? "" : dtcust.Rows[0]["c_bulding_no"].ToString());
-                //rpt.SetParameterValue("c_street", dtcust == null ? "" : dtcust.Rows[0]["c_street"].ToString());
-                //rpt.SetParameterValue("c_site_name", dtcust == null ? "" : dtcust.Rows[0]["c_site_name"].ToString());
-                //rpt.SetParameterValue("c_city", dtcust == null ? "" : dtcust.Rows[0]["c_city"].ToString());
-                //rpt.SetParameterValue("c_cuntry", dtcust == null ? "" : dtcust.Rows[0]["c_cuntry"].ToString());
-                //rpt.SetParameterValue("c_postal_code", dtcust == null ? "" : dtcust.Rows[0]["c_postal_code"].ToString());
-                //rpt.SetParameterValue("c_ex_postalcode", dtcust == null ? "" : dtcust.Rows[0]["c_ex_postalcode"].ToString());
-                //rpt.SetParameterValue("c_other_id", dtcust == null ? "" : dtcust.Rows[0]["c_other_id"].ToString());
-                if (inv.invoiceTypeCode.Name.Substring(0, 2) == "01")
-                {
-                    //supply date mandatory only for standard invoices
-                    // فى حالة فاتورة مبسطة وفاتورة ملخصة هانكتب تاريخ التسليم واخر تاريخ التسليم
-                    
-                    inv.delivery.ActualDeliveryDate = dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2);  // "2022-10-22";
-                    inv.delivery.LatestDeliveryDate = dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2); //"2022-10-23";
-                }
-
-                if (!string.IsNullOrEmpty(txt_custno.Text))
-                {
-                    // بيانات المشترى
-                    if(string.IsNullOrEmpty(dtcust.Rows[0]["cu_addrs"].ToString()))
-                    { MessageBox.Show(" لا يوجد رقم السجل التجارى الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                      inv.CustomerParty.partyIdentification.ID = dtcust.Rows[0]["cu_addrs"].ToString(); // رقم السجل التجارى الخاص بالمشترى
-                    inv.CustomerParty.partyIdentification.schemeID = "CRN"; //رقم السجل التجارى
-
-                    if (string.IsNullOrEmpty(dtcust.Rows[0]["c_street"].ToString()))
-                    { MessageBox.Show(" لا يوجد اسم الشارع في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                    inv.CustomerParty.postalAddress.StreetName = dtcust.Rows[0]["c_street"].ToString(); // اجبارى
-                    //inv.CustomerParty.postalAddress.AdditionalStreetName = "street name"; // اختيارى
-                    if (string.IsNullOrEmpty(dtcust.Rows[0]["c_bulding_no"].ToString()))
-                    { MessageBox.Show(" لا يوجد رقم المبنى في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                    inv.CustomerParty.postalAddress.BuildingNumber = dtcust.Rows[0]["c_bulding_no"].ToString(); // اجبارى رقم المبنى
-                    // inv.CustomerParty.postalAddress.PlotIdentification = "9833"; // اختيارى رقم القطعة
-                    if (string.IsNullOrEmpty(dtcust.Rows[0]["c_city"].ToString()))
-                    { MessageBox.Show(" لا يوجد اسم المدينة في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                    inv.CustomerParty.postalAddress.CityName = dtcust.Rows[0]["c_city"].ToString(); // اسم المدينة
-
-                    if (string.IsNullOrEmpty(dtcust.Rows[0]["c_postal_code"].ToString()))
-                    { MessageBox.Show(" لا يوجد الرقم البريدي في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                    inv.CustomerParty.postalAddress.PostalZone = dtcust.Rows[0]["c_postal_code"].ToString(); // الرقم البريدي
-                    //inv.CustomerParty.postalAddress.CountrySubentity = "Makkah"; // اسم المحافظة او المدينة مثال (مكة) اختيارى
-                    if (string.IsNullOrEmpty(dtcust.Rows[0]["c_site_name"].ToString()))
-                    { MessageBox.Show(" لا يوجد اسم المنطقة او الحى في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
-                    else
-                    inv.CustomerParty.postalAddress.CitySubdivisionName = dtcust.Rows[0]["c_site_name"].ToString(); // اسم المنطقة او الحى 
-                    inv.CustomerParty.postalAddress.country.IdentificationCode = "SA";
-
-                    inv.CustomerParty.partyLegalEntity.RegistrationName = dtcust.Rows[0]["cu_name"].ToString(); // اسم الشركة المسجل فى الهيئة
-                    inv.CustomerParty.partyTaxScheme.CompanyID = dtcust.Rows[0]["vndr_taxcode"].ToString(); // رقم التسجيل الضريبي
-                }
-
-                ////inv.legalMonetaryTotal.PayableAmount = decimal.Parse(dtrh[14].ToString()) ;// اجمالي الفاتورة
-                ////inv.legalMonetaryTotal.TaxInclusiveAmount = decimal.Parse(dtrh[14].ToString());
-                ////inv.legalMonetaryTotal.TaxExclusiveAmount = decimal.Parse(dtrh[14].ToString()) - decimal.Parse(dtrh[17].ToString());
-                ////inv.legalMonetaryTotal.TaxExclusiveAmount = decimal.Parse(dtrh[14].ToString()) - decimal.Parse(dtrh[17].ToString());
-
-                // inv.legalMonetaryTotal.TaxInclusiveAmount = decimal.Parse(dtrh[14].ToString());
-                ////if (decimal.Parse(dtrh[13].ToString()) > 0)
-                ////{
-                ////    //this code incase of there is a discount in invoice level 
-                ////    AllowanceCharge allowance = new AllowanceCharge();
-                ////    //ChargeIndicator = false means that this is discount
-                ////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
-                ////    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
-                ////    //write this lines in case you will make discount as percentage
-                ////    allowance.MultiplierFactorNumeric = 0; //dscount percentage like 10
-                ////    allowance.BaseAmount = 0; // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
-
-                ////    // in case we will make discount as Amount 
-                ////    allowance.Amount = decimal.Parse(dtrh[13].ToString()); // 
-                ////    allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
-                ////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
-                ////    allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
-                ////    allowance.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
-                ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
-                ////    inv.allowanceCharges.Add(allowance);
-                ////}
-                //////decimal invoicediscount_for_tax15 = decimal.Parse(dtrh[17].ToString()) == 0 ? 0 : decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString()); //((decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString())) * (decimal.Parse(dtrh[18].ToString()) / 100)); // 100;
-                //////decimal invoicediscount_for_ZeroVat = decimal.Parse(dtrh[23].ToString())==0? 0 : ((decimal.Parse(dtrh[23].ToString()) + decimal.Parse(dtrh[17].ToString())) * (decimal.Parse(dtrh[18].ToString()) / 100));
-                //////if (invoicediscount_for_tax15 > 0)
-                //////{
-                //////    //this code incase of there is a discount in invoice level 
-                //////    AllowanceCharge allowance = new AllowanceCharge();
-                //////    //ChargeIndicator = false means that this is discount
-                //////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
-                //////    allowance.ChargeIndicator = false;
-
-                //////    // in case we will make discount as Amount 
-                //////   // allowance.Amount = invoicediscount_for_tax15; // 
-                //////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
-                //////    allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
-                //////    allowance.taxCategory.Percent =decimal.Parse(BL.CLS_Session.tax_per.ToString());// نسبة الضريبة tax percentage (0 - 15 - 5 )
-                //////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
-                //////    allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString());
-                //////    allowance.BaseAmount = decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString());
-                //////    // allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString())); //0;
-                //////    // allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()))) * decimal.Parse(dtrd[9].ToString()); //0;
-                //////    inv.allowanceCharges.Add(allowance);
-                //////}
-                //////if (invoicediscount_for_ZeroVat > 0)
-                //////{
-                //////    //this code incase of there is a discount in invoice level 
-                //////    AllowanceCharge allowance = new AllowanceCharge();
-                //////    //ChargeIndicator = false means that this is discount
-                //////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
-                //////    allowance.ChargeIndicator = false;
-
-                //////    // in case we will make discount as Amount 
-                //////   // allowance.Amount = invoicediscount_for_ZeroVat; // 
-                //////    allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString());
-                //////    allowance.BaseAmount =  decimal.Parse(dtrh[23].ToString());
-                //////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
-                //////    allowance.taxCategory.ID = "Z";// كود الضريبة tax code (S Z O E )
-                //////    allowance.taxCategory.Percent = 0;// نسبة الضريبة tax percentage (0 - 15 - 5 )
-                //////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
-                //////    inv.allowanceCharges.Add(allowance);
-                //////}
-                ////if (decimal.Parse(dtrh[13].ToString()) > 0)
-                ////{
-                ////    //this code incase of there is a discount in invoice level 
-                ////    AllowanceCharge allowance = new AllowanceCharge();
-                ////    //ChargeIndicator = false means that this is discount
-                ////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
-                ////    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
-                ////    //write this lines in case you will make discount as percentage
-                ////    allowance.MultiplierFactorNumeric = 0; //dscount percentage like 10
-                ////    allowance.BaseAmount = 0; // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
-
-                ////    // in case we will make discount as Amount 
-                ////    allowance.Amount = decimal.Parse(dtrh[13].ToString()); // 
-                ////    allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
-                ////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
-                ////    allowance.taxCategory.ID = "Z";// كود الضريبة tax code (S Z O E )
-                ////    allowance.taxCategory.Percent = 0; //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
-                ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
-                ////    inv.allowanceCharges.Add(allowance);
-                ////}
-
-                DataTable dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select a.*,b.tax_id,b.tax_percent,b.zatka_code,b.zatka_reason from sales_dtl a join taxs b on a.tax_id=b.tax_id where a.ref=" + dtrh[3] + " and a.invtype='" + dtrh[2] + "'");
-                // فى حالة فى اكتر من منتج فى الفاتورة هانعمل ليست من invoiceline مثال الكود التالى
-                // for (int i = 1; i <= dtdtl.Rows.Count; i++)
-                foreach (DataRow dtrd in dtdtl.Rows)
-                {
-                    InvoiceLine invline = new InvoiceLine();
-                    invline.InvoiceQuantity = decimal.Parse(dtrd[8].ToString());
-                    //invline.allowanceCharge.AllowanceChargeReason = "discount"; //سبب الخصم على مستوى المنتج
-                    //invline.allowanceCharge.Amount = 10;//قيم الخصم
-
-                    //if the price is including vat set EncludingVat=true;
-                    //invline.price.EncludingVat = true;
-                    invline.price.EncludingVat =chk_shaml_tax.Checked? true : false;
-
-                    // invline.price.PriceAmount = decimal.Parse(dtrd[8].ToString());// سعر المنتج بعد الخصم 
-                    invline.price.PriceAmount = decimal.Parse(dtrd[10].ToString());// decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()));// سعر المنتج بعد الخصم 
-
-                    invline.item.Name = dtrd[28].ToString();// dtrd[6].ToString();
-
-
-                    //invline.price.allowanceCharge.AllowanceChargeReason = "discount"; //سبب الخصم على مستوى المنتج
-                    //invline.price.allowanceCharge.Amount = 0;//قيم الخصم
-                    if (decimal.Parse(dtrd[32].ToString()) == 0)
-                    {
-                        //item Tax code
-                        invline.item.classifiedTaxCategory.ID = dtrd[39].ToString().Equals("VATEX-SA-35") ? "Z" : "O"; // كود الضريبة
-                        //item Tax code
-                        invline.taxTotal.TaxSubtotal.taxCategory.ID = dtrd[39].ToString().Equals("VATEX-SA-35") ? "Z" : "O"; // كود الضريبة
-                        //item Tax Exemption Reason Code mentioned in zatca pdf page(32-33)
-                        invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = dtrd[39].ToString();// "VATEX-SA-35"; // كود الضريبة
-                        //item Tax Exemption Reason mentioned in zatca pdf page(32-33)
-                        invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = dtrd[40].ToString();// "Medicines and medical equipment"; // كود الضريبة
-                        invline.item.classifiedTaxCategory.Percent = 0; // نسبة الضريبة
-                        invline.taxTotal.TaxSubtotal.taxCategory.Percent = 0; // نسبة الضريبة
-
-                    }
+                    // inv.CurrencyRate = decimal.Parse("3.75"); // قيمة الدولار مقابل الريال
+                    // فى حالة ان اشعار دائن او مدين فقط هانكتب رقم الفاتورة اللى اصدرنا الاشعار ليها
+                    //inv.billingReference.InvoiceDocumentReferenceID = "123654"; رقم فاتورة البيع في حال ارجاع الفاتورة 
+                    // هنا ممكن اضيف ال pih من قاعدة البيانات  
+                    if (dthash.Rows.Count > 0)
+                        inv.AdditionalDocumentReferencePIH.EmbeddedDocumentBinaryObject = string.IsNullOrEmpty(dthash.Rows[0][0].ToString()) ? "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==" : dthash.Rows[0][0].ToString();
                     else
                     {
-                        //item Tax code
-                        invline.item.classifiedTaxCategory.ID = "S"; // كود الضريبة
-                        //item Tax code
-                        invline.taxTotal.TaxSubtotal.taxCategory.ID = "S"; // كود الضريبة
-                        invline.item.classifiedTaxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); // نسبة الضريبة
-                        invline.taxTotal.TaxSubtotal.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); // نسبة الضريبة
+                        inv.AdditionalDocumentReferencePIH.EmbeddedDocumentBinaryObject = "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==";
+                        // daml.Insert_Update_Delete_Only("INSERT [dbo].[pos_hash] ([brno], [slno], [ref], [contr], [type], [zref], [zuuid], [inv_hash]) VALUES (N'01', N'01', 0, 1, N'1', 1, NEWID(), N'NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==');",false);
                     }
-                    // invline.item.classifiedTaxCategory.ID = "S";// كود الضريبة
-                    //// invline.item.classifiedTaxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString());// نسبة الضريبة
-
-                    // invline.taxTotal.TaxSubtotal.taxCategory.ID = "S";//كود الضريبة
-                    //// invline.taxTotal.TaxSubtotal.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString());//نسبة الضريبة
-                    //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "Private healthcare to citizen";
-                    //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "VATEX-SA-HEA";
-                    //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "";
-                    //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "";
-
-                    if (decimal.Parse(dtrh[15].ToString()) > 0)
-                    // if (0 > 1)
+                    // قيمة عداد الفاتورة
+                    // inv.AdditionalDocumentReferenceICV.ID = string.IsNullOrEmpty(dthash.Rows[0][1].ToString()) ? "1" : dthash.Rows[0][1].ToString(); // لابد ان يكون ارقام فقط
+                    inv.AdditionalDocumentReferenceICV.UUID = string.IsNullOrEmpty(dthash.Rows[0][1].ToString()) ? 1 : Convert.ToInt32(dthash.Rows[0][1].ToString()); //Convert.ToInt32(dtrh[2].ToString()); // لابد ان يكون ارقام فقط
+                    //فى حالة فاتورة مبسطة وفاتورة ملخصة هانكتب تاريخ التسليم واخر تاريخ التسليم
+                    // inv.delivery.ActualDeliveryDate = "2022-10-22"; للضريبية فقط اجباري
+                    // inv.delivery.LatestDeliveryDate = "2022-10-23"; للضريبية فقط اختياري
+                    //
+                    //بيانات الدفع 
+                    string paymentcode = cmb_type.SelectedValue.Equals("05") || cmb_type.SelectedValue.Equals("15") ? "30" : "10";
+                    if (!string.IsNullOrEmpty(paymentcode))
                     {
-                        // incase there is discount in invoice line level
-                        AllowanceCharge allowanceCharge = new AllowanceCharge();
-                        // فى حالة الرسوم incase of charges
-                        // allowanceCharge.ChargeIndicator = true;
-                        // فى حالة الخصم incase of discount
-                        allowanceCharge.ChargeIndicator = false;
-
-                        allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
-                        // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
-                        //allowanceCharge.Amount = decimal.Parse(dtrd[19].ToString()); // قيم الخصم discount amount or charge amount
-
-                        // allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString()); //0;
-                       // allowanceCharge.MultiplierFactorNumeric = ((decimal.Parse(dtrd[19].ToString()) / ((decimal.Parse(dtrd[8].ToString()) * decimal.Parse(dtrd[9].ToString())) - decimal.Parse(dtrd[17].ToString()) - decimal.Parse(dtrd[19].ToString()))) * 100) + decimal.Parse(dtrh[18].ToString()); //0;
-                        allowanceCharge.MultiplierFactorNumeric =  decimal.Parse(dtrh[15].ToString()); //0;
-                        // allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString())); //0;
-                        // allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()))) * decimal.Parse(dtrd[9].ToString()); //0;
-                        //allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) * decimal.Parse(dtrd[9].ToString())) - decimal.Parse(dtrd[17].ToString()) - decimal.Parse(dtrd[19].ToString()); //0;
-                        allowanceCharge.BaseAmount =  decimal.Parse(dtrd[10].ToString()); //0;
-                        invline.allowanceCharges.Add(allowanceCharge);
+                        PaymentMeans paymentMeans = new PaymentMeans();
+                        paymentMeans.PaymentMeansCode = paymentcode; // optional for invoices - mandatory for return invoice - debit notes
+                        if (inv.invoiceTypeCode.id == 383 || inv.invoiceTypeCode.id == 381)
+                        {
+                            paymentMeans.InstructionNote = inv.invoiceTypeCode.id == 381 ? "return items" : "add items"; //the reason of return invoice - debit notes // manatory only for return invoice - debit notes 
+                        }
+                        inv.paymentmeans.Add(paymentMeans);
                     }
+                    // اكواد معين
+                    // اختيارى كود الدفع
+                    //inv.paymentmeans.PaymentMeansCode = "42";//اختيارى
+                    //inv.paymentmeans.InstructionNote = "Payment Notes"; //اجبارى فى الاشعارات
+                    //inv.paymentmeans.payeefinancialaccount.ID = "";//اختيارى
+                    //inv.paymentmeans.payeefinancialaccount.paymentnote = "Payment by credit";//اختيارى
+
+                    //بيانات البائع 
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString()))
+                    { MessageBox.Show(" لا يوجد رقم التعريف الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
+                        inv.SupplierParty.partyIdentification.ID = BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString();// "123456"; // رقم السجل التجارى الخاض بالبائع
+                   
+                    inv.SupplierParty.partyIdentification.schemeID = BL.CLS_Session.cmpschem;// "CRN"; //رقم السجل التجارى
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["street"].ToString()))
+                    { MessageBox.Show(" لا يوجد اسم الشارع في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                      inv.SupplierParty.postalAddress.StreetName = BL.CLS_Session.dtcomp.Rows[0]["street"].ToString();// "streetnumber";// اجبارى
+                    inv.SupplierParty.postalAddress.AdditionalStreetName = "";// "ststtstst"; //اختيارى
+
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString()))
+                    { MessageBox.Show(" لا يوجد رقم المبنى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                    inv.SupplierParty.postalAddress.BuildingNumber = BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString();// "3724"; // اجبارى رقم المبنى
+                    //inv.SupplierParty.postalAddress.PlotIdentification = "9833";//اختيارى رقم القطعة
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["city"].ToString()))
+                    { MessageBox.Show(" لا يوجد اسم المدينة في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                    inv.SupplierParty.postalAddress.CityName = BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "gaddah"; //اسم المدينة
+
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString()))
+                    { MessageBox.Show(" لا يوجد الرقم البريدي في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                    inv.SupplierParty.postalAddress.PostalZone = BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString();// "15385";//الرقم البريدي
+                    inv.SupplierParty.postalAddress.CountrySubentity = "";// BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "makka";//اسم المحافظة او المدينة مثال (مكة) اختيارى
+
+                    if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString()))
+                    { MessageBox.Show(" لا يوجد اسم المنطقة او الحى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                    inv.SupplierParty.postalAddress.CitySubdivisionName = BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString();// "flassk";// اسم المنطقة او الحى 
+                    inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
+                    inv.SupplierParty.partyLegalEntity.RegistrationName = BL.CLS_Session.cmp_name;// "على ابراهيم"; // اسم الشركة المسجل فى الهيئة
+
+                    if (string.IsNullOrEmpty(BL.CLS_Session.tax_no))
+                    { MessageBox.Show(" لا يوجد الرقم الضريبي الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    else
+                    inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
+
+                    //rpt.SetParameterValue("c_bulding_no", dtcust == null ? "" : dtcust.Rows[0]["c_bulding_no"].ToString());
+                    //rpt.SetParameterValue("c_street", dtcust == null ? "" : dtcust.Rows[0]["c_street"].ToString());
+                    //rpt.SetParameterValue("c_site_name", dtcust == null ? "" : dtcust.Rows[0]["c_site_name"].ToString());
+                    //rpt.SetParameterValue("c_city", dtcust == null ? "" : dtcust.Rows[0]["c_city"].ToString());
+                    //rpt.SetParameterValue("c_cuntry", dtcust == null ? "" : dtcust.Rows[0]["c_cuntry"].ToString());
+                    //rpt.SetParameterValue("c_postal_code", dtcust == null ? "" : dtcust.Rows[0]["c_postal_code"].ToString());
+                    //rpt.SetParameterValue("c_ex_postalcode", dtcust == null ? "" : dtcust.Rows[0]["c_ex_postalcode"].ToString());
+                    //rpt.SetParameterValue("c_other_id", dtcust == null ? "" : dtcust.Rows[0]["c_other_id"].ToString());
+                    if (inv.invoiceTypeCode.Name.Substring(0, 2) == "01")
                     {
-                        // incase there is discount in invoice line level
-                        AllowanceCharge allowanceCharge = new AllowanceCharge();
-                        // فى حالة الرسوم incase of charges
-                        // allowanceCharge.ChargeIndicator = true;
-                        // فى حالة الخصم incase of discount
-                        allowanceCharge.ChargeIndicator = false;
+                        //supply date mandatory only for standard invoices
+                        // فى حالة فاتورة مبسطة وفاتورة ملخصة هانكتب تاريخ التسليم واخر تاريخ التسليم
 
-                        allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
-                        // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
-                        allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
-
-                        allowanceCharge.MultiplierFactorNumeric = 0;
-                        allowanceCharge.BaseAmount = 0;
-                        invline.allowanceCharges.Add(allowanceCharge);
+                        inv.delivery.ActualDeliveryDate = dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2);  // "2022-10-22";
+                        inv.delivery.LatestDeliveryDate = dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2); //"2022-10-23";
                     }
-                    inv.InvoiceLines.Add(invline);
-                }
 
-                res = ubl.GenerateInvoiceXML(inv, Directory.GetCurrentDirectory());
+                    if (!string.IsNullOrEmpty(txt_custno.Text) && !string.IsNullOrEmpty(txt_taxid.Text))
+                    {
+                        // بيانات المشترى
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["cu_addrs"].ToString()))
+                        { MessageBox.Show(" لا يوجد رقم السجل التجارى الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.partyIdentification.ID = dtcust.Rows[0]["cu_addrs"].ToString(); // رقم السجل التجارى الخاص بالمشترى
+                        inv.CustomerParty.partyIdentification.schemeID = "CRN"; //رقم السجل التجارى
 
-               // MessageBox.Show(dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2));
-                if (res.IsValid)
-                {
-                   // daml.Insert_Update_Delete_Only(@"INSERT INTO [dbo].[pos_esend]([brno],[slno],[ref],[contr],[type],[uuid],[hash],[qr_code],[file_name],[encoded_xml],[z_ref]) VALUES ('" + dtrh[0] + "','" + dtrh[1] + "'," + dtrh[3] + "," + 0 + ",'" + dtrh[2] + "','" + inv.UUID + "','" + res.InvoiceHash + "','" + res.QRCode + "','" + res.SingedXMLFileName + "','" + res.EncodedInvoice + "'," + dthash.Rows[0][1] + ") ", false);
-                    daml.Insert_Update_Delete_Only(@"INSERT INTO [dbo].[pos_esend]([brno],[slno],[ref],[contr],[type],[uuid],[hash],[qr_code],[file_name],[encoded_xml],[z_ref]) VALUES ('" + dtrh[0] + "','" + dtrh[1] + "'," + dtrh[3] + "," + 0 + ",'" + cmb_type.SelectedValue + "','" + inv.UUID + "','" + res.InvoiceHash + "','" + res.QRCode + "','" + res.SingedXMLFileName + "','" + res.EncodedInvoice + "'," + dthash.Rows[0][1] + ") ", false);
-                    daml.Insert_Update_Delete_Only(@"update pos_hash set [ref]=" + dtrh[3] + ",[zref]=" + dthash.Rows[0][1] + ",[inv_hash]='" + res.InvoiceHash + "',type='" + cmb_type.SelectedValue + "',contr="+ 0 +" ", false);
-                    //القيم التالية تحتاج ان تحفظها فى سطر الفاتورة فى قاعدة البيانات الخاصة بكم  كي تكون مرجع لكم لاحقاً
-                    //MessageBox.Show(res.InvoiceHash);
-                    //MessageBox.Show(res.SingedXML);
-                    //MessageBox.Show(res.EncodedInvoice);
-                    //MessageBox.Show(res.UUID);
-                    //MessageBox.Show(res.QRCode);
-                    //MessageBox.Show(res.PIH);
-                    //MessageBox.Show(res.SingedXMLFileName);
-                    send_to_zatka(dthash.Rows[0][1].ToString());
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["c_street"].ToString()))
+                        { MessageBox.Show(" لا يوجد اسم الشارع في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.postalAddress.StreetName = dtcust.Rows[0]["c_street"].ToString(); // اجبارى
+                        //inv.CustomerParty.postalAddress.AdditionalStreetName = "street name"; // اختيارى
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["c_bulding_no"].ToString()))
+                        { MessageBox.Show(" لا يوجد رقم المبنى في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.postalAddress.BuildingNumber = dtcust.Rows[0]["c_bulding_no"].ToString(); // اجبارى رقم المبنى
+                        // inv.CustomerParty.postalAddress.PlotIdentification = "9833"; // اختيارى رقم القطعة
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["c_city"].ToString()))
+                        { MessageBox.Show(" لا يوجد اسم المدينة في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.postalAddress.CityName = dtcust.Rows[0]["c_city"].ToString(); // اسم المدينة
+
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["c_postal_code"].ToString()))
+                        { MessageBox.Show(" لا يوجد الرقم البريدي في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.postalAddress.PostalZone = dtcust.Rows[0]["c_postal_code"].ToString(); // الرقم البريدي
+                        //inv.CustomerParty.postalAddress.CountrySubentity = "Makkah"; // اسم المحافظة او المدينة مثال (مكة) اختيارى
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["c_site_name"].ToString()))
+                        { MessageBox.Show(" لا يوجد اسم المنطقة او الحى في العنوان الوطني الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                            inv.CustomerParty.postalAddress.CitySubdivisionName = dtcust.Rows[0]["c_site_name"].ToString(); // اسم المنطقة او الحى 
+                        inv.CustomerParty.postalAddress.country.IdentificationCode = "SA";
+
+                        inv.CustomerParty.partyLegalEntity.RegistrationName = dtcust.Rows[0]["cu_name"].ToString(); // اسم الشركة المسجل فى الهيئة
+
+                        if (string.IsNullOrEmpty(dtcust.Rows[0]["vndr_taxcode"].ToString()))
+                        { MessageBox.Show(" لا يوجد الرقم الضريبي الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                        else
+                        inv.CustomerParty.partyTaxScheme.CompanyID = dtcust.Rows[0]["vndr_taxcode"].ToString(); // رقم التسجيل الضريبي
+                    }
+
+                    ////inv.legalMonetaryTotal.PayableAmount = decimal.Parse(dtrh[14].ToString()) ;// اجمالي الفاتورة
+                    ////inv.legalMonetaryTotal.TaxInclusiveAmount = decimal.Parse(dtrh[14].ToString());
+                    ////inv.legalMonetaryTotal.TaxExclusiveAmount = decimal.Parse(dtrh[14].ToString()) - decimal.Parse(dtrh[17].ToString());
+                    ////inv.legalMonetaryTotal.TaxExclusiveAmount = decimal.Parse(dtrh[14].ToString()) - decimal.Parse(dtrh[17].ToString());
+
+                    // inv.legalMonetaryTotal.TaxInclusiveAmount = decimal.Parse(dtrh[14].ToString());
+                    ////if (decimal.Parse(dtrh[13].ToString()) > 0)
+                    ////{
+                    ////    //this code incase of there is a discount in invoice level 
+                    ////    AllowanceCharge allowance = new AllowanceCharge();
+                    ////    //ChargeIndicator = false means that this is discount
+                    ////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                    ////    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
+                    ////    //write this lines in case you will make discount as percentage
+                    ////    allowance.MultiplierFactorNumeric = 0; //dscount percentage like 10
+                    ////    allowance.BaseAmount = 0; // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
+
+                    ////    // in case we will make discount as Amount 
+                    ////    allowance.Amount = decimal.Parse(dtrh[13].ToString()); // 
+                    ////    allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
+                    ////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                    ////    allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
+                    ////    allowance.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                    ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                    ////    inv.allowanceCharges.Add(allowance);
+                    ////}
+                    //////decimal invoicediscount_for_tax15 = decimal.Parse(dtrh[17].ToString()) == 0 ? 0 : decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString()); //((decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString())) * (decimal.Parse(dtrh[18].ToString()) / 100)); // 100;
+                    //////decimal invoicediscount_for_ZeroVat = decimal.Parse(dtrh[23].ToString())==0? 0 : ((decimal.Parse(dtrh[23].ToString()) + decimal.Parse(dtrh[17].ToString())) * (decimal.Parse(dtrh[18].ToString()) / 100));
+                    //////if (invoicediscount_for_tax15 > 0)
+                    //////{
+                    //////    //this code incase of there is a discount in invoice level 
+                    //////    AllowanceCharge allowance = new AllowanceCharge();
+                    //////    //ChargeIndicator = false means that this is discount
+                    //////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                    //////    allowance.ChargeIndicator = false;
+
+                    //////    // in case we will make discount as Amount 
+                    //////   // allowance.Amount = invoicediscount_for_tax15; // 
+                    //////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                    //////    allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
+                    //////    allowance.taxCategory.Percent =decimal.Parse(BL.CLS_Session.tax_per.ToString());// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                    //////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                    //////    allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString());
+                    //////    allowance.BaseAmount = decimal.Parse(dtrh[6].ToString()) - decimal.Parse(dtrh[17].ToString()) - decimal.Parse(dtrh[23].ToString());
+                    //////    // allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString())); //0;
+                    //////    // allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()))) * decimal.Parse(dtrd[9].ToString()); //0;
+                    //////    inv.allowanceCharges.Add(allowance);
+                    //////}
+                    //////if (invoicediscount_for_ZeroVat > 0)
+                    //////{
+                    //////    //this code incase of there is a discount in invoice level 
+                    //////    AllowanceCharge allowance = new AllowanceCharge();
+                    //////    //ChargeIndicator = false means that this is discount
+                    //////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                    //////    allowance.ChargeIndicator = false;
+
+                    //////    // in case we will make discount as Amount 
+                    //////   // allowance.Amount = invoicediscount_for_ZeroVat; // 
+                    //////    allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString());
+                    //////    allowance.BaseAmount =  decimal.Parse(dtrh[23].ToString());
+                    //////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                    //////    allowance.taxCategory.ID = "Z";// كود الضريبة tax code (S Z O E )
+                    //////    allowance.taxCategory.Percent = 0;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                    //////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                    //////    inv.allowanceCharges.Add(allowance);
+                    //////}
+                    ////if (decimal.Parse(dtrh[13].ToString()) > 0)
+                    ////{
+                    ////    //this code incase of there is a discount in invoice level 
+                    ////    AllowanceCharge allowance = new AllowanceCharge();
+                    ////    //ChargeIndicator = false means that this is discount
+                    ////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                    ////    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
+                    ////    //write this lines in case you will make discount as percentage
+                    ////    allowance.MultiplierFactorNumeric = 0; //dscount percentage like 10
+                    ////    allowance.BaseAmount = 0; // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
+
+                    ////    // in case we will make discount as Amount 
+                    ////    allowance.Amount = decimal.Parse(dtrh[13].ToString()); // 
+                    ////    allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
+                    ////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                    ////    allowance.taxCategory.ID = "Z";// كود الضريبة tax code (S Z O E )
+                    ////    allowance.taxCategory.Percent = 0; //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                    ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                    ////    inv.allowanceCharges.Add(allowance);
+                    ////}
+
+                    DataTable dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select a.*,b.tax_id,b.tax_percent,b.zatka_code,b.zatka_reason from sales_dtl a join taxs b on a.tax_id=b.tax_id where a.ref=" + dtrh[3] + " and a.invtype='" + dtrh[2] + "'");
+                    // فى حالة فى اكتر من منتج فى الفاتورة هانعمل ليست من invoiceline مثال الكود التالى
+                    // for (int i = 1; i <= dtdtl.Rows.Count; i++)
+                    foreach (DataRow dtrd in dtdtl.Rows)
+                    {
+                        InvoiceLine invline = new InvoiceLine();
+                        invline.InvoiceQuantity = decimal.Parse(dtrd[8].ToString());
+                        //invline.allowanceCharge.AllowanceChargeReason = "discount"; //سبب الخصم على مستوى المنتج
+                        //invline.allowanceCharge.Amount = 10;//قيم الخصم
+
+                        //if the price is including vat set EncludingVat=true;
+                        //invline.price.EncludingVat = true;
+                        invline.price.EncludingVat = chk_shaml_tax.Checked ? true : false;
+
+                        // invline.price.PriceAmount = decimal.Parse(dtrd[8].ToString());// سعر المنتج بعد الخصم 
+                        invline.price.PriceAmount = decimal.Parse(dtrd[10].ToString());// decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()));// سعر المنتج بعد الخصم 
+
+                        invline.item.Name = dtrd[28].ToString();// dtrd[6].ToString();
+
+
+                        //invline.price.allowanceCharge.AllowanceChargeReason = "discount"; //سبب الخصم على مستوى المنتج
+                        //invline.price.allowanceCharge.Amount = 0;//قيم الخصم
+                        if (decimal.Parse(dtrd[32].ToString()) == 0)
+                        {
+                            //item Tax code
+                            invline.item.classifiedTaxCategory.ID = dtrd[39].ToString().Equals("VATEX-SA-35") ? "Z" : "O"; // كود الضريبة
+                            //item Tax code
+                            invline.taxTotal.TaxSubtotal.taxCategory.ID = dtrd[39].ToString().Equals("VATEX-SA-35") ? "Z" : "O"; // كود الضريبة
+                            //item Tax Exemption Reason Code mentioned in zatca pdf page(32-33)
+                            invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = dtrd[39].ToString();// "VATEX-SA-35"; // كود الضريبة
+                            //item Tax Exemption Reason mentioned in zatca pdf page(32-33)
+                            invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = dtrd[40].ToString();// "Medicines and medical equipment"; // كود الضريبة
+                            invline.item.classifiedTaxCategory.Percent = 0; // نسبة الضريبة
+                            invline.taxTotal.TaxSubtotal.taxCategory.Percent = 0; // نسبة الضريبة
+
+                        }
+                        else
+                        {
+                            //item Tax code
+                            invline.item.classifiedTaxCategory.ID = "S"; // كود الضريبة
+                            //item Tax code
+                            invline.taxTotal.TaxSubtotal.taxCategory.ID = "S"; // كود الضريبة
+                            invline.item.classifiedTaxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); // نسبة الضريبة
+                            invline.taxTotal.TaxSubtotal.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); // نسبة الضريبة
+                        }
+                        // invline.item.classifiedTaxCategory.ID = "S";// كود الضريبة
+                        //// invline.item.classifiedTaxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString());// نسبة الضريبة
+
+                        // invline.taxTotal.TaxSubtotal.taxCategory.ID = "S";//كود الضريبة
+                        //// invline.taxTotal.TaxSubtotal.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString());//نسبة الضريبة
+                        //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "Private healthcare to citizen";
+                        //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "VATEX-SA-HEA";
+                        //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "";
+                        //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "";
+
+                        if (decimal.Parse(dtrh[15].ToString()) > 0)
+                        // if (0 > 1)
+                        {
+                            // incase there is discount in invoice line level
+                            AllowanceCharge allowanceCharge = new AllowanceCharge();
+                            // فى حالة الرسوم incase of charges
+                            // allowanceCharge.ChargeIndicator = true;
+                            // فى حالة الخصم incase of discount
+                            allowanceCharge.ChargeIndicator = false;
+
+                            allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
+                            // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
+                            //allowanceCharge.Amount = decimal.Parse(dtrd[19].ToString()); // قيم الخصم discount amount or charge amount
+
+                            // allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrh[18].ToString()); //0;
+                            // allowanceCharge.MultiplierFactorNumeric = ((decimal.Parse(dtrd[19].ToString()) / ((decimal.Parse(dtrd[8].ToString()) * decimal.Parse(dtrd[9].ToString())) - decimal.Parse(dtrd[17].ToString()) - decimal.Parse(dtrd[19].ToString()))) * 100) + decimal.Parse(dtrh[18].ToString()); //0;
+                            allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrh[15].ToString()); //0;
+                            // allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString())); //0;
+                            // allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()))) * decimal.Parse(dtrd[9].ToString()); //0;
+                            //allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) * decimal.Parse(dtrd[9].ToString())) - decimal.Parse(dtrd[17].ToString()) - decimal.Parse(dtrd[19].ToString()); //0;
+                            allowanceCharge.BaseAmount = decimal.Parse(dtrd[10].ToString()); //0;
+                            invline.allowanceCharges.Add(allowanceCharge);
+                        }
+                        else
+                        {
+                            // incase there is discount in invoice line level
+                            AllowanceCharge allowanceCharge = new AllowanceCharge();
+                            // فى حالة الرسوم incase of charges
+                            // allowanceCharge.ChargeIndicator = true;
+                            // فى حالة الخصم incase of discount
+                            allowanceCharge.ChargeIndicator = false;
+
+                            allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
+                            // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
+                            allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
+
+                            allowanceCharge.MultiplierFactorNumeric = 0;
+                            allowanceCharge.BaseAmount = 0;
+                            invline.allowanceCharges.Add(allowanceCharge);
+                        }
+                        inv.InvoiceLines.Add(invline);
+                    }
+
+                    res = ubl.GenerateInvoiceXML(inv, Directory.GetCurrentDirectory());
+
+                    // MessageBox.Show(dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2));
+                    if (res.IsValid)
+                    {
+                        // daml.Insert_Update_Delete_Only(@"INSERT INTO [dbo].[pos_esend]([brno],[slno],[ref],[contr],[type],[uuid],[hash],[qr_code],[file_name],[encoded_xml],[z_ref]) VALUES ('" + dtrh[0] + "','" + dtrh[1] + "'," + dtrh[3] + "," + 0 + ",'" + dtrh[2] + "','" + inv.UUID + "','" + res.InvoiceHash + "','" + res.QRCode + "','" + res.SingedXMLFileName + "','" + res.EncodedInvoice + "'," + dthash.Rows[0][1] + ") ", false);
+                        daml.Insert_Update_Delete_Only(@"INSERT INTO [dbo].[pos_esend]([brno],[slno],[ref],[contr],[type],[uuid],[hash],[qr_code],[file_name],[encoded_xml],[z_ref]) VALUES ('" + dtrh[0] + "','" + dtrh[1] + "'," + dtrh[3] + "," + 0 + ",'" + cmb_type.SelectedValue + "','" + inv.UUID + "','" + res.InvoiceHash + "','" + res.QRCode + "','" + res.SingedXMLFileName + "','" + res.EncodedInvoice + "'," + dthash.Rows[0][1] + ") ", false);
+                        daml.Insert_Update_Delete_Only(@"update pos_hash set [ref]=" + dtrh[3] + ",[zref]=" + dthash.Rows[0][1] + ",[inv_hash]='" + res.InvoiceHash + "',type='" + cmb_type.SelectedValue + "',contr=" + 0 + " ", false);
+                        //القيم التالية تحتاج ان تحفظها فى سطر الفاتورة فى قاعدة البيانات الخاصة بكم  كي تكون مرجع لكم لاحقاً
+                        //MessageBox.Show(res.InvoiceHash);
+                        //MessageBox.Show(res.SingedXML);
+                        //MessageBox.Show(res.EncodedInvoice);
+                        //MessageBox.Show(res.UUID);
+                        //MessageBox.Show(res.QRCode);
+                        //MessageBox.Show(res.PIH);
+                        //MessageBox.Show(res.SingedXMLFileName);
+                        send_to_zatka(dthash.Rows[0][1].ToString());
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "  هناك خطاء اثناء المشاركة  ", "Erroe", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // progressBar1.Visible = false;
             }
         }
 

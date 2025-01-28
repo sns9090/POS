@@ -32,6 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReport_ToSend));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.طباعةToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.txt_visa = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txt_master = new System.Windows.Forms.TextBox();
@@ -75,29 +82,72 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cmb_salctr = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.طباعةToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // طباعةToolStripMenuItem
             // 
-            this.طباعةToolStripMenuItem.Name = "طباعةToolStripMenuItem";
             resources.ApplyResources(this.طباعةToolStripMenuItem, "طباعةToolStripMenuItem");
+            this.طباعةToolStripMenuItem.Name = "طباعةToolStripMenuItem";
             this.طباعةToolStripMenuItem.Click += new System.EventHandler(this.طباعةToolStripMenuItem_Click);
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Name = "progressBar1";
+            // 
+            // checkBox2
+            // 
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // button7
+            // 
+            resources.ApplyResources(this.button7, "button7");
+            this.button7.Image = global::POS.Properties.Resources.Synchronize_32x32;
+            this.button7.Name = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            resources.ApplyResources(this.button6, "button6");
+            this.button6.Name = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button4
+            // 
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.Image = global::POS.Properties.Resources.Print_32x32;
+            this.button4.Name = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button8
+            // 
+            resources.ApplyResources(this.button8, "button8");
+            this.button8.Image = global::POS.Properties.Resources.Print_32x32;
+            this.button8.Name = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // txt_visa
             // 
@@ -143,16 +193,16 @@
             // 
             // maskedTextBox4
             // 
+            resources.ApplyResources(this.maskedTextBox4, "maskedTextBox4");
             this.maskedTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.maskedTextBox4.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            resources.ApplyResources(this.maskedTextBox4, "maskedTextBox4");
             this.maskedTextBox4.Name = "maskedTextBox4";
             // 
             // maskedTextBox3
             // 
+            resources.ApplyResources(this.maskedTextBox3, "maskedTextBox3");
             this.maskedTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.maskedTextBox3.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            resources.ApplyResources(this.maskedTextBox3, "maskedTextBox3");
             this.maskedTextBox3.Name = "maskedTextBox3";
             // 
             // txt_other
@@ -169,8 +219,8 @@
             // 
             // button5
             // 
-            this.button5.Image = global::POS.Properties.Resources.Print_32x32;
             resources.ApplyResources(this.button5, "button5");
+            this.button5.Image = global::POS.Properties.Resources.Print_32x32;
             this.button5.Name = "button5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -220,8 +270,8 @@
             // 
             // comboBox2
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBox2, "comboBox2");
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             resources.GetString("comboBox2.Items"),
@@ -231,8 +281,8 @@
             // 
             // button1
             // 
-            this.button1.Image = global::POS.Properties.Resources.Play_32x32;
             resources.ApplyResources(this.button1, "button1");
+            this.button1.Image = global::POS.Properties.Resources.Play_32x32;
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -261,9 +311,9 @@
             // 
             // maskedTextBox1
             // 
+            resources.ApplyResources(this.maskedTextBox1, "maskedTextBox1");
             this.maskedTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.maskedTextBox1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            resources.ApplyResources(this.maskedTextBox1, "maskedTextBox1");
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Enter += new System.EventHandler(this.maskedTextBox1_Enter);
             this.maskedTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox1_KeyDown);
@@ -271,9 +321,9 @@
             // 
             // maskedTextBox2
             // 
+            resources.ApplyResources(this.maskedTextBox2, "maskedTextBox2");
             this.maskedTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.maskedTextBox2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            resources.ApplyResources(this.maskedTextBox2, "maskedTextBox2");
             this.maskedTextBox2.Name = "maskedTextBox2";
             this.maskedTextBox2.Enter += new System.EventHandler(this.maskedTextBox1_Enter);
             this.maskedTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maskedTextBox2_KeyDown);
@@ -288,14 +338,15 @@
             // 
             // button2
             // 
-            this.button2.Image = global::POS.Properties.Resources.Excel_32_32;
             resources.ApplyResources(this.button2, "button2");
+            this.button2.Image = global::POS.Properties.Resources.Excel_32_32;
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBox1
             // 
+            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -303,7 +354,6 @@
             resources.GetString("comboBox1.Items1"),
             resources.GetString("comboBox1.Items2"),
             resources.GetString("comboBox1.Items3")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -323,8 +373,8 @@
             // 
             // button3
             // 
-            this.button3.Image = global::POS.Properties.Resources.Print_32x32;
             resources.ApplyResources(this.button3, "button3");
+            this.button3.Image = global::POS.Properties.Resources.Print_32x32;
             this.button3.Name = "button3";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -345,9 +395,9 @@
             // 
             // dataGridView1
             // 
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -360,8 +410,8 @@
             // 
             // txt_salman
             // 
-            this.txt_salman.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_salman, "txt_salman");
+            this.txt_salman.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_salman.Name = "txt_salman";
             // 
             // label6
@@ -371,8 +421,8 @@
             // 
             // txt_contr
             // 
-            this.txt_contr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_contr, "txt_contr");
+            this.txt_contr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_contr.Name = "txt_contr";
             // 
             // label7
@@ -387,8 +437,8 @@
             // 
             // cmb_salctr
             // 
-            this.cmb_salctr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_salctr, "cmb_salctr");
+            this.cmb_salctr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_salctr.FormattingEnabled = true;
             this.cmb_salctr.Name = "cmb_salctr";
             // 
@@ -397,56 +447,6 @@
             resources.ApplyResources(this.checkBox1, "checkBox1");
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Image = global::POS.Properties.Resources.Print_32x32;
-            resources.ApplyResources(this.button8, "button8");
-            this.button8.Name = "button8";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button4
-            // 
-            this.button4.Image = global::POS.Properties.Resources.Print_32x32;
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button6
-            // 
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.Name = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Image = global::POS.Properties.Resources.Synchronize_32x32;
-            resources.ApplyResources(this.button7, "button7");
-            this.button7.Name = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // checkBox2
-            // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Name = "progressBar1";
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // SalesReport_ToSend
             // 

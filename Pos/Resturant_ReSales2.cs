@@ -685,14 +685,8 @@ namespace POS.Pos
             //////////    }
             //////////}
 
-            if (con2.State == ConnectionState.Closed)
-            {
-                con2.Open();
-            }
-            else
-            {
-               // con2.Open();
-            }
+            if (con2.State == ConnectionState.Closed) con2.Open();
+
             //  creat_btns();
            // var lines = File.ReadAllLines(Directory.GetCurrentDirectory()+@"\temp.txt");
             var lines2 = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\prttype.txt");
@@ -1297,7 +1291,9 @@ namespace POS.Pos
                     cmd1.Parameters.AddWithValue("@a20", s2);
                     cmd1.Parameters.AddWithValue("@a21", s1);
 
+                    if (con2.State == ConnectionState.Closed) con2.Open();
                     cmd1.ExecuteNonQuery();
+                    con2.Close();
                 }
             if (!string.IsNullOrEmpty(txt_driver.Text) || button22.BackColor == Color.GreenYellow || !string.IsNullOrEmpty(txt) || !string.IsNullOrEmpty(at.txt_tameemamt.Text))
             {
@@ -1316,7 +1312,9 @@ namespace POS.Pos
                     cmd1.Parameters.AddWithValue("@a4", string.IsNullOrEmpty(at.txt_tameemamt.Text) ? "0" : at.txt_tameemamt.Text);
                     cmd1.Parameters.AddWithValue("@a5", at.txt_tameennot.Text);
 
+                    if (con2.State == ConnectionState.Closed) con2.Open();
                     cmd1.ExecuteNonQuery();
+                    con2.Close();
                 }
             }
 
@@ -1357,8 +1355,10 @@ namespace POS.Pos
                         cmd.Parameters.AddWithValue("@c10", row.Cells[1].Value);
                         cmd.Parameters.AddWithValue("@sn", srno);
                         cmd.Parameters.AddWithValue("@ta", string.IsNullOrEmpty(BL.CLS_Session.tax_no) ? 0 : Math.Round((Convert.ToDouble(row.Cells[8].Value) * Convert.ToDouble(BL.CLS_Session.tax_per) / (100 + Convert.ToDouble(BL.CLS_Session.tax_per))),4));
-                        cmd.ExecuteNonQuery();
 
+                        if (con2.State == ConnectionState.Closed) con2.Open();
+                        cmd.ExecuteNonQuery();
+                        con2.Close();
                         //lblref.Text = Convert.ToString(dss.Tables[0].Rows[0][0]);
 
                     }

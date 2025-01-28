@@ -1459,6 +1459,7 @@ namespace POS.Sal
                     txt_hdate.Enabled = false;
                     txt_mdate.Enabled = false;
                     txt_desc.Enabled = false;
+                    txt_mobile.Enabled = false;
                     txt_validdate.Enabled = false;
                     btn_payment.Enabled = false;
                     txt_aqd.Enabled = false;
@@ -2068,6 +2069,7 @@ namespace POS.Sal
                     txt_mdate.Enabled = false;
                 }
                 txt_desc.Enabled = true;
+                txt_mobile.Enabled = true;
                 txt_validdate.Enabled = true;
                 btn_payment.Enabled = true;
                 txt_aqd.Enabled = true;
@@ -2277,6 +2279,7 @@ namespace POS.Sal
                 txt_mdate.Enabled = false;
                 txt_hdate.Enabled = false;
                 txt_desc.Enabled = false;
+                txt_mobile.Enabled = false;
                 txt_validdate.Enabled = false;
                 btn_payment.Enabled = false;
                 txt_aqd.Enabled = false;
@@ -2468,7 +2471,7 @@ namespace POS.Sal
                 {
                    // MessageBox.Show(txt_paid.Text.ToString());
                     daml.SqlCon_Open();
-                    int exexcuteds = daml.Insert_Update_Delete_retrn_int("INSERT INTO salofr_hdr(branch,slcenter,invtype,ref,invmdate, invhdate,text,remarks,casher,entries,invttl,invdsvl,nettotal,invdspc,tax_amt_rcvd,with_tax,usrid,custno,invcst,suspend,glser,slcode,stkjvno,taxid,tax_percent,taxfree_amt,carrier,invpaid,chkno,reref,sanedcrd_amt,rtncash_dfrpl,chkdate) VALUES('" + BL.CLS_Session.brno + "','" + cmb_salctr.SelectedValue + "','" + cmb_type.SelectedValue + "'," + ref_max + ",'" + mdate + "','" + hdate + "','" + txt_desc.Text + "','" + txt_remark.Text + "','" + txt_key.Text + "'," + (dataGridView1.RowCount - 1) + "," + txt_total.Text + "," + txt_des.Text + "," + txt_net.Text + "," + txt_desper.Text + "," + txt_tax.Text + "," + (chk_shaml_tax.Checked ? 1 : 0) + ",'" + txt_user.Text + "','" + txt_custno.Text + "'," + txt_cost.Text + "," + (chk_suspend.Checked ? 1 : 0) + ",'Sal1','" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "'," + (BL.CLS_Session.is_dorymost.Equals("2") ? jrdacc : 0) + ",'" + txt_taxid.Text + "'," + tax_per + "," + txt_taxfree.Text + ",'" + cmb_exits.SelectedValue + "'," + (txt_paid.Text.Trim().Equals("") ? "0.00" : txt_paid.Text) + ",'" + txt_aqd.Text + "','" + txt_reref.Text + "'," + card_amt + "," + other_amt + ",'" + vmdate + "')", false);
+                    int exexcuteds = daml.Insert_Update_Delete_retrn_int("INSERT INTO salofr_hdr(branch,slcenter,invtype,ref,invmdate, invhdate,text,remarks,casher,entries,invttl,invdsvl,nettotal,invdspc,tax_amt_rcvd,with_tax,usrid,custno,invcst,suspend,glser,slcode,stkjvno,taxid,tax_percent,taxfree_amt,carrier,invpaid,chkno,reref,sanedcrd_amt,rtncash_dfrpl,chkdate,cust_mobil) VALUES('" + BL.CLS_Session.brno + "','" + cmb_salctr.SelectedValue + "','" + cmb_type.SelectedValue + "'," + ref_max + ",'" + mdate + "','" + hdate + "','" + txt_desc.Text + "','" + txt_remark.Text + "','" + txt_key.Text + "'," + (dataGridView1.RowCount - 1) + "," + txt_total.Text + "," + txt_des.Text + "," + txt_net.Text + "," + txt_desper.Text + "," + txt_tax.Text + "," + (chk_shaml_tax.Checked ? 1 : 0) + ",'" + txt_user.Text + "','" + txt_custno.Text + "'," + txt_cost.Text + "," + (chk_suspend.Checked ? 1 : 0) + ",'Sal1','" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "'," + (BL.CLS_Session.is_dorymost.Equals("2") ? jrdacc : 0) + ",'" + txt_taxid.Text + "'," + tax_per + "," + txt_taxfree.Text + ",'" + cmb_exits.SelectedValue + "'," + (txt_paid.Text.Trim().Equals("") ? "0.00" : txt_paid.Text) + ",'" + txt_aqd.Text + "','" + txt_reref.Text + "'," + card_amt + "," + other_amt + ",'" + vmdate + "','"+txt_mobile.Text+"')", false);
                     daml.SqlCon_Close();
 
                    // MessageBox.Show(ref_max.ToString());
@@ -2493,6 +2496,7 @@ namespace POS.Sal
                         txt_hdate.Enabled = false;
                         txt_mdate.Enabled = false;
                         txt_desc.Enabled = false;
+                        txt_mobile.Enabled = false;
                         txt_validdate.Enabled = false;
                         btn_payment.Enabled = false;
                         txt_aqd.Enabled = false;
@@ -2525,7 +2529,7 @@ namespace POS.Sal
                      if (Convert.ToInt32(dtifex.Rows[0][0]) == 0)
                      {
                          daml.SqlCon_Open();
-                         daml.Insert_Update_Delete_retrn_int("INSERT INTO salofr_hdr(branch,slcenter,invtype,ref,invmdate, invhdate,text,remarks,casher,entries,invttl,invdsvl,nettotal,invdspc,tax_amt_rcvd,with_tax,usrid,custno,invcst,suspend,glser,slcode,stkjvno,taxid,tax_percent,taxfree_amt,carrier,invpaid,reref,sanedcrd_amt,rtncash_dfrpl) VALUES('" + BL.CLS_Session.brno + "','" + cmb_salctr.SelectedValue + "','" + cmb_type.SelectedValue + "'," + txt_ref.Text + ",'" + mdate + "','" + hdate + "','" + txt_desc.Text + "','" + txt_remark.Text + "','" + txt_key.Text + "'," + (dataGridView1.RowCount - 1) + "," + txt_total.Text + "," + txt_des.Text + "," + txt_net.Text + "," + txt_desper.Text + "," + txt_tax.Text + "," + (chk_shaml_tax.Checked ? 1 : 0) + ",'" + txt_user.Text + "','" + txt_custno.Text + "'," + txt_cost.Text + "," + (chk_suspend.Checked ? 1 : 0) + ",'Sal1','" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "'," + (BL.CLS_Session.is_dorymost.Equals("2") ? jrdacc : 0) + ",'" + txt_taxid.Text + "'," + tax_per + "," + txt_taxfree.Text + ",'" + cmb_exits.SelectedValue + "'," + txt_paid.Text + ",'" + txt_reref.Text + "',"+card_amt+","+other_amt+")", false);
+                         daml.Insert_Update_Delete_retrn_int("INSERT INTO salofr_hdr(branch,slcenter,invtype,ref,invmdate, invhdate,text,remarks,casher,entries,invttl,invdsvl,nettotal,invdspc,tax_amt_rcvd,with_tax,usrid,custno,invcst,suspend,glser,slcode,stkjvno,taxid,tax_percent,taxfree_amt,carrier,invpaid,reref,sanedcrd_amt,rtncash_dfrpl,chkdate,cust_mobil) VALUES('" + BL.CLS_Session.brno + "','" + cmb_salctr.SelectedValue + "','" + cmb_type.SelectedValue + "'," + txt_ref.Text + ",'" + mdate + "','" + hdate + "','" + txt_desc.Text + "','" + txt_remark.Text + "','" + txt_key.Text + "'," + (dataGridView1.RowCount - 1) + "," + txt_total.Text + "," + txt_des.Text + "," + txt_net.Text + "," + txt_desper.Text + "," + txt_tax.Text + "," + (chk_shaml_tax.Checked ? 1 : 0) + ",'" + txt_user.Text + "','" + txt_custno.Text + "'," + txt_cost.Text + "," + (chk_suspend.Checked ? 1 : 0) + ",'Sal1','" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "'," + (BL.CLS_Session.is_dorymost.Equals("2") ? jrdacc : 0) + ",'" + txt_taxid.Text + "'," + tax_per + "," + txt_taxfree.Text + ",'" + cmb_exits.SelectedValue + "'," + txt_paid.Text + ",'" + txt_reref.Text + "'," + card_amt + "," + other_amt + ",'" + vmdate + "','" + txt_mobile.Text + "')", false);
                          daml.SqlCon_Close();
                      }
                      else
@@ -2533,7 +2537,7 @@ namespace POS.Sal
 
                          daml.SqlCon_Open();
                          //int exexcuteds = daml.Insert_Update_Delete_retrn_int("update salofr_hdr set invmdate='" + mdate + "', invhdate='" + hdate + "',text='" + txt_desc.Text + "',remarks='" + txt_remark.Text + "',casher='" + txt_key.Text + "',custno='" + txt_custno.Text + "',entries=" + (dataGridView1.RowCount - 1) + ",lastupdt='" + DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false)) + "',invttl=" + txt_total.Text + ",invdsvl=" + txt_des.Text + ",nettotal=" + txt_net.Text + ",invdspc=" + txt_desper.Text + ",tax_amt_rcvd=" + txt_tax.Text + ",invcst=" + txt_cost.Text + ",usrid='" + txt_user.Text + "',suspend=" + (chk_suspend.Checked ? 1 : 0) + ",slcode='" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "',lastupdt=getdate() where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "", false);
-                         daml.Insert_Update_Delete_retrn_int("update salofr_hdr set invtype='" + cmb_type.SelectedValue + "', invmdate='" + mdate + "', invhdate='" + hdate + "',text='" + txt_desc.Text + "',remarks='" + txt_remark.Text + "',casher='" + txt_key.Text + "',custno='" + txt_custno.Text + "',entries=" + (dataGridView1.RowCount - 1) + ",invttl=" + txt_total.Text + ",invdsvl=" + txt_des.Text + ",nettotal=" + txt_net.Text + ",invdspc=" + txt_desper.Text + ",tax_amt_rcvd=" + txt_tax.Text + ",invcst=" + txt_cost.Text + ",usrid='" + txt_user.Text + "',suspend=" + (chk_suspend.Checked ? 1 : 0) + ",slcode='" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "',lastupdt=getdate(),taxid='" + txt_taxid.Text + "',taxfree_amt=" + txt_taxfree.Text + ",carrier='" + cmb_exits.SelectedValue + "',with_tax=" + (chk_shaml_tax.Checked ? 1 : 0) + ",invpaid=" + txt_paid.Text + ",chkno='" + txt_aqd.Text + "',reref='" + txt_reref.Text + "',sanedcrd_amt=" + card_amt + ",rtncash_dfrpl=" + other_amt + ",chkdate='" + vmdate + "' where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "", false);
+                         daml.Insert_Update_Delete_retrn_int("update salofr_hdr set invtype='" + cmb_type.SelectedValue + "', invmdate='" + mdate + "', invhdate='" + hdate + "',text='" + txt_desc.Text + "',remarks='" + txt_remark.Text + "',casher='" + txt_key.Text + "',custno='" + txt_custno.Text + "',entries=" + (dataGridView1.RowCount - 1) + ",invttl=" + txt_total.Text + ",invdsvl=" + txt_des.Text + ",nettotal=" + txt_net.Text + ",invdspc=" + txt_desper.Text + ",tax_amt_rcvd=" + txt_tax.Text + ",invcst=" + txt_cost.Text + ",usrid='" + txt_user.Text + "',suspend=" + (chk_suspend.Checked ? 1 : 0) + ",slcode='" + (cmb_salman.SelectedIndex != -1 ? cmb_salman.SelectedValue.ToString() : "") + "',lastupdt=getdate(),taxid='" + txt_taxid.Text + "',taxfree_amt=" + txt_taxfree.Text + ",carrier='" + cmb_exits.SelectedValue + "',with_tax=" + (chk_shaml_tax.Checked ? 1 : 0) + ",invpaid=" + txt_paid.Text + ",chkno='" + txt_aqd.Text + "',reref='" + txt_reref.Text + "',sanedcrd_amt=" + card_amt + ",rtncash_dfrpl=" + other_amt + ",chkdate='" + vmdate + "',cust_mobil='"+txt_mobile.Text+"' where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "", false);
                          daml.Insert_Update_Delete_retrn_int("delete from  salofr_dtl where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "", false);
                     
                          daml.SqlCon_Close();
@@ -2554,6 +2558,7 @@ namespace POS.Sal
                         txt_hdate.Enabled = false;
                         txt_mdate.Enabled = false;
                         txt_desc.Enabled = false;
+                        txt_mobile.Enabled = false;
                         txt_validdate.Enabled = false;
                         btn_payment.Enabled = false;
                         txt_aqd.Enabled = false;
@@ -2955,6 +2960,7 @@ namespace POS.Sal
                     chk_nodup.Checked = true;
                     chk_nodup.Enabled = true;
                     txt_desc.Enabled = true;
+                    txt_mobile.Enabled = true;
                     txt_validdate.Enabled = true;
                     btn_payment.Enabled = true;
                     txt_aqd.Enabled = true;
@@ -3175,6 +3181,7 @@ namespace POS.Sal
               //  hdate = txt_hdate.Text.Replace("-", "").Substring(4, 4) + txt_hdate.Text.Replace("-", "").Substring(2, 2) + txt_hdate.Text.Replace("-", "").Substring(0, 2);
                 string strtblh = atype.Equals("37") ? "salofr_hdr" : "salofr_hdr";
                 string strtbld = atype.Equals("37") ? "salofr_dtl" : "salofr_dtl";
+                string usrid = BL.CLS_Session.up_edit_othr ? " " : " and usrid = '" + BL.CLS_Session.UserName + "' ";
                 if (isfeched)
                 {
 
@@ -3182,7 +3189,7 @@ namespace POS.Sal
                 else
                 {
                     //dthdr = daml.SELECT_QUIRY_only_retrn_dt("select * from " + strtblh + " where invtype='" + atype + "' and ref=" + aref + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "'");
-                    dthdr = daml.SELECT_QUIRY_only_retrn_dt("select *,isnull(inv_printed,0) einv from " + strtblh + " where " + (aqd_temp ? " chkno='" + aref + "'" : "invtype='" + atype + "' and ref=" + aref + "") + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "'");
+                    dthdr = daml.SELECT_QUIRY_only_retrn_dt("select *,isnull(inv_printed,0) einv from " + strtblh + " where " + (aqd_temp ? " chkno='" + aref + "'" : "invtype='" + atype + "' and ref=" + aref + "") + " and branch='" + BL.CLS_Session.brno + "' and slcenter='" + slctr + "' "+usrid+" ");
                     
                     // string strvt = Convert.ToBoolean(dthdr.Rows[0]["with_tax"]) ? "((aa.qty*aa.price)-((aa.qty*aa.price)*aa.discpc/100))" : "((aa.qty*aa.price)+aa.tax_amt)-(((aa.qty*aa.price)+aa.tax_amt)*aa.discpc/100)";
                     // string strvt = Convert.ToBoolean(dthdr.Rows[0]["with_tax"]) ? "((aa.qty*aa.price)-((aa.qty*aa.price)*aa.discpc/100))" : "((aa.qty*aa.price)+aa.tax_amt)-(((aa.qty*aa.price)+aa.tax_amt)*aa.discpc/100)";
@@ -3218,6 +3225,7 @@ namespace POS.Sal
                 txt_net.Text = dthdr.Rows[0]["nettotal"].ToString();
                 txt_user.Text = dthdr.Rows[0]["usrid"].ToString();
                 txt_cost.Text = dthdr.Rows[0]["invcst"].ToString();
+                txt_mobile.Text = dthdr.Rows[0]["cust_mobil"].ToString();
                // txt_net.Text = dthdr.Rows[0]["nettotal"].ToString();
                 txt_jrdacc.Text = dthdr.Rows[0]["stkjvno"].ToString();
                 txt_key.Text = dthdr.Rows[0][19].ToString();
@@ -3693,7 +3701,7 @@ namespace POS.Sal
         {
             //daml.Exec_Query_only("update salofr_hdr set inv_printed=1 where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
             //is_printd = true;
-            
+            BL.CLS_Session.cust_mob = !string.IsNullOrEmpty(txt_mobile.Text) ? txt_mobile.Text : "";
             btn_Rfrsh_Click(sender, e);
 
             if (dataGridView1.Rows.Count == 0)

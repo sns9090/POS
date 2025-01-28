@@ -48,6 +48,7 @@
             this.rad_cus = new System.Windows.Forms.RadioButton();
             this.rad_acc = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cmb_puctr = new System.Windows.Forms.ComboBox();
             this.txt_newno = new System.Windows.Forms.TextBox();
@@ -61,7 +62,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -224,6 +224,14 @@
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             // 
+            // button2
+            // 
+            this.button2.Image = global::POS.Properties.Resources.Refresh_32x32;
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
@@ -280,7 +288,6 @@
             this.cmb_type.FormattingEnabled = true;
             this.cmb_type.Name = "cmb_type";
             this.cmb_type.SelectedIndexChanged += new System.EventHandler(this.cmb_type_SelectedIndexChanged);
-            this.cmb_type.Leave += new System.EventHandler(this.cmb_type_Leave);
             // 
             // label2
             // 
@@ -299,13 +306,6 @@
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
-            // 
-            // button2
-            // 
-            this.button2.Image = global::POS.Properties.Resources.Refresh_32x32;
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // Move_Acc_Its
             // 

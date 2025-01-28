@@ -67,7 +67,6 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.chk_rp);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.pictureBox1);
@@ -83,6 +82,7 @@
             this.groupBox1.Controls.Add(this.txt_pass);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -101,8 +101,8 @@
             // 
             // pictureBox1
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BackgroundImage = global::POS.Properties.Resources.TS_Logo_removebg1;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
@@ -120,8 +120,8 @@
             // 
             // cmb_year
             // 
-            resources.ApplyResources(this.cmb_year, "cmb_year");
             this.cmb_year.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_year, "cmb_year");
             this.cmb_year.FormattingEnabled = true;
             this.cmb_year.Name = "cmb_year";
             this.cmb_year.Enter += new System.EventHandler(this.cmb_year_Enter);
@@ -131,8 +131,8 @@
             // 
             // cmb_company
             // 
-            resources.ApplyResources(this.cmb_company, "cmb_company");
             this.cmb_company.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_company, "cmb_company");
             this.cmb_company.FormattingEnabled = true;
             this.cmb_company.Name = "cmb_company";
             this.cmb_company.Enter += new System.EventHandler(this.cmb_company_Enter);
@@ -140,8 +140,8 @@
             // 
             // cmb_brno
             // 
-            resources.ApplyResources(this.cmb_brno, "cmb_brno");
             this.cmb_brno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_brno, "cmb_brno");
             this.cmb_brno.FormattingEnabled = true;
             this.cmb_brno.Name = "cmb_brno";
             this.cmb_brno.SelectedIndexChanged += new System.EventHandler(this.cmb_brno_SelectedIndexChanged);
@@ -159,8 +159,8 @@
             // 
             // cmb_user
             // 
-            resources.ApplyResources(this.cmb_user, "cmb_user");
             this.cmb_user.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_user, "cmb_user");
             this.cmb_user.FormattingEnabled = true;
             this.cmb_user.Name = "cmb_user";
             this.cmb_user.Enter += new System.EventHandler(this.cmb_user_Enter);
@@ -212,6 +212,7 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.MaximizeBox = false;
             this.Name = "LOGIN";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LOGIN_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LOGIN_FormClosed);

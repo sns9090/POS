@@ -5400,6 +5400,7 @@ namespace POS.Pos
                 //inv.paymentmeans.payeefinancialaccount.ID = "";//اختيارى
                 //inv.paymentmeans.payeefinancialaccount.paymentnote = "Payment by credit";//اختيارى
 
+                /*
                 //بيانات البائع 
                 inv.SupplierParty.partyIdentification.ID = BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString();// "123456"; // رقم السجل التجارى الخاض بالبائع
                 inv.SupplierParty.partyIdentification.schemeID = "CRN"; //رقم السجل التجارى
@@ -5414,6 +5415,46 @@ namespace POS.Pos
                 inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
                 inv.SupplierParty.partyLegalEntity.RegistrationName = BL.CLS_Session.cmp_name;// "على ابراهيم"; // اسم الشركة المسجل فى الهيئة
                 inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
+                */
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString()))
+                { MessageBox.Show(" لا يوجد رقم التعريف الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.partyIdentification.ID = BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString();// "123456"; // رقم السجل التجارى الخاض بالبائع
+
+                inv.SupplierParty.partyIdentification.schemeID = BL.CLS_Session.cmpschem;// "CRN"; //رقم السجل التجارى
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["street"].ToString()))
+                { MessageBox.Show(" لا يوجد اسم الشارع في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.postalAddress.StreetName = BL.CLS_Session.dtcomp.Rows[0]["street"].ToString();// "streetnumber";// اجبارى
+                inv.SupplierParty.postalAddress.AdditionalStreetName = "";// "ststtstst"; //اختيارى
+
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString()))
+                { MessageBox.Show(" لا يوجد رقم المبنى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.postalAddress.BuildingNumber = BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString();// "3724"; // اجبارى رقم المبنى
+                //inv.SupplierParty.postalAddress.PlotIdentification = "9833";//اختيارى رقم القطعة
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["city"].ToString()))
+                { MessageBox.Show(" لا يوجد اسم المدينة في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.postalAddress.CityName = BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "gaddah"; //اسم المدينة
+
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString()))
+                { MessageBox.Show(" لا يوجد الرقم البريدي في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.postalAddress.PostalZone = BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString();// "15385";//الرقم البريدي
+                inv.SupplierParty.postalAddress.CountrySubentity = "";// BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "makka";//اسم المحافظة او المدينة مثال (مكة) اختيارى
+
+                if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString()))
+                { MessageBox.Show(" لا يوجد اسم المنطقة او الحى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.postalAddress.CitySubdivisionName = BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString();// "flassk";// اسم المنطقة او الحى 
+                inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
+                inv.SupplierParty.partyLegalEntity.RegistrationName = BL.CLS_Session.cmp_name;// "على ابراهيم"; // اسم الشركة المسجل فى الهيئة
+
+                if (string.IsNullOrEmpty(BL.CLS_Session.tax_no))
+                { MessageBox.Show(" لا يوجد الرقم الضريبي الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                else
+                    inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
 
                 ////inv.legalMonetaryTotal.PayableAmount = decimal.Parse(dtrh[14].ToString()) ;// اجمالي الفاتورة
                 ////inv.legalMonetaryTotal.TaxInclusiveAmount = decimal.Parse(dtrh[14].ToString());

@@ -963,7 +963,7 @@ namespace POS.Sto
                     ////}
                     ////else
                     ////{
-                    dttrtyps = daml.SELECT_QUIRY_only_retrn_dt("select * from trtypes where tr_no in(" + tr + ") and tr_no in('32','31')");
+                    dttrtyps = daml.SELECT_QUIRY_only_retrn_dt("select * from trtypes where tr_no in(" + tr + ") and tr_no in('31','32') ");
 
 
 
@@ -1480,7 +1480,7 @@ namespace POS.Sto
             //  cmb_type.Items.Remove(cmb_type.SelectedValue);
             cmb_type.DataSource = null;
             string tr = BL.CLS_Session.trkey.Replace(" ", "','").Remove(0, 2) + "'";
-            dttrtyps = daml.SELECT_QUIRY_only_retrn_dt("select * from trtypes where tr_no in(" + tr + ") and tr_no in('32')");
+            dttrtyps = daml.SELECT_QUIRY_only_retrn_dt("select * from trtypes where tr_no in(" + tr + ") and tr_no in('31','32')");
             cmb_type.DataSource = dttrtyps;
             cmb_type.DisplayMember = "tr_name";
             cmb_type.ValueMember = "tr_no";

@@ -307,7 +307,7 @@ namespace POS
 
             if (BL.CLS_Session.sysno == "0" || BL.CLS_Session.sysno == "10" || BL.CLS_Session.sysno == "9" || BL.CLS_Session.sysno.Equals("2"))
             {
-                عرضسعرخاصToolStripMenuItem.Visible = false;
+               // عرضسعرخاصToolStripMenuItem.Visible = false;
             }
             if (BL.CLS_Session.sysno == "1")
             {

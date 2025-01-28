@@ -34,7 +34,7 @@ update companys set allw_zerop = 0 where allw_zerop is null;
 update companys set guid_day = 'jl49a1j6/40=' where guid_day is null;
 update companys set guid_dt = 'bweLrQi4sWAGTuCM4mc15A==' where guid_dt is null;
 update companys set is_einv_p2 = 0 where is_einv_p2 is null;
-update companys set einv_p2_date = '' where einv_p2_date is null;
+update companys set einv_p2_date = '99999999' where einv_p2_date is null or einv_p2_date='';
 update companys set is_production = 0 where is_production is null;
 update companys set whatsapp_actv = 0 where whatsapp_actv is null;
 update companys set whatsapp_tokn = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJudW1iZXIiOiJzbnM5MDkwIiwic2VyaWFsIjoiMzBhMGQ4NTA3MjMwYTcyIiwiaWF0IjoxNzIzMzA0MjY5LCJleHAiOjE4MDk3MDQyNjl9.f4oMQMpJYZ__d9TZwTjCz2khGAxc5_v3pslSmW25SHw' where whatsapp_tokn is null;

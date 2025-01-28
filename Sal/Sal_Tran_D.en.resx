@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="contextMenuStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btn_last.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 509</value>
@@ -139,14 +142,83 @@
   <data name="btn_Add.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="contextMenuStrip2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_Exit.Text" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="btn_Exit.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 14</value>
+  </data>
+  <data name="label35.Text" xml:space="preserve">
+    <value>MPay</value>
+  </data>
+  <data name="label35.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_mpay.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>656, 170</value>
+  </data>
+  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 14</value>
+  </data>
+  <data name="label34.Text" xml:space="preserve">
+    <value>Note3</value>
+  </data>
+  <data name="label34.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_note3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 14</value>
+  </data>
+  <data name="label33.Text" xml:space="preserve">
+    <value>Tel</value>
+  </data>
+  <data name="label33.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_mobile.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>656, 144</value>
+  </data>
+  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 14</value>
+  </data>
+  <data name="label32.Text" xml:space="preserve">
+    <value>Note2</value>
+  </data>
+  <data name="label32.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_note2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="button3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="txt_ccname.Location" type="System.Drawing.Point, System.Drawing">
     <value>444, 538</value>
   </data>
+  <data name="txt_ccname.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_ccno.Location" type="System.Drawing.Point, System.Drawing">
     <value>635, 538</value>
+  </data>
+  <data name="txt_ccno.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
     <value>699, 542</value>
@@ -157,17 +229,41 @@
   <data name="label31.Text" xml:space="preserve">
     <value>Cost Center</value>
   </data>
+  <data name="label31.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_payment.Text" xml:space="preserve">
     <value>Payment</value>
+  </data>
+  <data name="btn_payment.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btn_tali.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btn_qbl.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="txt_s.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 510</value>
   </data>
+  <data name="txt_s.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_t.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 510</value>
   </data>
+  <data name="txt_t.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_r.Location" type="System.Drawing.Point, System.Drawing">
     <value>166, 510</value>
+  </data>
+  <data name="txt_r.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_reref.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="txt_curbal.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 511</value>
@@ -175,8 +271,14 @@
   <data name="txt_curbal.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
+  <data name="txt_curbal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_whbal.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 513</value>
+  </data>
+  <data name="txt_whbal.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 14</value>
@@ -184,8 +286,14 @@
   <data name="label30.Text" xml:space="preserve">
     <value>Return Inv.</value>
   </data>
+  <data name="label30.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 541</value>
+  </data>
+  <data name="label19.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 14</value>
@@ -193,11 +301,32 @@
   <data name="label29.Text" xml:space="preserve">
     <value>Eqd</value>
   </data>
+  <data name="label29.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_aqd.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 14</value>
   </data>
   <data name="label28.Text" xml:space="preserve">
     <value>Acc</value>
+  </data>
+  <data name="label28.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label27.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_rim.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label26.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_paid.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 515</value>
@@ -208,6 +337,9 @@
   <data name="label25.Text" xml:space="preserve">
     <value>Balance</value>
   </data>
+  <data name="label25.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
     <value>620, 513</value>
   </data>
@@ -217,8 +349,14 @@
   <data name="label24.Text" xml:space="preserve">
     <value>Free Tax</value>
   </data>
+  <data name="label24.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="cmb_exits.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 526</value>
+  </data>
+  <data name="cmb_exits.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 503</value>
@@ -229,8 +367,17 @@
   <data name="label23.Text" xml:space="preserve">
     <value>Trans</value>
   </data>
+  <data name="label23.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_taxfree.Location" type="System.Drawing.Point, System.Drawing">
     <value>683, 508</value>
+  </data>
+  <data name="txt_taxfree.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_taxid.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 116</value>
@@ -241,8 +388,14 @@
   <data name="label22.Text" xml:space="preserve">
     <value>Cust Tax Id</value>
   </data>
+  <data name="label22.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 505</value>
+  </data>
+  <data name="panel2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="bindingNavigatorAddNewItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -311,17 +464,35 @@
   <data name="bindingNavigator1.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 508</value>
   </data>
+  <data name="bindingNavigator1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_jrdacc.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 14</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>Saler</value>
   </data>
+  <data name="label21.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cmb_salman.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 14</value>
   </data>
   <data name="label20.Text" xml:space="preserve">
     <value>Print</value>
+  </data>
+  <data name="label20.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="numericUpDown1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_usebarcode.Location" type="System.Drawing.Point, System.Drawing">
     <value>324, 510</value>
@@ -332,6 +503,9 @@
   <data name="chk_usebarcode.Text" xml:space="preserve">
     <value>Use Barcode</value>
   </data>
+  <data name="chk_usebarcode.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="chk_suspend.Location" type="System.Drawing.Point, System.Drawing">
     <value>527, 488</value>
   </data>
@@ -340,6 +514,9 @@
   </data>
   <data name="chk_suspend.Text" xml:space="preserve">
     <value>Not Payed</value>
+  </data>
+  <data name="chk_suspend.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 488</value>
@@ -350,17 +527,41 @@
   <data name="label18.Text" xml:space="preserve">
     <value>Cost</value>
   </data>
+  <data name="label18.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_icost.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 486</value>
   </data>
+  <data name="txt_icost.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_cost.Location" type="System.Drawing.Point, System.Drawing">
     <value>330, 486</value>
+  </data>
+  <data name="txt_cost.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_crlmt.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_temp.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 14</value>
   </data>
   <data name="label17.Text" xml:space="preserve">
     <value>Cust</value>
+  </data>
+  <data name="label17.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_custnam.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_custno.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_nodup.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 169</value>
@@ -371,6 +572,9 @@
   <data name="chk_nodup.Text" xml:space="preserve">
     <value>No Item Duplicate</value>
   </data>
+  <data name="chk_nodup.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>627, 488</value>
   </data>
@@ -379,6 +583,9 @@
   </data>
   <data name="label16.Text" xml:space="preserve">
     <value>Tax</value>
+  </data>
+  <data name="label16.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>256, 483</value>
@@ -389,14 +596,26 @@
   <data name="label15.Text" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="label15.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_user.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 500</value>
+  </data>
+  <data name="txt_user.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>903, 484</value>
   </data>
+  <data name="label14.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_desper.Location" type="System.Drawing.Point, System.Drawing">
     <value>861, 513</value>
+  </data>
+  <data name="txt_desper.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_shaml_tax.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 18</value>
@@ -404,11 +623,20 @@
   <data name="chk_shaml_tax.Text" xml:space="preserve">
     <value>Tax Included</value>
   </data>
+  <data name="chk_shaml_tax.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_tax.Location" type="System.Drawing.Point, System.Drawing">
     <value>683, 482</value>
   </data>
+  <data name="txt_tax.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_net.Location" type="System.Drawing.Point, System.Drawing">
     <value>861, 538</value>
+  </data>
+  <data name="txt_net.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>793, 543</value>
@@ -419,6 +647,9 @@
   <data name="label13.Text" xml:space="preserve">
     <value>Net Total</value>
   </data>
+  <data name="label13.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>793, 517</value>
   </data>
@@ -427,6 +658,9 @@
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Discount</value>
+  </data>
+  <data name="label12.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>793, 491</value>
@@ -437,6 +671,15 @@
   <data name="label11.Text" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="label11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_name.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_key.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>656, 117</value>
   </data>
@@ -446,41 +689,98 @@
   <data name="label10.Text" xml:space="preserve">
     <value>Note</value>
   </data>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_remark.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 14</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>SL No</value>
   </data>
+  <data name="label9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cmb_salctr.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txt_total.Location" type="System.Drawing.Point, System.Drawing">
     <value>861, 487</value>
+  </data>
+  <data name="txt_total.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="txt_des.Location" type="System.Drawing.Point, System.Drawing">
     <value>924, 480</value>
   </data>
+  <data name="txt_des.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_prtdirct.Text" xml:space="preserve">
     <value>Print</value>
+  </data>
+  <data name="btn_prtdirct.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="button2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btn_Post.Text" xml:space="preserve">
     <value>Post</value>
   </data>
+  <data name="btn_Post.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_Edit.Text" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="btn_Edit.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btn_Del.Text" xml:space="preserve">
     <value>Del</value>
   </data>
+  <data name="btn_Del.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_Find.Text" xml:space="preserve">
     <value>Find</value>
+  </data>
+  <data name="btn_Find.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btn_Save.Text" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="btn_Save.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_Print.Text" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="btn_Print.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_Undo.Text" xml:space="preserve">
     <value>Undo</value>
+  </data>
+  <data name="btn_Undo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btn_Rfrsh.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="button1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_ref.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 14</value>
@@ -488,17 +788,38 @@
   <data name="label8.Text" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 14</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cmb_type.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 14</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Hijjri</value>
+  </data>
+  <data name="label3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>657, 63</value>
@@ -509,6 +830,9 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>656, 89</value>
   </data>
@@ -517,6 +841,21 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Desc</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_hdate.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_amt.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_mdate.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txt_desc.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Item No</value>
@@ -555,35 +894,8 @@
   <data name="dataGridView1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Inherit</value>
   </data>
-  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>656, 144</value>
-  </data>
-  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 14</value>
-  </data>
-  <data name="label32.Text" xml:space="preserve">
-    <value>Note2</value>
-  </data>
-  <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 14</value>
-  </data>
-  <data name="label33.Text" xml:space="preserve">
-    <value>Tel</value>
-  </data>
-  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>656, 170</value>
-  </data>
-  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 14</value>
-  </data>
-  <data name="label34.Text" xml:space="preserve">
-    <value>Note3</value>
-  </data>
-  <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 14</value>
-  </data>
-  <data name="label35.Text" xml:space="preserve">
-    <value>MPay</value>
+  <data name="dataGridView1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -884,5 +1196,8 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Sales</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -158,8 +158,7 @@ namespace POS
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(446, 47);
             this.txtMessage.TabIndex = 57;
-            this.txtMessage.Text = "هذه الرسالة اصدرت من نظام\r\nتري سوفت - TreeSoft المحاسبي\r\nلطلب الخدمة ومعرفة المزي" +
-    "د\r\nيرجى زيارة الموقع الالكتروني\r\ntree-soft.com";
+            this.txtMessage.Text = resources.GetString("txtMessage.Text");
             this.txtMessage.TextChanged += new System.EventHandler(this.txtMessage_TextChanged);
             // 
             // Label2
@@ -272,12 +271,12 @@ namespace POS
             // 
             // txtfilepath
             // 
-            this.txtfilepath.Location = new System.Drawing.Point(44, 254);
+            this.txtfilepath.Location = new System.Drawing.Point(42, 254);
             this.txtfilepath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtfilepath.Name = "txtfilepath";
             this.txtfilepath.Size = new System.Drawing.Size(464, 20);
             this.txtfilepath.TabIndex = 187;
-            this.txtfilepath.Text = "..\\image\\J0390072.JPG";
+            this.txtfilepath.Text = "D:\\TreeSoft\\background.png";
             // 
             // Label4
             // 

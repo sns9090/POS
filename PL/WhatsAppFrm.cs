@@ -620,8 +620,10 @@ namespace POS
             try
             {
 
+               // dynamic client = new RestSharp.RestClient(whatsurl);
                 dynamic client = new RestSharp.RestClient(whatsurl);
                 client.Timeout = -1;
+               // dynamic request = new RestSharp.RestRequest(RestSharp.Method.Post);
                 dynamic request = new RestSharp.RestRequest(RestSharp.Method.POST);
                 request.AddHeader("Authorization", "Bearer " + tkn);
                 request.AddHeader("Accept", "*/*");
@@ -630,10 +632,12 @@ namespace POS
                 request.AddParameter("type", "media");
                 request.AddParameter("number", mobiel_no);
                 request.AddFile("file", filepath);
-                RestSharp.IRestResponse response = client.Execute(request);
+               // RestSharp.IRestResponse response = client.Execute(request);
+                RestSharp.IRestClient response = client.Execute(request);
                 //   Console.WriteLine(response.Content)
                 //     writelog("sendwhatssms", response.Content)
-                return response.Content;
+               // return response.Content;
+                return response.ToString();
             }
             catch (Exception e1)
             {
@@ -645,11 +649,15 @@ namespace POS
 
 		private void Button4_Click_2(object sender, EventArgs e)
 		{
-            //966537422638,966594647848
-           // string st = SendMediaFromDisk("967" + txtmobile_no.Text, txtMessage.Text, txtfilepath.Text, txttocken.Text, 0);
-            string st = SendMediaFromDisk( txtmobile_no.Text, txtMessage.Text, txtfilepath.Text, txttocken.Text, 0);
+            try
+            {
+                //966537422638,966594647848
+                // string st = SendMediaFromDisk("967" + txtmobile_no.Text, txtMessage.Text, txtfilepath.Text, txttocken.Text, 0);
+                string st = SendMediaFromDisk(txtmobile_no.Text, txtMessage.Text, txtfilepath.Text, txttocken.Text, 0);
 
-            txtlog.Text = st;
+                txtlog.Text = st;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -1020,9 +1028,11 @@ namespace POS
                 }
                 destinations += "]";
 
-                dynamic client = new RestSharp.RestClient(whatsurl);
+              //  dynamic client = new RestSharp.RestClient(whatsurl);
+                dynamic client = new RestSharp.RestClient();
                 client.Timeout = -1;
-                dynamic request = new RestSharp.RestRequest(RestSharp.Method.POST);
+               // dynamic request = new RestSharp.RestRequest(RestSharp.Method.POST);
+                dynamic request = new RestSharp.RestRequest();
                 request.AddHeader("Authorization", "Bearer " + tkn);
                 request.AddHeader("Accept", "*/*");
                 request.AddHeader("Content-Type", "multipart/form-data");
@@ -1036,10 +1046,12 @@ namespace POS
                 request.AddParameter("skip_reg_error", 1);
                 request.AddParameter("auto_time_enabled", 0);
                 request.AddFile("file", filepath);
-                RestSharp.IRestResponse response = client.Execute(request);
+               // RestSharp.IRestResponse response = client.Execute(request);
+                RestSharp.IRestClient response = client.Execute(request);
                 //   Console.WriteLine(response.Content)
                 //     writelog("sendwhatssms", response.Content)
-                return response.Content;
+               // return response.Content;
+                return response.ToString();
             }
             catch (Exception e1)
             {

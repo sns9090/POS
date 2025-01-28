@@ -131,7 +131,7 @@
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\update\ZATKA DLL\Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\Users\Tree\Downloads\ZatcaIntegrationSDK_SourceCode_Eng_Saif\ZatcaIntegrationSDK\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -139,8 +139,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\SSS\Desktop\GenerateQrCode\GenerateQrCode\GenerateQrCode\packages\QRCoder.1.4.1\lib\net35\QRCoder.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>C:\Users\Tree\Downloads\Whatsapp_sample_csharp2\Whatsapp_sample_csharp\bin\Debug\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=102.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Tree\Downloads\Whatsapp_sample_csharp_json0\Whatsapp_sample_csharp_json\lib\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -171,9 +172,9 @@
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="ZatcaIntegrationSDK, Version=1.0.9035.19380, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ZatcaIntegrationSDK, Version=1.0.9153.16423, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\update\update\ZatcaIntegrationSDK.dll</HintPath>
+      <HintPath>C:\Users\Tree\Downloads\ZatcaIntegrationSDK_SourceCode_Eng_Saif\ZatcaIntegrationSDK\bin\Debug\ZatcaIntegrationSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

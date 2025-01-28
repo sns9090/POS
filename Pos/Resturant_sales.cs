@@ -698,14 +698,7 @@ namespace POS.Pos
             //////////    }
             //////////}
 
-            if (con2.State == ConnectionState.Closed)
-            {
-                con2.Open();
-            }
-            else
-            {
-               // con2.Open();
-            }
+            if (con2.State == ConnectionState.Closed) con2.Open();
             //  creat_btns();
            // var lines = File.ReadAllLines(Directory.GetCurrentDirectory()+@"\temp.txt");
             var lines2 = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\prttype.txt");
