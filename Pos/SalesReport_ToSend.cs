@@ -17,6 +17,7 @@ using ZatcaIntegrationSDK;
 using ZatcaIntegrationSDK.BLL;
 using ZatcaIntegrationSDK.HelperContracts;
 using ZatcaIntegrationSDK.APIHelper;
+using System.Net.NetworkInformation;
 
 namespace POS.Pos
 {
@@ -1051,6 +1052,27 @@ namespace POS.Pos
                     ////    inv.allowanceCharges.Add(allowance);
                     ////}
 
+                    if (decimal.Parse(dtrh[13].ToString()) > 0)
+                    {
+                        //this code incase of there is a discount in invoice level 
+                        AllowanceCharge allowance = new AllowanceCharge();
+                        //ChargeIndicator = false means that this is discount
+                        //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                        allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
+                        //write this lines in case you will make discount as percentage
+                        // allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[15].ToString()); //dscount percentage like 10
+                        // allowance.BaseAmount = decimal.Parse(dtrh[17].ToString()); // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
+
+                        // in case we will make discount as Amount 
+                        allowance.Amount = decimal.Parse(Math.Round(Convert.ToDouble(dtrh[13]), 2).ToString());// decimal.Parse(dtrh[13].ToString()); // 
+                        //  allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
+                        allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                        allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
+                        allowance.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                        //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                        inv.allowanceCharges.Add(allowance);
+                    }
+
                     DataTable dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select a.*,b.tax_id,b.tax_percent,b.zatka_code,b.zatka_reason from pos_dtl a join taxs b on a.tax_id=b.tax_id where a.ref=" + dtrh[2].ToString() + "");
                     // فى حالة فى اكتر من منتج فى الفاتورة هانعمل ليست من invoiceline مثال الكود التالى
                     // for (int i = 1; i <= dtdtl.Rows.Count; i++)
@@ -1107,6 +1129,7 @@ namespace POS.Pos
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "VATEX-SA-HEA";
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "";
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "";
+                        /*
                         if (decimal.Parse(dtrh[18].ToString()) > 0)
                         // if (0 > 1)
                         {
@@ -1143,6 +1166,24 @@ namespace POS.Pos
 
                             allowanceCharge.MultiplierFactorNumeric = 0;
                             allowanceCharge.BaseAmount = 0;
+                            invline.allowanceCharges.Add(allowanceCharge);
+                        }
+                        */
+                        if (decimal.Parse(dtrd[15].ToString()) > 0)
+                        {
+                            // incase there is discount in invoice line level
+                            AllowanceCharge allowanceCharge = new AllowanceCharge();
+                            // فى حالة الرسوم incase of charges
+                            // allowanceCharge.ChargeIndicator = true;
+                            // فى حالة الخصم incase of discount
+                            allowanceCharge.ChargeIndicator = false;
+
+                            allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
+                            // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
+                            // allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
+
+                            allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrd[15].ToString());//0;
+                            allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) * (decimal.Parse(dtrd[9].ToString())); //0;
                             invline.allowanceCharges.Add(allowanceCharge);
                         }
                         inv.InvoiceLines.Add(invline);
@@ -1539,11 +1580,35 @@ namespace POS.Pos
 
 //            }
         }
+        private bool chknet()
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                String host = "google.com";
+                byte[] buffer = new byte[32];
+                int timeout = 1000;
+                PingOptions pingOptions = new PingOptions();
+                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
 
         public void button7_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!chknet())
+                {
+                    MessageBox.Show(" No Internet Connection لا يوجد اتصال بالانترنت ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 string PublicKey = string.IsNullOrEmpty(BL.CLS_Session.z_certpem) ? File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\cert.pem") : BL.CLS_Session.z_certpem;
                 string PrivateKey = string.IsNullOrEmpty(BL.CLS_Session.z_keypem) ?File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\key.pem"): BL.CLS_Session.z_keypem;
                 string SecretKey = string.IsNullOrEmpty(BL.CLS_Session.z_secrettxt) ? File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\secret.txt") : BL.CLS_Session.z_secrettxt;

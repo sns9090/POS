@@ -2097,7 +2097,8 @@ namespace POS.Pur
 
             foreach (DataGridViewRow ro in dataGridView1.Rows)
             {
-                if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null))
+               // if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null))
+                if (!ro.IsNewRow && ro.Cells[0].Value != null && ro.Cells[1].Value != null && ro.Cells[2].Value != null && ro.Cells[3].Value != null && ro.Cells[0] != null && ro.Cells[1] != null && ro.Cells[2] != null && ro.Cells[3] != null && !ro.Cells[0].Value.ToString().Trim().Equals("") && !ro.Cells[1].Value.ToString().Trim().Equals("") && !ro.Cells[2].Value.ToString().Trim().Equals("") && !ro.Cells[3].Value.ToString().Trim().Equals(""))              
                 {
                     if (shameltax)
                     {

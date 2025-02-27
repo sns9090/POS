@@ -41,6 +41,7 @@
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_edit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chk_stopserach = new System.Windows.Forms.CheckBox();
             this.chk_priclowcost = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -83,9 +84,11 @@
             this.txt_password = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_find = new System.Windows.Forms.TextBox();
-            this.chk_stopserach = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -186,6 +189,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.chk_stopserach);
             this.groupBox1.Controls.Add(this.chk_priclowcost);
             this.groupBox1.Controls.Add(this.label19);
@@ -233,6 +238,12 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // chk_stopserach
+            // 
+            resources.ApplyResources(this.chk_stopserach, "chk_stopserach");
+            this.chk_stopserach.Name = "chk_stopserach";
+            this.chk_stopserach.UseVisualStyleBackColor = true;
             // 
             // chk_priclowcost
             // 
@@ -484,11 +495,30 @@
             this.txt_find.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             this.txt_find.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox7_KeyDown);
             // 
-            // chk_stopserach
+            // label20
             // 
-            resources.ApplyResources(this.chk_stopserach, "chk_stopserach");
-            this.chk_stopserach.Name = "chk_stopserach";
-            this.chk_stopserach.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // numericUpDown1
+            // 
+            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // USER_PRO
             // 
@@ -503,6 +533,7 @@
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -564,6 +595,8 @@
         private System.Windows.Forms.CheckBox chk_priclowcost;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.CheckBox chk_stopserach;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
 
     }
 }

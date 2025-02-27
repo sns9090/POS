@@ -97,6 +97,8 @@
             this.button8 = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txt_resales = new System.Windows.Forms.TextBox();
+            this.txt_sales = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -584,11 +586,27 @@
             0,
             0});
             // 
+            // txt_resales
+            // 
+            resources.ApplyResources(this.txt_resales, "txt_resales");
+            this.txt_resales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_resales.Name = "txt_resales";
+            this.txt_resales.ReadOnly = true;
+            // 
+            // txt_sales
+            // 
+            resources.ApplyResources(this.txt_sales, "txt_sales");
+            this.txt_sales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_sales.Name = "txt_sales";
+            this.txt_sales.ReadOnly = true;
+            // 
             // Sales_Report
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.txt_resales);
+            this.Controls.Add(this.txt_sales);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button8);
@@ -709,5 +727,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox txt_resales;
+        private System.Windows.Forms.TextBox txt_sales;
     }
 }

@@ -65,7 +65,7 @@ namespace POS.Pos
 
                 //  SqlDataAdapter da3 = new SqlDataAdapter("select * from hdr where date like'%" + xxx + "%'", con3);
                 // SqlDataAdapter da4 = new SqlDataAdapter("select sum(total) from hdr where date between'" + xxx + "' and '" + yyy + "'", con3);
-                SqlDataAdapter da4 = new SqlDataAdapter("select round(sum(case type when 1 then total when 5 then total when 0 then -total end),2),round(sum(case type when 1 then total_cost when 5 then total_cost when 0 then -total_cost end),2),round(sum(case type when 1 then discount when 5 then discount when 0 then -discount end),2),round(sum(case type when 1 then net_total when 5 then net_total when 0 then -net_total end ),2),round(sum(case type when 1 then tax_amt when 5 then tax_amt when 0 then -tax_amt end),2) tax ,round(sum(((case type when 1 then net_total when 5 then net_total when 0 then -net_total end) - (case type when 1 then tax_amt when 5 then tax_amt  when 0 then -tax_amt end))),2) net1,round(sum(case type when 1 then net_total-card_amt when 5 then net_total-card_amt when 0 then -net_total end),2)cash ,round(isnull(sum(case when type in (1,5) and card_type in(1,2,3) then card_amt  else 0 end),0),2) card,round(isnull(sum(case when type in(1,5) and card_type in(4) then card_amt  else 0 end),0),2) othr,round(sum(case type when 3 then net_total  else 0 end ),2) netagl,round(isnull(sum(case when type in(1,5) and card_type in(2) then card_amt  else 0 end),0),2) master,round(isnull(sum(case when type in(1,5) and card_type in(3) then card_amt  else 0 end),0),2) visa from " + condcncl + " where  brno='" + BL.CLS_Session.brno + "' and date between'" + datval.convert_to_yyyy_MMddwith_dash(xxx) + " " + maskedTextBox3.Text + "' and '" + datval.convert_to_yyyy_MMddwith_dash(zzz) + " " + maskedTextBox4.Text + "' " + conds + condt + condam + cndtyp + cndtdv + "", con3);
+                SqlDataAdapter da4 = new SqlDataAdapter("select round(sum(case type when 1 then total when 5 then total when 0 then -total end),2),round(sum(case type when 1 then total_cost when 5 then total_cost when 0 then -total_cost end),2),round(sum(case type when 1 then discount when 5 then discount when 0 then -discount end),2),round(sum(case type when 1 then net_total when 5 then net_total when 0 then -net_total end ),2),round(sum(case type when 1 then tax_amt when 5 then tax_amt when 0 then -tax_amt end),2) tax ,round(sum(((case type when 1 then net_total when 5 then net_total when 0 then -net_total end) - (case type when 1 then tax_amt when 5 then tax_amt  when 0 then -tax_amt end))),2) net1,round(sum(case type when 1 then net_total-card_amt when 5 then net_total-card_amt when 0 then -net_total end),2)cash ,round(isnull(sum(case when type in (1,5) and card_type in(1,2,3) then card_amt  else 0 end),0),2) card,round(isnull(sum(case when type in(1,5) and card_type in(4) then card_amt  else 0 end),0),2) othr,(round(sum(case when type in(3) then net_total  else 0 end ),2) - round(sum(case when type in(2) then net_total  else 0 end ),2)) netagl,round(isnull(sum(case when type in(1,5) and card_type in(2) then card_amt  else 0 end),0),2) master,round(isnull(sum(case when type in(1,5) and card_type in(3) then card_amt  else 0 end),0),2) visa,round(sum(((case when type not in(0,2) then net_total else 0 end))),2) sales, round(sum(((case when type in(0,2) then net_total else 0 end))),2) resales from " + condcncl + " where  brno='" + BL.CLS_Session.brno + "' and date between'" + datval.convert_to_yyyy_MMddwith_dash(xxx) + " " + maskedTextBox3.Text + "' and '" + datval.convert_to_yyyy_MMddwith_dash(zzz) + " " + maskedTextBox4.Text + "' " + conds + condt + condam + cndtyp + cndtdv + "", con3);
 
                 DataSet ds3 = new DataSet();
                 da3.Fill(ds3, "0");
@@ -75,6 +75,8 @@ namespace POS.Pos
                 txt_cost.Text = ds3.Tables[1].Rows[0][1].ToString();
 
                 txt_tax.Text = ds3.Tables[1].Rows[0]["tax"].ToString();
+                txt_sales.Text = ds3.Tables[1].Rows[0]["sales"].ToString();
+                txt_resales.Text = ds3.Tables[1].Rows[0]["resales"].ToString();
                 txt_net1.Text = ds3.Tables[1].Rows[0]["net1"].ToString();
 
                 txt_cash.Text = ds3.Tables[1].Rows[0]["cash"].ToString();
@@ -565,7 +567,9 @@ namespace POS.Pos
 
         private void طباعةToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Convert.ToDouble(datval.convert_to_yyyyDDdd(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)).AddDays(365).ToString())) < Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))))
+            //if (Convert.ToDouble(datval.convert_to_yyyyDDdd(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)).AddDays(365).ToString())) < Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))))
+            TimeSpan span = DateTime.Now.Subtract(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)));
+            if (Convert.ToDouble(span.Days) > 365)
             {
                 MessageBox.Show(" بيانات الصيانه مفقودة يرجى التواصل مع الدعم الفني لتحديثها ", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -784,7 +788,8 @@ namespace POS.Pos
                 rpt.SetParameterValue("Comp_Name", BL.CLS_Session.cmp_name.ToString());
                 rpt.SetParameterValue("date", maskedTextBox1.Text.Substring(0, 10) + " To " + maskedTextBox2.Text.Substring(0, 10));
                 rpt.SetParameterValue("salman", txt_salman.Text);
-
+                rpt.SetParameterValue("sales", txt_sales.Text);
+                rpt.SetParameterValue("resales", txt_resales.Text);
                 rpt.SetParameterValue("total", txt_total.Text);
                 rpt.SetParameterValue("disc", textBox2.Text);
                 rpt.SetParameterValue("net", textBox1.Text);

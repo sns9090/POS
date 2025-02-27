@@ -20,15 +20,17 @@ namespace POS.Sto
         private string Excel03ConString = "Provider=Microsoft.Jet.Sql.4.0;Data Source={0};Extended Properties='Excel 8.0;HDR={1}'";
         private string Excel07ConString = "Provider=Microsoft.ACE.Sql.12.0;Data Source={0};Extended Properties='Excel 8.0;HDR={1}'";
 
-      //  BL.DAML daml =new BL.DAML();
+        BL.DAML daml =new BL.DAML();
+        DataTable dtci;
         public Import_From_Xls()
         {
             InitializeComponent();
         }
 
        // SqlConnection con = new SqlConnection(@"Provider=Microsoft.ACE.Sql.12.0;Data Source=" + Directory.GetCurrentDirectory() + @"\db\db.accdb; Jet Sql:Database Password=123456;");
-        SqlConnection con2 = BL.DAML.con;
-        OleDbConnection con = new OleDbConnection(Properties.Settings.Default.dbConnectionString);
+        SqlConnection con3 = BL.DAML.con;
+      //  OleDbConnection con = new OleDbConnection(Properties.Settings.Default.dbConnectionString);
+       
         //new SqlConnection(Properties.Settings.Default.dbConnectionString);
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -63,6 +65,8 @@ namespace POS.Sto
                 using (OleDbCommand cmd = new OleDbCommand())
                 {
                     cmd.Connection = con;
+
+                    if (con.State == ConnectionState.Closed)
                     con.Open();
                     DataTable dtExcelSchema = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                     sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
@@ -80,6 +84,8 @@ namespace POS.Sto
                         DataTable dt = new DataTable();
                         cmd.CommandText = "SELECT * From [" + sheetName + "]";
                         cmd.Connection = con;
+
+                        if (con.State == ConnectionState.Closed)
                         con.Open();
                         oda.SelectCommand = cmd;
                         oda.Fill(dt);
@@ -94,7 +100,8 @@ namespace POS.Sto
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
+            dtci = new DataTable();
             string saveStaff, savebc, savebr,savewb;
 
             progressBar1.Visible = true;
@@ -109,8 +116,8 @@ namespace POS.Sto
 
             try
             {
-                if(con2.State==ConnectionState.Closed)
-                  con2.Open();
+                if(con3.State==ConnectionState.Closed)
+                  con3.Open();
                 //for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 //{
                 //    //StrQuery = @"INSERT INTO contacts VALUES ("
@@ -132,7 +139,7 @@ namespace POS.Sto
                 //////    saveStaff = "INSERT into items (item_no,item_name,item_price,item_barcode,item_unit,item_group,unit2,uq2,unit2p,supno) "
                 //////              + " VALUES ('" + row[0] + "', '" + row[1] + "'," + row[2] + ",'" + row[3] + "'," + row[4] + "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + ",'" + row[9] + "');";
 
-                //////    SqlCommand cmd = new SqlCommand(saveStaff, con2);
+                //////    SqlCommand cmd = new SqlCommand(saveStaff, con3);
 
                 //////    cmd.ExecuteNonQuery();
 
@@ -140,50 +147,56 @@ namespace POS.Sto
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-
-                    saveStaff = "INSERT into items (item_no,item_name,item_price,item_barcode,item_unit,item_group,unit2,uq2,unit2p,supno,item_ename) "
-                      //  + " VALUES ('" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() :  dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Trim().Substring(0, 100) + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" +(chk_autobarcode.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) )+ "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString().Trim() + "');";
-                     //  + " VALUES ('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Substring(0, 16) + "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Substring(0, 100) + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" +  dataGridView1.Rows[i].Cells[3].Value.ToString().Substring(0, 20) + "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString() + "');";
-                       + " VALUES ('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString().Trim() + "','"+dataGridView1.Rows[i].Cells[13].Value.ToString().Trim()+"');";
-
-                    SqlCommand cmd = new SqlCommand(saveStaff, con2);
-
-                    savebc = "INSERT into items_bc(item_no,barcode,pack,pk_qty,price,pkorder,br_no,sl_no)"
-                      //  + " VALUES('" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "','" +(chk_autobarcode.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) )+ "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1);";
-                      //  +" VALUES('" +  dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) + "','" +   dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) + "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1);";
-                          + " VALUES('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "','" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1,'01','01');";
-                   
-                    SqlCommand cmd2 = new SqlCommand(savebc, con2);
-
-                    savebr = "INSERT into brprices(branch,slcenter,itemno,lprice1,barcode)"
-                     //   + " VALUES('" + BL.CLS_Session.brno + "','','" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "'," + dataGridView1.Rows[i].Cells[2].Value + ");";
-                          + " VALUES('" + BL.CLS_Session.brno + "','','" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "');";
-                   
-                    SqlCommand cmd3 = new SqlCommand(savebr, con2);
-
-                    cmd.ExecuteNonQuery();
-                    cmd2.ExecuteNonQuery();
-                    cmd3.ExecuteNonQuery();
-
-                    progressBar1.Value = i;
-                }
-
-                if (checkBox1.Checked)
-                {
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    dtci = daml.SELECT_QUIRY_only_retrn_dt("select * from items where item_no='" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "'");
+                    if (dtci.Rows.Count == 0)
                     {
-                        savewb = "INSERT into whbins (br_no, item_no, unicode, wh_no, bin_no, qty, rsvqty, openbal, lcost, fcost, openlcost, openfcost, expdate) "
-                             + " VALUES ('" + BL.CLS_Session.brno + "','" + (chk_autoitemno.Checked ? dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16)) + "','', '" + dataGridView1.Rows[i].Cells[10].Value.ToString().Trim() + "',''," + dataGridView1.Rows[i].Cells[11].Value + ",0," + dataGridView1.Rows[i].Cells[11].Value + "," + dataGridView1.Rows[i].Cells[12].Value + ",0," + dataGridView1.Rows[i].Cells[12].Value + ",0,'');";
+                        saveStaff = "INSERT into items (item_no,item_name,item_price,item_barcode,item_unit,item_group,unit2,uq2,unit2p,supno,item_ename) "
+                            //  + " VALUES ('" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() :  dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Trim().Substring(0, 100) + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" +(chk_autobarcode.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) )+ "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString().Trim() + "');";
+                            //  + " VALUES ('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Substring(0, 16) + "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Substring(0, 100) + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" +  dataGridView1.Rows[i].Cells[3].Value.ToString().Substring(0, 20) + "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString() + "');";
+                           + " VALUES ('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "', '" + dataGridView1.Rows[i].Cells[1].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[4].Value + ",'" + dataGridView1.Rows[i].Cells[5].Value + "'," + dataGridView1.Rows[i].Cells[6].Value + "," + dataGridView1.Rows[i].Cells[7].Value + "," + dataGridView1.Rows[i].Cells[8].Value + ",'" + dataGridView1.Rows[i].Cells[9].Value.ToString().Trim() + "','" + dataGridView1.Rows[i].Cells[13].Value.ToString().Trim() + "');";
 
-                        SqlCommand cmd4 = new SqlCommand(savewb, con2);
+                        SqlCommand cmd = new SqlCommand(saveStaff, con3);
 
-                       
-                        cmd4.ExecuteNonQuery();
-                       
+                        savebc = "INSERT into items_bc(item_no,barcode,pack,pk_qty,price,pkorder,br_no,sl_no)"
+                            //  + " VALUES('" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "','" +(chk_autobarcode.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) )+ "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1);";
+                            //  +" VALUES('" +  dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) + "','" +   dataGridView1.Rows[i].Cells[3].Value.ToString().Trim().Substring(0, 20) + "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1);";
+                              + " VALUES('" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "','" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[4].Value + ",1," + dataGridView1.Rows[i].Cells[2].Value + ",1,'01','01');";
+
+                        SqlCommand cmd2 = new SqlCommand(savebc, con3);
+
+                        savebr = "INSERT into brprices(branch,slcenter,itemno,lprice1,barcode)"
+                            //   + " VALUES('" + BL.CLS_Session.brno + "','','" +(chk_autoitemno.Checked?dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16) )+ "'," + dataGridView1.Rows[i].Cells[2].Value + ");";
+                              + " VALUES('" + BL.CLS_Session.brno + "','','" + dataGridView1.Rows[i].Cells[0].Value.ToString().Trim() + "'," + dataGridView1.Rows[i].Cells[2].Value + ",'" + dataGridView1.Rows[i].Cells[3].Value.ToString().Trim() + "');";
+
+                        SqlCommand cmd3 = new SqlCommand(savebr, con3);
+
+
+                        if (con3.State == ConnectionState.Closed)
+                            con3.Open();
+                        cmd.ExecuteNonQuery();
+                        cmd2.ExecuteNonQuery();
+                        cmd3.ExecuteNonQuery();
+
+                        progressBar1.Value = i;
+
+
+                        if (checkBox1.Checked)
+                        {
+                            // for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                            /// {
+                            savewb = "INSERT into whbins (br_no, item_no, unicode, wh_no, bin_no, qty, rsvqty, openbal, lcost, fcost, openlcost, openfcost, expdate) "
+                                   + " VALUES ('" + BL.CLS_Session.brno + "','" + (chk_autoitemno.Checked ? dataGridView1.Rows[i].HeaderCell.Value.ToString() : dataGridView1.Rows[i].Cells[0].Value.ToString().Trim().Substring(0, 16)) + "','', '" + dataGridView1.Rows[i].Cells[10].Value.ToString().Trim() + "',''," + dataGridView1.Rows[i].Cells[11].Value + ",0," + dataGridView1.Rows[i].Cells[11].Value + "," + dataGridView1.Rows[i].Cells[12].Value + ",0," + dataGridView1.Rows[i].Cells[12].Value + ",0,'');";
+
+                            SqlCommand cmd4 = new SqlCommand(savewb, con3);
+
+
+                            cmd4.ExecuteNonQuery();
+
+                            // }
+                        }
                     }
                 }
-
-                con2.Close();
+                con3.Close();
                // MetroFramework.MetroMessageBox.Show(this, "تم الحفظ بنجاح", "alter", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 MessageBox.Show("تم الحفظ بنجاح", "alter", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
@@ -202,7 +215,7 @@ namespace POS.Sto
 
         private void Import_From_Xls_Load(object sender, EventArgs e)
         {
-
+            con3.Close();
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -247,6 +260,7 @@ namespace POS.Sto
 
                 OleDbConnection con = new OleDbConnection(constr);
                 OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                if (con.State == ConnectionState.Closed)
                 con.Open();
 
                 OleDbDataAdapter sda = new OleDbDataAdapter(oconn);

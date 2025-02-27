@@ -125,6 +125,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.cmb_app = new System.Windows.Forms.ComboBox();
+            this.txt_invbar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -400,6 +401,7 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.txt_invbar);
             this.groupBox1.Controls.Add(this.chk_agel);
             this.groupBox1.Controls.Add(this.txt_temp);
             this.groupBox1.Controls.Add(this.label15);
@@ -822,6 +824,12 @@
             this.cmb_app.Name = "cmb_app";
             this.cmb_app.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_app_KeyDown);
             // 
+            // txt_invbar
+            // 
+            this.txt_invbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_invbar, "txt_invbar");
+            this.txt_invbar.Name = "txt_invbar";
+            // 
             // Resturant_sales
             // 
             resources.ApplyResources(this, "$this");
@@ -988,5 +996,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cmb_app;
+        private System.Windows.Forms.TextBox txt_invbar;
     }
 }

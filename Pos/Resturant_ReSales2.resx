@@ -5282,6 +5282,9 @@
   <data name="txt_invbar.TabIndex" type="System.Int32, mscorlib">
     <value>249</value>
   </data>
+  <data name="txt_invbar.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;txt_invbar.Name" xml:space="preserve">
     <value>txt_invbar</value>
   </data>

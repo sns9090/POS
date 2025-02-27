@@ -16,6 +16,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 //using CrystalDecisions.CrystalReports.Engine;
 using System.Drawing.Printing;
+using System.Data.OleDb;
 //using System.Data.Common;
 
 namespace POS.Pur
@@ -33,7 +34,7 @@ namespace POS.Pur
         int ref_max;
         string bprinter, ptype,prpt, a_slctr, a_ref, a_type, strcash, strrcash, strrcrdt, strcrdt, strdsc, strtax, strcashr, stwhno, strsndoq, shehn, gmark, tamin, msfr, mother, waseet, stcstcode, stmkhzon,sabr;
         double gmark_amt = 0, tamin_amt = 0, shahen_amt = 0, msfr_amt = 0, mother_amt = 0, waseet_amt = 0, etax_amt=0,sabr_amt=0;
-        bool isnew, isupdate, notposted, shameltax, onebyone = false, is_printd = false;
+        bool isnew, isupdate, notposted, shameltax, onebyone = true, is_printd = false;
         BL.DAML daml = new BL.DAML();
         BL.Date_Validate dtv = new BL.Date_Validate();
         SqlConnection con = BL.DAML.con;
@@ -1778,7 +1779,9 @@ namespace POS.Pur
         {
             txt_mdate.Text = DateTime.Now.ToString("dd-MM-yyyy", new CultureInfo("en-US", false));
             txt_hdate.Text = DateTime.Now.ToString("dd-MM-yyyy", new CultureInfo("ar-SA", false));
-            
+
+            button1.ContextMenuStrip = contextMenuStrip4;
+
             cmb_salctr_SelectedIndexChanged(sender, e);
             tax_per = BL.CLS_Session.tax_per;
             
@@ -2097,7 +2100,8 @@ namespace POS.Pur
 
             foreach (DataGridViewRow ro in dataGridView1.Rows)
             {
-                if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null))
+               // if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null))
+                if (!ro.IsNewRow && ro.Cells[0].Value != null && ro.Cells[1].Value != null && ro.Cells[2].Value != null && ro.Cells[3].Value != null && ro.Cells[0] != null && ro.Cells[1] != null && ro.Cells[2] != null && ro.Cells[3] != null && !ro.Cells[0].Value.ToString().Trim().Equals("") && !ro.Cells[1].Value.ToString().Trim().Equals("") && !ro.Cells[2].Value.ToString().Trim().Equals("") && !ro.Cells[3].Value.ToString().Trim().Equals(""))              
                 {
                     if (shameltax)
                     {
@@ -2467,7 +2471,8 @@ namespace POS.Pur
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    if (cmd.Parameters["@errstatus"].Value.ToString().Equals("0"))
+                   // if (cmd.Parameters["@errstatus"].Value.ToString().Equals("0"))
+                    if (!cmd.Parameters["@errstatus"].Value.ToString().Equals("1"))
                     {
                         MessageBox.Show("لم يتم حفظ تفاصيل الفاتورة يرجى الحفظ مرة اخرى", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -5235,14 +5240,22 @@ namespace POS.Pur
 
                       //  MessageBox.Show(Environment.CurrentDirectory + @"\reports\Barcode" + (string.IsNullOrEmpty(prpt) ? "1" : prpt) + ".frx");
                         // ReportDocument report = new ReportDocument();
-                        DataTable dtpb = daml.SELECT_QUIRY_only_retrn_dt("select * from items where item_no ='" + dtr[0] + "'");
-
+                      //  DataTable dtpb = daml.SELECT_QUIRY_only_retrn_dt("select * from items where item_no ='" + dtr[0] + "'");
+                        DataTable dtpb = daml.SELECT_QUIRY_only_retrn_dt("select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,i.item_tax i_tax,i.item_image img,i.item_ename from items i join items_bc b on i.item_no=b.item_no and b.barcode='" + dtr[0].ToString().Trim() + "'");
                         FastReport.Report rpt = new FastReport.Report();
 
                         rpt.Load(Environment.CurrentDirectory + @"\reports\Barcode" + (string.IsNullOrEmpty(prpt)? "1" : prpt) + ".frx");
+                       /* rpt.SetParameterValue("br_name", BL.CLS_Session.brname);
+                        rpt.SetParameterValue("taxper", BL.CLS_Session.tax_per);
+                        rpt.SetParameterValue("tax_type", BL.CLS_Session.autotax ? "3" : "0");
+                        rpt.RegisterData(dtpb, "items");*/
                         rpt.SetParameterValue("br_name", BL.CLS_Session.brname);
                         rpt.SetParameterValue("taxper", BL.CLS_Session.tax_per);
                         rpt.SetParameterValue("tax_type", BL.CLS_Session.autotax ? "3" : "0");
+                        rpt.SetParameterValue("sdate", "");
+                        rpt.SetParameterValue("edate", "");
+                        rpt.SetParameterValue("bc_price", dtpb.Rows[0]["item_price"].ToString());
+                        rpt.SetParameterValue("bc", dtpb.Rows[0]["item_barcode"].ToString());
                         rpt.RegisterData(dtpb, "items");
 
                         rpt.PrintSettings.ShowDialog = false;
@@ -5476,6 +5489,143 @@ namespace POS.Pur
             Sup.Suppliers cust = new Sup.Suppliers("");
             cust.MdiParent = this.MdiParent;
             cust.Show();
+        }
+
+        private void استيرادمناكسلToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           if (isnew == false)
+                return;
+            try
+            {
+                openFileDialog1.ShowDialog();
+                string filePath = openFileDialog1.FileName;
+                // MessageBox.Show(filePath);
+
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook excelBook = xlApp.Workbooks.Open(filePath);
+                /*
+                String[] excelSheets = new String[excelBook.Worksheets.Count];
+                int i = 0;
+                foreach (Microsoft.Office.Interop.Excel.Worksheet wSheet in excelBook.Worksheets)
+                {
+                    excelSheets[i] = wSheet.Name;
+                    i++;
+                }
+                */
+                Microsoft.Office.Interop.Excel.Worksheet worksheet1 = excelBook.ActiveSheet as Microsoft.Office.Interop.Excel.Worksheet;
+                String name = worksheet1.Name;
+                String constr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                                filePath +
+                                ";Extended Properties='Excel 12.0 XML;HDR=NO;';";
+
+                OleDbConnection con = new OleDbConnection(constr);
+                OleDbCommand oconn = new OleDbCommand("Select * From [" + name + "$]", con);
+                con.Open();
+
+                OleDbDataAdapter sda = new OleDbDataAdapter(oconn);
+                DataTable data = new DataTable();
+                sda.Fill(data);
+                con.Close();
+
+               // excelBook.Save();
+               // excelBook.Close(true);
+                /*
+                excelBook.Close(0);
+                xlApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+                 */
+               // dataGridView1.Rows.Clear();
+
+
+
+               
+
+                foreach (DataRow dtr in data.Rows)
+                {
+                    if (!string.IsNullOrEmpty(dtr[0].ToString()))
+                    {
+                        //  MessageBox.Show("The name of the active sheet is : " + dtr[0].ToString());
+                       // dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select '" + dtr[0] + "' itemno,bb.item_name item_name," + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " pack,1 pkqty," + dtr[2] + " qty," + dtr[3] + " lcost,(" + Convert.ToDouble(dtr[2]) * Convert.ToDouble(dtr[3]) + ") total,bb.item_curcost cost,bb.item_barcode barcode,'' expdate  from items bb where bb.item_no='" + dtr[0] + "'");// and aa.a_type='" + atype + "' and aa.a_ref=" + aref + "");
+                        dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select '" + dtr[0] + "' itemno,bb.item_barcode barcode,bb.item_name item_name," + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " pack," + (dtr[1].ToString().Trim().Equals("") ? "1" : "us.unit_qty") + " pkqty," + dtr[2] + " qty," + dtr[3] + " price,0 discpc,0 tax_amt,(" + Convert.ToDouble(dtr[2]) * Convert.ToDouble(dtr[3]) + ") total,bb.item_tax tax_id, " + dtr[3] + " cost,bb.item_cost stk_or_ser,'' expdate,0 fqty from items bb join units us on us.unit_id=" + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " where bb.item_no='" + dtr[0] + "'");// and aa.a_type='" + atype + "' and aa.a_ref=" + aref + "");
+                        if (dtdtl.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dtdtl.Rows)
+                            {
+
+                                dataGridView1.Rows.Add(dr.ItemArray);
+
+                            }
+                        }
+                    }
+                   // dataGridView1.DataSource = data;
+                }
+
+                int rowNumber = 1;
+                foreach (DataGridViewRow r in dataGridView1.Rows)
+                {
+                    // dataGridView1.Rows.Add(r);
+                    // dataGridView1.Rows[e.RowIndex].HeaderCell.Value = (e.RowIndex + 1).ToString();
+                    if (r.IsNewRow) continue;
+                    //r.HeaderCell.Value = (e.RowIndex + 1).ToString();
+                    r.HeaderCell.Value = rowNumber.ToString();
+                    rowNumber = rowNumber + 1;
+
+                    DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
+                    //  r.Cells[2] = dcombo;
+                    DataView dv1 = dtunits.DefaultView;
+                    //  dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
+                    dv1.RowFilter = "unit_id in('" + r.Cells[3].Value + "')";
+                    DataTable dtNew = dv1.ToTable();
+                    dcombo.DataSource = dtNew;
+                    dcombo.DisplayMember = "unit_name";
+                    dcombo.ValueMember = "unit_id";
+
+                    r.Cells[3] = dcombo;
+                    r.Cells[3].Value = dtNew.Rows[0][0];
+
+                    dcombo.FlatStyle = FlatStyle.Flat;
+                }
+                total();
+               // excelBook.Close(0);
+              //  oWorkbook.Close();
+                excelBook.Close();
+               // excelBook = null;
+                xlApp.Quit();
+                kill_exl();
+               // xlApp = null;
+               // xlApp.Quit();
+               // System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+               
+               
+              // MessageBox.Show("The name of the active sheet is: " +
+               //     worksheet1.Name);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error); }
+        }
+
+        private void kill_exl()
+        {
+            System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
+            foreach (System.Diagnostics.Process p in process)
+            {
+                if (!string.IsNullOrEmpty(p.ProcessName))
+                {
+                    try
+                    {
+                        p.Kill();
+                    }
+                    catch { }
+                }
+            }
+
+        }
+        
+        private void تعليماتالاستيرادمنالاكسلToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isnew == false)
+                return;
+            var sh = new Sto.Import_Excel_Form();
+            sh.ShowDialog();
         }
     }
 }

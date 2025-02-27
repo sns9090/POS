@@ -2218,7 +2218,7 @@
     <value>70</value>
   </data>
   <data name="dataGridView2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 494</value>
+    <value>12, 494</value>
   </data>
   <data name="dataGridView2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -2227,7 +2227,7 @@
     <value>60</value>
   </data>
   <data name="dataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1127, 106</value>
+    <value>1118, 106</value>
   </data>
   <data name="dataGridView2.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>

@@ -97,6 +97,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txt_sales = new System.Windows.Forms.TextBox();
+            this.txt_resales = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -104,21 +106,21 @@
             // 
             // contextMenuStrip1
             // 
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.طباعةToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // طباعةToolStripMenuItem
             // 
-            resources.ApplyResources(this.طباعةToolStripMenuItem, "طباعةToolStripMenuItem");
             this.طباعةToolStripMenuItem.Name = "طباعةToolStripMenuItem";
+            resources.ApplyResources(this.طباعةToolStripMenuItem, "طباعةToolStripMenuItem");
             this.طباعةToolStripMenuItem.Click += new System.EventHandler(this.طباعةToolStripMenuItem_Click);
             // 
             // button8
             // 
-            resources.ApplyResources(this.button8, "button8");
             this.button8.Image = global::POS.Properties.Resources.Print_32x32;
+            resources.ApplyResources(this.button8, "button8");
             this.button8.Name = "button8";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
@@ -222,8 +224,8 @@
             // 
             // comboBox2
             // 
-            resources.ApplyResources(this.comboBox2, "comboBox2");
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBox2, "comboBox2");
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             resources.GetString("comboBox2.Items"),
@@ -233,17 +235,17 @@
             // 
             // button1
             // 
-            resources.ApplyResources(this.button1, "button1");
             this.button1.Image = global::POS.Properties.Resources.Play_32x32;
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -412,16 +414,16 @@
             // 
             // button2
             // 
-            resources.ApplyResources(this.button2, "button2");
             this.button2.Image = global::POS.Properties.Resources.Excel_32_32;
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // txt_mdate
             // 
-            resources.ApplyResources(this.txt_mdate, "txt_mdate");
             this.txt_mdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_mdate, "txt_mdate");
             this.txt_mdate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txt_mdate.Name = "txt_mdate";
             this.txt_mdate.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
@@ -444,7 +446,6 @@
             // 
             // comboBox1
             // 
-            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -452,6 +453,7 @@
             resources.GetString("comboBox1.Items1"),
             resources.GetString("comboBox1.Items2"),
             resources.GetString("comboBox1.Items3")});
+            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -471,16 +473,16 @@
             // 
             // button4
             // 
-            resources.ApplyResources(this.button4, "button4");
             this.button4.Image = global::POS.Properties.Resources.Print_32x32;
+            resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            resources.ApplyResources(this.button5, "button5");
             this.button5.Image = global::POS.Properties.Resources.Print_32x32;
+            resources.ApplyResources(this.button5, "button5");
             this.button5.Name = "button5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -525,8 +527,8 @@
             // 
             // cmb_salctr
             // 
-            resources.ApplyResources(this.cmb_salctr, "cmb_salctr");
             this.cmb_salctr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_salctr, "cmb_salctr");
             this.cmb_salctr.FormattingEnabled = true;
             this.cmb_salctr.Name = "cmb_salctr";
             this.cmb_salctr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_salctr_KeyDown);
@@ -539,14 +541,14 @@
             // 
             // txt_contr
             // 
-            resources.ApplyResources(this.txt_contr, "txt_contr");
             this.txt_contr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_contr, "txt_contr");
             this.txt_contr.Name = "txt_contr";
             // 
             // txt_salman
             // 
-            resources.ApplyResources(this.txt_salman, "txt_salman");
             this.txt_salman.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_salman, "txt_salman");
             this.txt_salman.Name = "txt_salman";
             // 
             // label6
@@ -585,11 +587,27 @@
             0,
             0});
             // 
+            // txt_sales
+            // 
+            resources.ApplyResources(this.txt_sales, "txt_sales");
+            this.txt_sales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_sales.Name = "txt_sales";
+            this.txt_sales.ReadOnly = true;
+            // 
+            // txt_resales
+            // 
+            resources.ApplyResources(this.txt_resales, "txt_resales");
+            this.txt_resales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_resales.Name = "txt_resales";
+            this.txt_resales.ReadOnly = true;
+            // 
             // DilySalesReport
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.txt_resales);
+            this.Controls.Add(this.txt_sales);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button8);
@@ -710,5 +728,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox txt_sales;
+        private System.Windows.Forms.TextBox txt_resales;
     }
 }

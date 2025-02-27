@@ -185,5 +185,53 @@ namespace POS
                 catch { }
             }
         }
+
+        private void طباعةToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sqlDataAdapter = new SqlDataAdapter("select * from branchs where br_no ='" + dataGridView1.CurrentRow.Cells[0].Value + "'", sqlConnection);
+                sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+                dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+
+                if (dataTable.Rows.Count > 0 && !dataTable.Rows[0][0].ToString().Equals("01") && !Convert.ToBoolean(dataTable.Rows[0]["acc_coped"]))
+                {
+                    using (SqlCommand cmd = new SqlCommand("copy_br_acc"))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = con1;
+                        cmd.CommandTimeout = 0;
+                        cmd.Parameters.AddWithValue("@brno", dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim());
+                        cmd.Parameters.AddWithValue("@brname", dataGridView1.CurrentRow.Cells[1].Value.ToString().Trim());
+                        cmd.Parameters.AddWithValue("@errstatus", 0);
+                        cmd.Parameters["@errstatus"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.AddWithValue("@NO_acc", 0);
+                        cmd.Parameters["@NO_acc"].Direction = ParameterDirection.Output;
+                        if (con1.State == ConnectionState.Closed) con1.Open();
+                        cmd.ExecuteNonQuery();
+                        con1.Close();
+
+                        // MessageBox.Show(cmd.Parameters["@errstatus"].Value.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (!cmd.Parameters["@errstatus"].Value.ToString().Equals("1"))
+                        {
+                            MessageBox.Show(dataGridView1.CurrentRow.Cells[1].Value.ToString().Trim() + " فشل فتح حسابات ", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        // MessageBox.Show(cmd.Parameters["@errstatus"].Value.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //else
+                        MessageBox.Show(cmd.Parameters["@NO_acc"].Value.ToString() + " تم فتح حسابات " + dataGridView1.CurrentRow.Cells[1].Value.ToString().Trim() + " بنجاح ", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(dataGridView1.CurrentRow.Cells[1].Value.ToString().Trim() + " حدث خطا اثناء فتح حسابات ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

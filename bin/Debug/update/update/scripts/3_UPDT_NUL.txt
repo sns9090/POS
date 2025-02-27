@@ -115,3 +115,6 @@ BEGIN
     INSERT INTO [dbo].[trtypes]([tr_no],[tr_name],[tr_ename],[tr_abriv]) VALUES('37','طلبية بيع','Sale Order','طلبية بيع')
 END
 
+update users set up_frmprt=1 where up_frmprt is null;
+update items set dunit=item_unit where dunit is null;
+update branchs set acc_coped=1 where acc_coped is null;

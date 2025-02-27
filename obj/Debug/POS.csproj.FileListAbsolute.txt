@@ -1447,3 +1447,6 @@ D:\POS_Project\POS\POS\bin\Debug\IKVM.Runtime.dll
 D:\POS_Project\POS\POS\bin\Debug\IKVM.OpenJDK.Text.dll
 D:\POS_Project\POS\POS\bin\Debug\IKVM.OpenJDK.Util.dll
 D:\POS_Project\POS\POS\bin\Debug\Newtonsoft.Json.xml
+D:\POS_Project\POS\POS\obj\Debug\POS.Pos.Pos_Tafseel.resources
+D:\POS_Project\POS\POS\obj\Debug\POS.Pos.Pos_Tafseel.en.resources
+D:\POS_Project\POS\POS\obj\Debug\POS.Sto.Mizan_Expoert.en.resources

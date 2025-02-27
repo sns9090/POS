@@ -287,11 +287,13 @@ namespace POS.Pos
                 {
                     sl_delline = false;
                     btn_delitem.Enabled = false;
+                    dataGridView1.AllowUserToDeleteRows = false;
                 }
                 else
                 {
                     sl_delline = true;
                     btn_delitem.Enabled = true;
+                    dataGridView1.AllowUserToDeleteRows = true;
                 }
 
                 if (Convert.ToBoolean(BL.CLS_Session.dtsalman.Rows[0]["sl_delinv"]) == false)
@@ -389,7 +391,7 @@ namespace POS.Pos
                 txt_salnam.Text = BL.CLS_Session.dtsalman.Rows[0]["sl_name"].ToString();
 
 
-                int form2Count = Application.OpenForms.OfType<RESALES_D_TCH>().Count();
+                int form2Count = Application.OpenForms.OfType<RESALES_D_TCH>().Count() + Application.OpenForms.OfType<SALES_D_TCH>().Count();
 
                 if (form2Count > Convert.ToInt32(BL.CLS_Session.dtsalman.Rows[0]["scr_open"]))
                     this.Close();
@@ -842,7 +844,7 @@ namespace POS.Pos
             {
                // if (string.IsNullOrEmpty(txt_custno.Text) ? ((Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text)) >= (BL.CLS_Session.isshamltax.Equals("2") ? (Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_desc.Text)) : (Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_desc.Text) + Convert.ToDouble(txt_tax.Text)))): 1 != 0)
                // if (string.IsNullOrEmpty(txt_custno.Text) && !chk_agel.Checked ? ((Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text)) >= (BL.CLS_Session.isshamltax.Equals("2") ? (Convert.ToDouble(lbl_mustpay.Text)) : (Convert.ToDouble(lbl_mustpay.Text)))) : 1 != 0)
-                if (Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text) >= Convert.ToDouble(lbl_mustpay.Text) && (string.IsNullOrEmpty(txt_custno.Text) || !chk_agel.Checked))
+                if ((Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text)) >= Convert.ToDouble(lbl_mustpay.Text) &&  !chk_agel.Checked)
                 {
                     //  if (((Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text)) > (BL.CLS_Session.isshamltax.Equals("2") ? (Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_desc.Text) + 500) : (Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_desc.Text) + Convert.ToDouble(txt_tax.Text) + 500))))
                     if (((Convert.ToDouble(txt_recv.Text) + Convert.ToDouble(txt_cardpay.Text)) > (BL.CLS_Session.isshamltax.Equals("2") ? (Convert.ToDouble(lbl_mustpay.Text) + 500) : (Convert.ToDouble(lbl_mustpay.Text) + 500))))
@@ -3786,7 +3788,7 @@ namespace POS.Pos
 
         private void txt_custno_Leave(object sender, EventArgs e)
         {
-            DataTable dt2 = daml.SELECT_QUIRY_only_retrn_dt("select cu_no ,cu_name ,cl_acc,cu_crlmt from customers a join cuclass b on a.cu_class=b.cl_no  where a.inactive=0 and a.cu_brno='" + BL.CLS_Session.brno + "' and cu_no='" + txt_custno.Text + "'");
+            DataTable dt2 = daml.SELECT_QUIRY_only_retrn_dt("select cu_no ,cu_name ,cl_acc,cu_crlmt,cu_disc from customers a join cuclass b on a.cu_class=b.cl_no  where a.inactive=0 and a.cu_brno='" + BL.CLS_Session.brno + "' and cu_no='" + txt_custno.Text + "'");
 
             // dataGridView1.DataSource = daml.SELECT_QUIRY(qstr2);
 
@@ -3835,7 +3837,8 @@ namespace POS.Pos
 
             if (e.KeyCode == Keys.Enter)
             {
-                txt_desc.Focus();
+                txt_recv.Focus();
+                //txt_desc.Focus();
             }
         }
 
@@ -5502,6 +5505,26 @@ namespace POS.Pos
                 ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
                 ////    inv.allowanceCharges.Add(allowance);
                 ////}
+                if (decimal.Parse(dtrh[13].ToString()) > 0)
+                {
+                    //this code incase of there is a discount in invoice level 
+                    AllowanceCharge allowance = new AllowanceCharge();
+                    //ChargeIndicator = false means that this is discount
+                    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
+                    //write this lines in case you will make discount as percentage
+                    // allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[15].ToString()); //dscount percentage like 10
+                    // allowance.BaseAmount = decimal.Parse(dtrh[17].ToString()); // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
+
+                    // in case we will make discount as Amount 
+                    allowance.Amount = decimal.Parse(Math.Round(Convert.ToDouble(dtrh[13]), 2).ToString());// decimal.Parse(dtrh[13].ToString()); // 
+                    //  allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
+                    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                    allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
+                    allowance.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                    inv.allowanceCharges.Add(allowance);
+                }
 
                 DataTable dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select a.*,b.tax_id,b.tax_percent,b.zatka_code,b.zatka_reason from pos_dtl a join taxs b on a.tax_id=b.tax_id where a.ref=" + dtrh[2] + "");
                 // فى حالة فى اكتر من منتج فى الفاتورة هانعمل ليست من invoiceline مثال الكود التالى
@@ -5557,6 +5580,7 @@ namespace POS.Pos
                     //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "VATEX-SA-HEA";
                     //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "";
                     //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "";
+                    /*
                     if (decimal.Parse(dtrh[18].ToString()) > 0)
                     // if (0 > 1)
                     {
@@ -5593,6 +5617,24 @@ namespace POS.Pos
 
                         allowanceCharge.MultiplierFactorNumeric = 0;
                         allowanceCharge.BaseAmount = 0;
+                        invline.allowanceCharges.Add(allowanceCharge);
+                    }
+                    */
+                    if (decimal.Parse(dtrd[15].ToString()) > 0)
+                    {
+                        // incase there is discount in invoice line level
+                        AllowanceCharge allowanceCharge = new AllowanceCharge();
+                        // فى حالة الرسوم incase of charges
+                        // allowanceCharge.ChargeIndicator = true;
+                        // فى حالة الخصم incase of discount
+                        allowanceCharge.ChargeIndicator = false;
+
+                        allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
+                        // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
+                        // allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
+
+                        allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrd[15].ToString());//0;
+                        allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) * (decimal.Parse(dtrd[9].ToString())); //0;
                         invline.allowanceCharges.Add(allowanceCharge);
                     }
                     inv.InvoiceLines.Add(invline);

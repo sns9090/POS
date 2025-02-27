@@ -64,18 +64,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cmb_type = new System.Windows.Forms.ComboBox();
-            this.txt_desc = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.txt_equl = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rad_all = new System.Windows.Forms.RadioButton();
-            this.rad_notpostd = new System.Windows.Forms.RadioButton();
-            this.rad_posted = new System.Windows.Forms.RadioButton();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,6 +77,19 @@
             this.a_p = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.a_t = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.src = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmb_type = new System.Windows.Forms.ComboBox();
+            this.txt_desc = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.txt_equl = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rad_all = new System.Windows.Forms.RadioButton();
+            this.rad_notpostd = new System.Windows.Forms.RadioButton();
+            this.rad_posted = new System.Windows.Forms.RadioButton();
+            this.chk_zatka = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -329,90 +330,6 @@
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
-            // cmb_type
-            // 
-            this.cmb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_type, "cmb_type");
-            this.cmb_type.FormattingEnabled = true;
-            this.cmb_type.Name = "cmb_type";
-            this.cmb_type.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
-            // 
-            // txt_desc
-            // 
-            this.txt_desc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.txt_desc, "txt_desc");
-            this.txt_desc.Name = "txt_desc";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBox2, "comboBox2");
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            resources.GetString("comboBox2.Items"),
-            resources.GetString("comboBox2.Items1"),
-            resources.GetString("comboBox2.Items2")});
-            this.comboBox2.Name = "comboBox2";
-            // 
-            // txt_equl
-            // 
-            this.txt_equl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.txt_equl, "txt_equl");
-            this.txt_equl.Name = "txt_equl";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rad_all);
-            this.panel1.Controls.Add(this.rad_notpostd);
-            this.panel1.Controls.Add(this.rad_posted);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // rad_all
-            // 
-            resources.ApplyResources(this.rad_all, "rad_all");
-            this.rad_all.Checked = true;
-            this.rad_all.Name = "rad_all";
-            this.rad_all.TabStop = true;
-            this.rad_all.UseVisualStyleBackColor = true;
-            // 
-            // rad_notpostd
-            // 
-            resources.ApplyResources(this.rad_notpostd, "rad_notpostd");
-            this.rad_notpostd.Name = "rad_notpostd";
-            this.rad_notpostd.TabStop = true;
-            this.rad_notpostd.UseVisualStyleBackColor = true;
-            // 
-            // rad_posted
-            // 
-            resources.ApplyResources(this.rad_posted, "rad_posted");
-            this.rad_posted.Name = "rad_posted";
-            this.rad_posted.TabStop = true;
-            this.rad_posted.UseVisualStyleBackColor = true;
-            // 
             // Column2
             // 
             this.Column2.DataPropertyName = "sl_no";
@@ -526,11 +443,104 @@
             this.src.Name = "src";
             this.src.ReadOnly = true;
             // 
+            // cmb_type
+            // 
+            this.cmb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_type, "cmb_type");
+            this.cmb_type.FormattingEnabled = true;
+            this.cmb_type.Name = "cmb_type";
+            this.cmb_type.SelectedIndexChanged += new System.EventHandler(this.cmb_type_SelectedIndexChanged);
+            this.cmb_type.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
+            // 
+            // txt_desc
+            // 
+            this.txt_desc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_desc, "txt_desc");
+            this.txt_desc.Name = "txt_desc";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBox2, "comboBox2");
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            resources.GetString("comboBox2.Items"),
+            resources.GetString("comboBox2.Items1"),
+            resources.GetString("comboBox2.Items2")});
+            this.comboBox2.Name = "comboBox2";
+            // 
+            // txt_equl
+            // 
+            this.txt_equl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_equl, "txt_equl");
+            this.txt_equl.Name = "txt_equl";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rad_all);
+            this.panel1.Controls.Add(this.rad_notpostd);
+            this.panel1.Controls.Add(this.rad_posted);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // rad_all
+            // 
+            resources.ApplyResources(this.rad_all, "rad_all");
+            this.rad_all.Checked = true;
+            this.rad_all.Name = "rad_all";
+            this.rad_all.TabStop = true;
+            this.rad_all.UseVisualStyleBackColor = true;
+            // 
+            // rad_notpostd
+            // 
+            resources.ApplyResources(this.rad_notpostd, "rad_notpostd");
+            this.rad_notpostd.Name = "rad_notpostd";
+            this.rad_notpostd.TabStop = true;
+            this.rad_notpostd.UseVisualStyleBackColor = true;
+            // 
+            // rad_posted
+            // 
+            resources.ApplyResources(this.rad_posted, "rad_posted");
+            this.rad_posted.Name = "rad_posted";
+            this.rad_posted.TabStop = true;
+            this.rad_posted.UseVisualStyleBackColor = true;
+            // 
+            // chk_zatka
+            // 
+            resources.ApplyResources(this.chk_zatka, "chk_zatka");
+            this.chk_zatka.Name = "chk_zatka";
+            this.chk_zatka.UseVisualStyleBackColor = true;
+            this.chk_zatka.CheckedChanged += new System.EventHandler(this.chk_zatka_CheckedChanged);
+            // 
             // Sal_Report
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.chk_zatka);
             this.Controls.Add(this.chk_forrviw);
             this.Controls.Add(this.cmb_exits);
             this.Controls.Add(this.label23);
@@ -637,5 +647,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn a_p;
         private System.Windows.Forms.DataGridViewTextBoxColumn a_t;
         private System.Windows.Forms.DataGridViewTextBoxColumn src;
+        private System.Windows.Forms.CheckBox chk_zatka;
     }
 }

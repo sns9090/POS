@@ -184,6 +184,7 @@ namespace POS
                     BL.CLS_Session.port_no = ds3.Tables["4"].Rows[0]["portno"].ToString();
                     BL.CLS_Session.printrtn = Convert.ToBoolean(ds3.Tables["4"].Rows[0]["print_rtn"]);
                     BL.CLS_Session.sl_no = ds3.Tables["4"].Rows[0]["c_slno"].ToString();
+                    BL.CLS_Session.slno = ds3.Tables["4"].Rows[0]["c_slno"].ToString();
                     BL.CLS_Session.cd_msg = ds3.Tables["4"].Rows[0]["cdmsg"].ToString();
                     BL.CLS_Session.prnt_type = string.IsNullOrEmpty(ds3.Tables["4"].Rows[0]["print_type"].ToString()) ? "0" : ds3.Tables["4"].Rows[0]["print_type"].ToString();// ds3.Tables["4"].Rows[0]["print_type"].ToString();
                     BL.CLS_Session.iscofi = Convert.ToBoolean(ds3.Tables["4"].Rows[0]["is_cofi"]);
@@ -269,12 +270,13 @@ namespace POS
 
                     BL.CLS_Session.up_pricelowcost = Convert.ToBoolean(ds3.Tables["0"].Rows[0]["prislwcst"]);
                     BL.CLS_Session.lang = ds3.Tables["0"].Rows[0][5].ToString();
-                    BL.CLS_Session.sl_prices = ds3.Tables["0"].Rows[0]["sl_no"].ToString();
+                    BL.CLS_Session.sl_prices = ds3.Tables["0"].Rows[0]["sl_no"].ToString().Trim().Equals("") ? "01" : ds3.Tables["0"].Rows[0]["sl_no"].ToString();
                     BL.CLS_Session.UseEdit = ds3.Tables["0"].Rows[0][6].ToString();
                     BL.CLS_Session.up_editop =Convert.ToBoolean(ds3.Tables["0"].Rows[0]["user_type"]);
                     BL.CLS_Session.up_stopsrch = Convert.ToBoolean(ds3.Tables["0"].Rows[0]["up_stopsrch"]);
                     BL.CLS_Session.up_suspend = Convert.ToBoolean(ds3.Tables["0"].Rows[0]["suspend_inv"]);
                     BL.CLS_Session.up_belwbal = Convert.ToBoolean(ds3.Tables["0"].Rows[0]["belw_bal"]);
+                    BL.CLS_Session.up_prtfrm = Convert.ToInt32(ds3.Tables["0"].Rows[0]["up_frmprt"]);
                     BL.CLS_Session.autoitemno = Convert.ToBoolean(ds3.Tables["1"].Rows[0]["auto_itmno"]);
                     BL.CLS_Session.issections = Convert.ToBoolean(ds3.Tables["1"].Rows[0]["is_sections"]);
                     BL.CLS_Session.multi_bc = Convert.ToBoolean(ds3.Tables["1"].Rows[0]["multibc"]);
@@ -490,16 +492,19 @@ namespace POS
             {
                 if(File.Exists(@".\sp_01-11-2021.sql"))
                    File.Delete(@".\sp_01-11-2021.sql");
-
-                RegistryKey rg = Registry.CurrentUser.OpenSubKey(@"Control Panel\International", true);
-                rg.SetValue("iCalendarType", "2");
-                rg.SetValue("iDate", "0");
-                rg.SetValue("NumShape", "1");
-                rg.SetValue("sDate", "-");
-                rg.SetValue("sShortDate", "dd-MM-yyyy");
-                //rg.SetValue("LocaleName", "en-US");
-                rg.SetValue("sLongDate", "dddd, MMMM dd, yyyy");
-                // rg.SetValue("sLongDate", "dd-mm-yyyy");
+                /*       chage date formate*/
+                if (BL.CLS_Session.is_einv_p2 && BL.CLS_Session.is_production)
+                {
+                    RegistryKey rg = Registry.CurrentUser.OpenSubKey(@"Control Panel\International", true);
+                    rg.SetValue("iCalendarType", "2");
+                    rg.SetValue("iDate", "0");
+                    rg.SetValue("NumShape", "1");
+                    rg.SetValue("sDate", "-");
+                    rg.SetValue("sShortDate", "dd-MM-yyyy");
+                    //rg.SetValue("LocaleName", "en-US");
+                    rg.SetValue("sLongDate", "dddd, MMMM dd, yyyy");
+                    // rg.SetValue("sLongDate", "dd-mm-yyyy");
+                }
 
                 //RegistryKey rg1 = Registry.Users.OpenSubKey(@"S-1-5-21-2478951088-3800772498-1979442883-1001\Control Panel\International", true);
                 //rg1.SetValue("iCalendarType", "2");

@@ -56,13 +56,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txt_srch = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.dtpk = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +66,14 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_srch = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.dtpk = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -160,6 +161,7 @@
             resources.ApplyResources(this.cmb_salctr, "cmb_salctr");
             this.cmb_salctr.FormattingEnabled = true;
             this.cmb_salctr.Name = "cmb_salctr";
+            this.cmb_salctr.SelectedIndexChanged += new System.EventHandler(this.cmb_salctr_SelectedIndexChanged);
             this.cmb_salctr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_salctr_KeyDown);
             // 
             // label6
@@ -280,61 +282,6 @@
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::POS.Properties.Resources.background_button;
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.txt_srch);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.dtpk);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Name = "panel1";
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // button7
-            // 
-            this.button7.Image = global::POS.Properties.Resources.Search_16x16;
-            resources.ApplyResources(this.button7, "button7");
-            this.button7.Name = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // txt_srch
-            // 
-            this.txt_srch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.txt_srch, "txt_srch");
-            this.txt_srch.Name = "txt_srch";
-            this.txt_srch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // button5
-            // 
-            resources.ApplyResources(this.button5, "button5");
-            this.button5.Image = global::POS.Properties.Resources.Preview_32x32;
-            this.button5.Name = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // dtpk
-            // 
-            this.dtpk.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            resources.ApplyResources(this.dtpk, "dtpk");
-            this.dtpk.Name = "dtpk";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "itemno";
@@ -404,6 +351,70 @@
             this.Column10.FillWeight = 5F;
             resources.ApplyResources(this.Column10, "Column10");
             this.Column10.Name = "Column10";
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::POS.Properties.Resources.background_button;
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.button8);
+            this.panel1.Controls.Add(this.button7);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.txt_srch);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.dtpk);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Name = "panel1";
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button7
+            // 
+            this.button7.Image = global::POS.Properties.Resources.Search_16x16;
+            resources.ApplyResources(this.button7, "button7");
+            this.button7.Name = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // txt_srch
+            // 
+            this.txt_srch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txt_srch, "txt_srch");
+            this.txt_srch.Name = "txt_srch";
+            this.txt_srch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
+            // button5
+            // 
+            resources.ApplyResources(this.button5, "button5");
+            this.button5.Image = global::POS.Properties.Resources.Preview_32x32;
+            this.button5.Name = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // dtpk
+            // 
+            this.dtpk.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            resources.ApplyResources(this.dtpk, "dtpk");
+            this.dtpk.Name = "dtpk";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // button8
+            // 
+            this.button8.Image = global::POS.Properties.Resources.Print_32x32;
+            resources.ApplyResources(this.button8, "button8");
+            this.button8.Name = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Sal_Items_Offer
             // 
@@ -490,5 +501,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column10;
+        private System.Windows.Forms.Button button8;
     }
 }

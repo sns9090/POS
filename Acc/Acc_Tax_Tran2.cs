@@ -2510,11 +2510,11 @@ namespace POS.Acc
 
               //  MessageBox.Show(sumto.ToString()); MessageBox.Show(sumtin.ToString());
 
-                txt_ttltxout.Text = sumto.ToString();
-                txt_ttltxin.Text = sumtin.ToString();
+                txt_ttltxout.Text =Math.Round(sumto,4).ToString();
+                txt_ttltxin.Text = Math.Round(sumtin,4).ToString();
 
-                txt_camt.Text = (sumc + sumtin).ToString();
-                txt_damt.Text = (sumd + sumto).ToString();
+                txt_camt.Text = Math.Round((sumc + sumtin),4).ToString();
+                txt_damt.Text = Math.Round((sumd + sumto),4).ToString();
                
 
             }
@@ -2534,6 +2534,7 @@ namespace POS.Acc
             }
             txt_fdamt.Text = (Convert.ToDouble(txt_camt.Text) > Convert.ToDouble(txt_damt.Text) ? Convert.ToDouble(txt_camt.Text) - Convert.ToDouble(txt_damt.Text) : 0).ToString();
             txt_fcamt.Text = (Convert.ToDouble(txt_damt.Text) > Convert.ToDouble(txt_camt.Text) ? Convert.ToDouble(txt_damt.Text) - Convert.ToDouble(txt_camt.Text) : 0).ToString();
+            total();
         }
 
         private void txt_damt_TextChanged(object sender, EventArgs e)
@@ -2546,6 +2547,7 @@ namespace POS.Acc
             }
             txt_fdamt.Text = (Convert.ToDouble(txt_camt.Text) > Convert.ToDouble(txt_damt.Text) ? Convert.ToDouble(txt_camt.Text) - Convert.ToDouble(txt_damt.Text) : 0).ToString();
             txt_fcamt.Text = (Convert.ToDouble(txt_damt.Text) > Convert.ToDouble(txt_camt.Text) ? Convert.ToDouble(txt_damt.Text) - Convert.ToDouble(txt_camt.Text) : 0).ToString();
+            total();
         }
 
         private void نسخToolStripMenuItem_Click(object sender, EventArgs e)

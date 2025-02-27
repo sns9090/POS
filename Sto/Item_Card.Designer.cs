@@ -42,6 +42,8 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_find = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmb_dunit = new System.Windows.Forms.ComboBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.txt_priceper = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.txt_bprice = new System.Windows.Forms.TextBox();
@@ -147,8 +149,8 @@
             // 
             // btn_Exit
             // 
-            this.btn_Exit.Image = global::POS.Properties.Resources.Log_Out_32x32;
             resources.ApplyResources(this.btn_Exit, "btn_Exit");
+            this.btn_Exit.Image = global::POS.Properties.Resources.Log_Out_32x32;
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
@@ -179,8 +181,8 @@
             // 
             // btn_add
             // 
-            this.btn_add.Image = global::POS.Properties.Resources.Add_32x32;
             resources.ApplyResources(this.btn_add, "btn_add");
+            this.btn_add.Image = global::POS.Properties.Resources.Add_32x32;
             this.btn_add.Name = "btn_add";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.button3_Click);
@@ -194,8 +196,8 @@
             // 
             // btn_mizan
             // 
-            this.btn_mizan.Image = global::POS.Properties.Resources.Archive_32x32;
             resources.ApplyResources(this.btn_mizan, "btn_mizan");
+            this.btn_mizan.Image = global::POS.Properties.Resources.Archive_32x32;
             this.btn_mizan.Name = "btn_mizan";
             this.btn_mizan.UseVisualStyleBackColor = true;
             this.btn_mizan.Click += new System.EventHandler(this.button3_Click_1);
@@ -227,14 +229,17 @@
             // 
             // btn_find
             // 
-            this.btn_find.Image = global::POS.Properties.Resources.Find_32x32;
             resources.ApplyResources(this.btn_find, "btn_find");
+            this.btn_find.Image = global::POS.Properties.Resources.Find_32x32;
             this.btn_find.Name = "btn_find";
             this.btn_find.UseVisualStyleBackColor = true;
             this.btn_find.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.cmb_dunit);
+            this.groupBox1.Controls.Add(this.label29);
             this.groupBox1.Controls.Add(this.txt_priceper);
             this.groupBox1.Controls.Add(this.label28);
             this.groupBox1.Controls.Add(this.txt_bprice);
@@ -290,15 +295,30 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.textBox7);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // cmb_dunit
+            // 
+            resources.ApplyResources(this.cmb_dunit, "cmb_dunit");
+            this.cmb_dunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_dunit.FormattingEnabled = true;
+            this.cmb_dunit.Name = "cmb_dunit";
+            this.cmb_dunit.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            this.cmb_dunit.Enter += new System.EventHandler(this.cmb_dunit_Enter);
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.ForeColor = System.Drawing.Color.Black;
+            this.label29.Name = "label29";
+            this.label29.Click += new System.EventHandler(this.label29_Click);
+            // 
             // txt_priceper
             // 
-            this.txt_priceper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_priceper, "txt_priceper");
+            this.txt_priceper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_priceper.Name = "txt_priceper";
             this.txt_priceper.ReadOnly = true;
             // 
@@ -309,8 +329,8 @@
             // 
             // txt_bprice
             // 
-            this.txt_bprice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_bprice, "txt_bprice");
+            this.txt_bprice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_bprice.Name = "txt_bprice";
             this.txt_bprice.TextChanged += new System.EventHandler(this.txt_bprice_TextChanged);
             this.txt_bprice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_bprice_KeyDown);
@@ -330,28 +350,28 @@
             // 
             // btn_irp
             // 
-            this.btn_irp.Image = global::POS.Properties.Resources.Synchronize_32x32;
             resources.ApplyResources(this.btn_irp, "btn_irp");
+            this.btn_irp.Image = global::POS.Properties.Resources.Synchronize_32x32;
             this.btn_irp.Name = "btn_irp";
             this.btn_irp.UseVisualStyleBackColor = true;
             this.btn_irp.Click += new System.EventHandler(this.btn_irp_Click);
             // 
             // btn_brprice
             // 
-            this.btn_brprice.Image = global::POS.Properties.Resources.Copy_32x32;
             resources.ApplyResources(this.btn_brprice, "btn_brprice");
+            this.btn_brprice.Image = global::POS.Properties.Resources.Copy_32x32;
             this.btn_brprice.Name = "btn_brprice";
             this.btn_brprice.UseVisualStyleBackColor = true;
             this.btn_brprice.Click += new System.EventHandler(this.btn_brprice_Click);
             // 
             // panel3
             // 
+            resources.ApplyResources(this.panel3, "panel3");
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.rd_sp);
             this.panel3.Controls.Add(this.rd_gen);
             this.panel3.Controls.Add(this.btn_prtbar);
             this.panel3.Controls.Add(this.txt_prtbar);
-            resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
             // rd_sp
@@ -370,16 +390,16 @@
             // 
             // btn_prtbar
             // 
-            this.btn_prtbar.Image = global::POS.Properties.Resources.barcode;
             resources.ApplyResources(this.btn_prtbar, "btn_prtbar");
+            this.btn_prtbar.Image = global::POS.Properties.Resources.barcode;
             this.btn_prtbar.Name = "btn_prtbar";
             this.btn_prtbar.UseVisualStyleBackColor = true;
             this.btn_prtbar.Click += new System.EventHandler(this.button7_Click);
             // 
             // txt_prtbar
             // 
-            this.txt_prtbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_prtbar, "txt_prtbar");
+            this.txt_prtbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_prtbar.Name = "txt_prtbar";
             // 
             // btn_combin
@@ -398,6 +418,7 @@
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.txt_staticcst);
             this.panel2.Controls.Add(this.label26);
@@ -409,13 +430,12 @@
             this.panel2.Controls.Add(this.txt_curbal);
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label21);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // txt_staticcst
             // 
-            this.txt_staticcst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_staticcst, "txt_staticcst");
+            this.txt_staticcst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_staticcst.Name = "txt_staticcst";
             this.txt_staticcst.TextChanged += new System.EventHandler(this.txt_staticcst_TextChanged);
             // 
@@ -444,22 +464,22 @@
             // 
             // txt_curcost
             // 
-            this.txt_curcost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_curcost, "txt_curcost");
+            this.txt_curcost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_curcost.Name = "txt_curcost";
             this.txt_curcost.ReadOnly = true;
             // 
             // txt_lastp
             // 
-            this.txt_lastp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_lastp, "txt_lastp");
+            this.txt_lastp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_lastp.Name = "txt_lastp";
             this.txt_lastp.ReadOnly = true;
             // 
             // txt_curbal
             // 
-            this.txt_curbal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_curbal, "txt_curbal");
+            this.txt_curbal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_curbal.Name = "txt_curbal";
             this.txt_curbal.ReadOnly = true;
             // 
@@ -475,16 +495,16 @@
             // 
             // btn_prt
             // 
-            this.btn_prt.Image = global::POS.Properties.Resources.Print_32x32;
             resources.ApplyResources(this.btn_prt, "btn_prt");
+            this.btn_prt.Image = global::POS.Properties.Resources.Print_32x32;
             this.btn_prt.Name = "btn_prt";
             this.btn_prt.UseVisualStyleBackColor = true;
             this.btn_prt.Click += new System.EventHandler(this.btn_prt_Click);
             // 
             // cmb_sgroup
             // 
-            this.cmb_sgroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_sgroup, "cmb_sgroup");
+            this.cmb_sgroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sgroup.FormattingEnabled = true;
             this.cmb_sgroup.Name = "cmb_sgroup";
             this.cmb_sgroup.SelectedIndexChanged += new System.EventHandler(this.cmb_sgroup_SelectedIndexChanged);
@@ -498,8 +518,8 @@
             // 
             // cmb_type
             // 
-            this.cmb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_type, "cmb_type");
+            this.cmb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_type.FormattingEnabled = true;
             this.cmb_type.Items.AddRange(new object[] {
             resources.GetString("cmb_type.Items"),
@@ -515,8 +535,8 @@
             // 
             // txt_note
             // 
-            this.txt_note.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_note, "txt_note");
+            this.txt_note.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_note.Name = "txt_note";
             // 
             // label19
@@ -526,8 +546,8 @@
             // 
             // txt_price2
             // 
-            this.txt_price2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_price2, "txt_price2");
+            this.txt_price2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_price2.Name = "txt_price2";
             this.txt_price2.TextChanged += new System.EventHandler(this.txt_price2_TextChanged);
             this.txt_price2.Validating += new System.ComponentModel.CancelEventHandler(this.txt_price2_Validating);
@@ -539,8 +559,8 @@
             // 
             // btn_cpal
             // 
-            this.btn_cpal.Image = global::POS.Properties.Resources.Preview_32x32;
             resources.ApplyResources(this.btn_cpal, "btn_cpal");
+            this.btn_cpal.Image = global::POS.Properties.Resources.Preview_32x32;
             this.btn_cpal.Name = "btn_cpal";
             this.btn_cpal.UseVisualStyleBackColor = true;
             this.btn_cpal.Click += new System.EventHandler(this.button2_Click_1);
@@ -555,32 +575,36 @@
             resources.ApplyResources(this.label17, "label17");
             this.label17.ForeColor = System.Drawing.Color.Black;
             this.label17.Name = "label17";
+            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // txt_supname
             // 
-            this.txt_supname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_supname, "txt_supname");
+            this.txt_supname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_supname.Name = "txt_supname";
             this.txt_supname.ReadOnly = true;
+            this.txt_supname.TextChanged += new System.EventHandler(this.txt_supname_TextChanged);
             // 
             // txt_supno
             // 
-            this.txt_supno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_supno, "txt_supno");
+            this.txt_supno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_supno.Name = "txt_supno";
+            this.txt_supno.TextChanged += new System.EventHandler(this.txt_supno_TextChanged);
             this.txt_supno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_custno_KeyDown);
             this.txt_supno.Leave += new System.EventHandler(this.txt_custno_Leave);
             // 
             // btn_opal
             // 
-            this.btn_opal.Image = global::POS.Properties.Resources.Properties_32x32;
             resources.ApplyResources(this.btn_opal, "btn_opal");
+            this.btn_opal.Image = global::POS.Properties.Resources.Properties_32x32;
             this.btn_opal.Name = "btn_opal";
             this.btn_opal.UseVisualStyleBackColor = true;
             this.btn_opal.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // pnl_qtys
             // 
+            resources.ApplyResources(this.pnl_qtys, "pnl_qtys");
             this.pnl_qtys.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_qtys.Controls.Add(this.txt_u2q);
             this.pnl_qtys.Controls.Add(this.cmb_u2);
@@ -591,13 +615,12 @@
             this.pnl_qtys.Controls.Add(this.txt_u4q);
             this.pnl_qtys.Controls.Add(this.txt_u3p);
             this.pnl_qtys.Controls.Add(this.txt_u2p);
-            resources.ApplyResources(this.pnl_qtys, "pnl_qtys");
             this.pnl_qtys.Name = "pnl_qtys";
             // 
             // txt_u2q
             // 
-            this.txt_u2q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u2q, "txt_u2q");
+            this.txt_u2q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u2q.Name = "txt_u2q";
             this.txt_u2q.TextChanged += new System.EventHandler(this.txt_u2q_TextChanged);
             this.txt_u2q.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_u2q_KeyDown);
@@ -605,38 +628,41 @@
             // 
             // cmb_u2
             // 
-            this.cmb_u2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_u2, "cmb_u2");
+            this.cmb_u2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_u2.FormattingEnabled = true;
             this.cmb_u2.Name = "cmb_u2";
+            this.cmb_u2.SelectedIndexChanged += new System.EventHandler(this.cmb_u2_SelectedIndexChanged);
             this.cmb_u2.Enter += new System.EventHandler(this.cmb_u2_Enter);
             this.cmb_u2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_u2_KeyDown);
-            this.cmb_u2.Leave += new System.EventHandler(this.cmb_u2_Leave);
+            this.cmb_u2.Leave += new System.EventHandler(this.cmb_unit_Leave);
             // 
             // cmb_u4
             // 
-            this.cmb_u4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_u4, "cmb_u4");
+            this.cmb_u4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_u4.FormattingEnabled = true;
             this.cmb_u4.Name = "cmb_u4";
+            this.cmb_u4.SelectedIndexChanged += new System.EventHandler(this.cmb_u4_SelectedIndexChanged);
             this.cmb_u4.Enter += new System.EventHandler(this.cmb_u4_Enter);
             this.cmb_u4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_u4_KeyDown);
-            this.cmb_u4.Leave += new System.EventHandler(this.cmb_u4_Leave);
+            this.cmb_u4.Leave += new System.EventHandler(this.cmb_unit_Leave);
             // 
             // cmb_u3
             // 
-            this.cmb_u3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_u3, "cmb_u3");
+            this.cmb_u3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_u3.FormattingEnabled = true;
             this.cmb_u3.Name = "cmb_u3";
+            this.cmb_u3.SelectedIndexChanged += new System.EventHandler(this.cmb_u3_SelectedIndexChanged);
             this.cmb_u3.Enter += new System.EventHandler(this.cmb_u3_Enter);
             this.cmb_u3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_u3_KeyDown);
-            this.cmb_u3.Leave += new System.EventHandler(this.cmb_u3_Leave);
+            this.cmb_u3.Leave += new System.EventHandler(this.cmb_unit_Leave);
             // 
             // txt_u3q
             // 
-            this.txt_u3q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u3q, "txt_u3q");
+            this.txt_u3q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u3q.Name = "txt_u3q";
             this.txt_u3q.TextChanged += new System.EventHandler(this.txt_u3q_TextChanged);
             this.txt_u3q.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_u3q_KeyDown);
@@ -644,8 +670,8 @@
             // 
             // txt_u4p
             // 
-            this.txt_u4p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u4p, "txt_u4p");
+            this.txt_u4p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u4p.Name = "txt_u4p";
             this.txt_u4p.TextChanged += new System.EventHandler(this.txt_u4p_TextChanged);
             this.txt_u4p.Enter += new System.EventHandler(this.txt_u4p_Enter);
@@ -654,8 +680,8 @@
             // 
             // txt_u4q
             // 
-            this.txt_u4q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u4q, "txt_u4q");
+            this.txt_u4q.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u4q.Name = "txt_u4q";
             this.txt_u4q.TextChanged += new System.EventHandler(this.txt_u4q_TextChanged);
             this.txt_u4q.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_u4q_KeyDown);
@@ -663,8 +689,8 @@
             // 
             // txt_u3p
             // 
-            this.txt_u3p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u3p, "txt_u3p");
+            this.txt_u3p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u3p.Name = "txt_u3p";
             this.txt_u3p.TextChanged += new System.EventHandler(this.txt_u3p_TextChanged);
             this.txt_u3p.Enter += new System.EventHandler(this.txt_u3p_Enter);
@@ -673,8 +699,8 @@
             // 
             // txt_u2p
             // 
-            this.txt_u2p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_u2p, "txt_u2p");
+            this.txt_u2p.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_u2p.Name = "txt_u2p";
             this.txt_u2p.TextChanged += new System.EventHandler(this.txt_u2p_TextChanged);
             this.txt_u2p.Enter += new System.EventHandler(this.txt_u2p_Enter);
@@ -688,8 +714,8 @@
             // 
             // txt_ename
             // 
-            this.txt_ename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_ename, "txt_ename");
+            this.txt_ename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_ename.Name = "txt_ename";
             this.txt_ename.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_ename_KeyDown);
             // 
@@ -705,8 +731,8 @@
             // 
             // button4
             // 
-            this.button4.Image = global::POS.Properties.Resources.Search_16x16;
             resources.ApplyResources(this.button4, "button4");
+            this.button4.Image = global::POS.Properties.Resources.Search_16x16;
             this.button4.Name = "button4";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -729,8 +755,8 @@
             // 
             // cmb_tax
             // 
-            this.cmb_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_tax, "cmb_tax");
+            this.cmb_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_tax.FormattingEnabled = true;
             this.cmb_tax.Name = "cmb_tax";
             this.cmb_tax.Enter += new System.EventHandler(this.comboBox3_Enter);
@@ -744,13 +770,14 @@
             // 
             // cmb_unit
             // 
-            this.cmb_unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_unit, "cmb_unit");
+            this.cmb_unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_unit.FormattingEnabled = true;
             this.cmb_unit.Name = "cmb_unit";
             this.cmb_unit.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             this.cmb_unit.Enter += new System.EventHandler(this.comboBox2_Enter);
             this.cmb_unit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox2_KeyDown);
+            this.cmb_unit.Leave += new System.EventHandler(this.cmb_unit_Leave);
             // 
             // checkBox1
             // 
@@ -767,18 +794,18 @@
             // 
             // pictureBox1
             // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = global::POS.Properties.Resources.background_button;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
@@ -788,8 +815,8 @@
             // 
             // cmb_group
             // 
-            this.cmb_group.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_group, "cmb_group");
+            this.cmb_group.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_group.FormattingEnabled = true;
             this.cmb_group.Name = "cmb_group";
             this.cmb_group.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -842,8 +869,8 @@
             // 
             // textBox2
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.textBox2, "textBox2");
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox2.Name = "textBox2";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
@@ -852,8 +879,8 @@
             // 
             // txt_price
             // 
-            this.txt_price.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.txt_price, "txt_price");
+            this.txt_price.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_price.Name = "txt_price";
             this.txt_price.TextChanged += new System.EventHandler(this.txt_price_TextChanged);
             this.txt_price.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyDown);
@@ -868,16 +895,16 @@
             // 
             // textBox5
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.textBox5, "textBox5");
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox5.Name = "textBox5";
             this.textBox5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox5_KeyDown);
             this.textBox5.Leave += new System.EventHandler(this.textBox5_Leave);
             // 
             // textBox7
             // 
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.textBox7, "textBox7");
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox7.Name = "textBox7";
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             this.textBox7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox7_KeyDown);
@@ -1001,6 +1028,8 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox txt_priceper;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ComboBox cmb_dunit;
+        private System.Windows.Forms.Label label29;
 
     }
 }

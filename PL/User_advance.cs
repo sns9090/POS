@@ -408,5 +408,20 @@ namespace POS
             //    CheckAllChildren(child);
             //}
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (usid == "admin")
+            {
+                button5_Click(sender, e);
+                treeView1.Enabled = true;
+                button4.Enabled = true;
+            }
+        }
     }
 }

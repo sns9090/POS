@@ -32,8 +32,8 @@ namespace POS.BL
         public static int scount = 0, rscount = 0, mizanitemlen, mizanpricelen, mizantype, madatype, madaporttyp, madaportno;
 
         public static bool up_changprice, up_use_dsc, up_ch_itmpr, up_us_post, up_chang_dt, up_edit_othr, up_sal_icost, use_cd, istuch, imp_itm, isopprt = false, showwin, up_editop, up_stopsrch, up_suspend, up_pricelowcost, up_belwbal, islight = false, autobak, iscofi, nocahopen, is_einv = false, whatsappactv, notxchng;
-        public static bool is_sal_login = false, autoitemno = false, printrtn, autotax, autoposupdat, issections = false, multi_bc, mustcost, ismain, system_down, is_taqsit = false, mustequal, msrofqid, oneslserial, showqtysrch, edititm, is_einv_p2 = false, is_production = false, allwzerop, einv_p2_syncactv=false;
-        public static int posatrtday;
+        public static bool chk_qty1=false, is_sal_login = false, autoitemno = false, printrtn, autotax, autoposupdat, issections = false, multi_bc, mustcost, ismain, system_down, is_taqsit = false, mustequal, msrofqid, oneslserial, showqtysrch, edititm, is_einv_p2 = false, is_production = false, allwzerop, einv_p2_syncactv=false;
+        public static int posatrtday, up_prtfrm;
 
         public static string brno, brname, brcash,brstkin,brstkout;
 

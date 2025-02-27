@@ -65,6 +65,8 @@
             this.txt_sdate = new System.Windows.Forms.MaskedTextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txt_edate = new System.Windows.Forms.MaskedTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txt_ename = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -318,11 +320,25 @@
             this.txt_edate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txt_edate.Name = "txt_edate";
             // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // txt_ename
+            // 
+            resources.ApplyResources(this.txt_ename, "txt_ename");
+            this.txt_ename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_ename.Name = "txt_ename";
+            this.txt_ename.ReadOnly = true;
+            // 
             // Print_Barcode_FR
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txt_ename);
             this.Controls.Add(this.txt_edate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label9);
@@ -399,5 +415,7 @@
         private System.Windows.Forms.MaskedTextBox txt_sdate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.MaskedTextBox txt_edate;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txt_ename;
     }
 }

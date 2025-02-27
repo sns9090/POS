@@ -23,6 +23,7 @@ using ZatcaIntegrationSDK;
 using ZatcaIntegrationSDK.BLL;
 using ZatcaIntegrationSDK.HelperContracts;
 using ZatcaIntegrationSDK.APIHelper;
+using System.Net.NetworkInformation;
 
 namespace POS.Sal
 {
@@ -34,7 +35,7 @@ namespace POS.Sal
        // DataTable dtg;
        // DataTable dt2,dtunits;
         string inv_t, inv_r, inv_s;
-
+       // string inv_hash,inv_ref;
         DataTable dthdr, dtdtl, dt222, dtunits, dtsal, dtvat, dttrtyps, dtslctr, dtcolman, dtexits,dttodel,dtcust;//,dtbind;
        // int count = 0;
         int ref_max,cnt=0,cntto=0,temp=0,jrdacc,print_count=0;
@@ -164,7 +165,7 @@ namespace POS.Sal
 
                         // SqlDataAdapter da23 = new SqlDataAdapter("select i.*,t.tax_percent from items i, taxs t where i.item_tax=t.tax_id and i.item_no='" + firstColumnValue3 + "'", con2);
                         // quiryt = "select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,b.pack,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,t.tax_percent,b.pk_qty pkqty,i.item_tax i_tax,i.item_image img from items i join items_bc b on b.item_no=i.item_no and i.item_no='" + firstColumnValue3 + "' join taxs t on i.item_tax=t.tax_id";
-                        quiryt = "select *,1.00 pk_qty from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
+                        quiryt = "select *,1 pk_qty from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
                     }
                     //  }
                     //  quiryt = "select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
@@ -184,11 +185,11 @@ namespace POS.Sal
                         dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][0];
                         dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][1];
                         if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[4].Value.ToString()))
-                            dataGridView1.CurrentRow.Cells[4].Value = "1.00";
+                            dataGridView1.CurrentRow.Cells[4].Value = "1";
                         else
                             dataGridView1.CurrentRow.Cells[4].Value = dt222.Rows[0]["pk_qty"];
                         if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[5].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[5].Value.ToString()))
-                            dataGridView1.CurrentRow.Cells[5].Value = "1.00";
+                            dataGridView1.CurrentRow.Cells[5].Value = "1";
                         //else
                         //    dataGridView1.CurrentRow.Cells[4].Value = dt222.Rows[0]["pk_qty"];
                         dataGridView1.CurrentRow.Cells[6].Value = dt222.Rows[0]["item_price"];
@@ -272,8 +273,8 @@ namespace POS.Sal
                         dataGridView1.CurrentRow.Cells[1].Value = f4.dataGridView1.CurrentRow.Cells["i_b"].Value;
                         dataGridView1.CurrentRow.Cells[2].Value = f4.dataGridView1.CurrentRow.Cells[1].Value;
                         if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[4].Value.ToString()))
-                            dataGridView1.CurrentRow.Cells[4].Value = "1.00";
-                        dataGridView1.CurrentRow.Cells[5].Value = 1.00;
+                            dataGridView1.CurrentRow.Cells[4].Value = "1";
+                        dataGridView1.CurrentRow.Cells[5].Value = 1;
                         //if (dataGridView1.CurrentRow.Cells[2].Value == null)
                         //{
                         //    dataGridView1.CurrentRow.Cells[2].Value = txt_desc.Text;
@@ -285,7 +286,7 @@ namespace POS.Sal
                         string item_bar = chk_usebarcode.Checked == false ? "  rtrim(ltrim(item_no))='" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'" : "  rtrim(ltrim(item_barcode))='" + f4.dataGridView1.CurrentRow.Cells[1].Value + "'";
                         // dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where " + item_bar + "'" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'");
                         //  dt222 = daml.SELECT_QUIRY_only_retrn_dt("select *,0 pk_qty from items where " + item_bar + "");
-                        dt222 = daml.SELECT_QUIRY_only_retrn_dt("select *,1.00 pk_qty from items where rtrim(ltrim(item_no))='" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'");
+                        dt222 = daml.SELECT_QUIRY_only_retrn_dt("select *,1 pk_qty from items where rtrim(ltrim(item_no))='" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'");
                         
                         DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
                         DataView dv1 = dtunits.DefaultView;
@@ -295,6 +296,11 @@ namespace POS.Sal
                         dcombo.DataSource = dtNew;
                         dcombo.DisplayMember = "unit_name";
                         dcombo.ValueMember = "unit_id";
+                       // dcombo.Value = dt222.Rows[0][5];
+                      /*  if (dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][12]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][15]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][18]))
+                            dcombo.Value = dt222.Rows[0]["dunit"];
+                        else
+                            dcombo.Value = dt222.Rows[0][5];*/
                         dcombo.Value = dt222.Rows[0][5];
                         dataGridView1.CurrentRow.Cells[3] = dcombo;
                       // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
@@ -316,10 +322,16 @@ namespace POS.Sal
 
                        // chk_shaml_tax.Enabled = false;
                         dataGridView1.CurrentCell = this.dataGridView1[3, dataGridView1.CurrentRow.Index];
+                       // dataGridView1.BeginEdit(false);
                         SendKeys.Send("{F4}");
                         SendKeys.Send("{Down}");
+                       // SendKeys.Send("{Down}");
                         SendKeys.Send("{UP}");
-
+                        /*SendKeys.Send("{F4}");
+                        SendKeys.Send("{Down}");
+                        SendKeys.Send("{UP}");*/
+                       // SendKeys.Send("{F2}");
+                       // SendKeys.Send("{F4}");
 
                         //  DataRow[] dtrvat= dtvat.Select("tax_id ='" + dt222.Rows[0][11] + "'");//,'" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
                         //  txt_tax.Text = dtrvat[0][2].ToString();
@@ -530,42 +542,83 @@ namespace POS.Sal
                 DataGridView dg = (DataGridView)sender;
                 //if (! BL.CLS_Session.sysno.Equals("10"))
                 //{
-                if (dg.CurrentCell.EditType == typeof(DataGridViewComboBoxEditingControl) && isnew && dataGridView1.CurrentRow.Index == dataGridView1.RowCount -2 && Convert.ToDouble(dataGridView1.CurrentRow.Cells[9].Value)==0)
+               // if (dg.CurrentCell.EditType == typeof(DataGridViewComboBoxEditingControl) && isnew && dataGridView1.CurrentRow.Index == dataGridView1.NewRowIndex -1 && Convert.ToDouble(dataGridView1.CurrentRow.Cells[9].Value)==0 && !chk_qty1.Checked)
+                    if (dg.CurrentCell.EditType == typeof(DataGridViewComboBoxEditingControl) && isnew && dataGridView1.CurrentRow.Index == dataGridView1.NewRowIndex - 1 && !chk_qty1.Checked)
                     {
                         //dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
+                       /* 
+                        if (!BL.CLS_Session.multi_bc)
+                        {
+                            dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
 
-                        //DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
-                        //DataView dv1 = dtunits.DefaultView;
-                        //dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
-                        //DataTable dtNew = dv1.ToTable();
-                        //dcombo.DataSource = dtNew;
-                        //dcombo.DisplayMember = "unit_name";
-                        //dcombo.ValueMember = "unit_id";
-                        //dcombo.Value = dt222.Rows[0][5];
-                        //dataGridView1.CurrentRow.Cells[2] = dcombo;
-                        //// dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
-                        //dcombo.FlatStyle = FlatStyle.Flat;
-                        //   dataGridView1.BeginEdit(true);
+                            DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
+                            DataView dv1 = dtunits.DefaultView;
+                            dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
+                            DataTable dtNew = dv1.ToTable();
+                            dcombo.DataSource = dtNew;
+                            dcombo.DisplayMember = "unit_name";
+                            dcombo.ValueMember = "unit_id";
+
+                            if (dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][12]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][15]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][18]))
+                                dcombo.Value = dt222.Rows[0]["dunit"];
+                            else
+                                dcombo.Value = dt222.Rows[0][5];
+
+                            dataGridView1.CurrentRow.Cells[3] = dcombo;
+                            //// dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
+                            dcombo.FlatStyle = FlatStyle.Flat;
+                            //   dataGridView1.BeginEdit(true);
+                        }
+                        if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[3] && !dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]))
+                        SendKeys.Send("{F4}");*/
                         SendKeys.Send("{F4}");
-                        //  dataGridView1.BeginEdit(true);
-                        //  ((ComboBox)dataGridView1.EditingControl).DroppedDown = true;
                         SendKeys.Send("{Down}");
                         SendKeys.Send("{UP}");
+
+                        //SendKeys.Send("{F2}");
+                        //  dataGridView1.BeginEdit(true);
+                        //  ((ComboBox)dataGridView1.EditingControl).DroppedDown = true;
+                      //  SendKeys.Send("{Down}");
+                     //   SendKeys.Send("{UP}");
                         //// dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
                         //  SendKeys.Send("{F2}");
                         //  dataGridView1.BeginEdit(true);
                     }
 
-                if (dg.CurrentCell.EditType == typeof(DataGridViewComboBoxEditingControl) && isupdate && dataGridView1.CurrentRow.Index == dataGridView1.RowCount - 2 && Convert.ToDouble(dataGridView1.CurrentRow.Cells[9].Value) == 0)
-                    {
-                        /*
+                if (dg.CurrentCell.EditType == typeof(DataGridViewComboBoxEditingControl) && isupdate && dataGridView1.CurrentRow.Index == dataGridView1.NewRowIndex - 1 && !chk_qty1.Checked)
+                {
+                    /*
+                    DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
+                    //  DataGridViewComboBoxColumn dcombo = new DataGridViewComboBoxColumn();
+                    // dt.Clear();
+                    dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
+                  //  dataGridView1.CurrentRow.Cells[1].Value = dt222.Rows[0][1];
+                    //   dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][1];
+                  //  dataGridView1.CurrentRow.Cells[4].Value = 1.00;
+                    // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][0];
+                    DataView dv1 = dtunits.DefaultView;
+                    // dv1.RowFilter = " pack_id = 1";//or ProductId = 2 or ProductID = 3";
+                    dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
+                    DataTable dtNew = dv1.ToTable();
+
+                    dcombo.DataSource = dtNew;
+                    dcombo.DisplayMember = "unit_name";
+                    dcombo.ValueMember = "unit_id";
+
+                    dataGridView1.CurrentRow.Cells[2] = dcombo;
+                   // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
+                    dcombo.FlatStyle = FlatStyle.Flat;
+                    */
+                    //if (dataGridView1.CurrentCell == dataGridView1[2, dataGridView1.CurrentRow.Index] && isupdate)
+                    //{
+                    /*
                         DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
                         //  DataGridViewComboBoxColumn dcombo = new DataGridViewComboBoxColumn();
                         // dt.Clear();
                         dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
-                      //  dataGridView1.CurrentRow.Cells[1].Value = dt222.Rows[0][1];
+                        //  dataGridView1.CurrentRow.Cells[1].Value = dt222.Rows[0][1];
                         //   dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][1];
-                      //  dataGridView1.CurrentRow.Cells[4].Value = 1.00;
+                        //  dataGridView1.CurrentRow.Cells[4].Value = 1.00;
                         // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][0];
                         DataView dv1 = dtunits.DefaultView;
                         // dv1.RowFilter = " pack_id = 1";//or ProductId = 2 or ProductID = 3";
@@ -577,44 +630,58 @@ namespace POS.Sal
                         dcombo.ValueMember = "unit_id";
 
                         dataGridView1.CurrentRow.Cells[2] = dcombo;
-                       // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
+                        dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];// dt222.Rows[0][5];
+                        dcombo.FlatStyle = FlatStyle.Flat
+                     */
+                    //  }
+                    // dataGridView1.BeginEdit(true);
+                    //if (0==1)
+                   /*
+                    if (!BL.CLS_Session.multi_bc)
+                    {
+                        dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
+
+                        DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
+                        DataView dv1 = dtunits.DefaultView;
+                        dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
+                        DataTable dtNew = dv1.ToTable();
+                        dcombo.DataSource = dtNew;
+                        dcombo.DisplayMember = "unit_name";
+                        dcombo.ValueMember = "unit_id";
+
+                        if (dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][12]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][15]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][18]))
+                            dcombo.Value = dt222.Rows[0]["dunit"];
+                        else
+                            dcombo.Value = dt222.Rows[0][5];
+
+                        dataGridView1.CurrentRow.Cells[3] = dcombo;
+                        //// dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
                         dcombo.FlatStyle = FlatStyle.Flat;
-                        */
-                        //if (dataGridView1.CurrentCell == dataGridView1[2, dataGridView1.CurrentRow.Index] && isupdate)
-                        //{
-                        /*
-                            DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
-                            //  DataGridViewComboBoxColumn dcombo = new DataGridViewComboBoxColumn();
-                            // dt.Clear();
-                            dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
-                            //  dataGridView1.CurrentRow.Cells[1].Value = dt222.Rows[0][1];
-                            //   dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][1];
-                            //  dataGridView1.CurrentRow.Cells[4].Value = 1.00;
-                            // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][0];
-                            DataView dv1 = dtunits.DefaultView;
-                            // dv1.RowFilter = " pack_id = 1";//or ProductId = 2 or ProductID = 3";
-                            dv1.RowFilter = "unit_id in('" + dt222.Rows[0][5] + "','" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
-                            DataTable dtNew = dv1.ToTable();
+                        //   dataGridView1.BeginEdit(true);
+                    }
+                    if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[3] && !dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]))
+                    SendKeys.Send("{F4}");*/
 
-                            dcombo.DataSource = dtNew;
-                            dcombo.DisplayMember = "unit_name";
-                            dcombo.ValueMember = "unit_id";
-
-                            dataGridView1.CurrentRow.Cells[2] = dcombo;
-                            dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];// dt222.Rows[0][5];
-                            dcombo.FlatStyle = FlatStyle.Flat
-                         */
-                        //  }
-                        // dataGridView1.BeginEdit(true);
-                        SendKeys.Send("{F4}");
-                        //  dataGridView1.BeginEdit(true);
-                        //  ((ComboBox)dataGridView1.EditingControl).DroppedDown = true;
-                        SendKeys.Send("{Down}");
-                        SendKeys.Send("{UP}");
-                        // SendKeys.Send("{F2}");
-                        // dataGridView1.BeginEdit(true);
+                    SendKeys.Send("{F4}");
+                    SendKeys.Send("{Down}");
+                    SendKeys.Send("{UP}");
+                    //SendKeys.Send("{F2}");
+                    //  dataGridView1.BeginEdit(true);
+                    //  ((ComboBox)dataGridView1.EditingControl).DroppedDown = true;
+                   // SendKeys.Send("{Down}");
+                   // SendKeys.Send("{UP}");
+                    // SendKeys.Send("{F2}");
+                    // dataGridView1.BeginEdit(true);
 
                     //}
+                }
+                else if(chk_qty1.Checked)
+                {
+                   // dataGridView1.CurrentCell = dataGridView1[dataGridView1.CurrentRow.Index + 1, 0];// dataGridView1.Rows[dataGridView1.CurrentRow.Index + 1].Cells[0];// dataGridView1.NewRowIndex
+
+                   // dataGridView1.CurrentRow = dataGridView1.Rows[dataGridView1.NewRowIndex];
+                   
+                    // dataGridView1.CurrentCell.Selected = true;
                 }
                  //   if (dataGridView1.CurrentCell == dataGridView1[9, dataGridView1.CurrentRow.Index] || dataGridView1.CurrentCell == dataGridView1[8, dataGridView1.CurrentRow.Index])//.ReadOnly == true || dataGridView1[3, dataGridView1.CurrentRow.Index].ReadOnly == true || dataGridView1[6, dataGridView1.CurrentRow.Index].ReadOnly == true)
                 if (dataGridView1.CurrentCell == dataGridView1[8, dataGridView1.CurrentRow.Index])//.ReadOnly == true || dataGridView1[3, dataGridView1.CurrentRow.Index].ReadOnly == true || dataGridView1[6, dataGridView1.CurrentRow.Index].ReadOnly == true)
@@ -625,8 +692,8 @@ namespace POS.Sal
                     // SendKeys.Send("{Down}");
                     SendKeys.Send("{Tab}");
                 }
-                
 
+                //total();
                 //if (dataGridView1[1, dataGridView1.CurrentRow.Index].ReadOnly == true || dataGridView1[3, dataGridView1.CurrentRow.Index].ReadOnly == true || dataGridView1[6, dataGridView1.CurrentRow.Index].ReadOnly == true)
                 //{
                 //    // dataGridView1.CurrentCell = dataGridView1[e.ColumnIndex + 1, dataGridView1.CurrentRow.Index];
@@ -734,7 +801,7 @@ namespace POS.Sal
 
                                 // SqlDataAdapter da23 = new SqlDataAdapter("select i.*,t.tax_percent from items i, taxs t where i.item_tax=t.tax_id and i.item_no='" + firstColumnValue3 + "'", con2);
                                 // quiryt = "select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,b.pack,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,t.tax_percent,b.pk_qty pkqty,i.item_tax i_tax,i.item_image img from items i join items_bc b on b.item_no=i.item_no and i.item_no='" + firstColumnValue3 + "' join taxs t on i.item_tax=t.tax_id";
-                                quiryt = "select *,1.00 pk_qty from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
+                                quiryt = "select *,1 pk_qty from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
                             }
                             //  }
                             //  quiryt = "select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
@@ -756,9 +823,9 @@ namespace POS.Sal
                             dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][0];
                             dataGridView1.CurrentRow.Cells[2].Value = BL.CLS_Session.lang.Equals("E") ? dt222.Rows[0]["item_ename"] : dt222.Rows[0][1];
                             if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[4].Value.ToString()))
-                                dataGridView1.CurrentRow.Cells[4].Value = "1.00";
+                                dataGridView1.CurrentRow.Cells[4].Value = "1";
                             if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[5].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[5].Value.ToString()))
-                                dataGridView1.CurrentRow.Cells[5].Value = "1.00";
+                                dataGridView1.CurrentRow.Cells[5].Value = "1";
                             //   dataGridView1.CurrentRow.Cells[0].Value = dt222.Rows[0][1];
                             //  dataGridView1.CurrentRow.Cells[4].Value = 1.00;
                             // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][0];
@@ -781,6 +848,11 @@ namespace POS.Sal
                             dcombo.ValueMember = "unit_id";
 
                             //  dcombo.DisplayIndex = 0;
+                           /* if (dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][5]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][12]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][15]) || dt222.Rows[0]["dunit"].Equals(dt222.Rows[0][18]))
+                                dcombo.Value = dt222.Rows[0]["dunit"];
+                            else
+                                dcombo.Value = dt222.Rows[0][5];*/
+                            dcombo.Value = dt222.Rows[0][5];
 
                             dataGridView1.CurrentRow.Cells[3] = dcombo;
                             // dcombo.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
@@ -791,7 +863,7 @@ namespace POS.Sal
 
                             //  dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
                            // if (isnew)
-                                dataGridView1.CurrentRow.Cells[3].Value = dt222.Rows[0][5];
+                             //   dataGridView1.CurrentRow.Cells[3].Value = dt222.Rows[0][5];
 
                             dcombo.FlatStyle = FlatStyle.Flat;
 
@@ -869,8 +941,8 @@ namespace POS.Sal
                                 dataGridView1.CurrentRow.Cells[0].Value = f4.dataGridView1.CurrentRow.Cells[0].Value;
                                 dataGridView1.CurrentRow.Cells[2].Value = f4.dataGridView1.CurrentRow.Cells[1].Value;
                                 if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value) == 0 || string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[4].Value.ToString()))
-                                    dataGridView1.CurrentRow.Cells[4].Value = "1.00";
-                                dataGridView1.CurrentRow.Cells[5].Value = 1.00;
+                                    dataGridView1.CurrentRow.Cells[4].Value = "1";
+                                dataGridView1.CurrentRow.Cells[5].Value = 1;
                                 //if (dataGridView1.CurrentRow.Cells[2].Value == null)
                                 //{
                                 //    dataGridView1.CurrentRow.Cells[2].Value = txt_desc.Text;
@@ -881,7 +953,7 @@ namespace POS.Sal
                                 // dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items " + item_bar + "'" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'");
                                 //// dt222 = daml.SELECT_QUIRY_only_retrn_dt("select * from items where " + item_bar + "'" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'");
                                 string item_bar = chk_usebarcode.Checked == false ? "  rtrim(ltrim(item_no))='" + f4.dataGridView1.CurrentRow.Cells[0].Value + "'" : "  rtrim(ltrim(item_barcode))='" + f4.dataGridView1.CurrentRow.Cells[1].Value + "'";
-                                dt222 = daml.SELECT_QUIRY_only_retrn_dt("select *,1.00 pk_qty from items where " + item_bar + "");
+                                dt222 = daml.SELECT_QUIRY_only_retrn_dt("select *,1 pk_qty from items where " + item_bar + "");
 
 
                                 // DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
@@ -897,7 +969,7 @@ namespace POS.Sal
                                 // dataGridView1.CurrentRow.Cells[2].Value = dt222.Rows[0][5];
                                 dcombo.FlatStyle = FlatStyle.Flat;
 
-                                dataGridView1.CurrentRow.Cells[4].Value = "1.00";
+                                dataGridView1.CurrentRow.Cells[4].Value = "1";
                                 dataGridView1.CurrentRow.Cells[6].Value = dt222.Rows[0]["item_price"];
                                 dataGridView1.CurrentRow.Cells[10].Value = dt222.Rows[0][11];
                                 dataGridView1.CurrentRow.Cells[11].Value = dt222.Rows[0]["item_curcost"];
@@ -1006,7 +1078,7 @@ namespace POS.Sal
                         if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[5] || dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[6] || dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[7])
                         {
                             if (string.IsNullOrEmpty(dataGridView1.CurrentCell.Value.ToString()))
-                                dataGridView1.CurrentCell.Value = 0.00;
+                                dataGridView1.CurrentCell.Value = 0;
                         }
                         if (dataGridView1.CurrentCell == dataGridView1.CurrentRow.Cells[3])
                         {
@@ -1032,7 +1104,7 @@ namespace POS.Sal
                             {
                                 // quiryt = "select *,1.00 pk_qty from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'";
                                 DataTable dtunii = daml.SELECT_QUIRY_only_retrn_dt("select * from items where rtrim(ltrim(item_no))='" + dataGridView1.CurrentRow.Cells[0].Value + "'");
-                                dataGridView1.CurrentRow.Cells[4].Value = dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][18].ToString()) ? dtunii.Rows[0][19].ToString() : dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][15].ToString()) ? dtunii.Rows[0][16].ToString() : dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][12].ToString()) ? dtunii.Rows[0][13].ToString() : "1.00";
+                                dataGridView1.CurrentRow.Cells[4].Value = dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][18].ToString()) ? dtunii.Rows[0][19].ToString() : dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][15].ToString()) ? dtunii.Rows[0][16].ToString() : dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][12].ToString()) ? dtunii.Rows[0][13].ToString() : "1";
                                 dataGridView1.CurrentRow.Cells[6].Value = dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][5].ToString()) ? dtunii.Rows[0][3].ToString() : (dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][12].ToString()) ? dtunii.Rows[0][14].ToString() : (dataGridView1.CurrentRow.Cells[3].Value.ToString().Equals(dtunii.Rows[0][15].ToString()) ? dtunii.Rows[0][17].ToString() : dtunii.Rows[0][20].ToString()));
                           
                             }
@@ -1040,7 +1112,7 @@ namespace POS.Sal
                             
                            // dataGridView1.CurrentRow.Cells[7].Value = string.IsNullOrEmpty(dataGridView1.CurrentRow.Cells[7].Value.ToString()) ? 0 : dataGridView1.CurrentRow.Cells[7].Value;
                         if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[5].Value) == 0)
-                            dataGridView1.CurrentRow.Cells[5].Value = "1.00";
+                            dataGridView1.CurrentRow.Cells[5].Value = "1";
                             //////dataGridView1.CurrentRow.Cells[3].Value = dataGridView1.CurrentRow.Cells[2].Value.ToString().Equals(dt222.Rows[0][18].ToString()) ? dt222.Rows[0][19].ToString() : dataGridView1.CurrentRow.Cells[2].Value.ToString().Equals(dt222.Rows[0][15].ToString()) ? dt222.Rows[0][16].ToString() : dataGridView1.CurrentRow.Cells[2].Value.ToString().Equals(dt222.Rows[0][12].ToString()) ? dt222.Rows[0][13].ToString() : "1.00";
 
                             //////if (Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value) == 0)
@@ -1118,15 +1190,15 @@ namespace POS.Sal
                             {
                                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentRow.Index + 1].Cells[0];
                             }
-                            else
+                            else if (!chk_qty1.Checked)
                             {
                                 //if (e.ColumnIndex != 3 )
-                                    SendKeys.Send("{UP}");
+                                SendKeys.Send("{UP}");
 
                                 if (BL.CLS_Session.lang.Equals("E"))
                                 {
-                                    if( dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[5] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[6] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[7])
-                                    SendKeys.Send("{right 2}");
+                                    if (dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[5] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[6] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[7])
+                                        SendKeys.Send("{right 2}");
                                     else
                                         SendKeys.Send("{right 1}");
                                     // SendKeys.Send("{right}");
@@ -1134,11 +1206,16 @@ namespace POS.Sal
                                 else
                                 {
                                     if (dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[5] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[6] && dataGridView1.CurrentCell != dataGridView1.CurrentRow.Cells[7])
-                                    SendKeys.Send("{left 2}");
+                                        SendKeys.Send("{left 2}");
                                     else
                                         SendKeys.Send("{left 1}");
                                     // SendKeys.Send("{left}");
                                 }
+                            }
+                            else
+                            {
+                                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex + 1].Cells[0];
+                                dataGridView1_CellLeave(null, null);
                             }
                        
                         }
@@ -1307,13 +1384,17 @@ namespace POS.Sal
         }
         private void Acc_Tran_Load(object sender, EventArgs e)
         {
-           
+            numericUpDown1.Value = BL.CLS_Session.up_prtfrm;
+            if (BL.CLS_Session.chk_qty1)
+                chk_qty1.Checked = true;
 
             this.Icon = Properties.Resources.TsIcon;
             //if (dataGridView1.RowCount < 1000 && BL.CLS_Session.sysno.Equals("10"))
             //    dataGridView1.Rows.Add(1000);
            // if (BL.CLS_Session.is_einv_p2)
-           
+
+            if (BL.CLS_Session.mizantype.ToString().Equals("1"))
+                dataGridView1.Columns[5].DefaultCellStyle.Format = "N3";
 
             if (BL.CLS_Session.is_taqsit || BL.CLS_Session.multi_bc)
             {
@@ -1399,7 +1480,7 @@ namespace POS.Sal
                 this.dataGridView1.CellValidated += new DataGridViewCellEventHandler(dataGridView1_CellValidated);
 
 
-                dtunits = daml.SELECT_QUIRY_only_retrn_dt("select * from units");
+                dtunits = daml.SELECT_QUIRY_only_retrn_dt("select * from units order by unit_order");
                 dtvat = daml.SELECT_QUIRY_only_retrn_dt("select * from taxs");
                 // MessageBox.Show(dtv.convert_to_ddDDyyyy("20180526"));
 
@@ -2381,7 +2462,9 @@ namespace POS.Sal
 
             foreach (DataGridViewRow ro in dataGridView1.Rows)
             {
-                if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null) && (!ro.IsNewRow && ro.Cells[2].Value != null))
+               // if ((!ro.IsNewRow && ro.Cells[0].Value != null) && (!ro.IsNewRow && ro.Cells[1].Value != null) && (!ro.IsNewRow && ro.Cells[3].Value != null) && (!ro.IsNewRow && ro.Cells[2].Value != null))
+                if (!ro.IsNewRow && ro.Cells[0].Value != null && ro.Cells[1].Value != null && ro.Cells[2].Value != null && ro.Cells[3].Value != null && ro.Cells[0] != null && ro.Cells[1] != null && ro.Cells[2] != null && ro.Cells[3] != null && !ro.Cells[0].Value.ToString().Trim().Equals("") && !ro.Cells[1].Value.ToString().Trim().Equals("") && !ro.Cells[2].Value.ToString().Trim().Equals("") && !ro.Cells[3].Value.ToString().Trim().Equals(""))              
+                //if(!ro.IsNewRow && !string.IsNullOrEmpty(ro.Cells[0].Value.ToString()) && !string.IsNullOrEmpty(ro.Cells[1].Value.ToString()) && !string.IsNullOrEmpty(ro.Cells[3].Value.ToString()) && !string.IsNullOrEmpty(ro.Cells[2].Value.ToString()))
                 {
                     if (shameltax)
                     {
@@ -2428,9 +2511,10 @@ namespace POS.Sal
                 //    return;
                 //}
 
-                if ((Convert.ToDouble(dgvr.Cells[5].Value) == 0 || Convert.ToDouble(dgvr.Cells[6].Value) == 0) && !dgvr.IsNewRow && !BL.CLS_Session.allwzerop)
+              //  if ((Convert.ToDouble(dgvr.Cells[5].Value) == 0 || Convert.ToDouble(dgvr.Cells[6].Value) == 0) && !dgvr.IsNewRow && !BL.CLS_Session.allwzerop && dgvr.Cells[0].Value != null && dgvr.Cells[1].Value != null && dgvr.Cells[0] != null && dgvr.Cells[1] != null && !dgvr.Cells[0].Value.ToString().Trim().Equals("") && !dgvr.Cells[1].Value.ToString().Trim().Equals(""))
+                if ((Convert.ToDouble(dgvr.Cells[5].Value) == 0 || Convert.ToDouble(dgvr.Cells[6].Value) == 0) && !dgvr.IsNewRow && dgvr.Cells[0].Value != null && dgvr.Cells[1].Value != null && dgvr.Cells[0] != null && dgvr.Cells[1] != null && !dgvr.Cells[0].Value.ToString().Trim().Equals("") && !dgvr.Cells[1].Value.ToString().Trim().Equals(""))
                 {
-                    MessageBox.Show("لا يمكن ان تكون الكمية او السعر صفر", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("تاكد من صحة بيانات المدخلة لا يمكن ان تكون فارغة او الكمية او السعر صفر", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dataGridView1.CurrentCell = dataGridView1[5, dgvr.Index];
                     dataGridView1.Select();
                     return;
@@ -2783,7 +2867,8 @@ namespace POS.Sal
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    if (cmd.Parameters["@errstatus"].Value.ToString().Equals("0"))
+                   // MessageBox.Show(cmd.Parameters["@errstatus"].Value.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!cmd.Parameters["@errstatus"].Value.ToString().Equals("1"))
                     {
                         MessageBox.Show("لم يتم حفظ الفاتورة يرجى الحفظ مرة اخرى", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -3013,7 +3098,7 @@ namespace POS.Sal
             cmb_salctr_Leave(sender, e);
 
            // if (BL.CLS_Session.is_einv_p2 
-            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date) && !freetax.Equals("1"))
               //       {
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
@@ -3166,7 +3251,7 @@ namespace POS.Sal
                 }
                 else
                 {
-                    MessageBox.Show(BL.CLS_Session.lang.Equals("E") ? "Can't edit posted trans. " : "لا يمكن تعديل حركة مرحلة", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(BL.CLS_Session.lang.Equals("E") ? "Can't edit posted trans. " : "لا يمكن تعديل حركة مرحلة", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
 
@@ -3862,7 +3947,7 @@ namespace POS.Sal
             DataTable dtdate = daml.SELECT_QUIRY_only_retrn_dt("select released from sales_hdr where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
 
             //if (BL.CLS_Session.is_einv_p2)
-            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date) && !freetax.Equals("1"))
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
                 if (dtzs.Rows.Count == 0)
@@ -4026,6 +4111,7 @@ namespace POS.Sal
                     rpt.SetParameterValue("type", cmb_type.Text);
                     rpt.SetParameterValue("ref", txt_ref.Text);
                     rpt.SetParameterValue("date", txt_mdate.Text);
+                   // rpt.SetParameterValue("cust", !string.IsNullOrEmpty(txt_custnam.Text) ? txt_custnam.Text : txt_name.Text);
                     rpt.SetParameterValue("cust", txt_custnam.Text);
                     rpt.SetParameterValue("desc", txt_desc.Text);
 
@@ -4042,6 +4128,7 @@ namespace POS.Sal
 
                     //  MessageBox.Show(toWord.ConvertToArabic());
                     rpt.SetParameterValue("a_toword", BL.CLS_Session.lang.Equals("E") ? toWord.ConvertToEnglish() : toWord.ConvertToArabic());
+                   // rpt.SetParameterValue("custno", !string.IsNullOrEmpty(txt_custno.Text) ? txt_custno.Text : txt_key.Text);
                     rpt.SetParameterValue("custno", txt_custno.Text);
                     rpt.SetParameterValue("note", txt_remark.Text);
                     rpt.SetParameterValue("clnt_taxid", txt_taxid.Text);
@@ -4086,7 +4173,7 @@ namespace POS.Sal
                             Math.Round(Convert.ToDouble(txt_tax.Text), 2).ToString());
                     // GenerateQrCodeTLV1 ddd=new GenerateQrCodeTLV1();
                     // if (BL.CLS_Session.is_einv_p2)
-                  if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+                     if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date) && !freetax.Equals("1"))
                      {
                          DataTable dtqrc = daml.SELECT_QUIRY_only_retrn_dt("select qr_code from pos_esend where ref=" + txt_ref.Text + " and type='" + cmb_type.SelectedValue + "'");
                          rpt.SetParameterValue("qr", dtqrc.Rows[0][0].ToString());
@@ -4571,7 +4658,7 @@ namespace POS.Sal
             {
                 if (1==1)//dataGridView1.CurrentCell == dataGridView1[3, dataGridView1.CurrentRow.Index] || dataGridView1.CurrentCell == dataGridView1[4, dataGridView1.CurrentRow.Index] ||dataGridView1.CurrentCell == dataGridView1[5, dataGridView1.CurrentRow.Index] || dataGridView1.CurrentCell == dataGridView1[6, dataGridView1.CurrentRow.Index] || dataGridView1.CurrentCell == dataGridView1[7, dataGridView1.CurrentRow.Index])
             {
-                //   total();
+                  // total();
                 if (shameltax)
                 {
                     DataRow[] dtrvat = dtvat.Select("tax_id ='" + dataGridView1.CurrentRow.Cells[10].Value + "'");//,'" + dt222.Rows[0][12] + "','" + dt222.Rows[0][15] + "','" + dt222.Rows[0][18] + "')";
@@ -4878,77 +4965,84 @@ namespace POS.Sal
             //    txt_des.Focus();
             //    return;
             //}
-            txt_paid_TextChanged(null, null);
-             string per =Convert.ToDouble(txt_total.Text)>0 ? (100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)).ToString():"0";
-            // txt_desper.Text = (Math.Round((100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)), 2)).ToString();
+            try
+            {
+               
+                txt_paid_TextChanged(null, null);
+                string per = Convert.ToDouble(txt_total.Text) > 0 ? (100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)).ToString() : "0";
+                // txt_desper.Text = (Math.Round((100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)), 2)).ToString();
 
                 //  if ((Convert.ToDouble(per) > Convert.ToDouble(BL.CLS_Session.inv_dsc)))
-             if ((Convert.ToDouble(per) > Convert.ToDouble(BL.CLS_Session.inv_dsc)))
+                if ((Convert.ToDouble(per) > Convert.ToDouble(BL.CLS_Session.inv_dsc)))
                 {
-                    MessageBox.Show("تجاوزت الخصم المسموح لك","",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("تجاوزت الخصم المسموح لك", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txt_des.Text = "0";
                     txt_desper.Text = "0";
                     txt_des.Focus();
                     return;
                 }
 
-            double sum = 0,sumv=0,sumc=0,sumfv=0;
-            foreach (DataGridViewRow ro in dataGridView1.Rows)
-            {
-                if (ro.Cells[0].Value != null)
+                double sum = 0, sumv = 0, sumc = 0, sumfv = 0;
+                foreach (DataGridViewRow ro in dataGridView1.Rows)
                 {
-                    if (shameltax)
+                    // if (ro.Cells[0].Value)
+                    if (!ro.IsNewRow && ro.Cells[0].Value != null && !ro.Cells[0].Value.ToString().Trim().Equals("") && ro.Cells[1].Value != null && !ro.Cells[1].Value.ToString().Trim().Equals(""))
                     {
-                        sum = sum + Convert.ToDouble(ro.Cells[9].Value);
-                        sumv = sumv + Convert.ToDouble(ro.Cells[8].Value);
-                        sumfv = sumfv + (Convert.ToDouble(ro.Cells[8].Value) == 0 ? Convert.ToDouble(ro.Cells[9].Value) : 0);
-                        sumc = sumc + (Convert.ToDouble(ro.Cells[11].Value) * Convert.ToDouble(ro.Cells[5].Value) * Convert.ToDouble(ro.Cells[4].Value));
-                    }
-                    else
-                    {
-                        //  sum = sum + Convert.ToDouble(ro.Cells[8].Value) - Convert.ToDouble(ro.Cells[7].Value);
-                        sum = sum + Convert.ToDouble(ro.Cells[9].Value);
-                        sumv = sumv + Convert.ToDouble(ro.Cells[8].Value);
-                        sumfv = sumfv + (Convert.ToDouble(ro.Cells[8].Value) == 0 ? Convert.ToDouble(ro.Cells[9].Value) : 0);
-                        sumc = sumc + (Convert.ToDouble(ro.Cells[11].Value) * Convert.ToDouble(ro.Cells[5].Value) * Convert.ToDouble(ro.Cells[4].Value));
+                        if (shameltax)
+                        {
+                            sum = sum + Convert.ToDouble(ro.Cells[9].Value);
+                            sumv = sumv + Convert.ToDouble(ro.Cells[8].Value);
+                            sumfv = sumfv + (Convert.ToDouble(ro.Cells[8].Value) == 0 ? Convert.ToDouble(ro.Cells[9].Value) : 0);
+                            sumc = sumc + (Convert.ToDouble(ro.Cells[11].Value) * Convert.ToDouble(ro.Cells[5].Value) * Convert.ToDouble(ro.Cells[4].Value));
+                        }
+                        else
+                        {
+                            //  sum = sum + Convert.ToDouble(ro.Cells[8].Value) - Convert.ToDouble(ro.Cells[7].Value);
+                            sum = sum + Convert.ToDouble(ro.Cells[9].Value);
+                            sumv = sumv + Convert.ToDouble(ro.Cells[8].Value);
+                            sumfv = sumfv + (Convert.ToDouble(ro.Cells[8].Value) == 0 ? Convert.ToDouble(ro.Cells[9].Value) : 0);
+                            sumc = sumc + (Convert.ToDouble(ro.Cells[11].Value) * Convert.ToDouble(ro.Cells[5].Value) * Convert.ToDouble(ro.Cells[4].Value));
+                        }
                     }
                 }
+                //  textBox1.Text = sum.ToString();
+
+
+
+                // txt_tax.Text = sumv.ToString();
+
+                // if(isnew)
+                //  txt_tax.Text = (Math.Round((sumv - (sumv * Convert.ToDouble(txt_desper.Text) / 100)), 1)).ToString();
+
+                if (shameltax)
+                    txt_total.Text = Math.Round(sum, 2).ToString();
+                else
+                    txt_total.Text = Math.Round(sum, 2).ToString();
+
+                txt_cost.Text = Math.Round(sumc, 2).ToString();
+                // txt_des.Text = (Math.Round(((Convert.ToDouble(txt_desper.Text) * Convert.ToDouble(txt_total.Text)) / 100),2)).ToString();
+
+                if (shameltax)
+                    txt_net.Text = (Math.Round((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)), 2)).ToString();
+                else
+                    txt_net.Text = (Math.Round((Convert.ToDouble(txt_total.Text) + Convert.ToDouble(txt_tax.Text) - Convert.ToDouble(txt_des.Text)), 2)).ToString();
+                //  txt_tax.Text = (Math.Round( (sumv - (sumv * Convert.ToDouble(txt_desper.Text)/100)),2)).ToString();
+
+                // txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / (100 / BL.CLS_Session.tax_per)), 2).ToString() : Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / ((100 + BL.CLS_Session.tax_per) / BL.CLS_Session.tax_per)), 2).ToString();
+                //// txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / (100 / tax_per)), 2).ToString() : Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / ((100 + tax_per) / tax_per)), 2).ToString();
+                //txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text)/100))) ), 2).ToString() : Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text)/100)))), 2).ToString();
+                //txt_taxfree.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString() : Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
+                txt_desper.Text = Convert.ToDouble(txt_total.Text) > 0 ? (Math.Round((100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)), 8)).ToString() : "0";
+                txt_tax.Text = string.IsNullOrEmpty(BL.CLS_Session.tax_no) || freetax.Equals("1") ? "0" : !chk_shaml_tax.Checked ? Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString() : Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
+                txt_taxfree.Text = !chk_shaml_tax.Checked ? Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 4).ToString() : Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
+
+                //if (shameltax)
+                //    txt_total.Text = Math.Round((Convert.ToDouble(txt_net.Text) - Convert.ToDouble(txt_tax.Text) ), 2).ToString();
+                //else
+                //    txt_total.Text = Math.Round((Convert.ToDouble(txt_net.Text) - Convert.ToDouble(txt_tax.Text) ), 2).ToString();
+                //dataGridView1_CellLeave(null, null);
             }
-          //  textBox1.Text = sum.ToString();
-           
-
-           
-           // txt_tax.Text = sumv.ToString();
-         
-           // if(isnew)
-           //  txt_tax.Text = (Math.Round((sumv - (sumv * Convert.ToDouble(txt_desper.Text) / 100)), 1)).ToString();
-
-            if (shameltax)
-                txt_total.Text = Math.Round(sum , 2).ToString();
-            else
-                txt_total.Text = Math.Round(sum ,2).ToString();
-
-            txt_cost.Text = Math.Round(sumc,2).ToString();
-           // txt_des.Text = (Math.Round(((Convert.ToDouble(txt_desper.Text) * Convert.ToDouble(txt_total.Text)) / 100),2)).ToString();
-
-            if (shameltax)
-                txt_net.Text = (Math.Round((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) ,2)).ToString();
-            else
-                txt_net.Text = (Math.Round((Convert.ToDouble(txt_total.Text) + Convert.ToDouble(txt_tax.Text) - Convert.ToDouble(txt_des.Text)) ,2)).ToString();
-            //  txt_tax.Text = (Math.Round( (sumv - (sumv * Convert.ToDouble(txt_desper.Text)/100)),2)).ToString();
-
-           // txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / (100 / BL.CLS_Session.tax_per)), 2).ToString() : Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / ((100 + BL.CLS_Session.tax_per) / BL.CLS_Session.tax_per)), 2).ToString();
-           //// txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / (100 / tax_per)), 2).ToString() : Math.Round(((Convert.ToDouble(txt_total.Text) - Convert.ToDouble(txt_des.Text)) / ((100 + tax_per) / tax_per)), 2).ToString();
-            //txt_tax.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text)/100))) ), 2).ToString() : Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text)/100)))), 2).ToString();
-            //txt_taxfree.Text = BL.CLS_Session.isshamltax.Equals("1") ? Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString() : Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
-            txt_desper.Text =Convert.ToDouble(txt_total.Text)>0 ? (Math.Round((100 * (Convert.ToDouble(txt_des.Text)) / Convert.ToDouble(txt_total.Text)), 8)).ToString():"0";
-            txt_tax.Text = string.IsNullOrEmpty(BL.CLS_Session.tax_no) || freetax.Equals("1") ? "0" : !chk_shaml_tax.Checked ? Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString() : Math.Round(((Convert.ToDouble(sumv) - (Convert.ToDouble(sumv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
-            txt_taxfree.Text = !chk_shaml_tax.Checked ? Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))),4).ToString() : Math.Round(((Convert.ToDouble(sumfv) - (Convert.ToDouble(sumfv) * (Convert.ToDouble(txt_desper.Text) / 100)))), 2).ToString();
-
-            //if (shameltax)
-            //    txt_total.Text = Math.Round((Convert.ToDouble(txt_net.Text) - Convert.ToDouble(txt_tax.Text) ), 2).ToString();
-            //else
-            //    txt_total.Text = Math.Round((Convert.ToDouble(txt_net.Text) - Convert.ToDouble(txt_tax.Text) ), 2).ToString();
+            catch { }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -5690,6 +5784,7 @@ namespace POS.Sal
             //total();
         }
 
+
         private void btn_prtdirct_Click(object sender, EventArgs e)
         {
             btn_Rfrsh_Click( sender,  e);
@@ -5697,18 +5792,19 @@ namespace POS.Sal
             if (dataGridView1.Rows.Count == 0)
                 return;
 
-            if (Convert.ToDouble(dtv.convert_to_yyyyDDdd(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)).AddDays(365).ToString())) < Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))))
+            TimeSpan span = DateTime.Now.Subtract(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)));
+
+        //    if (Convert.ToDouble(dtv.convert_to_yyyyDDdd(Convert.ToDateTime((BL.CLS_Session.minstart.Substring(4, 2) + "/" + BL.CLS_Session.minstart.Substring(6, 2) + "/" + BL.CLS_Session.minstart.Substring(0, 4)), new CultureInfo("en-US", false)).AddDays(365).ToString())) < Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))))
+            if (Convert.ToDouble(span.Days) > 365)
             {
                 MessageBox.Show(" بيانات الصيانه مفقودة يرجى التواصل مع الدعم الفني لتحديثها ", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
                         
 
-            DataTable dtdate = daml.SELECT_QUIRY_only_retrn_dt("select released from sales_hdr where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
-            daml.Exec_Query_only("update sales_hdr set inv_printed=isnull(inv_printed,0)+1 where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
-            is_printd = true;
+            
 
-            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+            if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date) && !freetax.Equals("1"))
             {
                 DataTable dtzs = daml.SELECT_QUIRY_only_retrn_dt("select * from pos_esend where (clrnce_status='CLEARED' or rport_status='REPORTED') and brno='" + BL.CLS_Session.brno + "' and slno='" + cmb_salctr.SelectedValue + "' and type='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
                 if (dtzs.Rows.Count == 0)
@@ -5717,6 +5813,10 @@ namespace POS.Sal
                     return;
                 }
             }
+
+            DataTable dtdate = daml.SELECT_QUIRY_only_retrn_dt("select released from sales_hdr where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
+            daml.Exec_Query_only("update sales_hdr set inv_printed=isnull(inv_printed,0)+1 where branch='" + BL.CLS_Session.brno + "' and slcenter='" + cmb_salctr.SelectedValue + "' and invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + "");
+            is_printd = true;
 
             Acc.rpt.Acc_frmPrint rf = new Acc.rpt.Acc_frmPrint();
             //  DataSet ds1 = new DataSet();
@@ -5820,6 +5920,7 @@ namespace POS.Sal
                 rpt.SetParameterValue("type", cmb_type.Text);
                 rpt.SetParameterValue("ref", txt_ref.Text);
                 rpt.SetParameterValue("date", txt_mdate.Text);
+               // rpt.SetParameterValue("cust", !string.IsNullOrEmpty(txt_custnam.Text) ? txt_custnam.Text : txt_name.Text);
                 rpt.SetParameterValue("cust", txt_custnam.Text);
                 rpt.SetParameterValue("desc", txt_desc.Text);
 
@@ -5836,6 +5937,7 @@ namespace POS.Sal
 
                 //  MessageBox.Show(toWord.ConvertToArabic());
                 rpt.SetParameterValue("a_toword", BL.CLS_Session.lang.Equals("E") ? toWord.ConvertToEnglish() : toWord.ConvertToArabic());
+               // rpt.SetParameterValue("custno",!string.IsNullOrEmpty(txt_custno.Text)? txt_custno.Text : txt_key.Text);
                 rpt.SetParameterValue("custno", txt_custno.Text);
                 rpt.SetParameterValue("note", txt_remark.Text);
                 rpt.SetParameterValue("clnt_taxid", txt_taxid.Text);
@@ -5888,7 +5990,7 @@ namespace POS.Sal
                            Math.Round(Convert.ToDouble(txt_tax.Text), 2).ToString());
 
                 //if (BL.CLS_Session.is_einv_p2)
-                if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
+                if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date) && !freetax.Equals("1"))
                 {
                     DataTable dtqrc = daml.SELECT_QUIRY_only_retrn_dt("select qr_code from pos_esend where ref=" + txt_ref.Text + " and type='"+cmb_type.SelectedValue +"'");
                     rpt.SetParameterValue("qr", dtqrc.Rows[0][0].ToString());
@@ -6363,41 +6465,41 @@ namespace POS.Sal
                     { MessageBox.Show(" لا يوجد رقم التعريف الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
                         inv.SupplierParty.partyIdentification.ID = BL.CLS_Session.dtcomp.Rows[0]["ownr_mob"].ToString();// "123456"; // رقم السجل التجارى الخاض بالبائع
-                   
+
                     inv.SupplierParty.partyIdentification.schemeID = BL.CLS_Session.cmpschem;// "CRN"; //رقم السجل التجارى
                     if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["street"].ToString()))
                     { MessageBox.Show(" لا يوجد اسم الشارع في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                      inv.SupplierParty.postalAddress.StreetName = BL.CLS_Session.dtcomp.Rows[0]["street"].ToString();// "streetnumber";// اجبارى
+                        inv.SupplierParty.postalAddress.StreetName = BL.CLS_Session.dtcomp.Rows[0]["street"].ToString();// "streetnumber";// اجبارى
                     inv.SupplierParty.postalAddress.AdditionalStreetName = "";// "ststtstst"; //اختيارى
 
                     if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString()))
                     { MessageBox.Show(" لا يوجد رقم المبنى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                    inv.SupplierParty.postalAddress.BuildingNumber = BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString();// "3724"; // اجبارى رقم المبنى
+                        inv.SupplierParty.postalAddress.BuildingNumber = BL.CLS_Session.dtcomp.Rows[0]["bulding_no"].ToString();// "3724"; // اجبارى رقم المبنى
                     //inv.SupplierParty.postalAddress.PlotIdentification = "9833";//اختيارى رقم القطعة
                     if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["city"].ToString()))
                     { MessageBox.Show(" لا يوجد اسم المدينة في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                    inv.SupplierParty.postalAddress.CityName = BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "gaddah"; //اسم المدينة
+                        inv.SupplierParty.postalAddress.CityName = BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "gaddah"; //اسم المدينة
 
                     if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString()))
                     { MessageBox.Show(" لا يوجد الرقم البريدي في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                    inv.SupplierParty.postalAddress.PostalZone = BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString();// "15385";//الرقم البريدي
+                        inv.SupplierParty.postalAddress.PostalZone = BL.CLS_Session.dtcomp.Rows[0]["postal_code"].ToString();// "15385";//الرقم البريدي
                     inv.SupplierParty.postalAddress.CountrySubentity = "";// BL.CLS_Session.dtcomp.Rows[0]["city"].ToString();// "makka";//اسم المحافظة او المدينة مثال (مكة) اختيارى
 
                     if (string.IsNullOrEmpty(BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString()))
                     { MessageBox.Show(" لا يوجد اسم المنطقة او الحى في العنوان الوطني الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                    inv.SupplierParty.postalAddress.CitySubdivisionName = BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString();// "flassk";// اسم المنطقة او الحى 
+                        inv.SupplierParty.postalAddress.CitySubdivisionName = BL.CLS_Session.dtcomp.Rows[0]["site_name"].ToString();// "flassk";// اسم المنطقة او الحى 
                     inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
                     inv.SupplierParty.partyLegalEntity.RegistrationName = BL.CLS_Session.cmp_name;// "على ابراهيم"; // اسم الشركة المسجل فى الهيئة
 
                     if (string.IsNullOrEmpty(BL.CLS_Session.tax_no))
                     { MessageBox.Show(" لا يوجد الرقم الضريبي الخاص بالبائع ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                     else
-                    inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
+                        inv.SupplierParty.partyTaxScheme.CompanyID = BL.CLS_Session.tax_no;// "300300868600003";// رقم التسجيل الضريبي
 
                     //rpt.SetParameterValue("c_bulding_no", dtcust == null ? "" : dtcust.Rows[0]["c_bulding_no"].ToString());
                     //rpt.SetParameterValue("c_street", dtcust == null ? "" : dtcust.Rows[0]["c_street"].ToString());
@@ -6456,7 +6558,7 @@ namespace POS.Sal
                         if (string.IsNullOrEmpty(dtcust.Rows[0]["vndr_taxcode"].ToString()))
                         { MessageBox.Show(" لا يوجد الرقم الضريبي الخاص بالمشترى ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
                         else
-                        inv.CustomerParty.partyTaxScheme.CompanyID = dtcust.Rows[0]["vndr_taxcode"].ToString(); // رقم التسجيل الضريبي
+                            inv.CustomerParty.partyTaxScheme.CompanyID = dtcust.Rows[0]["vndr_taxcode"].ToString(); // رقم التسجيل الضريبي
                     }
 
                     ////inv.legalMonetaryTotal.PayableAmount = decimal.Parse(dtrh[14].ToString()) ;// اجمالي الفاتورة
@@ -6525,26 +6627,29 @@ namespace POS.Sal
                     //////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
                     //////    inv.allowanceCharges.Add(allowance);
                     //////}
-                    ////if (decimal.Parse(dtrh[13].ToString()) > 0)
-                    ////{
-                    ////    //this code incase of there is a discount in invoice level 
-                    ////    AllowanceCharge allowance = new AllowanceCharge();
-                    ////    //ChargeIndicator = false means that this is discount
-                    ////    //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
-                    ////    allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
-                    ////    //write this lines in case you will make discount as percentage
-                    ////    allowance.MultiplierFactorNumeric = 0; //dscount percentage like 10
-                    ////    allowance.BaseAmount = 0; // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
 
-                    ////    // in case we will make discount as Amount 
-                    ////    allowance.Amount = decimal.Parse(dtrh[13].ToString()); // 
-                    ////    allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
-                    ////    allowance.AllowanceChargeReason = "discount"; //discount or charge reson
-                    ////    allowance.taxCategory.ID = "Z";// كود الضريبة tax code (S Z O E )
-                    ////    allowance.taxCategory.Percent = 0; //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
-                    ////    //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
-                    ////    inv.allowanceCharges.Add(allowance);
-                    ////}
+                    ///  if (decimal.Parse(dtrh[13].ToString()) > 0)
+                    // if (decimal.Parse(dtrh[15].ToString()) > 0)
+                    if (decimal.Parse(dtrh[16].ToString()) > 0)
+                    {
+                        //this code incase of there is a discount in invoice level 
+                        AllowanceCharge allowance = new AllowanceCharge();
+                        //ChargeIndicator = false means that this is discount
+                        //ChargeIndicator = true means that this is charges(like cleaning service - transportation)
+                        allowance.ChargeIndicator = false;// يعني خصم وليس رسوم
+                        //write this lines in case you will make discount as percentage
+                        // allowance.MultiplierFactorNumeric = decimal.Parse(dtrh[15].ToString()); //dscount percentage like 10
+                        // allowance.BaseAmount = decimal.Parse(dtrh[17].ToString()); // the amount we will apply percentage on example (MultiplierFactorNumeric=10 ,BaseAmount=1000 then AllowanceAmount will be 100 SAR)
+
+                        // in case we will make discount as Amount 
+                        allowance.Amount = decimal.Parse(Math.Round(Convert.ToDouble(dtrh[16]), 2).ToString());// decimal.Parse(dtrh[13].ToString()); // 
+                        //  allowance.AllowanceChargeReasonCode = ""; //discount or charge reason code
+                        allowance.AllowanceChargeReason = "discount"; //discount or charge reson
+                        allowance.taxCategory.ID = "S";// كود الضريبة tax code (S Z O E )
+                        allowance.taxCategory.Percent = decimal.Parse(BL.CLS_Session.tax_per.ToString()); //;// نسبة الضريبة tax percentage (0 - 15 - 5 )
+                        //فى حالة عندى اكثر من خصم بعمل loop على الاسطر السابقة
+                        inv.allowanceCharges.Add(allowance);
+                    }
 
                     DataTable dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select a.*,b.tax_id,b.tax_percent,b.zatka_code,b.zatka_reason from sales_dtl a join taxs b on a.tax_id=b.tax_id where a.ref=" + dtrh[3] + " and a.invtype='" + dtrh[2] + "'");
                     // فى حالة فى اكتر من منتج فى الفاتورة هانعمل ليست من invoiceline مثال الكود التالى
@@ -6561,7 +6666,7 @@ namespace POS.Sal
                         invline.price.EncludingVat = chk_shaml_tax.Checked ? true : false;
 
                         // invline.price.PriceAmount = decimal.Parse(dtrd[8].ToString());// سعر المنتج بعد الخصم 
-                        invline.price.PriceAmount = decimal.Parse(dtrd[10].ToString());// decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()));// سعر المنتج بعد الخصم 
+                        invline.price.PriceAmount = decimal.Parse(dtrd[10].ToString()) - (decimal.Parse(dtrd[10].ToString()) * decimal.Parse(dtrd[11].ToString()) / 100);// decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()));// سعر المنتج بعد الخصم 
 
                         invline.item.Name = dtrd[28].ToString();// dtrd[6].ToString();
 
@@ -6600,7 +6705,7 @@ namespace POS.Sal
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "VATEX-SA-HEA";
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReason = "";
                         //invline.taxTotal.TaxSubtotal.taxCategory.TaxExemptionReasonCode = "";
-
+                        /*
                         if (decimal.Parse(dtrh[15].ToString()) > 0)
                         // if (0 > 1)
                         {
@@ -6621,10 +6726,12 @@ namespace POS.Sal
                             // allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString())); //0;
                             // allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) - (decimal.Parse(dtrd[17].ToString()) / decimal.Parse(dtrd[9].ToString()))) * decimal.Parse(dtrd[9].ToString()); //0;
                             //allowanceCharge.BaseAmount = (decimal.Parse(dtrd[8].ToString()) * decimal.Parse(dtrd[9].ToString())) - decimal.Parse(dtrd[17].ToString()) - decimal.Parse(dtrd[19].ToString()); //0;
-                            allowanceCharge.BaseAmount = decimal.Parse(dtrd[10].ToString()); //0;
+                            allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) * (decimal.Parse(dtrd[10].ToString()) - (decimal.Parse(dtrd[10].ToString()) * decimal.Parse(dtrd[11].ToString()) / 100)); //0;
                             invline.allowanceCharges.Add(allowanceCharge);
                         }
-                        else
+                        */
+                        // else
+                        if (decimal.Parse(dtrd[11].ToString()) > 0)
                         {
                             // incase there is discount in invoice line level
                             AllowanceCharge allowanceCharge = new AllowanceCharge();
@@ -6635,15 +6742,17 @@ namespace POS.Sal
 
                             allowanceCharge.AllowanceChargeReason = "discount"; // سبب الخصم على مستوى المنتج
                             // allowanceCharge.AllowanceChargeReasonCode = "90"; // سبب الخصم على مستوى المنتج
-                            allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
+                            // allowanceCharge.Amount = decimal.Parse(dtrd[11].ToString()); // قيم الخصم discount amount or charge amount
 
-                            allowanceCharge.MultiplierFactorNumeric = 0;
-                            allowanceCharge.BaseAmount = 0;
+                            allowanceCharge.MultiplierFactorNumeric = decimal.Parse(dtrd[11].ToString());//0;
+                            allowanceCharge.BaseAmount = decimal.Parse(dtrd[8].ToString()) * (decimal.Parse(dtrd[10].ToString())); //0;
                             invline.allowanceCharges.Add(allowanceCharge);
                         }
+
                         inv.InvoiceLines.Add(invline);
                     }
 
+                    // res = ubl.GenerateInvoiceXML(inv, Directory.GetCurrentDirectory() + "\\" + BL.CLS_Session.sqldb.Substring(5, 4) + "_XMLs");
                     res = ubl.GenerateInvoiceXML(inv, Directory.GetCurrentDirectory());
 
                     // MessageBox.Show(dtrh["invmdate"].ToString().Substring(0, 4) + "-" + dtrh["invmdate"].ToString().Substring(4, 2) + "-" + dtrh["invmdate"].ToString().Substring(6, 2));
@@ -6675,9 +6784,9 @@ namespace POS.Sal
         {
             try
             {
-               // string PublicKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\cert.pem");
-               // string PrivateKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\key.pem");
-               // string SecretKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\secret.txt");
+                // string PublicKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\cert.pem");
+                // string PrivateKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\key.pem");
+                // string SecretKey = File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\secret.txt");
                 string PublicKey = string.IsNullOrEmpty(BL.CLS_Session.z_certpem) ? File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\cert.pem") : BL.CLS_Session.z_certpem;
                 string PrivateKey = string.IsNullOrEmpty(BL.CLS_Session.z_keypem) ? File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\key.pem") : BL.CLS_Session.z_keypem;
                 string SecretKey = string.IsNullOrEmpty(BL.CLS_Session.z_secrettxt) ? File.ReadAllText(Directory.GetCurrentDirectory() + "\\cert\\secret.txt") : BL.CLS_Session.z_secrettxt;
@@ -6702,8 +6811,8 @@ namespace POS.Sal
                     //this code is for simulation and production mode
 
                     // if (inv.invoiceTypeCode.Name.Substring(0, 2) == "01")
-                   // if (Convert.ToInt32(dtrh[3]) == 0)
-                    if (!string.IsNullOrEmpty(txt_custno.Text) && !string.IsNullOrEmpty(txt_taxid.Text) && txt_taxid.Text.Length==15)
+                    // if (Convert.ToInt32(dtrh[3]) == 0)
+                    if (!string.IsNullOrEmpty(txt_custno.Text) && !string.IsNullOrEmpty(txt_taxid.Text))
                     {
                         // to send standard invoices for clearing
                         //this this the calling of api 
@@ -6758,18 +6867,17 @@ namespace POS.Sal
                             daml.SELECT_QUIRY_only_retrn_dt("update pos_esend  set status_code = " + responsemodel.StatusCode + ", zatka_status=0 ,wrning_msg='" + responsemodel.WarningMessage + "',zatka_err_msg='" + responsemodel.ErrorMessage + "',rport_status='" + responsemodel.ReportingStatus + "'  where ref=" + dtrh[2].ToString() + "");
                         // MessageBox.Show(responsemodel.ErrorMessage);
                     }
-                   // progressBar1.Increment(1);
+                    // progressBar1.Increment(1);
                 }
                 MessageBox.Show("تم مشاركة الفاتورة مع الزكاة والدخل بنجاح", "Erroe", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-               // progressBar1.Visible = false;
+                // progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "  هناك خطاء اثناء المشاركة  ", "Erroe", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               // progressBar1.Visible = false;
+                // progressBar1.Visible = false;
             }
         }
-
         private void txt_ccno_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -6843,6 +6951,17 @@ namespace POS.Sal
 
         private void btn_zatkasnd_Click(object sender, EventArgs e)
         {
+            if (!chknet())
+            {
+                MessageBox.Show(" No Internet Connection لا يوجد اتصال بالانترنت ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+           if (!string.IsNullOrEmpty(txt_custno.Text) && !string.IsNullOrEmpty(txt_taxid.Text) && txt_taxid.Text.Trim().Length != 15)
+            {
+                MessageBox.Show(" Clint TaxID Length Error خطا في طول الرقم الضريبي للعميل ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(dtv.convert_to_yyyyDDdd(txt_mdate.Text)) >= Convert.ToDouble(BL.CLS_Session.einv_p2_date))
                 create_einv_p2(txt_ref.Text, cmb_type.SelectedValue.ToString());
             else
@@ -6851,12 +6970,49 @@ namespace POS.Sal
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            //if (chknet())
+            //    MessageBox.Show("Ok");
+            //else
+            //    MessageBox.Show("No");
+
             Cus.Customers cust = new Cus.Customers("");
             cust.MdiParent = this.MdiParent;
             cust.Show();
         }
 
+        private bool chknet()
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                String host = "google.com";
+                byte[] buffer = new byte[32];
+                int timeout = 1000;
+                PingOptions pingOptions = new PingOptions();
+                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void chk_qty1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_qty1.Checked)
+                BL.CLS_Session.chk_qty1 = true;
+            else
+                BL.CLS_Session.chk_qty1 = false;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

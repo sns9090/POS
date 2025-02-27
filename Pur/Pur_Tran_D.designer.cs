@@ -110,6 +110,9 @@
             this.btn_Undo = new System.Windows.Forms.Button();
             this.btn_Rfrsh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.استيرادمناكسلToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.تعليماتالاستيرادمنالاكسلToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txt_ref = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -140,73 +143,75 @@
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.نسخToolStripMenuItem,
             this.حذفالصفToolStripMenuItem,
             this.كشفحسابToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // نسخToolStripMenuItem
             // 
-            resources.ApplyResources(this.نسخToolStripMenuItem, "نسخToolStripMenuItem");
             this.نسخToolStripMenuItem.Name = "نسخToolStripMenuItem";
+            resources.ApplyResources(this.نسخToolStripMenuItem, "نسخToolStripMenuItem");
             this.نسخToolStripMenuItem.Click += new System.EventHandler(this.نسخToolStripMenuItem_Click);
             // 
             // حذفالصفToolStripMenuItem
             // 
-            resources.ApplyResources(this.حذفالصفToolStripMenuItem, "حذفالصفToolStripMenuItem");
             this.حذفالصفToolStripMenuItem.Name = "حذفالصفToolStripMenuItem";
+            resources.ApplyResources(this.حذفالصفToolStripMenuItem, "حذفالصفToolStripMenuItem");
             this.حذفالصفToolStripMenuItem.Click += new System.EventHandler(this.حذفالصفToolStripMenuItem_Click);
             // 
             // كشفحسابToolStripMenuItem
             // 
-            resources.ApplyResources(this.كشفحسابToolStripMenuItem, "كشفحسابToolStripMenuItem");
             this.كشفحسابToolStripMenuItem.Name = "كشفحسابToolStripMenuItem";
+            resources.ApplyResources(this.كشفحسابToolStripMenuItem, "كشفحسابToolStripMenuItem");
             this.كشفحسابToolStripMenuItem.Click += new System.EventHandler(this.كشفحسابToolStripMenuItem_Click);
             // 
             // contextMenuStrip2
             // 
-            resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.حبةمنكلصنفToolStripMenuItem,
             this.كلالكمياتToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
+            resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
             // 
             // حبةمنكلصنفToolStripMenuItem
             // 
-            resources.ApplyResources(this.حبةمنكلصنفToolStripMenuItem, "حبةمنكلصنفToolStripMenuItem");
             this.حبةمنكلصنفToolStripMenuItem.Name = "حبةمنكلصنفToolStripMenuItem";
+            resources.ApplyResources(this.حبةمنكلصنفToolStripMenuItem, "حبةمنكلصنفToolStripMenuItem");
             this.حبةمنكلصنفToolStripMenuItem.Click += new System.EventHandler(this.حبةمنكلصنفToolStripMenuItem_Click);
             // 
             // كلالكمياتToolStripMenuItem
             // 
-            resources.ApplyResources(this.كلالكمياتToolStripMenuItem, "كلالكمياتToolStripMenuItem");
             this.كلالكمياتToolStripMenuItem.Name = "كلالكمياتToolStripMenuItem";
+            resources.ApplyResources(this.كلالكمياتToolStripMenuItem, "كلالكمياتToolStripMenuItem");
             this.كلالكمياتToolStripMenuItem.Click += new System.EventHandler(this.كلالكمياتToolStripMenuItem_Click);
             // 
             // contextMenuStrip3
             // 
-            resources.ApplyResources(this.contextMenuStrip3, "contextMenuStrip3");
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.designToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip3, "contextMenuStrip3");
             // 
             // designToolStripMenuItem
             // 
-            resources.ApplyResources(this.designToolStripMenuItem, "designToolStripMenuItem");
             this.designToolStripMenuItem.Image = global::POS.Properties.Resources.Edit_16x16;
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
+            resources.ApplyResources(this.designToolStripMenuItem, "designToolStripMenuItem");
             this.designToolStripMenuItem.Click += new System.EventHandler(this.designToolStripMenuItem_Click);
             // 
             // backgroundWorker1
@@ -562,9 +567,9 @@
             // 
             // btn_prtbar
             // 
-            resources.ApplyResources(this.btn_prtbar, "btn_prtbar");
             this.btn_prtbar.ContextMenuStrip = this.contextMenuStrip2;
             this.btn_prtbar.Image = global::POS.Properties.Resources.barcode;
+            resources.ApplyResources(this.btn_prtbar, "btn_prtbar");
             this.btn_prtbar.Name = "btn_prtbar";
             this.btn_prtbar.UseVisualStyleBackColor = true;
             this.btn_prtbar.Click += new System.EventHandler(this.btn_prtbar_Click);
@@ -657,6 +662,26 @@
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.استيرادمناكسلToolStripMenuItem,
+            this.تعليماتالاستيرادمنالاكسلToolStripMenuItem});
+            this.contextMenuStrip4.Name = "contextMenuStrip2";
+            resources.ApplyResources(this.contextMenuStrip4, "contextMenuStrip4");
+            // 
+            // استيرادمناكسلToolStripMenuItem
+            // 
+            this.استيرادمناكسلToolStripMenuItem.Name = "استيرادمناكسلToolStripMenuItem";
+            resources.ApplyResources(this.استيرادمناكسلToolStripMenuItem, "استيرادمناكسلToolStripMenuItem");
+            this.استيرادمناكسلToolStripMenuItem.Click += new System.EventHandler(this.استيرادمناكسلToolStripMenuItem_Click);
+            // 
+            // تعليماتالاستيرادمنالاكسلToolStripMenuItem
+            // 
+            this.تعليماتالاستيرادمنالاكسلToolStripMenuItem.Name = "تعليماتالاستيرادمنالاكسلToolStripMenuItem";
+            resources.ApplyResources(this.تعليماتالاستيرادمنالاكسلToolStripMenuItem, "تعليماتالاستيرادمنالاكسلToolStripMenuItem");
+            this.تعليماتالاستيرادمنالاكسلToolStripMenuItem.Click += new System.EventHandler(this.تعليماتالاستيرادمنالاكسلToolStripMenuItem_Click);
             // 
             // txt_ref
             // 
@@ -755,11 +780,11 @@
             // 
             // dataGridView1
             // 
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -948,6 +973,10 @@
             resources.ApplyResources(this.Column15, "Column15");
             this.Column15.Name = "Column15";
             // 
+            // openFileDialog1
+            // 
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
+            // 
             // Pur_Tran_D
             // 
             resources.ApplyResources(this, "$this");
@@ -1029,6 +1058,7 @@
             this.contextMenuStrip3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1139,5 +1169,9 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
+        private System.Windows.Forms.ToolStripMenuItem استيرادمناكسلToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem تعليماتالاستيرادمنالاكسلToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

@@ -425,26 +425,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TreeSoft.exe" size="34652160">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TreeSoft.exe" size="34974720">
       <assemblyIdentity name="TreeSoft" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>esNuvdL4NL6LlhuUB32Xo953VgAWNdkz4isqN4XRbDc=</dsig:DigestValue>
+        <dsig:DigestValue>E8fKgPdjBHGCWgqaWXDKs5Ms/ULmUlnSpkvM+0Iw3pY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en\TreeSoft.resources.dll" size="5300736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en\TreeSoft.resources.dll" size="5315584">
       <assemblyIdentity name="TreeSoft.resources" version="1.0.0.0" language="en" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>teuUE6AWBK6LkKJEm3LF3mgcWc+N/9VS621wEhdbA3w=</dsig:DigestValue>
+        <dsig:DigestValue>HqPACUwWEGjFSFaQNn4jScTyJQEthAEsOhqM4WlV+dQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

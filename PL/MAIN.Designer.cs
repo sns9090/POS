@@ -348,6 +348,7 @@
             this.bak_timer = new System.Windows.Forms.Timer(this.components);
             this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.sync_timer = new System.Windows.Forms.Timer(this.components);
+            this.مبيعاتتفصيلToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -1519,7 +1520,8 @@
             this.جلبالمبيعاتمنالفروعToolStripMenuItem,
             this.تكوينالمبيعاتوالقيودالمحاسبيةToolStripMenuItem,
             this.اصلاحالمبيعاتوالقيودالمحاسبيةToolStripMenuItem,
-            this.تجهيزوارسالالفواتيرللزكاةToolStripMenuItem});
+            this.تجهيزوارسالالفواتيرللزكاةToolStripMenuItem,
+            this.مبيعاتتفصيلToolStripMenuItem});
             this.المبيعاتToolStripMenuItem.Image = global::POS.Properties.Resources.Settings_16x16;
             this.المبيعاتToolStripMenuItem.Name = "المبيعاتToolStripMenuItem";
             resources.ApplyResources(this.المبيعاتToolStripMenuItem, "المبيعاتToolStripMenuItem");
@@ -3195,6 +3197,14 @@
             this.sync_timer.Interval = 3600000;
             this.sync_timer.Tick += new System.EventHandler(this.sync_timer_Tick);
             // 
+            // مبيعاتتفصيلToolStripMenuItem
+            // 
+            this.مبيعاتتفصيلToolStripMenuItem.Image = global::POS.Properties.Resources.Settings_16x16;
+            this.مبيعاتتفصيلToolStripMenuItem.Name = "مبيعاتتفصيلToolStripMenuItem";
+            resources.ApplyResources(this.مبيعاتتفصيلToolStripMenuItem, "مبيعاتتفصيلToolStripMenuItem");
+            this.مبيعاتتفصيلToolStripMenuItem.Tag = "S12D";
+            this.مبيعاتتفصيلToolStripMenuItem.Click += new System.EventHandler(this.مبيعاتتفصيلToolStripMenuItem_Click);
+            // 
             // MAIN
             // 
             resources.ApplyResources(this, "$this");
@@ -3552,6 +3562,7 @@
         private System.Windows.Forms.ToolStripMenuItem اعمـــارديــونالمـــوردينToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem طرقالدفعالتطبيقاتToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem الميزانيةالعموميةToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem مبيعاتتفصيلToolStripMenuItem;
 
     }
 }

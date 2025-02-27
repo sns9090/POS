@@ -2615,16 +2615,16 @@ tree-soft.com</value>
     <value>NoControl</value>
   </data>
   <data name="chk_zerop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 212</value>
+    <value>581, 212</value>
   </data>
   <data name="chk_zerop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 18</value>
+    <value>34, 18</value>
   </data>
   <data name="chk_zerop.TabIndex" type="System.Int32, mscorlib">
     <value>132</value>
   </data>
   <data name="chk_zerop.Text" xml:space="preserve">
-    <value>السماح بالبيع بسعر بصفر</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;chk_zerop.Name" xml:space="preserve">
     <value>chk_zerop</value>

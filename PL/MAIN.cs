@@ -284,7 +284,7 @@ namespace POS
                 {
                     الحساباتToolStripMenuItem.Visible = true;
                     المبيعاتToolStripMenuItem2.Visible = false;
-                        الحركاتToolStripMenuItem.Visible = false;
+                   //     الحركاتToolStripMenuItem.Visible = false;
                         العملاءToolStripMenuItem.Visible = false;
                 }
                // المبيعاتToolStripMenuItem2.Visible = false;
@@ -300,7 +300,7 @@ namespace POS
                 تكوينالمبيعاتوالقيودالمحاسبيةToolStripMenuItem.Visible = false;
                 مبيعاتمطعمToolStripMenuItem.Visible = false;
                 مرتجعاتلمسToolStripMenuItem.Visible = false;
-                الحركاتToolStripMenuItem.Visible = false;
+               // الحركاتToolStripMenuItem.Visible = false;
                 button1.Visible = false;
                 button23.Visible = true;
             }
@@ -3337,11 +3337,11 @@ namespace POS
         {
             try
             {
-                if (Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))) >= Convert.ToDouble(encd.Decrypt(BL.CLS_Session.minlastlgin, true)))
+                if (!BL.CLS_Session.is_einv_p2 && Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))) >= Convert.ToDouble(encd.Decrypt(BL.CLS_Session.minlastlgin, true)))
                 {
                    daml.Exec_Query_only("update dbmstr.dbo.companys set min_lastlgin='" + encd.Encrypt(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false)), true) + "' where comp_id='" + BL.CLS_Session.cmp_id + "'");
                 }
-                else
+                else if (BL.CLS_Session.is_einv_p2 && Convert.ToDouble(DateTime.Now.ToString("yyyyMMdd", new CultureInfo("en-US", false))) < Convert.ToDouble(encd.Decrypt(BL.CLS_Session.minlastlgin, true)))
                 {
                     MessageBox.Show(" يرجى التاكد من تاريخ الجهاز ", " خطا بالتاريخ ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
@@ -4176,6 +4176,13 @@ namespace POS
             Acc.Acc_Final_Report_mm f6 = new Acc.Acc_Final_Report_mm();
             f6.MdiParent = this;
             f6.Show();
+        }
+
+        private void مبيعاتتفصيلToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pos.Pos_Tafseel rs = new Pos.Pos_Tafseel("","","");
+            rs.MdiParent = this;
+            rs.Show();
         } 
     }
 }

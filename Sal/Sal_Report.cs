@@ -93,7 +93,7 @@ namespace POS.Sal
 
                 }
                 */
-                if (!chk_notequal.Checked && !chk_forrviw.Checked)
+                if (!chk_notequal.Checked && !chk_forrviw.Checked && !chk_zatka.Checked)
                 {
                     string carir = cmb_exits.SelectedIndex != -1 ? " and carrier = '" + cmb_exits.SelectedValue.ToString() + "' " : " ";
                     string usrname = cmb_user.SelectedIndex != -1 ? " and usrid = '" + cmb_user.SelectedValue.ToString() + "' " : " ";
@@ -188,11 +188,18 @@ namespace POS.Sal
 
                         dt = daml.SELECT_QUIRY_only_retrn_dt(qstr + " order by invmdate");
                     }
-                    else
+                    else if (chk_forrviw.Checked)
                     {
                         string qstr = @"select slcenter sl_no,invtype a_type,ref a_ref,CONVERT(VARCHAR(10), CAST(invmdate as date), 105) a_mdate,(substring(invhdate,7,2) + '-' + substring(invhdate,5,2)+'-'+substring(invhdate,1,4)) a_hdate,text a_text,(case when invtype in ('04','05') then (case when with_tax=0 then invttl else invttl-tax_amt_rcvd end) else -(case when with_tax=0 then invttl else invttl-tax_amt_rcvd end) end) invttl,(case when invtype in ('04','05') then invdsvl else -invdsvl end) invdsvl,(case when invtype in ('04','05') then tax_amt_rcvd else -tax_amt_rcvd end) tax,(case when invtype in ('04','05') then nettotal else -nettotal end) nettotal,posted a_p,invtype a_t,glser src 
                                     FROM sales_hdr t1 where not exists
                                         (select * from acc_hdr t2 where t1.branch = t2.a_brno and t1.slcenter=t2.sl_no and t1.invtype=t2.a_type and t1.ref=t2.a_ref) and branch='" + BL.CLS_Session.brno + "' ";
+                        dt = daml.SELECT_QUIRY_only_retrn_dt(qstr + " order by invmdate");
+                    }
+                    else
+                    {
+                        string qstr = @"select slcenter sl_no,invtype a_type,ref a_ref,CONVERT(VARCHAR(10), CAST(invmdate as date), 105) a_mdate,(substring(invhdate,7,2) + '-' + substring(invhdate,5,2)+'-'+substring(invhdate,1,4)) a_hdate,text a_text,(case when invtype in ('04','05') then (case when with_tax=0 then invttl else invttl-tax_amt_rcvd end) else -(case when with_tax=0 then invttl else invttl-tax_amt_rcvd end) end) invttl,(case when invtype in ('04','05') then invdsvl else -invdsvl end) invdsvl,(case when invtype in ('04','05') then tax_amt_rcvd else -tax_amt_rcvd end) tax,(case when invtype in ('04','05') then nettotal else -nettotal end) nettotal,posted a_p,invtype a_t,glser src 
+                                    FROM sales_hdr t1 where invmdate>='"+ BL.CLS_Session.einv_p2_date + "' and not exists"
+                                       +" (select * from pos_esend t2 where t1.branch = t2.brno and t1.slcenter=t2.slno and t1.invtype=t2.type and t1.ref=t2.ref) and branch='" + BL.CLS_Session.brno + "' ";
                         dt = daml.SELECT_QUIRY_only_retrn_dt(qstr + " order by invmdate");
                     }
                     DataRow dr = dt.NewRow();
@@ -833,13 +840,30 @@ namespace POS.Sal
         private void chk_forrviw_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_forrviw.Checked)
-                chk_notequal.Checked = false;
+            {
+                chk_notequal.Checked = false; chk_zatka.Checked = false;
+            }
         }
 
         private void chk_notequal_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_notequal.Checked)
-                chk_forrviw.Checked = false;
+            {
+                chk_forrviw.Checked = false; chk_zatka.Checked = false;
+            }
+        }
+
+        private void chk_zatka_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_zatka.Checked)
+            {
+                chk_forrviw.Checked = false; chk_notequal.Checked = false;
+            }
+        }
+
+        private void cmb_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
        

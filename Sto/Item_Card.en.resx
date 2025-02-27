@@ -218,8 +218,26 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 12</value>
   </data>
+  <data name="cmb_dunit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>564, 303</value>
+  </data>
+  <data name="cmb_dunit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 307</value>
+  </data>
+  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 14</value>
+  </data>
+  <data name="label29.Text" xml:space="preserve">
+    <value>Default Sale Unit</value>
+  </data>
+  <data name="txt_priceper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 258</value>
+  </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 262</value>
+    <value>202, 263</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 14</value>
@@ -378,10 +396,10 @@
     <value>Combine Item</value>
   </data>
   <data name="cmb_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 345</value>
+    <value>463, 361</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 348</value>
+    <value>419, 364</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 14</value>
@@ -390,13 +408,13 @@
     <value>Type</value>
   </data>
   <data name="txt_note.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 375</value>
+    <value>463, 391</value>
   </data>
   <data name="txt_note.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Inherit</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 375</value>
+    <value>421, 391</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 14</value>
@@ -432,7 +450,7 @@
     <value>Press On to Change Picture</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 314</value>
+    <value>404, 335</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 14</value>
@@ -441,13 +459,19 @@
     <value>Supplier</value>
   </data>
   <data name="txt_supname.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 312</value>
+    <value>540, 333</value>
   </data>
   <data name="txt_supname.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Inherit</value>
   </data>
+  <data name="txt_supname.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
   <data name="txt_supno.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 312</value>
+    <value>463, 333</value>
+  </data>
+  <data name="txt_supno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 22</value>
   </data>
   <data name="btn_opal.Location" type="System.Drawing.Point, System.Drawing">
     <value>591, 23</value>
@@ -456,34 +480,34 @@
     <value>Open Balance</value>
   </data>
   <data name="txt_u2q.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 9</value>
+    <value>100, 7</value>
   </data>
   <data name="cmb_u2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 10</value>
+    <value>13, 8</value>
   </data>
   <data name="cmb_u4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 66</value>
+    <value>13, 64</value>
   </data>
   <data name="cmb_u3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 38</value>
+    <value>13, 36</value>
   </data>
   <data name="txt_u3q.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 37</value>
+    <value>100, 35</value>
   </data>
   <data name="txt_u4p.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 64</value>
+    <value>173, 62</value>
   </data>
   <data name="txt_u4q.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 65</value>
+    <value>100, 63</value>
   </data>
   <data name="txt_u3p.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 37</value>
+    <value>173, 35</value>
   </data>
   <data name="txt_u2p.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 10</value>
+    <value>173, 8</value>
   </data>
   <data name="pnl_qtys.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 208</value>
+    <value>461, 202</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 172</value>
@@ -525,7 +549,7 @@
     <value>Search</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 272</value>
+    <value>419, 266</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 14</value>
@@ -534,7 +558,7 @@
     <value>Unit2</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 244</value>
+    <value>419, 238</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 14</value>
@@ -543,7 +567,7 @@
     <value>Unit3</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 217</value>
+    <value>419, 211</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 14</value>

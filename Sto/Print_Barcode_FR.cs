@@ -103,7 +103,7 @@ namespace POS.Sto
 
                 string condi = " where i.item_no='" + itx + "'";
                 // select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,b.pack,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,t.tax_percent,b.pk_qty pkqty,i.item_tax i_tax,i.item_image img from items i join items_bc b on b.item_no=i.item_no and i.item_no='" + textBox3.Text + "' join taxs t on i.item_tax=t.tax_id", con2);
-                SqlDataAdapter da23 = new SqlDataAdapter("select i.item_no , i.item_name,i.item_cost,i.item_price as item_price,i.item_barcode as  item_barcode,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,i.item_tax i_tax,i.item_image img from items i " + condi + "", con2);
+                SqlDataAdapter da23 = new SqlDataAdapter("select i.item_no , i.item_name,i.item_cost,i.item_price as item_price,i.item_barcode as  item_barcode,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,i.item_tax i_tax,i.item_image img,i.item_ename from items i " + condi + "", con2);
                 DataTable dt = new DataTable();
                 da23.Fill(dt);
 
@@ -116,6 +116,7 @@ namespace POS.Sto
                     txt_itemno.Text = dt.Rows[0]["item_no"].ToString();
                     txt_barcode.Text = dt.Rows[0]["item_barcode"].ToString();
                     txt_name.Text = dt.Rows[0]["item_name"].ToString();
+                    txt_ename.Text = dt.Rows[0]["item_ename"].ToString();
                     txt_newp.Text = dt.Rows[0]["item_price"].ToString();
                     txt_count.Focus();
                 }
@@ -458,6 +459,7 @@ namespace POS.Sto
                     txt_itemno.Text = f4.dataGridView1.CurrentRow.Cells[0].Value.ToString();
                     txt_barcode.Text = f4.dataGridView1.CurrentRow.Cells["i_b"].Value.ToString();
                     txt_name.Text = f4.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                    txt_ename.Text = f4.dataGridView1.CurrentRow.Cells[5].Value.ToString();
                     txt_newp.Text = f4.dataGridView1.CurrentRow.Cells[2].Value.ToString();
                     txt_count.Focus();
                     //  dataGridView1.CurrentCell = this.dataGridView1[3, dataGridView1.CurrentRow.Index];
@@ -519,7 +521,7 @@ namespace POS.Sto
 
                         string condi = " where b.barcode='" + txt_barcode.Text + "'";
                         // select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,b.pack,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,t.tax_percent,b.pk_qty pkqty,i.item_tax i_tax,i.item_image img from items i join items_bc b on b.item_no=i.item_no and i.item_no='" + textBox3.Text + "' join taxs t on i.item_tax=t.tax_id", con2);
-                        SqlDataAdapter da23 = new SqlDataAdapter("select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,i.item_tax i_tax,i.item_image img from items i join items_bc b on i.item_no=b.item_no "+condi+"", con2);
+                        SqlDataAdapter da23 = new SqlDataAdapter("select i.item_no , i.item_name,i.item_cost,b.price as item_price,b.barcode as  item_barcode,i.item_obalance,i.item_cbalance,i.item_group,i.item_image,i.item_req,i.item_tax i_tax,i.item_image img,i.item_ename from items i join items_bc b on i.item_no=b.item_no " + condi + "", con2);
                         DataTable dt = new DataTable();
                         da23.Fill(dt);
 
@@ -531,7 +533,9 @@ namespace POS.Sto
                             txt_itemno.Text = dt.Rows[0]["item_no"].ToString(); // f4.dataGridView1.CurrentRow.Cells[0].Value.ToString();
                            // txt_barcode.Text = dt.Rows[0]["item_barcode"].ToString();
                             txt_name.Text = dt.Rows[0][1].ToString();
+                            txt_ename.Text = dt.Rows[0]["item_ename"].ToString();
                             txt_newp.Text = dt.Rows[0]["item_price"].ToString();
+
                             txt_count.Focus();
                         }
                     }

@@ -21,7 +21,7 @@ namespace POS.Sto
     {
         public int from_pur=0;
         BL.Date_Validate datval = new BL.Date_Validate();
-        DataTable dtunits, dtunits2, dtunits3, dtunits4,dtcount;
+        DataTable dtunits, dtunits2, dtunits3, dtunits4, dtunits5, dtcount;
         BL.DAML dml = new BL.DAML();
         string bc = "",bprinter,item,item_temp="";
         bool isnew,isupdate,ismoved=false;
@@ -37,6 +37,7 @@ namespace POS.Sto
            
             textBox1.Enabled = false;
             textBox2.Enabled = false;
+            cmb_dunit.Enabled = false;
             txt_staticcst.Enabled = false;
             chk_inactv.Enabled = false ;
             //textBox3.Enabled = false;
@@ -117,7 +118,7 @@ namespace POS.Sto
                     if (dt2.Rows.Count == 0 && dt3.Rows.Count == 0)
                     {
                         // using (SqlCommand cmd1 = new SqlCommand("INSERT INTO DB.dbo.hdr (date, total, count) VALUES(@a1,@a2,@a3)", con2))
-                        using (SqlCommand cmd1 = new SqlCommand("INSERT INTO items (item_no, item_name, item_cost, item_price, item_barcode, item_unit,item_group,item_image,item_req,item_tax,unit2,uq2,unit2p,unit3,uq3,unit3p,unit4,uq4,unit4p,item_ename,supno,note,last_updt,price2,sgroup,inactive,static_cost) VALUES(@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8,@a9,@a10,@a11,@a12,@a13,@a14,@a15,@a16,@a17,@a18,@a19,@a20,@a21,@a22,@a23,@a24,@a25,@a26,@a27)", con2))
+                        using (SqlCommand cmd1 = new SqlCommand("INSERT INTO items (item_no, item_name, item_cost, item_price, item_barcode, item_unit,item_group,item_image,item_req,item_tax,unit2,uq2,unit2p,unit3,uq3,unit3p,unit4,uq4,unit4p,item_ename,supno,note,last_updt,price2,sgroup,inactive,static_cost,dunit) VALUES(@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8,@a9,@a10,@a11,@a12,@a13,@a14,@a15,@a16,@a17,@a18,@a19,@a20,@a21,@a22,@a23,@a24,@a25,@a26,@a27,@a28)", con2))
                         {
 
 
@@ -155,12 +156,14 @@ namespace POS.Sto
                             cmd1.Parameters.AddWithValue("@a25", (cmb_sgroup.SelectedIndex == -1 ? "" : cmb_sgroup.SelectedValue.ToString()));
                             cmd1.Parameters.AddWithValue("@a26", chk_inactv.Checked ? 1 : 0);
                             cmd1.Parameters.AddWithValue("@a27", txt_staticcst.Text);
+                            cmd1.Parameters.AddWithValue("@a28", (cmb_dunit.SelectedIndex == -1 ? cmb_unit.SelectedValue : cmb_dunit.SelectedValue));
 
                             cmd1.ExecuteNonQuery();
                             con2.Close();
                             //  MessageBox.Show("add success", "ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             textBox1.Enabled = false;
                             textBox2.Enabled = false;
+                            cmb_dunit.Enabled = false;
                             txt_staticcst.Enabled = false;
                             chk_inactv.Enabled = false;
                             //textBox3.Enabled = false;
@@ -373,7 +376,11 @@ namespace POS.Sto
             cmb_u4.ValueMember = "unit_id";
             cmb_u4.SelectedIndex = -1;
 
-           
+            dtunits5 = dml.SELECT_QUIRY_only_retrn_dt("select unit_id,unit_name from units");
+            cmb_dunit.DataSource = dtunits5;
+            cmb_dunit.DisplayMember = "unit_name";
+            cmb_dunit.ValueMember = "unit_id";
+            cmb_dunit.SelectedIndex = -1;
 
           
 
@@ -442,12 +449,14 @@ namespace POS.Sto
             txt_u3p.Enabled = true;
             cmb_u4.Enabled = true;
             cmb_u4.SelectedIndex = -1;
+            cmb_dunit.SelectedIndex = -1;
             txt_u4q.Enabled = true;
             txt_u4p.Enabled = true;
            // foreach (Control ctr in pnl_qtys.Controls)
            //     ctr.Enabled = true;
             textBox1.Enabled = true;
             textBox2.Enabled = true;
+            cmb_dunit.Enabled = true;
             txt_staticcst.Enabled = true;
             chk_inactv.Enabled = true;
             //textBox3.Enabled = true;
@@ -824,6 +833,7 @@ namespace POS.Sto
                         txt_price.Text = dt.Rows[0][3].ToString();
                         textBox5.Text = dt.Rows[0][4].ToString();
                         txt_note.Text = dt.Rows[0]["note"].ToString();
+
                         txt_ename.Text = dt.Rows[0]["item_ename"].ToString();
                         txt_price2.Text = dt.Rows[0]["price2"].ToString();
                        // txt_curbal.Text = dt.Rows[0]["item_cbalance"].ToString();
@@ -901,7 +911,9 @@ namespace POS.Sto
                         cmb_unit.SelectedValue = dt.Rows[0][5].ToString();
                         cmb_group.SelectedValue = dt.Rows[0][8].ToString();
                         cmb_sgroup.SelectedValue = dt.Rows[0]["sgroup"].ToString();
+                        cmb_dunit.SelectedValue = dt.Rows[0]["dunit"].ToString();
                         /*
+                         * 
                         string tmp2 = dt.Rows[0][11].ToString();
                         //  SqlDataAdapter da4 = new SqlDataAdapter("select group_name from groups where group_id=" + Convert.ToInt32(tmp) + "", con2);
                         DataTable dt4 = dml.SELECT_QUIRY_only_retrn_dt("select tax_name from taxs where tax_id=" + Convert.ToInt32(tmp2) + "");
@@ -1050,6 +1062,7 @@ namespace POS.Sto
             txt_price2.Enabled = true;
             textBox1.Enabled = false;
             textBox2.Enabled = true;
+            cmb_dunit.Enabled = true;
             txt_staticcst.Enabled = true;
             chk_inactv.Enabled = true;
            // textBox3.Enabled = true;
@@ -1214,7 +1227,7 @@ namespace POS.Sto
                 if (con2.State == ConnectionState.Closed)
                 con2.Open();
                 // using (SqlCommand cmd1 = new SqlCommand("INSERT INTO DB.dbo.hdr (date, total, count) VALUES(@a1,@a2,@a3)", con2))
-                using (SqlCommand cmd1 = new SqlCommand("update items set  item_name=@a2, item_cost=@a3, item_price=@a4, item_barcode=@a5,item_unit=@a6,item_group=@a7,item_image=@a8,item_req=@a9,item_tax=@a10,item_ename=@a20,supno=@a21,unit2=@u2,uq2=@uq2,unit2p=@u2p,unit3=@u3,uq3=@uq3,unit3p=@u3p,unit4=@u4,uq4=@uq4,unit4p=@u4p,note=@not,last_updt=@lu,price2=@p2,sgroup=@sg,inactive=@ia,static_cost=@stc where item_no=@a1", con2))
+                using (SqlCommand cmd1 = new SqlCommand("update items set  item_name=@a2, item_cost=@a3, item_price=@a4, item_barcode=@a5,item_unit=@a6,item_group=@a7,item_image=@a8,item_req=@a9,item_tax=@a10,item_ename=@a20,supno=@a21,unit2=@u2,uq2=@uq2,unit2p=@u2p,unit3=@u3,uq3=@uq3,unit3p=@u3p,unit4=@u4,uq4=@uq4,unit4p=@u4p,note=@not,last_updt=@lu,price2=@p2,sgroup=@sg,inactive=@ia,static_cost=@stc,dunit=@dunit where item_no=@a1", con2))
                 {
 
 
@@ -1251,11 +1264,13 @@ namespace POS.Sto
                     cmd1.Parameters.AddWithValue("@sg", (cmb_sgroup.SelectedIndex==-1 ? "" : cmb_sgroup.SelectedValue.ToString()));
                     cmd1.Parameters.AddWithValue("@ia", chk_inactv.Checked? 1 : 0 );
                     cmd1.Parameters.AddWithValue("@stc", txt_staticcst.Text);
+                    cmd1.Parameters.AddWithValue("@dunit", (cmb_dunit.SelectedIndex == -1 ? cmb_unit.SelectedValue : cmb_dunit.SelectedValue));
                     cmd1.ExecuteNonQuery();
                     con2.Close();
                    // MessageBox.Show("modifed success", "ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     textBox1.Enabled = false;
                     textBox2.Enabled = false;
+                    cmb_dunit.Enabled = false;
                     txt_staticcst.Enabled = false;
                     chk_inactv.Enabled = false;
                    // textBox3.Enabled = false;
@@ -2001,7 +2016,8 @@ namespace POS.Sto
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           // cmb_dunit.SelectedIndex = -1;
+           
         }
 
         private void cmb_u2_Enter(object sender, EventArgs e)
@@ -2356,6 +2372,7 @@ namespace POS.Sto
                  {
                      textBox1.Enabled = false;
                      textBox2.Enabled = false;
+                     cmb_dunit.Enabled = false;
                      txt_staticcst.Enabled = false;
                      chk_inactv.Enabled = false;
                      //textBox3.Enabled = false;
@@ -2394,6 +2411,7 @@ namespace POS.Sto
                  {
                      textBox1.Enabled = false;
                      textBox2.Enabled = false;
+                     cmb_dunit.Enabled = false;
                      txt_staticcst.Enabled = false;
                      chk_inactv.Enabled = false;
                      //textBox3.Enabled = false;
@@ -2887,6 +2905,58 @@ namespace POS.Sto
         private void textBox1_Enter(object sender, EventArgs e)
         {
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("EN"));
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_dunit_Enter(object sender, EventArgs e)
+        {
+            cmb_dunit.DataSource = dml.SELECT_QUIRY_only_retrn_dt("select unit_id,unit_name from units where unit_id in(" + cmb_unit.SelectedValue + "," + (cmb_u2.SelectedIndex == -1 ? 0 : cmb_u2.SelectedValue) + "," + (cmb_u3.SelectedIndex == -1 ? 0 : cmb_u3.SelectedValue) + "," + (cmb_u4.SelectedIndex == -1 ? 0 : cmb_u4.SelectedValue) + ") order by unit_order");
+            cmb_dunit.DisplayMember = "unit_name";
+            cmb_dunit.ValueMember = "unit_id";
+        }
+
+        private void cmb_u2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_u3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_u4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_unit_Leave(object sender, EventArgs e)
+        {
+            cmb_dunit_Enter(sender, e);
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_supname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_supno_TextChanged(object sender, EventArgs e)
+        {
+
         }
         
     }

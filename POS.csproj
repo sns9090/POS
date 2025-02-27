@@ -603,6 +603,12 @@
     <Compile Include="Pos\Pos_Pay.Designer.cs">
       <DependentUpon>Pos_Pay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pos\Pos_Tafseel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pos\Pos_Tafseel.Designer.cs">
+      <DependentUpon>Pos_Tafseel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pos\SalesReport_ToSend.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,6 +775,12 @@
     </Compile>
     <Compile Include="Sal\Sal_Report_Gr_Daily.Designer.cs">
       <DependentUpon>Sal_Report_Gr_Daily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sal\Sal_Tran_D.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sal\Sal_Tran_D.designer.cs">
+      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
     </Compile>
     <Compile Include="Sal\Sl_PayDtl.cs">
       <SubType>Form</SubType>
@@ -1631,12 +1643,6 @@
     <Compile Include="Sal\Sal_Report_Cus_WR.Designer.cs">
       <DependentUpon>Sal_Report_Cus_WR.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sal\Sal_Tran_D.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sal\Sal_Tran_D.designer.cs">
-      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sal\Sal_Tran_notax.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2487,6 +2493,12 @@
     <EmbeddedResource Include="Pos\Pos_Pay.resx">
       <DependentUpon>Pos_Pay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pos\Pos_Tafseel.en.resx">
+      <DependentUpon>Pos_Tafseel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pos\Pos_Tafseel.resx">
+      <DependentUpon>Pos_Tafseel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pos\SalesReport_ToSend.en.resx">
       <DependentUpon>SalesReport_ToSend.cs</DependentUpon>
     </EmbeddedResource>
@@ -2642,6 +2654,7 @@
     <EmbeddedResource Include="PL\itm_note.resx">
       <DependentUpon>itm_note.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sal\rpt\Sal_Items_Offer_rpt.rdlc" />
     <EmbeddedResource Include="Sal\Sal_Ord_Tran_D.en.resx">
       <DependentUpon>Sal_Ord_Tran_D.cs</DependentUpon>
     </EmbeddedResource>
@@ -2663,6 +2676,12 @@
       <DependentUpon>Sal_Report_Gr_Daily.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sal\rpt\Sal_Report_Cus_WR_rpt.rdlc" />
+    <EmbeddedResource Include="Sal\Sal_Tran_D.en.resx">
+      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sal\Sal_Tran_D.resx">
+      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sal\Sl_PayDtl.resx">
       <DependentUpon>Sl_PayDtl.cs</DependentUpon>
     </EmbeddedResource>
@@ -2743,6 +2762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sto\Items_Rivew.en.resx">
       <DependentUpon>Items_Rivew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sto\Mizan_Expoert.en.resx">
+      <DependentUpon>Mizan_Expoert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sto\Price_Chang.en.resx">
       <DependentUpon>Price_Chang.cs</DependentUpon>
@@ -3463,12 +3485,6 @@
     <EmbeddedResource Include="Sal\rpt\Sal_Report_rpt.rdlc" />
     <EmbeddedResource Include="Sal\rpt\Sal_Tran_Tax_rpt.rdlc" />
     <EmbeddedResource Include="Sal\rpt\Sal_Tran_rpt.rdlc" />
-    <EmbeddedResource Include="Sal\Sal_Tran_D.en.resx">
-      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sal\Sal_Tran_D.resx">
-      <DependentUpon>Sal_Tran_D.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sal\Sal_Tran_notax.en.resx">
       <DependentUpon>Sal_Tran_notax.cs</DependentUpon>
     </EmbeddedResource>

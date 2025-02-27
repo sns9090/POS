@@ -216,8 +216,29 @@ namespace POS.Acc
                     cmd.ExecuteNonQuery();
                     con3.Close();
 
+                    int response = Convert.ToInt32(cmd.Parameters["@errstatus"].Value);
+
+                    if (response > 0)
+                    {
+                        MessageBox.Show("تم نقل الملفات والحركات التالية بنجاح" + Environment.NewLine + Environment.NewLine + whatdo, " تم النقل بنجاح", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                  
+                    }
+                    else
+                    {
+                        MessageBox.Show("فشل النقل" + Environment.NewLine + Environment.NewLine , " خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    //switch (response)
+                    //{
+                    //    case 0:
+                    //        MessageBox.Show("تم نقل الملفات والحركات التالية بنجاح" + Environment.NewLine + Environment.NewLine + whatdo, " تم النقل بنجاح", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                  
+
+                    //    case 1:
+                    //        MessageBox.Show("تم نقل الملفات والحركات التالية بنجاح" + Environment.NewLine + Environment.NewLine + whatdo, " تم النقل بنجاح", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                  
+                    //}
                    // MessageBox.Show("Done Successfully " +cmd.Parameters["@errstatus"].Value + " " , " تم النقل بنجاح", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    MessageBox.Show("تم نقل الملفات والحركات التالية بنجاح" + Environment.NewLine + Environment.NewLine + whatdo, " تم النقل بنجاح", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    
                     button2.Enabled = true;
                     button2.Text = "جلب البيانات";
                 }

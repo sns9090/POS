@@ -104,13 +104,14 @@ namespace POS
                 if (dt2.Rows.Count == 0)
                 {
                     // using (SqlCommand cmd1 = new SqlCommand("INSERT INTO DB.dbo.hdr (date, total, count) VALUES(@a1,@a2,@a3)", con2))
-                    using (SqlCommand cmd1 = new SqlCommand("INSERT INTO users (user_name, full_name, password, user_type, modify_price, language,use_sal_edt,use_dsc,post_btn,chng_date,modfy_othr_tr,item_desc,inv_desc,shw_sal_icost,inactive,show_win,suspend_inv,belw_bal,sl_no,prislwcst,up_stopsrch) VALUES(@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8,@a9,@a10,@a11,@a12,@a13,@a14,@a15,@a16,@a17,@a18,@a19,@a20,@a21)", con2))
+                    using (SqlCommand cmd1 = new SqlCommand("INSERT INTO users (user_name, full_name, password, user_type, modify_price, language,use_sal_edt,use_dsc,post_btn,chng_date,modfy_othr_tr,item_desc,inv_desc,shw_sal_icost,inactive,show_win,suspend_inv,belw_bal,sl_no,prislwcst,up_stopsrch,up_frmprt) VALUES(@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8,@a9,@a10,@a11,@a12,@a13,@a14,@a15,@a16,@a17,@a18,@a19,@a20,@a21,@up_frmprt)", con2))
                     {
 
 
                         cmd1.Parameters.AddWithValue("@a1", txt_userid.Text);
                         cmd1.Parameters.AddWithValue("@a2", txt_username.Text);
                         cmd1.Parameters.AddWithValue("@a3", ende.Encrypt(txt_password.Text, true));
+                        
                        // cmd1.Parameters.AddWithValue("@a3", Convert.ToInt32(textBox3.Text));
                        // cmd1.Parameters.AddWithValue("@a4", Convert.ToInt32(textBox4.Text));
                        // cmd1.Parameters.AddWithValue("@a5", textBox5.Text);
@@ -185,7 +186,7 @@ namespace POS
                         if (chk_stopserach.Checked == true)
                         { cmd1.Parameters.AddWithValue("@a21", 1); }
                         else { cmd1.Parameters.AddWithValue("@a21", 0); }
-
+                        cmd1.Parameters.AddWithValue("@up_frmprt", numericUpDown1.Value);
                         cmd1.ExecuteNonQuery();
                         con2.Close();
                       //  MessageBox.Show("add success", "ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -519,6 +520,7 @@ namespace POS
                         }
                         else { chk_stopserach.Checked = false; }
 
+                        numericUpDown1.Value = Convert.ToInt32(dt.Rows[0]["up_frmprt"]);
                         //if (dt.Rows[0][9] is DBNull)
                         //{
                         //   // pictureBox1.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\simple-blue-opera-background-button.jpg");
@@ -676,7 +678,7 @@ namespace POS
 
                 con2.Open();
                 // using (SqlCommand cmd1 = new SqlCommand("INSERT INTO DB.dbo.hdr (date, total, count) VALUES(@a1,@a2,@a3)", con2))
-                using (SqlCommand cmd1 = new SqlCommand("update users set  full_name=@a2, password=@a3, user_type=@a4, modify_price=@a5, language=@a6,use_sal_edt=@a7,use_dsc=@a8,ch_itmpr=@a9,post_btn=@a10,chng_date=@a11,modfy_othr_tr=@a12,item_desc=@a13,inv_desc=@a14,shw_sal_icost=@a15,inactive=@a16,show_win=@a17,suspend_inv=@a18,belw_bal=@a19,sl_no=@a20,prislwcst=@a21,up_stopsrch=@a22 where user_name='" + txt_userid.Text + "'", con2))
+                using (SqlCommand cmd1 = new SqlCommand("update users set  full_name=@a2, password=@a3, user_type=@a4, modify_price=@a5, language=@a6,use_sal_edt=@a7,use_dsc=@a8,ch_itmpr=@a9,post_btn=@a10,chng_date=@a11,modfy_othr_tr=@a12,item_desc=@a13,inv_desc=@a14,shw_sal_icost=@a15,inactive=@a16,show_win=@a17,suspend_inv=@a18,belw_bal=@a19,sl_no=@a20,prislwcst=@a21,up_stopsrch=@a22,up_frmprt=@up_frmprt where user_name='" + txt_userid.Text + "'", con2))
                 {
 
 
@@ -764,6 +766,7 @@ namespace POS
                     if (chk_stopserach.Checked == true)
                     { cmd1.Parameters.AddWithValue("@a22", 1); }
                     else { cmd1.Parameters.AddWithValue("@a22", 0); }
+                    cmd1.Parameters.AddWithValue("@up_frmprt", numericUpDown1.Value);
 
                     cmd1.ExecuteNonQuery();
                     con2.Close();

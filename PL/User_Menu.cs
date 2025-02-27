@@ -1342,6 +1342,24 @@ namespace POS
                         dp.Show();
                     }
                 }
+                if (treeView1.SelectedNode.Name == "S12D")
+                {
+                    if (BL.CLS_Session.formkey.Contains("S12D"))
+                    {
+                        Pos.Pos_Tafseel dp = new Pos.Pos_Tafseel("","","");
+                        dp.MdiParent = MdiParent;
+                        dp.Show();
+                    }
+                }
+                if (treeView1.SelectedNode.Name == "S100")
+                {
+                    if (BL.CLS_Session.formkey.Contains("S100"))
+                    {
+                        Pos.SalesReport_ToSend dp = new Pos.SalesReport_ToSend("");
+                        dp.MdiParent = MdiParent;
+                        dp.Show();
+                    }
+                }
                 if (treeView1.SelectedNode.Name == "S124")
                 {
                     if (BL.CLS_Session.formkey.Contains("S124"))

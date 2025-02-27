@@ -2548,7 +2548,7 @@ namespace POS.Sto
 
                     try
                     {
-                        DataTable dttbld = daml.SELECT_QUIRY_only_retrn_dt("select itemno item_no,pkqty * qty item_qty from sto_dtl where invtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + " and branch='" + BL.CLS_Session.brno + "'");
+                        DataTable dttbld = daml.SELECT_QUIRY_only_retrn_dt("select itemno item_no,pkqty * qty item_qty from sto_dtl where trtype='" + cmb_type.SelectedValue + "' and ref=" + txt_ref.Text + " and branch='" + BL.CLS_Session.brno + "'");
                    
                         daml.SqlCon_Open();
                         ////if (dthdr.Rows[0][8].ToString().Equals("SL"))

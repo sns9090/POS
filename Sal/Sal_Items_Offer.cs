@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Microsoft.Reporting.WinForms;
 
 namespace POS.Sal
 {
@@ -1287,6 +1288,95 @@ namespace POS.Sal
             //    // su=su+r.Cells[6].Value;
 
             //}
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count <= 1)
+                return;
+            /*
+            Reports.Report_Form rrf = new Reports.Report_Form("DR", dtt);
+            rrf.MdiParent = ParentForm;
+            rrf.Show();
+             */
+            try
+            {
+                Acc.rpt.Acc_frmPrint rf = new Acc.rpt.Acc_frmPrint();
+
+                /*
+                DataSet ds1 = new DataSet();
+
+                */
+                DataTable dt = new DataTable();
+                int cn = 1;
+                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                {
+                    /*
+                    dt.Columns.Add(col.Name);
+                    // dt.Columns.Add(col.HeaderText);
+                     * */
+                    if (col.Index <= 6)
+                    {
+                        dt.Columns.Add("c" + cn.ToString());
+                        //MessageBox.Show("c" + cn.ToString());
+                        cn++;
+                    }
+                }
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        DataRow dRow = dt.NewRow();
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            if (cell.ColumnIndex <= 6)
+                            {
+                                dRow[cell.ColumnIndex] = cell.Value;
+                              //  MessageBox.Show(cell.Value.ToString()); 
+                            }
+                        }
+                        dt.Rows.Add(dRow);
+                    }
+                }
+
+
+                rf.reportViewer1.LocalReport.DataSources.Clear();
+                rf.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                rf.reportViewer1.LocalReport.ReportEmbeddedResource = "POS.Sal.rpt.Sal_Items_Offer_rpt.rdlc";
+
+
+
+                // ReportParameter[] parameters = new ReportParameter[2];
+                // parameters[0] = new ReportParameter("comp_name", BL.CLS_Session.cmp_name);
+                // parameters[1] = new ReportParameter("mdate", dthdr.Rows[0][3].ToString().Substring(6, 2) + "- " + dthdr.Rows[0][3].ToString().Substring(4, 2) + "- " + dthdr.Rows[0][3].ToString().Substring(0, 4));
+
+                // rf.reportViewer1.LocalReport.SetParameters(parameters);
+                ReportParameter[] parameters = new ReportParameter[6];
+                parameters[0] = new ReportParameter("comp_name", BL.CLS_Session.cmp_name);
+                //  parameters[1] = new ReportParameter("mdate", dthdr.Rows[0][3].ToString().Substring(6, 2) + "- " + dthdr.Rows[0][3].ToString().Substring(4, 2) + "- " + dthdr.Rows[0][3].ToString().Substring(0, 4));
+                parameters[1] = new ReportParameter("fmdate", txt_start.Text);
+                parameters[2] = new ReportParameter("tmdate", txt_end.Text);
+                parameters[3] = new ReportParameter("br_name", BL.CLS_Session.brname);
+                parameters[4] = new ReportParameter("txt", this.Text);
+                parameters[5] = new ReportParameter("ofertype", dataGridView1.Columns[4].HeaderText);
+
+                rf.reportViewer1.LocalReport.SetParameters(parameters);
+
+                rf.reportViewer1.RefreshReport();
+                rf.MdiParent = ParentForm;
+                rf.Show();
+
+                //rf.reportViewer1.RefreshReport();
+                //rf.MdiParent = ParentForm;
+                //rf.Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void cmb_salctr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

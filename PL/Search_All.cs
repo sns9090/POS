@@ -178,6 +178,30 @@ namespace POS
                     }
                     break;
 
+                case "6t":
+                    //   textBox1.Visible = false;
+                    string sle2 = BL.CLS_Session.slkey.Replace(" ", "','").Remove(0, 2) + "'";
+                    // string usrid = BL.CLS_Session.up_edit_othr ? " " : " and usrid = '" + BL.CLS_Session.UserName + "' ";
+                    this.Text = this.Text = BL.CLS_Session.lang.Equals("E") ? "Sales View" : "استعراض المبيعات";
+                    dataGridView1.DataSource = daml.SELECT_QUIRY_only_retrn_dt("select top 100 slno " + (BL.CLS_Session.lang.Equals("ع") ? "'مركز البيع'" : "'Sal Center'") + " ,case when type=1 then 'بيع' else 'مرتجع' end " + (BL.CLS_Session.lang.Equals("ع") ? "'النوع'" : "'Type'") + ",ref " + (BL.CLS_Session.lang.Equals("ع") ? "'الرقم'" : "'Ref No'") + ",CONVERT(VARCHAR(10), CAST(mdate as date), 105) " + (BL.CLS_Session.lang.Equals("ع") ? "'التاريخ'" : "'Date'") + " ," + (checkBox1.Checked ? "remarks 'الملاحضات' " : "case when cust_no='' then dscrp else cust_nam end " + (BL.CLS_Session.lang.Equals("ع") ? "'الوصف'" : "'Description'") + "") + ",round(total,2) " + (BL.CLS_Session.lang.Equals("ع") ? "'المبلغ'" : "'Amount'") + ",type a_t from pos_tafseel left join customers on pos_tafseel.cust_no=customers.cu_no and pos_tafseel.brno=customers.cu_brno where pos_tafseel.brno='" + BL.CLS_Session.brno + "' " + usrid + " and brno + slno in(" + sle2 + ") and (" + (checkBox1.Checked ? "remark+dscrp+note+cust_mobil" : "remark+dscrp+note+cust_mobil") + " like '%" + textBox1.Text.Replace(" ", "%") + "%' or qmashtyp like '%" + textBox1.Text + "%') order by crtdate desc");
+                    dataGridView1.Columns[0].Width = 35;
+                    dataGridView1.Columns[1].Width = 50;
+                    dataGridView1.Columns[2].Width = 55;
+                    dataGridView1.Columns[3].Width = 65;
+                    dataGridView1.Columns[4].Width = 180;
+                    // dataGridView1.Columns[0].Width = 75;
+                    dataGridView1.Columns[5].Width = 60;
+                    // dataGridView1.Columns[1].Width = 75;
+                    dataGridView1.Columns["a_t"].Visible = false;
+                    dataGridView1.RightToLeft = BL.CLS_Session.lang.Equals("E") ? RightToLeft.No : RightToLeft.Yes;
+                    //foreach (DataGridViewRow rw in dataGridView1.Rows)
+                    //{
+                    //    //   rw.Cells[0].Value = rw.Cells[0].Value.ToString().Equals("01") ? "ق عام" : rw.Cells[0].Value.ToString().Equals("02") ? "س قبض" : "س صرف";
+
+                    //    rw.Cells[1].Value = datval.validate_trtypes(rw.Cells[1].Value.ToString());
+                    //}
+                    break;
+
                 case "6-6":
                     //   textBox1.Visible = false;
                     string sles = BL.CLS_Session.slkey.Replace(" ", "','").Remove(0, 2) + "'";
@@ -624,7 +648,7 @@ namespace POS
                                 cond1 = ",'' 'الرصيد' ";
                            // SqlDataAdapter da2 = new SqlDataAdapter("select item_no " + (BL.CLS_Session.lang.Equals("ع") ? "'رقم الصنف'" : "'Item No'") + ",item_name " + (BL.CLS_Session.lang.Equals("ع") ? "'اسم الصنف'" : "'Item Name'") + ",item_price " + (BL.CLS_Session.lang.Equals("ع") ? "'سعر البيع'" : "'Sale Price'") + ",item_barcode i_b,item_cbalance " + (BL.CLS_Session.lang.Equals("ع") ? "'الرصيد'" : "'Balance'") + " from items where inactive=0 and item_no + item_name + item_ename like '%" + textBox1.Text.Replace(" ", "%") + "%'" + (condition.Equals("Sto2") ? " and item_cost=2 " : "") + "", con);
                           //  SqlDataAdapter da2 = new SqlDataAdapter("select item_no " + (BL.CLS_Session.lang.Equals("ع") ? "'رقم الصنف'" : "'Item No'") + ",item_name " + (BL.CLS_Session.lang.Equals("ع") ? "'اسم الصنف'" : "'Item Name'") + ",item_price " + (BL.CLS_Session.lang.Equals("ع") ? "'سعر البيع'" : "'Sale Price'") + ",item_barcode i_b from items where inactive=0 and item_no + item_name + item_ename like '%" + textBox1.Text.Replace(" ", "%") + "%'" + (condition.Equals("Sto2") ? " and item_cost=2 " : "") + "", con);
-                            SqlDataAdapter da2 = new SqlDataAdapter("select a.item_no " + (BL.CLS_Session.lang.Equals("ع") ? "'رقم الصنف'" : "'Item No'") + "," + (BL.CLS_Session.lang.Equals("E")? "a.item_ename ": "a.item_name ") +  (BL.CLS_Session.lang.Equals("ع") ? "'اسم الصنف'" : "'Item Name'") + ",b.price " + (BL.CLS_Session.lang.Equals("ع") ? "'سعر البيع'" : "'Sale Price'") + ",b.barcode i_b "+cond1+" from items a join items_bc b on a.item_no=b.item_no and a.item_barcode=b.barcode and b.sl_no='" + BL.CLS_Session.sl_prices + "' where a.inactive=0 and a.item_no + a.item_name + a.item_ename like '%" + textBox1.Text.Replace(" ", "%") + "%'" + (condition.Equals("Sto2") ? " and a.item_cost=2 " : "") + "", con);
+                            SqlDataAdapter da2 = new SqlDataAdapter("select a.item_no " + (BL.CLS_Session.lang.Equals("ع") ? "'رقم الصنف'" : "'Item No'") + "," + (BL.CLS_Session.lang.Equals("E")? "a.item_ename ": "a.item_name ") +  (BL.CLS_Session.lang.Equals("ع") ? "'اسم الصنف'" : "'Item Name'") + ",b.price " + (BL.CLS_Session.lang.Equals("ع") ? "'سعر البيع'" : "'Sale Price'") + ",b.barcode i_b "+cond1+"," +(BL.CLS_Session.lang.Equals("E")? "a.item_name ": "a.item_ename ") +" from items a join items_bc b on a.item_no=b.item_no and a.item_barcode=b.barcode and b.sl_no='" + BL.CLS_Session.sl_prices + "' where a.inactive=0 and a.item_no + a.item_name + a.item_ename like '%" + textBox1.Text.Replace(" ", "%") + "%'" + (condition.Equals("Sto2") ? " and a.item_cost=2 " : "") + "", con);
                             // SqlDataAdapter da2 = new SqlDataAdapter("select item_no " + (BL.CLS_Session.lang.Equals("ع") ? "'رقم الصنف'" : "'Item No'") + ",item_name " + (BL.CLS_Session.lang.Equals("ع") ? "'اسم الصنف'" : "'Item Name'") + ",item_price " + (BL.CLS_Session.lang.Equals("ع") ? "'سعر البيع'" : "'Sale Price'") + ",item_barcode i_b,item_cbalance " + (BL.CLS_Session.lang.Equals("ع") ? "'الرصيد'" : "'Balance'") + " from items where inactive=0 and item_no + item_name + item_ename like '%" + textBox1.Text + "%'" + (condition.Equals("Sto2") ? " and item_cost=2 " : "") + "", con);
                             DataTable dt2 = new DataTable();
                             da2.Fill(dt2);
@@ -637,7 +661,7 @@ namespace POS
                           //  dataGridView1.Columns[4].FillWeight = 15;
                             dataGridView1.Columns[4].Visible =BL.CLS_Session.showqtysrch ?true : false ;
                             dataGridView1.Columns[4].FillWeight = 15;
-
+                            dataGridView1.Columns[5].Visible = false;
                             textBox1.RightToLeft = BL.CLS_Session.lang.Equals("ع") ? RightToLeft.Yes : RightToLeft.No;
                             dataGridView1.RightToLeft = BL.CLS_Session.lang.Equals("ع") ? RightToLeft.Yes : RightToLeft.No;
                            // dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; 
@@ -706,6 +730,9 @@ namespace POS
                         break;
 
                     case "6":
+                        Form7_Load(null, null);
+                        break;
+                    case "6t":
                         Form7_Load(null, null);
                         break;
 

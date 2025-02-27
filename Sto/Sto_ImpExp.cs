@@ -3736,7 +3736,7 @@ namespace POS.Sto
                     if (!string.IsNullOrEmpty(dtr[0].ToString()))
                     {
                         //  MessageBox.Show("The name of the active sheet is : " + dtr[0].ToString());
-                        dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select '" + dtr[0] + "' itemno,bb.item_name item_name," + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " pack,1 pkqty," + dtr[2] + " qty," + dtr[3] + " lcost,(" + Convert.ToDouble(dtr[2]) * Convert.ToDouble(dtr[3]) + ") total,bb.item_curcost cost,bb.item_barcode barcode,'' expdate  from items bb where bb.item_no='" + dtr[0] + "'");// and aa.a_type='" + atype + "' and aa.a_ref=" + aref + "");
+                        dtdtl = daml.SELECT_QUIRY_only_retrn_dt("select '" + dtr[0] + "' itemno,bb.item_name item_name," + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " pack," + (dtr[1].ToString().Trim().Equals("") ? "1" : "us.unit_qty") + " pkqty," + dtr[2] + " qty," + dtr[3] + " lcost,(" + Convert.ToDouble(dtr[2]) * Convert.ToDouble(dtr[3]) + ") total,bb.item_curcost cost,bb.item_barcode barcode,'' expdate  from items bb join units us on us.unit_id=" + (dtr[1].ToString().Trim().Equals("") ? "bb.item_unit" : dtr[1]) + " where bb.item_no='" + dtr[0] + "'");// and aa.a_type='" + atype + "' and aa.a_ref=" + aref + "");
 
                         if (dtdtl.Rows.Count > 0)
                         {

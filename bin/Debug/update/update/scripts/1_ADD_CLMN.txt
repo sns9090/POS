@@ -618,3 +618,27 @@ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_N
 		    ALTER TABLE dbo.branchs ADD  jv_37  numeric(10, 0) NULL default 0
 		 
 		end
+
+ if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'users' and COLUMN_NAME='up_frmprt')
+		begin 
+		    ALTER TABLE dbo.users ADD  up_frmprt  int NULL default 1
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'items' and COLUMN_NAME='dunit')
+		begin 
+		    ALTER TABLE dbo.items ADD  dunit  int NULL default 1
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'branchs' and COLUMN_NAME='acc_coped')
+		begin 
+		    ALTER TABLE dbo.branchs ADD  acc_coped  bit NULL default 0
+		 
+		end
+
+if not exists(SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = 'acccpy' and COLUMN_NAME='a_note')
+		begin 
+		    ALTER TABLE dbo.acccpy ADD  a_note  nvarchar(MAX) NULL default N''
+		 
+		end
